@@ -14,7 +14,7 @@ data class GitHub(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Github
+        other as GitHub
 
         if (issue != other.issue) return false
         if (pullRequest != other.pullRequest) return false
@@ -44,7 +44,7 @@ data class GitHubPR(
         val title: String,
         val body: String,
         val user: GitHubUser,
-        val assignee: GitHubUser?
+        val assignee: GitHubUser?,
         val assignees: Array<GitHubUser>,
         @SerializedName("created_at") val createdAt: Date,
         @SerializedName("updated_at") val updatedAt: Date,
@@ -259,7 +259,7 @@ data class GitHubIssueLabel(
         val url: String,
         val name: String,
         val color: String
-}
+)
 
 enum class GitHubUserType(val value: String) {
     USER("User"), ORGANIZATION("Organization")
