@@ -1,0 +1,4 @@
+rootProject.name = 'danger-kt'
+include 'danger-kt-lib'
+include 'danger-kt-lib'
+
