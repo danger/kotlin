@@ -1,4 +1,4 @@
-package com.danger.dangerkt.runner
+package com.danger.dangerkt.lib
 
 data class DSL(
         val danger: DangerDSL

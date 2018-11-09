@@ -1,13 +1,13 @@
-package com.danger.dangerkt.runner
+package com.danger.dangerkt.lib
 
 import com.google.gson.annotations.SerializedName
 
 typealias File = String
 
 data class Git(
-        @SerializedName("modified_files") val modifiedFiles: Array<File>,
-        @SerializedName("created_files") val createdFiles: Array<File>,
-        @SerializedName("deleted_files") val deletedFiles: Array<File>
+    @SerializedName("modified_files") val modifiedFiles: Array<File>,
+    @SerializedName("created_files") val createdFiles: Array<File>,
+    @SerializedName("deleted_files") val deletedFiles: Array<File>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -31,12 +31,12 @@ data class Git(
 }
 
 data class GitCommit(
-        val sha: String,
-        val author: GitCommitAuthor,
-        val committer: GitCommitAuthor,
-        val message: String,
-        val parents: Array<String>?,
-        val url: String
+    val sha: String,
+    val author: GitCommitAuthor,
+    val committer: GitCommitAuthor,
+    val message: String,
+    val parents: Array<String>?,
+    val url: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
