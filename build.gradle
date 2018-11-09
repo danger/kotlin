@@ -12,6 +12,7 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+    testCompile 'junit:junit:4.12'
 }
 
 compileKotlin {
