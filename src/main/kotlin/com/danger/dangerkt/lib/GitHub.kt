@@ -14,7 +14,7 @@ data class GitHub(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Github
+        other as GitHub
 
         if (issue != other.issue) return false
         if (pullRequest != other.pullRequest) return false
@@ -40,28 +40,28 @@ enum class GitHubPullRequestState(val value: String) {
 }
 
 data class GitHubPR(
-    val number: Int,
-    val title: String,
-    val body: String,
-    val user: GitHubUser,
-    val assignee: GitHubUser?
-    val assignees: Array<GitHubUser>,
-    @SerializedName("created_at") val createdAt: Date,
-    @SerializedName("updated_at") val updatedAt: Date,
-    @SerializedName("closed_at") val closedAt: Date,
-    @SerializedName("merged_at") val mergedAt: Date,
-    val head: GitHubMergeRef,
-    val base: GitHubMergeRef,
-    val state: GitHubPullRequestState,
-    @SerializedName("locked") val isLocked: Boolean,
-    @SerializedName("merged") val isMerged: Boolean?,
-    @SerializedName("commits") val commitCount: Int?,
-    @SerializedName("comments") val commentCount: Int?,
-    @SerializedName("review_comments") val reviewCommentCount: Int?,
-    val additions: Int?,
-    val deletions: Int?,
-    @SerializedName("changed_files") val changedFiles: Int?,
-    val milestone: GitHubMilestone?
+        val number: Int,
+        val title: String,
+        val body: String,
+        val user: GitHubUser,
+        val assignee: GitHubUser?,
+        val assignees: Array<GitHubUser>,
+        @SerializedName("created_at") val createdAt: Date,
+        @SerializedName("updated_at") val updatedAt: Date,
+        @SerializedName("closed_at") val closedAt: Date,
+        @SerializedName("merged_at") val mergedAt: Date,
+        val head: GitHubMergeRef,
+        val base: GitHubMergeRef,
+        val state: GitHubPullRequestState,
+        @SerializedName("locked") val isLocked: Boolean,
+        @SerializedName("merged") val isMerged: Boolean?,
+        @SerializedName("commits") val commitCount: Int?,
+        @SerializedName("comments") val commentCount: Int?,
+        @SerializedName("review_comments") val reviewCommentCount: Int?,
+        val additions: Int?,
+        val deletions: Int?,
+        @SerializedName("changed_files") val changedFiles: Int?,
+        val milestone: GitHubMilestone?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -257,11 +257,11 @@ data class GitHubIssue(
 }
 
 data class GitHubIssueLabel(
-    val id: Int,
-    val url: String,
-    val name: String,
-    val color: String
-}
+        val id: Int,
+        val url: String,
+        val name: String,
+        val color: String
+)
 
 enum class GitHubUserType(val value: String) {
     USER("User"), ORGANIZATION("Organization")
