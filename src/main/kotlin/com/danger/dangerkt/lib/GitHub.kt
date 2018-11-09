@@ -36,7 +36,14 @@ data class GitHub(
 }
 
 enum class GitHubPullRequestState(val value: String) {
-    CLOSED("closed"), OPEN("open"), MERGED("merged"), LOCKED("locked")
+    @SerializedName("closed")
+    CLOSED("closed"),
+    @SerializedName("open")
+    OPEN("open"),
+    @SerializedName("merged")
+    MERGED("merged"),
+    @SerializedName("locked")
+    LOCKED("locked")
 }
 
 data class GitHubPR(
@@ -169,9 +176,16 @@ data class GitHubRepo(
 )
 
 enum class GitHubReviewState(val value: String) {
-    APPROVED("APPROVED"), CHANGES_REQUESTED("CHANGES_REQUESTED"), COMMENTED("COMMENTED"), PENDING("PENDING"), DISMISSED(
-        "DISMISSED"
-    )
+    @SerializedName("APPROVED")
+    APPROVED("APPROVED"),
+    @SerializedName("CHANGES_REQUESTED")
+    CHANGES_REQUESTED("CHANGES_REQUESTED"),
+    @SerializedName("COMMENTED")
+    COMMENTED("COMMENTED"),
+    @SerializedName("PENDING")
+    PENDING("PENDING"),
+    @SerializedName("DISMISSED")
+    DISMISSED("DISMISSED")
 }
 
 data class GitHubReview(
@@ -191,7 +205,12 @@ data class GitHubCommit(
 )
 
 enum class GitHubIssueState(val value: String) {
-    CLOSED("closed"), OPEN("open"), LOCKED("locked")
+    @SerializedName("closed")
+    CLOSED("closed"),
+    @SerializedName("open")
+    OPEN("open"),
+    @SerializedName("locked")
+    LOCKED("locked")
 }
 
 data class GitHubIssue(
@@ -264,7 +283,10 @@ data class GitHubIssueLabel(
 )
 
 enum class GitHubUserType(val value: String) {
-    USER("User"), ORGANIZATION("Organization")
+    @SerializedName("User")
+    USER("User"),
+    @SerializedName("Organization")
+    ORGANIZATION("Organization")
 }
 
 data class GitHubUser(
@@ -274,7 +296,12 @@ data class GitHubUser(
 )
 
 enum class GitHubMilestoneState(val value: String) {
-    CLOSE("close"), OPEN("open"), ALL("all")
+    @SerializedName("close")
+    CLOSE("close"),
+    @SerializedName("open")
+    OPEN("open"),
+    @SerializedName("all")
+    ALL("all")
 }
 
 data class GitHubMilestone(
