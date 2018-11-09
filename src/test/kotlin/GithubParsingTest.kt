@@ -89,4 +89,15 @@ class GithubParsingTest {
         val expectedMilestone = GitHubMilestone(1002604, 1, GitHubMilestoneState.OPEN, "v1.0", "Tracking milestone for version 1.0", expectedCreator, 4, 8, Date(1302466171000), Date(1393873090000), Date(1360675321000), Date(1349825941000))
         Assert.assertEquals(expectedMilestone, issue.milestone)
     }
+
+    @Test
+    fun testItParsesTheRequestedReviewersCorrectly() {
+        val requestedReviewers = github.requestedReviewers
+
+        val expectedUser = GitHubUser(1, "octocat", GitHubUserType.USER)
+        Assert.assertEquals(expectedUser, requestedReviewers.users.first())
+
+        val expectedTeam = GitHubTeam(1, "Justice League")
+        Assert.assertEquals(expectedTeam, requestedReviewers.teams.first())
+    }
 }
