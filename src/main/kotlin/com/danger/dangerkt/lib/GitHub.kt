@@ -1,14 +1,14 @@
-package com.danger.dangerkt.runner
+package com.danger.dangerkt.lib
 
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class GitHub(
-        val issue: GitHubIssue,
-        @SerializedName("pr") val pullRequest: GitHubPR,
-        val commits: Array<GitHubCommit>,
-        val reviews: Array<GitHubReview>,
-        @SerializedName("requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
+    val issue: GitHubIssue,
+    @SerializedName("pr") val pullRequest: GitHubPR,
+    val commits: Array<GitHubCommit>,
+    val reviews: Array<GitHubReview>,
+    @SerializedName("requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -40,28 +40,28 @@ enum class GitHubPullRequestState(val value: String) {
 }
 
 data class GitHubPR(
-        val number: Int,
-        val title: String,
-        val body: String,
-        val user: GitHubUser,
-        val assignee: GitHubUser?
-        val assignees: Array<GitHubUser>,
-        @SerializedName("created_at") val createdAt: Date,
-        @SerializedName("updated_at") val updatedAt: Date,
-        @SerializedName("closed_at") val closedAt: Date,
-        @SerializedName("merged_at") val mergedAt: Date,
-        val head: GitHubMergeRef,
-        val base: GitHubMergeRef,
-        val state: GitHubPullRequestState,
-        @SerializedName("locked") val isLocked: Boolean,
-        @SerializedName("merged") val isMerged: Boolean?,
-        @SerializedName("commits") val commitCount: Int?,
-        @SerializedName("comments") val commentCount: Int?,
-        @SerializedName("review_comments") val reviewCommentCount: Int?,
-        val additions: Int?,
-        val deletions: Int?,
-        @SerializedName("changed_files") val changedFiles: Int?,
-        val milestone: GitHubMilestone?
+    val number: Int,
+    val title: String,
+    val body: String,
+    val user: GitHubUser,
+    val assignee: GitHubUser?
+    val assignees: Array<GitHubUser>,
+    @SerializedName("created_at") val createdAt: Date,
+    @SerializedName("updated_at") val updatedAt: Date,
+    @SerializedName("closed_at") val closedAt: Date,
+    @SerializedName("merged_at") val mergedAt: Date,
+    val head: GitHubMergeRef,
+    val base: GitHubMergeRef,
+    val state: GitHubPullRequestState,
+    @SerializedName("locked") val isLocked: Boolean,
+    @SerializedName("merged") val isMerged: Boolean?,
+    @SerializedName("commits") val commitCount: Int?,
+    @SerializedName("comments") val commentCount: Int?,
+    @SerializedName("review_comments") val reviewCommentCount: Int?,
+    val additions: Int?,
+    val deletions: Int?,
+    @SerializedName("changed_files") val changedFiles: Int?,
+    val milestone: GitHubMilestone?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -123,8 +123,8 @@ data class GitHubPR(
 }
 
 data class GitHubTeam(
-        val id: Int,
-        val name: String
+    val id: Int,
+    val name: String
 )
 
 data class GitHubRequestedReviewers(
@@ -150,29 +150,31 @@ data class GitHubRequestedReviewers(
     }
 }
 
-data class GitHubMergeRef (
-        val label: String,
-        val ref: String,
-        val sha: String,
-        val user: GitHubUser,
-        val repo: GitHubRepo
+data class GitHubMergeRef(
+    val label: String,
+    val ref: String,
+    val sha: String,
+    val user: GitHubUser,
+    val repo: GitHubRepo
 )
 
-data class GitHubRepo (
-        val id: Int,
-        val name: String,
-        @SerializedName("full_name") val fullName: String,
-        @SerializedName("private") val isPrivate: Boolean,
-        val description: String?,
-        @SerializedName("fork") val isFork: Boolean,
-        @SerializedName("html_url") val htmlURL: String
+data class GitHubRepo(
+    val id: Int,
+    val name: String,
+    @SerializedName("full_name") val fullName: String,
+    @SerializedName("private") val isPrivate: Boolean,
+    val description: String?,
+    @SerializedName("fork") val isFork: Boolean,
+    @SerializedName("html_url") val htmlURL: String
 )
 
 enum class GitHubReviewState(val value: String) {
-    APPROVED("APPROVED"), CHANGES_REQUESTED("CHANGES_REQUESTED"), COMMENTED("COMMENTED"), PENDING("PENDING"), DISMISSED("DISMISSED")
+    APPROVED("APPROVED"), CHANGES_REQUESTED("CHANGES_REQUESTED"), COMMENTED("COMMENTED"), PENDING("PENDING"), DISMISSED(
+        "DISMISSED"
+    )
 }
 
-data class GitHubReview (
+data class GitHubReview(
     val user: GitHubUser,
     val id: Int?,
     val body: String?,
@@ -182,10 +184,10 @@ data class GitHubReview (
 
 // TODO: Add git commit value when is ready
 data class GitHubCommit(
-        val sha: String,
-        val url: String,
-        val author: GitHubUser?,
-        val committer: GitHubUser?
+    val sha: String,
+    val url: String,
+    val author: GitHubUser?,
+    val committer: GitHubUser?
 )
 
 enum class GitHubIssueState(val value: String) {
@@ -193,21 +195,21 @@ enum class GitHubIssueState(val value: String) {
 }
 
 data class GitHubIssue(
-        val id: Int,
-        val number: Int,
-        val title: String,
-        val user: GitHubUser,
-        val state: GitHubIssueState,
-        @SerializedName("locked") val isLocked: Boolean,
-        val body: String,
-        @SerializedName("comments") val commentCount: Int,
-        val assignee: GitHubUser?,
-        val assignees: Array<GitHubUser>,
-        val milestone: GitHubMilestone,
-        @SerializedName("created_at") val createdAt: Date,
-        @SerializedName("updated_at") val updatedAt: Date,
-        @SerializedName("closed_at") val closedAt: Date,
-        val labels: Array<GitHubIssueLabel>
+    val id: Int,
+    val number: Int,
+    val title: String,
+    val user: GitHubUser,
+    val state: GitHubIssueState,
+    @SerializedName("locked") val isLocked: Boolean,
+    val body: String,
+    @SerializedName("comments") val commentCount: Int,
+    val assignee: GitHubUser?,
+    val assignees: Array<GitHubUser>,
+    val milestone: GitHubMilestone,
+    @SerializedName("created_at") val createdAt: Date,
+    @SerializedName("updated_at") val updatedAt: Date,
+    @SerializedName("closed_at") val closedAt: Date,
+    val labels: Array<GitHubIssueLabel>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -255,37 +257,37 @@ data class GitHubIssue(
 }
 
 data class GitHubIssueLabel(
-        val id: Int,
-        val url: String,
-        val name: String,
-        val color: String
+    val id: Int,
+    val url: String,
+    val name: String,
+    val color: String
 }
 
 enum class GitHubUserType(val value: String) {
     USER("User"), ORGANIZATION("Organization")
 }
 
-data class GitHubUser (
-        val id: Int,
-        val login: String,
-        val type: GitHubUserType
+data class GitHubUser(
+    val id: Int,
+    val login: String,
+    val type: GitHubUserType
 )
 
 enum class GitHubMilestoneState(val value: String) {
     CLOSE("close"), OPEN("open"), ALL("all")
 }
 
-data class GitHubMilestone (
-        val id: Int,
-        val number: Int,
-        val state: GitHubMilestoneState,
-        val title: String,
-        val description: String,
-        val user: GitHubUser,
-        @SerializedName("open_issues") val openIssues: Int,
-        @SerializedName("closed_issues") val closedIssues: Int,
-        @SerializedName("created_at") val createdAt: Date,
-        @SerializedName("updated_at") val updatedAt: Date,
-        @SerializedName("closed_at") val closedAt: Date,
-        @SerializedName("due_on") val dueOn: Date
- )
+data class GitHubMilestone(
+    val id: Int,
+    val number: Int,
+    val state: GitHubMilestoneState,
+    val title: String,
+    val description: String,
+    val user: GitHubUser,
+    @SerializedName("open_issues") val openIssues: Int,
+    @SerializedName("closed_issues") val closedIssues: Int,
+    @SerializedName("created_at") val createdAt: Date,
+    @SerializedName("updated_at") val updatedAt: Date,
+    @SerializedName("closed_at") val closedAt: Date,
+    @SerializedName("due_on") val dueOn: Date
+)

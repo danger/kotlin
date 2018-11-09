@@ -1,4 +1,4 @@
-package com.danger.dangerkt.runner
+package com.danger.dangerkt.lib
 
 import com.danger.dangerkt.lib.ExampleCodable
 import com.google.gson.Gson
