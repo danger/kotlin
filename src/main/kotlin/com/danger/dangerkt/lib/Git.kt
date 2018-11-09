@@ -31,7 +31,7 @@ data class Git(
 }
 
 data class GitCommit(
-    val sha: String,
+    val sha: String?,
     val author: GitCommitAuthor,
     val committer: GitCommitAuthor,
     val message: String,
