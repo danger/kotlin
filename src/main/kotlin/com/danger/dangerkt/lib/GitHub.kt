@@ -310,7 +310,7 @@ data class GitHubMilestone(
     val state: GitHubMilestoneState,
     val title: String,
     val description: String,
-    val user: GitHubUser,
+    val creator: GitHubUser,
     @SerializedName("open_issues") val openIssues: Int,
     @SerializedName("closed_issues") val closedIssues: Int,
     @SerializedName("created_at") val createdAt: Date,
