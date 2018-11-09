@@ -196,11 +196,11 @@ data class GitHubReview(
     val state: GitHubReviewState?
 )
 
-// TODO: Add git commit value when is ready
 data class GitHubCommit(
     val sha: String,
     val url: String,
     val author: GitHubUser?,
+    val commit: GitCommit,
     val committer: GitHubUser?
 )
 
