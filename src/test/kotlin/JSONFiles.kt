@@ -2,10 +2,10 @@ import java.io.File
 
 private val reader = JSONFilesReader()
 
-val dangerJSON = reader.readJSON("/dangerDSL.json")
+val dangerJSON = reader.readJSON("./resources/dangerDSL.json")
 
 private class JSONFilesReader {
     fun readJSON(file: String): String {
-        return File("./resources/dangerDSL.json").readText()
+        return File(file).readText()
     }
 }
