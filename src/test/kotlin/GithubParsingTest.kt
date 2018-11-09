@@ -67,4 +67,26 @@ class GithubParsingTest {
 
         Assert.assertEquals(expectedGitHubCommit, commit)
     }
+
+    @Test
+    fun testItCorrectlyParsesTheIssue() {
+        val issue = github.issue
+
+        Assert.assertEquals(167696965, issue.id)
+        Assert.assertEquals(609, issue.number)
+        Assert.assertEquals("Xcode updates", issue.title)
+        Assert.assertEquals("I don't want to spend much time on this project, but I do want to keep it up to date with current tools so that we can deploy any fixes quickly. \n" +
+                "\n" + "I tried updating to CocoaPods 1.0, but things went quickly awry. It's a large job, but not necessary for now. \n", issue.body)
+        Assert.assertEquals(GitHubIssueState.CLOSED, issue.state)
+        Assert.assertEquals(false, issue.isLocked)
+        Assert.assertEquals(8, issue.commentCount)
+        Assert.assertEquals(Date(1469563050000), issue.createdAt)
+        Assert.assertEquals(Date(1471447574000), issue.updatedAt)
+        Assert.assertEquals(Date(1471447574000), issue.closedAt)
+        Assert.assertTrue(issue.labels.isEmpty())
+
+        val expectedCreator = GitHubUser(1, "octocat", GitHubUserType.USER)
+        val expectedMilestone = GitHubMilestone(1002604, 1, GitHubMilestoneState.OPEN, "v1.0", "Tracking milestone for version 1.0", expectedCreator, 4, 8, Date(1302466171000), Date(1393873090000), Date(1360675321000), Date(1349825941000))
+        Assert.assertEquals(expectedMilestone, issue.milestone)
+    }
 }
