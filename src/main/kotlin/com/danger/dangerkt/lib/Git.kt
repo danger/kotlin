@@ -2,12 +2,12 @@ package com.danger.dangerkt.lib
 
 import com.google.gson.annotations.SerializedName
 
-typealias File = String
+typealias FilePath = String
 
 data class Git(
-    @SerializedName("modified_files") val modifiedFiles: Array<File>,
-    @SerializedName("created_files") val createdFiles: Array<File>,
-    @SerializedName("deleted_files") val deletedFiles: Array<File>
+    @SerializedName("modified_files") val modifiedFiles: Array<FilePath>,
+    @SerializedName("created_files") val createdFiles: Array<FilePath>,
+    @SerializedName("deleted_files") val deletedFiles: Array<FilePath>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
