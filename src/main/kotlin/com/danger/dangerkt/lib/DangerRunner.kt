@@ -24,7 +24,7 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
 
 private var dangerRunner: DangerRunner? = null
 
-fun Danger(args: List<String>): DangerDSL {
+fun Danger(args: Array<String>): DangerDSL {
     val argsCount = args.count()
 
     val jsonInputFilePath = args[argsCount - 2]

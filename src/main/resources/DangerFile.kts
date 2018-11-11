@@ -1,2 +1,5 @@
+import com.danger.dangerkt.lib.*
 
-println("HelloWorld")
+val danger = Danger(args)
+
+fail("Failure")
