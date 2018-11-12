@@ -2,18 +2,17 @@ package com.danger.dangerkt.lib
 
 import com.google.gson.Gson
 import java.io.File
-import java.net.URL
 
 private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
-    val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(), arrayOf(), arrayOf())
+    val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(),arrayOf(), arrayOf())
 
     private val gson = Gson()
 
     init {
-        val jsonInputURL = URL(jsonInputFilePath)
-        this.danger = gson.fromJson(jsonInputURL.readText(), DSL::class.java).danger
+        this.danger = gson.fromJson(jsonInputFilePath.readText(), DSL::class.java).danger
+        saveDangerResults()
     }
 
     fun saveDangerResults() {
@@ -22,7 +21,7 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 }
 
-private var dangerRunner: DangerRunner? = null
+private lateinit var dangerRunner: DangerRunner
 
 fun Danger(args: Array<String>): DangerDSL {
     val argsCount = args.count()
@@ -31,7 +30,7 @@ fun Danger(args: Array<String>): DangerDSL {
     val jsonOutputPath = args[argsCount - 1]
 
     dangerRunner = DangerRunner(jsonInputFilePath, jsonOutputPath)
-    return dangerRunner!!.danger
+    return dangerRunner.danger
 }
 
 fun fail(message: String) {
@@ -43,8 +42,8 @@ fun fail(message: String, file: FilePath, line: Int) {
 }
 
 private fun fail(violation: Violation) {
-    dangerRunner?.dangerResults?.fails?.plus(violation)
-    dangerRunner?.saveDangerResults()
+    dangerRunner.dangerResults.fails+=violation
+    dangerRunner.saveDangerResults()
 }
 
 fun warning(message: String) {
@@ -56,8 +55,8 @@ fun warning(message: String, file: FilePath, line: Int) {
 }
 
 private fun warning(violation: Violation) {
-    dangerRunner?.dangerResults?.warnings?.plus(violation)
-    dangerRunner?.saveDangerResults()
+    dangerRunner.dangerResults.warnings+=(violation)
+    dangerRunner.saveDangerResults()
 }
 
 fun message(message: String) {
@@ -69,8 +68,8 @@ fun message(message: String, file: FilePath, line: Int) {
 }
 
 private fun message(violation: Violation) {
-    dangerRunner?.dangerResults?.messages?.plus(violation)
-    dangerRunner?.saveDangerResults()
+    dangerRunner.dangerResults.messages+=violation
+    dangerRunner.saveDangerResults()
 }
 
 fun markdown(message: String) {
@@ -82,6 +81,8 @@ fun markdown(message: String, file: FilePath, line: Int) {
 }
 
 private fun markdown(violation: Violation) {
-    dangerRunner?.dangerResults?.markdowns?.plus(violation)
-    dangerRunner?.saveDangerResults()
+    dangerRunner.dangerResults.markdowns+=violation
+    dangerRunner.saveDangerResults()
 }
+
+private fun FilePath.readText() = File(this).readText()
