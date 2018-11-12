@@ -1,0 +1,42 @@
+plugins {
+    id 'kotlin-multiplatform' version '1.3.0'
+}
+repositories {
+    mavenCentral()
+}
+
+kotlin {
+    targets {
+        // For ARM, preset should be changed to presets.iosArm32 or presets.iosArm64
+        // For Linux, preset should be changed to e.g. presets.linuxX64
+        // For MacOS, preset should be changed to e.g. presets.macosX64
+        fromPreset(presets.macosX64, 'macos')
+
+        configure([macos]) {
+            // Comment to generate Kotlin/Native library (KLIB) instead of executable file:
+            compilations.main.outputKinds('EXECUTABLE')
+            // Change to specify fully qualified name of your application's entry point:
+            compilations.main.entryPoint = 'sample.main'
+        }
+    }
+    sourceSets {
+        // Note: To enable common source sets please comment out 'kotlin.import.noCommonSourceSets' property
+        // in gradle.properties file and re-import your project in IDE.
+        macosMain {
+        }
+        macosTest {
+        }
+    }
+}
+
+task runProgram {
+    def buildType = 'release' // Change to 'debug' to run application with debug symbols.
+    dependsOn "link${buildType.capitalize()}ExecutableMacos"
+    doLast {
+        def programFile = kotlin.targets.macos.compilations.main.getBinary('EXECUTABLE', buildType)
+        exec {
+            executable programFile
+            args ''
+        }
+    }
+}
