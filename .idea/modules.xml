@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/danger-kt.iml" filepath="$PROJECT_DIR$/.idea/modules/danger-kt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/danger-kt_main.iml" filepath="$PROJECT_DIR$/.idea/modules/danger-kt_main.iml" group="danger-kt" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/danger-kt_test.iml" filepath="$PROJECT_DIR$/.idea/modules/danger-kt_test.iml" group="danger-kt" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runner.iml" filepath="$PROJECT_DIR$/.idea/modules/runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runner_commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/runner_commonMain.iml" group="runner" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runner_commonTest.iml" filepath="$PROJECT_DIR$/.idea/modules/runner_commonTest.iml" group="runner" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runner_macosMain.iml" filepath="$PROJECT_DIR$/.idea/modules/runner_macosMain.iml" group="runner" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runner_macosTest.iml" filepath="$PROJECT_DIR$/.idea/modules/runner_macosTest.iml" group="runner" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GithubParsingTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-11-14T10:40:52" hostname="GBBQBQH001M0250.local" time="0.054">
+  <properties/>
+  <testcase name="testItCorrectlyParsesTheIssue" classname="GithubParsingTest" time="0.011"/>
+  <testcase name="testItParsesCorrectlyTheCommits" classname="GithubParsingTest" time="0.007"/>
+  <testcase name="testItParsesTheGithubPullRequest" classname="GithubParsingTest" time="0.023"/>
+  <testcase name="testItParsesTheRequestedReviewersCorrectly" classname="GithubParsingTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

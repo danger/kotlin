@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="runner:macosMain" external.linked.project.path="$MODULE_DIR$/../../runner" external.root.project.path="$MODULE_DIR$/../../runner" external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="Native " useProjectSettings="false" isTestModule="false" externalProjectId="runner">
+        <sourceSets>
+          <sourceSet>runner_commonMain</sourceSet>
+        </sourceSets>
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <compilerSettings />
+        <compilerArguments>
+          <option name="languageVersion" value="1.3" />
+          <option name="apiVersion" value="1.3" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../runner/build/classes/kotlin/macos/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../runner/src/macosMain">
+      <sourceFolder url="file://$MODULE_DIR$/../../runner/src/macosMain/kotlin" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="runner_commonMain" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:zlib:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:Security:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:QuartzCore:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:posix:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:osx:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:OpenGLCommon:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:OpenGL3:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:OpenGL:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:objc:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:Metal:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:libkern:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:IOSurface:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:IOKit:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:ImageIO:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:iconv:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:GLUT:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:Foundation:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:DiskArbitration:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:darwin:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreVideo:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreText:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreServices:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreML:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreImage:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreGraphics:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreFoundation:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CoreData:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CommonCrypto:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:CFNetwork:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:ApplicationServices:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:AppKit:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:Accelerate:macos_x64:1.0.1" level="project" />
+    <orderEntry type="library" name="Gradle: Kotlin/Native:stdlib:1.0.1" level="project" />
+  </component>
+</module>

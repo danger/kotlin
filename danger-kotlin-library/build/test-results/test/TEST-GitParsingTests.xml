@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="GitParsingTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-11-14T10:40:52" hostname="GBBQBQH001M0250.local" time="0.097">
+  <properties/>
+  <testcase name="testItParsesCorrectlyTheGitFiles" classname="GitParsingTests" time="0.097"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

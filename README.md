@@ -7,3 +7,6 @@ Is possible to generate a working `danger-kotlin` instance from the code that is
 
 # Authors
 `Danger-kotlin` was developed by [@gianluz][] and [@f-meloni][]
+
+[@f-meloni]: https://github.com/f-meloni
+[@gianluz]: https://github.com/gianluz
