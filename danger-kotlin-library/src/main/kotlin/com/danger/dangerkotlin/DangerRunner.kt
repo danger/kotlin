@@ -46,15 +46,15 @@ private fun fail(violation: Violation) {
     dangerRunner.saveDangerResults()
 }
 
-fun warning(message: String) {
-    warning(Violation(message))
+fun warn(message: String) {
+    warn(Violation(message))
 }
 
-fun warning(message: String, file: FilePath, line: Int) {
-    warning(Violation(message, file, line))
+fun warn(message: String, file: FilePath, line: Int) {
+    warn(Violation(message, file, line))
 }
 
-private fun warning(violation: Violation) {
+private fun warn(violation: Violation) {
     dangerRunner.dangerResults.warnings+=(violation)
     dangerRunner.saveDangerResults()
 }
