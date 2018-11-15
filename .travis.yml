@@ -1,0 +1,19 @@
+language: generic
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10
+      install:
+        - brew install kotlin
+        - brew install holgerbrandl/tap/kscript
+        - brew install maven
+        - brew install gradle
+        - brew install danger/tap/danger-js 
+      script:
+        - cd danger-kotlin-library
+        - gradle publishToMavenLocal
+        - cd ../danger-kotlin
+        - gradle build
+        - cd ..
+        - danger ci --process danger-kotlin/build/bin/macos/main/release/executable/danger-kotlin.kexe
+        
