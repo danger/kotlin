@@ -9,9 +9,5 @@ matrix:
         - brew install gradle
         - brew install danger/tap/danger-js 
       script:
-        - cd danger-kotlin-library
-        - gradle publishToMavenLocal
-        - cd ../danger-kotlin
-        - gradle build
-        - cd ..
-        - danger ci --process danger-kotlin/build/bin/macos/main/release/executable/danger-kotlin.kexe
+        - make install
+        - danger ci --process danger-kotlin
