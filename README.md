@@ -13,14 +13,12 @@ brew install holgerbrandl/tap/kscript
 brew install maven
 brew install gradle
 ```
-- go on the folder `danger-kotlin-library`
-- run `gradle publishToMavenLocal`
-- go on the folder `danger-kotlin`
-- run `gradle build`
+- run `gradle publishToMavenLocal -p danger-kotlin-library`
+- run `gradle build -p danger-kotlin`
 - now you can run `danger command --process danger-kotlin/build/bin/$os_dir/main/release/executable/danger-kotlin.kexe`
 
 # Authors
-`Danger-kotlin` was developed by [@gianluz][] and [@f-meloni][]
+`danger-kotlin` was developed by [@gianluz][] and [@f-meloni][]
 
 [@f-meloni]: https://github.com/f-meloni
 [@gianluz]: https://github.com/gianluz
