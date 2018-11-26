@@ -37,26 +37,35 @@ data class BitBucketServer(
 
 data class BitBucketServerActivity(
         val id: Int,
-        val createdDate: Int,
+        val createdDate: Long,
         val user: BitBucketServerUser,
         val action: String,
         val commentAction: String?
 )
 
 data class BitBucketServerMetadata(
-        val pullRequestID: String,
-        val repoSlug: String
+        internal val env: BitBucketServerEnv
+) {
+    val pullRequestId: String
+        get() = env.pr
+    val repoSlug: String
+        get() = env.repo
+}
+
+data class BitBucketServerEnv(
+    val pr: String,
+    val repo: String
 )
 
 data class BitBucketServerComment(
     val id: Int,
-    val createdDate: Int,
+    val createdDate: Long,
     val user: BitBucketServerUser,
     val action: String,
     val fromHash: String?,
     val previousFromHash: String?,
     val commentAction: String?,
-    val comment: BitBucketServerCommentDetail
+    val comment: BitBucketServerCommentDetail?
 )
 
 data class BitBucketServerCommentDetail(
@@ -64,8 +73,10 @@ data class BitBucketServerCommentDetail(
     val version: Int,
     val text: String,
     val author: BitBucketServerUser,
-    val createdAt: Int,
-    val updatedAt: Int,
+    @SerializedName("createdDate")
+    val createdAt: Long,
+    @SerializedName("updatedDate")
+    val updatedAt: Long,
     val comments: Array<BitBucketServerCommentDetail>,
     val properties: BitBucketServerCommentInnerProperties,
     val tasks: Array<BitBucketServerCommentTask>
@@ -94,8 +105,8 @@ data class BitBucketServerCommentDetail(
         result = 31 * result + version
         result = 31 * result + text.hashCode()
         result = 31 * result + author.hashCode()
-        result = 31 * result + createdAt
-        result = 31 * result + updatedAt
+        result = 31 * result + createdAt.hashCode()
+        result = 31 * result + updatedAt.hashCode()
         result = 31 * result + comments.contentHashCode()
         result = 31 * result + properties.hashCode()
         result = 31 * result + tasks.contentHashCode()
@@ -105,7 +116,7 @@ data class BitBucketServerCommentDetail(
 
 data class BitBucketServerCommentTask(
         val id: Int,
-        val createdDate: Int,
+        val createdDate: Long,
         val text: String,
         val state: String,
         val author: BitBucketServerUser
@@ -113,7 +124,7 @@ data class BitBucketServerCommentTask(
 
 data class BitBucketServerCommentInnerProperties(
         val repositoryId: Int,
-        val issues: Array<String>
+        val issues: Array<String>?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -122,14 +133,19 @@ data class BitBucketServerCommentInnerProperties(
         other as BitBucketServerCommentInnerProperties
 
         if (repositoryId != other.repositoryId) return false
-        if (!issues.contentEquals(other.issues)) return false
+        if (issues != null) {
+            if (other.issues == null) return false
+            if (!issues.contentEquals(other.issues)) return false
+        } else {
+            return other.issues != null
+        }
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = repositoryId.hashCode()
-        result = 31 * result + issues.contentHashCode()
+        var result = repositoryId
+        result = 31 * result + (issues?.contentHashCode() ?: 0)
         return result
     }
 }
@@ -138,9 +154,9 @@ data class BitBucketServerCommit(
         val id: String,
         val displayId: String,
         val author: BitBucketServerUser,
-        val authorTimestamp: Int,
+        val authorTimestamp: Long,
         val committer: BitBucketServerUser?,
-        val committerTimestamp: Int,
+        val committerTimestamp: Long,
         val message: String,
         val parents: Array<BitBucketServerCommitParent>
 ) {
@@ -166,9 +182,9 @@ data class BitBucketServerCommit(
         var result = id.hashCode()
         result = 31 * result + displayId.hashCode()
         result = 31 * result + author.hashCode()
-        result = 31 * result + authorTimestamp
+        result = 31 * result + authorTimestamp.hashCode()
         result = 31 * result + (committer?.hashCode() ?: 0)
-        result = 31 * result + committerTimestamp
+        result = 31 * result + committerTimestamp.hashCode()
         result = 31 * result + message.hashCode()
         result = 31 * result + parents.contentHashCode()
         return result
@@ -189,18 +205,18 @@ data class BitBucketServerPR(
         val open: Boolean,
         val closed: Boolean,
         @SerializedName("createdDate")
-        val createdAt: Int,
+        val createdAt: Long,
         @SerializedName("updatedDate")
-        val updatedAt: Int,
-        @SerializedName("fromRef")
-        val head: BitBucketServerMergeRef,
+        val updatedAt: Long,
         @SerializedName("toRef")
+        val head: BitBucketServerMergeRef,
+        @SerializedName("fromRef")
         val base: BitBucketServerMergeRef,
         @SerializedName("locked")
         val isLocked: Boolean,
         val author: BitBucketServerAuthor,
         val reviewers: Array<BitBucketServerUser>,
-        val participants: Array<BitBucketServerUser>
+        val participants: Array<BitBucketServerAuthor>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -235,8 +251,8 @@ data class BitBucketServerPR(
         result = 31 * result + state.hashCode()
         result = 31 * result + open.hashCode()
         result = 31 * result + closed.hashCode()
-        result = 31 * result + createdAt
-        result = 31 * result + updatedAt
+        result = 31 * result + createdAt.hashCode()
+        result = 31 * result + updatedAt.hashCode()
         result = 31 * result + head.hashCode()
         result = 31 * result + base.hashCode()
         result = 31 * result + isLocked.hashCode()

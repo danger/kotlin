@@ -9,6 +9,6 @@ data class DSL(
 data class DangerDSL(
         val github: GitHub,
         @SerializedName("bitbucket_server")
-        val bitbucketServer: BitBucketServer,
+        val bitBucketServer: BitBucketServer,
         val git: Git
 )
