@@ -37,7 +37,8 @@ data class BitBucketServer(
 
 data class BitBucketServerActivity(
         val id: Int,
-        val createdDate: Long,
+        @SerializedName("createdDate")
+        val createdAt: Long,
         val user: BitBucketServerUser,
         val action: String,
         val commentAction: String?
@@ -59,7 +60,8 @@ data class BitBucketServerEnv(
 
 data class BitBucketServerComment(
     val id: Int,
-    val createdDate: Long,
+    @SerializedName("createdDate")
+    val createdAt: Long,
     val user: BitBucketServerUser,
     val action: String,
     val fromHash: String?,
@@ -116,7 +118,8 @@ data class BitBucketServerCommentDetail(
 
 data class BitBucketServerCommentTask(
         val id: Int,
-        val createdDate: Long,
+        @SerializedName("createdDate")
+        val createdAt: Long,
         val text: String,
         val state: String,
         val author: BitBucketServerUser
