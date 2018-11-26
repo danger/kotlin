@@ -4,7 +4,7 @@ import org.junit.Assert.*
 import org.junit.Test
 import java.util.*
 
-class GithubParsingTest {
+class GitHubParsingTests {
     private val jsonFiles = JSONFiles()
     private val gson = Gson()
     private val dsl
