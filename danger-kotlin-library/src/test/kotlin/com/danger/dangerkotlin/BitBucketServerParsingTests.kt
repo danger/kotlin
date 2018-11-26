@@ -63,7 +63,7 @@ class BitBucketServerParsingTests {
             val expectedUser = BitBucketServerUser(2, "danger", "DangerCI", "foo@bar.com", true, "danger", "NORMAL")
             val commentText = "test"
             val expectedProperty = BitBucketServerCommentInnerProperties(1, null)
-            val expectedCommentDetail = BitBucketServerCommentDetail(10, 23, commentText, expectedUser, 1518939353345, 1519449132488, arrayOf<BitBucketServerCommentDetail>(), expectedProperty, arrayOf<BitBucketServerCommentTask>())
+            val expectedCommentDetail = BitBucketServerCommentDetail(10, 23, commentText, expectedUser, 1518939353345, 1519449132488, arrayOf(), expectedProperty, arrayOf<BitBucketServerCommentTask>())
             val expectedComment = BitBucketServerComment(52,
                     1518939353345,
                     expectedUser,
