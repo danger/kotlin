@@ -20,11 +20,11 @@ class BitBucketServerParsingTests {
 
             val expectedProject = BitBucketServerProject(1, "PROJ", "Project", false, "NORMAL")
             val expectedRepo = BitBucketServerRepo("Repo", "repo", "git", false, true, expectedProject)
-            val expectedBase = BitBucketServerMergeRef("refs/heads/foo", "foo", "d6725486c38d46a33e76f622cf24b9a388c8d13d", expectedRepo)
-            assertEquals(expectedBase, base)
+            val expectedHead = BitBucketServerMergeRef("refs/heads/foo", "foo", "d6725486c38d46a33e76f622cf24b9a388c8d13d", expectedRepo)
+            assertEquals(expectedHead, toRef)
 
-            val expectedHead = BitBucketServerMergeRef("refs/heads/master", "master", "8942a1f75e4c95df836f19ef681d20a87da2ee20", expectedRepo)
-            assertEquals(expectedHead, head)
+            val expectedBase = BitBucketServerMergeRef("refs/heads/master", "master", "8942a1f75e4c95df836f19ef681d20a87da2ee20", expectedRepo)
+            assertEquals(expectedBase, fromRef)
 
             val expectedPartecipant = BitBucketServerUser(2, "danger", "DangerCI", "user@email.com", true, "danger", "NORMAL")
             assertEquals(1, participants.count())

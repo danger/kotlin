@@ -211,10 +211,8 @@ data class BitBucketServerPR(
         val createdAt: Long,
         @SerializedName("updatedDate")
         val updatedAt: Long,
-        @SerializedName("toRef")
-        val head: BitBucketServerMergeRef,
-        @SerializedName("fromRef")
-        val base: BitBucketServerMergeRef,
+        val fromRef: BitBucketServerMergeRef,
+        val toRef: BitBucketServerMergeRef,
         @SerializedName("locked")
         val isLocked: Boolean,
         val author: BitBucketServerAuthor,
@@ -236,8 +234,8 @@ data class BitBucketServerPR(
         if (closed != other.closed) return false
         if (createdAt != other.createdAt) return false
         if (updatedAt != other.updatedAt) return false
-        if (head != other.head) return false
-        if (base != other.base) return false
+        if (fromRef != other.fromRef) return false
+        if (toRef != other.toRef) return false
         if (isLocked != other.isLocked) return false
         if (author != other.author) return false
         if (!reviewers.contentEquals(other.reviewers)) return false
@@ -256,8 +254,8 @@ data class BitBucketServerPR(
         result = 31 * result + closed.hashCode()
         result = 31 * result + createdAt.hashCode()
         result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + head.hashCode()
-        result = 31 * result + base.hashCode()
+        result = 31 * result + fromRef.hashCode()
+        result = 31 * result + toRef.hashCode()
         result = 31 * result + isLocked.hashCode()
         result = 31 * result + author.hashCode()
         result = 31 * result + reviewers.contentHashCode()
