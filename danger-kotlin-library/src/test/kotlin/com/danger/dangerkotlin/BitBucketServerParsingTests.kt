@@ -70,6 +70,8 @@ class BitBucketServerParsingTests {
                     "COMMENTED",
                     null,
                     null,
+                    null,
+                    null,
                     "ADDED",
                     expectedCommentDetail)
 

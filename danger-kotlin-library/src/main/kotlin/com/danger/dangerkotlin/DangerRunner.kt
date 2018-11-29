@@ -33,14 +33,14 @@ fun Danger(args: Array<String>): DangerDSL {
     return dangerRunner.danger
 }
 
-/*
+/**
 * Adds an inline fail message to the Danger report
 */
 fun fail(message: String) {
     fail(Violation(message))
 }
 
-/*
+/**
 * Adds an inline fail message to the Danger report
 */
 fun fail(message: String, file: FilePath, line: Int) {
@@ -52,14 +52,14 @@ private fun fail(violation: Violation) {
     dangerRunner.saveDangerResults()
 }
 
-/*
+/**
 * Adds an inline warning message to the Danger report
 */
 fun warn(message: String) {
     warn(Violation(message))
 }
 
-/*
+/**
 * Adds an inline warning message to the Danger report
 */
 fun warn(message: String, file: FilePath, line: Int) {
@@ -71,14 +71,14 @@ private fun warn(violation: Violation) {
     dangerRunner.saveDangerResults()
 }
 
-/*
+/**
 * Adds an inline message to the Danger report
 */
 fun message(message: String) {
     message(Violation(message))
 }
 
-/*
+/**
 * Adds an inline message to the Danger report
 */
 fun message(message: String, file: FilePath, line: Int) {
@@ -90,14 +90,14 @@ private fun message(violation: Violation) {
     dangerRunner.saveDangerResults()
 }
 
-/*
+/**
 * Adds an inline markdown message to the Danger report
 */
 fun markdown(message: String) {
     markdown(Violation(message))
 }
 
-/*
+/**
 * Adds an inline markdown message to the Danger report
 */
 fun markdown(message: String, file: FilePath, line: Int) {
