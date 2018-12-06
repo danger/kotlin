@@ -74,6 +74,7 @@ enum class GitHubPullRequestState(val value: String) {
  * @property deletions The number of deleted lines in the pull request.
  * @property changedFiles The number of files changed in the pull request.
  * @property milestone The milestone of the pull request
+ * @property htmlURL The link back to this PR as user-facing
  */
 data class GitHubPR(
         val number: Int,
@@ -97,7 +98,8 @@ data class GitHubPR(
         val additions: Int?,
         val deletions: Int?,
         @SerializedName("changed_files") val changedFiles: Int?,
-        val milestone: GitHubMilestone?
+        val milestone: GitHubMilestone?,
+        @SerializedName("html_url") val htmlURL: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -127,6 +129,7 @@ data class GitHubPR(
         if (deletions != other.deletions) return false
         if (changedFiles != other.changedFiles) return false
         if (milestone != other.milestone) return false
+        if (htmlURL != other.htmlURL) return false
 
         return true
     }
@@ -154,6 +157,7 @@ data class GitHubPR(
         result = 31 * result + (deletions ?: 0)
         result = 31 * result + (changedFiles ?: 0)
         result = 31 * result + (milestone?.hashCode() ?: 0)
+        result = 31 * result + htmlURL.hashCode()
         return result
     }
 }

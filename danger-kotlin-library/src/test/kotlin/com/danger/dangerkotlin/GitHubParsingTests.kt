@@ -35,6 +35,7 @@ class GitHubParsingTests {
             assertEquals(205, additions)
             assertEquals(111, deletions)
             assertEquals(56, changedFiles)
+            assertEquals("https://github.com/artsy/eidolon/pull/609", htmlURL)
             assertNull(milestone)
 
 
