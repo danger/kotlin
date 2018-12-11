@@ -1,11 +1,9 @@
 TOOL_NAME = danger-kotlin
 VERSION = 0.1.0
-OS_TARGET = $(./gradlew :danger-kotlin:osName | grep OS_TARGET)
-
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
-BUILD_PATH = danger-kotlin/build/konan/bin/${OS_TARGET}/$(TOOL_NAME).kexe
+BUILD_PATH = danger-kotlin/build/konan/bin/*/$(TOOL_NAME).kexe
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
 TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 
@@ -15,8 +13,8 @@ install: build
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 
 build:
-	./gradlew :danger-kotlin-library:publishToMavenLocal
-	./gradlew :danger-kotlin:build
+	gradle publishToMavenLocal -p danger-kotlin-library
+	gradle build -p danger-kotlin
 
 uninstall:
 	rm -f $(INSTALL_PATH)
