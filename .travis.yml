@@ -10,7 +10,6 @@ matrix:
         - make install
         - danger ci --process danger-kotlin
     - os: linux
-      language: generic
       sudo: required
       dist: trusty
       install:
