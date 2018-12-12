@@ -4,7 +4,7 @@ matrix:
     - os: osx
       osx_image: xcode10
       install:
-	- brew install gradle
+        - brew install gradle
         - brew install holgerbrandl/tap/kscript
         - brew install danger/tap/danger-js
       script:
@@ -17,7 +17,7 @@ matrix:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
         - sdk install kscript
-	- sdk install gradle 4.2
+        - sdk install gradle 4.2
         - npm -g install danger-js
       script:
         - make install
