@@ -18,7 +18,7 @@ matrix:
         - source ~/.bash_profile
         - sdk install kscript
         - sdk install gradle 4.2
-        - npm -g install danger-js
+        - npm install -g danger
       script:
         - make install
         - danger ci --process danger-kotlin
