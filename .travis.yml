@@ -19,6 +19,7 @@ matrix:
         - sdk install kscript
         - sdk install gradle 4.10
         - npm install -g danger
+        - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
         - danger ci --process danger-kotlin
