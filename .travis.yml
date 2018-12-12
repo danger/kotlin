@@ -18,6 +18,7 @@ matrix:
         - source ~/.bash_profile
         - sdk install kscript
         - sdk install gradle 4.10
+        - sdk install kotlin
         - npm install -g danger
         - sudo chmod -R a+rwx /usr/local/
       script:
