@@ -17,7 +17,7 @@ matrix:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
         - sdk install kscript
-	- sdk install gradle 5.0
+	- sdk install gradle 4.2
         - npm -g install danger-js
       script:
         - make install
