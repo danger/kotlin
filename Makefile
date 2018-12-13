@@ -3,7 +3,7 @@ VERSION = 0.1.0
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
-BUILD_PATH = danger-kotlin/build/bin/macos/main/release/executable/$(TOOL_NAME).kexe
+BUILD_PATH = danger-kotlin/build/konan/bin/*/$(TOOL_NAME).kexe
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
 TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 

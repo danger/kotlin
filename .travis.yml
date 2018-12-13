@@ -1,13 +1,29 @@
-language: generic
+language: java
 matrix:
   include:
     - os: osx
       osx_image: xcode10
       install:
-        - brew install kotlin
-        - brew install holgerbrandl/tap/kscript
-        - brew install gradle
-        - brew install danger/tap/danger-js 
+        - curl -s "https://get.sdkman.io" | bash
+        - source ~/.bash_profile
+        - sdk install kscript
+        - sdk install gradle 4.10
+        - sdk install kotlin
+        - brew install danger/tap/danger-js
+      script:
+        - make install
+        - danger ci --process danger-kotlin
+    - os: linux
+      sudo: required
+      dist: trusty
+      install:
+        - curl -s "https://get.sdkman.io" | bash
+        - source ~/.bash_profile
+        - sdk install kscript
+        - sdk install gradle 4.10
+        - sdk install kotlin
+        - npm install -g danger
+        - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
         - danger ci --process danger-kotlin
