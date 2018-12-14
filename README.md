@@ -8,14 +8,21 @@ If you want to try it:
 - clone the project
 - run
 ```sh
-brew install kotlin
-brew install holgerbrandl/tap/kscript
-brew install maven
-brew install gradle
+curl -s "https://get.sdkman.io" | bash
+source ~/.bash_profile
+sdk install kscript
+sdk install gradle 4.10
+sdk install kotlin
+npm install -g danger
 ```
-- run `gradle publishToMavenLocal -p danger-kotlin-library`
-- run `gradle build -p danger-kotlin`
-- now you can run `danger command --process danger-kotlin/build/bin/$os_dir/main/release/executable/danger-kotlin.kexe`
+- run `make install`
+- now you can run `danger command`
+
+### Commands
+
+- `danger-swift ci` - Use this on CI
+- `danger-swift pr https://github.com/Moya/Harvey/pull/23` - Use this to build your Dangerfile
+- `danger-swift local` - Use this to run danger against your local changes from master
 
 # Authors
 `danger-kotlin` was developed by [@gianluz][] and [@f-meloni][]
