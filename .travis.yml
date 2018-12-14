@@ -12,7 +12,7 @@ matrix:
         - brew install danger/tap/danger-js
       script:
         - make install
-        - danger ci --process danger-kotlin
+        - danger-kotlin ci
     - os: linux
       sudo: required
       dist: trusty
@@ -26,4 +26,4 @@ matrix:
         - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
-        - danger ci --process danger-kotlin
+        - danger-kotlin ci
