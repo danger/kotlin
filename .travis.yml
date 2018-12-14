@@ -9,7 +9,7 @@ matrix:
         - sdk install kscript
         - sdk install gradle 4.10
         - sdk install kotlin
-        - brew install danger/tap/danger-js
+        - npm install -g danger
       script:
         - make install
         - danger-kotlin ci
