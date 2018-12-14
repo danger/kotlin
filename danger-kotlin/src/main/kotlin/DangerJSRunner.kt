@@ -1,6 +1,7 @@
 fun runDangerJS(command: String, args: List<String>) {
     val argsString = args.joinToString(" ")
-    val dangerJSCall = "danger-$command --process danger-kotlin $argsString"
+    val dangerCommandPath = "which danger-$command".exec()
+    val dangerJSCall = "$dangerCommandPath --process danger-kotlin $argsString"
 
     println("Executing " + dangerJSCall)
 
