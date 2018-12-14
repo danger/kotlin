@@ -1,24 +1,18 @@
 import platform.posix.*
 
-const val TMP_INPUT_JSON_FILE = "danger_in.json"
-
-const val TMP_OUT_JSON_FILE = "danger_out.json"
-
 fun main(args: Array<String>) {
-
-    fopen(TMP_INPUT_JSON_FILE, "wt")?.apply {
-        do {
-            val line = readLine()?.let {
-                fputs(it, this)
+    if (args.size > 0) {
+        val command = args.first()
+        when (command) {
+            "ci", "local", "pr" -> {
+                val dangerArgs = args.drop(1)
+                runDangerJS(command, dangerArgs)
             }
-        } while (line != null)
-    }.also {
-        fclose(it)
+            else -> return
+        }
+    } else {
+        runDangerKotlin()
     }
-
-    "kscript --package Dangerfile.kts".exec()
-    "./Dangerfile $TMP_INPUT_JSON_FILE $TMP_OUT_JSON_FILE".exec()
-    "echo danger-results:/`pwd`/$TMP_OUT_JSON_FILE".exec()
 }
 
 fun String.exec() = system(this)
