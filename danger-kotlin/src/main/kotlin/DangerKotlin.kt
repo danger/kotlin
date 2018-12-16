@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
                 val dangerArgs = args.drop(1)
                 runDangerJS(command, dangerArgs)
             }
+            "edit" -> runEditCommand()
             else -> return
         }
     } else {
