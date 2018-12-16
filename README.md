@@ -20,9 +20,10 @@ npm install -g danger
 
 ### Commands
 
-- `danger-swift ci` - Use this on CI
-- `danger-swift pr https://github.com/Moya/Harvey/pull/23` - Use this to build your Dangerfile
-- `danger-swift local` - Use this to run danger against your local changes from master
+- `danger-kotlin ci` - Use this on CI
+- `danger-kotlin pr https://github.com/Moya/Harvey/pull/23` - Use this to build your Dangerfile
+- `danger-kotlin local` - Use this to run danger against your local changes from master
+- `danger-kotlin edit` - Creates a temporary project for working on a Dangerfile (Requires IntelliJ IDEA)
 
 # Authors
 `danger-kotlin` was developed by [@gianluz][] and [@f-meloni][]
