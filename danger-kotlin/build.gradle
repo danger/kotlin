@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.konan' version '0.9.1'
+    id 'org.jetbrains.kotlin.konan' version "1.3.11"
 }
 
 konan.targets = ['linux', 'macbook', 'mingw']
@@ -7,13 +7,11 @@ konan.targets = ['linux', 'macbook', 'mingw']
 konanArtifacts {
     program("danger-kotlin") {
         enableOptimizations(true)
-
     }
 }
 
 task('osName') {
     doLast {
         println "OS_TARGET=$org.jetbrains.kotlin.konan.target.HostManager.host"
- 
     }
 }
