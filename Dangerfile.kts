@@ -23,3 +23,5 @@ if (danger.git.createdFiles.size + danger.git.modifiedFiles.size - danger.git.de
 if (danger.github.pullRequest.title.contains("WIP" ,false)) {
     warn("PR is classed as Work in Progress")
 }
+
+suggest("Test", "Dangerfile.kts", 27)
