@@ -8,7 +8,7 @@ class GitHubParsingTests {
     private val jsonFiles = JSONFiles()
     private val gson = Gson()
     private val dsl
-        get() = gson.fromJson(jsonFiles.dangerJSON, DSL::class.java)
+        get() = gson.fromJson(jsonFiles.githubDangerJSON, DSL::class.java)
     private val github
         get() = dsl.danger.github
 
@@ -152,5 +152,15 @@ class GitHubParsingTests {
             val expectedTeam = GitHubTeam(1, "Justice League")
             assertEquals(expectedTeam, teams.first())
         }
+    }
+
+    @Test
+    fun testOnGitHubIsTrue(){
+        assertEquals(true, dsl.danger.onGitHub)
+    }
+
+    @Test
+    fun testOnBitBucketIsFalse(){
+        assertEquals(false, dsl.danger.onBitBucketServer)
     }
 }

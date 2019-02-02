@@ -8,7 +8,7 @@ class GitParsingTests {
     private val jsonFiles = JSONFiles()
     private val gson = Gson()
     private val dsl
-        get() = gson.fromJson(jsonFiles.dangerJSON, DSL::class.java)
+        get() = gson.fromJson(jsonFiles.githubDangerJSON, DSL::class.java)
 
     @Test
     fun testItParsesCorrectlyTheGitFiles() {

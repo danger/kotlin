@@ -1,8 +1,8 @@
 package com.danger.dangerkotlin
 
 class JSONFiles {
-    val dangerJSON
-        get() = loadJSON("dangerDSL.json")
+    val githubDangerJSON
+        get() = loadJSON("githubDangerJSON.json")
     val dangerBitBucketServerJSON
         get() = loadJSON("bitbucketServerDangerDSL.json")
 

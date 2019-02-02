@@ -98,4 +98,14 @@ class BitBucketServerParsingTests {
             assertEquals(7, count())
         }
     }
+
+    @Test
+    fun testOnBitBucketIsTrue(){
+        assertEquals(true, dsl.danger.onBitBucketServer)
+    }
+
+    @Test
+    fun testOnGitHubIsFalse(){
+        assertEquals(false, dsl.danger.onGitHub)
+    }
 }

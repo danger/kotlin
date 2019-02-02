@@ -11,4 +11,9 @@ data class DangerDSL(
         @SerializedName("bitbucket_server")
         val bitBucketServer: BitBucketServer,
         val git: Git
-)
+) {
+        val onGitHub
+                get() = github != null
+        val onBitBucketServer
+                get() = bitBucketServer != null
+}
