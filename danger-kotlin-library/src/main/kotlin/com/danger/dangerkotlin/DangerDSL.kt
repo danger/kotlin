@@ -12,11 +12,8 @@ data class DangerDSL(
         val bitBucketServer: BitBucketServer,
         val git: Git
 ) {
-        fun onGithub() : Boolean {
-                return github != null
-        }
-
-        fun onBitBucketServer() : Boolean {
-                return bitBucketServer != null
-        }
+        val onGitHub
+                get() = github != null
+        val onBitBucketServer
+                get() = bitBucketServer != null
 }

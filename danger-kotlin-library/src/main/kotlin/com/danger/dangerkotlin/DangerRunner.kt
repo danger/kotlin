@@ -114,7 +114,7 @@ private fun markdown(violation: Violation) {
  * Adds an inline suggest markdown message to the Danger report
  */
 fun suggest(code: String, file: FilePath, line: Int) {
-    if (dangerRunner.danger.onGithub()) {
+    if (dangerRunner.danger.onGitHub) {
         val message = "```suggestion\n $code \n```"
         markdown(Violation(message, file, line))
     } else {
