@@ -33,7 +33,7 @@ ext.testingDependencies = group {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    utilsDepeqndencies()
+    utilsDependencies()
     kotlinDependencies()
     testingDependencies()
 }
