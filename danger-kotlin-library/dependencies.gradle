@@ -1,0 +1,39 @@
+def group(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+// Utils
+def gsonVersion = '2.8.2'
+ext.utils = [
+        gson : "com.google.code.gson:gson:$gsonVersion"
+]
+
+ext.utilsDependencies = group {
+    api utils.gson
+}
+
+// Kotlin
+def kotlinScriptRuntimeVersion = '1.3.0'
+ext.kotlin = [
+        runtime : "org.jetbrains.kotlin:kotlin-script-runtime:$kotlinScriptRuntimeVersion"
+]
+ext.kotlinDependencies = group {
+    implementation kotlin.runtime
+}
+
+// Testing
+def junitVersion = '4.12'
+ext.testing = [
+        junit : "junit:junit:$junitVersion"
+]
+ext.testingDependencies = group {
+    testImplementation testing.junit
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    utilsDependencies()
+    kotlinDependencies()
+    testingDependencies()
+}
