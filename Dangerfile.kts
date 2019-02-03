@@ -1,6 +1,6 @@
 #!/usr/bin/env kscript
 
-//DEPS com.danger:danger-kotlin-library:1.0.0
+//DEPS com.danger:danger-kotlin-library:0.1.0
 
 import com.danger.dangerkotlin.*
 
