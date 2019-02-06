@@ -36,6 +36,11 @@ class BitBucketServerParsingTests {
             assertEquals(true, open)
             assertEquals("OPEN", state)
             assertEquals("Pull request title", title)
+
+            val expectedReviewerUser = BitBucketServerUser(2, "danger", "DangerCI", "foo@bar.com", true, "danger", "NORMAL")
+            val expectedReviewer = BitBucketServerReviewer(expectedReviewerUser, true, "8942a1f75e4c95df836f19ef681d20a87da2ee20")
+            assertEquals(1, reviewers.count())
+            assertEquals(expectedReviewer, reviewers[0])
         }
     }
 
@@ -84,7 +89,7 @@ class BitBucketServerParsingTests {
     fun testItParsesTheBitBucketMetadata() {
         with(bitBucketServer.metadata) {
             assertEquals("artsy/emission", repoSlug)
-            assertEquals("327", pullRequestId)
+            assertEquals("327", pullRequestID)
         }
     }
 

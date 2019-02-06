@@ -1,5 +1,4 @@
 package com.danger.dangerkotlin
-
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -66,13 +65,9 @@ data class BitBucketServerActivity(
  * @property repoSlug The complete repo slug including project slug.
  */
 data class BitBucketServerMetadata internal constructor(
-        internal val env: BitBucketServerEnv
-) {
-    val pullRequestId: String
-        get() = env.pr
+    val pullRequestID: String,
     val repoSlug: String
-        get() = env.repo
-}
+)
 
 internal data class BitBucketServerEnv(
     val pr: String,
@@ -310,9 +305,9 @@ data class BitBucketServerPR(
         val toRef: BitBucketServerMergeRef,
         @SerializedName("locked")
         val isLocked: Boolean,
-        val author: BitBucketServerAuthor,
-        val reviewers: Array<BitBucketServerUser>,
-        val participants: Array<BitBucketServerAuthor>
+        val author: BitBucketServerParticipant,
+        val reviewers: Array<BitBucketServerReviewer>,
+        val participants: Array<BitBucketServerParticipant>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -359,8 +354,20 @@ data class BitBucketServerPR(
     }
 }
 
-data class BitBucketServerAuthor(
+data class BitBucketServerParticipant(
         val user: BitBucketServerUser
+)
+
+/**
+ * The BitBucketServer PR data
+ * @property user The BitBucket Server user.
+ * @property approved The approval status.
+ * @property lastReviewedCommit The commit SHA for the latest commit that was reviewed.
+*/
+data class BitBucketServerReviewer(
+    val user: BitBucketServerUser,
+    val approved: Boolean,
+    val lastReviewedCommit: String?
 )
 
 /**
