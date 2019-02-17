@@ -431,11 +431,11 @@ data class BitBucketServerProject(
  * @property type The type of a user, "NORMAL" being a typical user3
  */
 data class BitBucketServerUser(
-        val id: Int,
+        val id: Int?,
         val name: String,
-        val displayName: String,
+        val displayName: String?,
         val emailAddress: String,
-        val active: Boolean,
-        val slug: String,
-        val type: String
+        val active: Boolean?,
+        val slug: String?,
+        val type: String?
 )

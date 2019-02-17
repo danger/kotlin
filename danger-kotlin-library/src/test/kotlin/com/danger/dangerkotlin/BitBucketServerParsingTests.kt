@@ -15,7 +15,7 @@ class BitBucketServerParsingTests {
     @Test
     fun testItParsesTheBitBucketPullRequest() {
         with(bitBucketServer.pullRequest) {
-            val expectedUser = BitBucketServerUser(1,"test", "test", "user@email.com", true, "test", "NORMAL")
+            val expectedUser = BitBucketServerUser(null,"test", null, "user@email.com", null, null, null)
             assertEquals(expectedUser, author.user)
 
             val expectedProject = BitBucketServerProject(1, "PROJ", "Project", false, "NORMAL")
