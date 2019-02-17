@@ -64,20 +64,8 @@
           "role": "AUTHOR",
           "status": "UNAPPROVED",
           "user": {
-            "active": true,
-            "displayName": "test",
             "emailAddress": "user@email.com",
-            "id": 1,
-            "links": {
-              "self": [
-                {
-                  "href": "http://localhost:7990/users/test"
-                }
-              ]
-            },
-            "name": "test",
-            "slug": "test",
-            "type": "NORMAL"
+            "name": "test"
           }
         },
         "closed": false,
