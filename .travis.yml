@@ -33,7 +33,7 @@ matrix:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
         - sdk install kscript
-        - sdk install gradle 5.2.1
+        - sdk install gradle
         - sdk install kotlin
         - npm install -g danger
       script:
@@ -46,7 +46,7 @@ matrix:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
         - sdk install kscript
-        - sdk install gradle 5.2.1
+        - sdk install gradle
         - sdk install kotlin
         - npm install -g danger
         - sudo chmod -R a+rwx /usr/local/
