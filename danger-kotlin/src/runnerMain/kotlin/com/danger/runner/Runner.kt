@@ -1,3 +1,4 @@
+package com.danger.runner
 import platform.posix.*
 
 const val TMP_INPUT_JSON_FILE = "danger_in.json"

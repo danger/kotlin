@@ -1,17 +1,17 @@
 plugins {
-    id 'org.jetbrains.kotlin.konan' version "1.3.11"
+    id 'kotlin-multiplatform'
 }
 
-konan.targets = ['linux', 'macbook', 'mingw']
-
-konanArtifacts {
-    program("danger-kotlin") {
-        enableOptimizations(true)
+kotlin {
+    targets {
+        fromPreset(MPPTools.defaultHostPreset(project), 'runner') {
+            compilations.main.outputKinds 'EXECUTABLE'
+            compilations.main.entryPoint 'com.danger.runner.main'
+        }
     }
 }
 
-task('osName') {
-    doLast {
-        println "OS_TARGET=$org.jetbrains.kotlin.konan.target.HostManager.host"
-    }
+
+MPPTools.createRunTask(project, 'runProgram', kotlin.targets.runner) {
+    
 }

@@ -1,1 +1,22 @@
-include ':danger-kotlin', 'danger-kotlin-library'
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    }
+}
+
+enableFeaturePreview('GRADLE_METADATA')
+
+include ':danger-kotlin-library'
+
+if (MPPTools.isMacos() || MPPTools.isLinux() || MPPTools.isWindows()) {
+    include ':danger-kotlin'
+}
