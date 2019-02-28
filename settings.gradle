@@ -1,1 +1,18 @@
-include ':danger-kotlin', 'danger-kotlin-library'
+pluginManagement {
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "kotlin-multiplatform") {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            }
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+include ':danger-kotlin-library'
+
+if (MPPTools.isMacos() || MPPTools.isLinux() || MPPTools.isWindows()) {
+    include ':danger-kotlin'
+}
