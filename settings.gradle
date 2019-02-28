@@ -8,12 +8,8 @@ pluginManagement {
     }
     repositories {
         mavenCentral()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 }
-
-enableFeaturePreview('GRADLE_METADATA')
 
 include ':danger-kotlin-library'
 
