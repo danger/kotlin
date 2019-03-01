@@ -24,6 +24,6 @@ object DangerKotlin {
 
     private fun printResult() {
         //TODO: find proper way to print the result in the stdout
-        Cmd().name("echo danger-results:/`pwd`/$FILE_TMP_OUTPUT_JSON").args("").exec()
+        Cmd().name("echo danger-results:/`pwd`/$FILE_TMP_OUTPUT_JSON").args("").exec(false)
     }
 }

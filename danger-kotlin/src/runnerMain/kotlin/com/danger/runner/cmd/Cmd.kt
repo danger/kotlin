@@ -15,8 +15,12 @@ class Cmd {
     }
 
     fun exec() {
+        exec(true)
+    }
+
+    fun exec(printCallLog: Boolean) {
         "$name ${args.joinToString(" ")}".apply {
-            println("Executing $this...")
+            if(printCallLog) println("Executing $this...")
         }.also {
             system(it)
         }
