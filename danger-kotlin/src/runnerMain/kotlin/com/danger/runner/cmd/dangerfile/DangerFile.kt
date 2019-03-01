@@ -11,9 +11,6 @@ object DangerFile: DangerFileBridge {
     override val kscript: KScriptBridge
         get() = KScript
 
-    override val cmd: ICmd
-        get() = Cmd
-
     override fun compile() = apply {
         kscript.pckg(DANGER_FILE)
     }
@@ -23,7 +20,7 @@ object DangerFile: DangerFileBridge {
     }
 
     override fun execute(inputJson: String, outputJson: String) {
-        with(cmd) {
+        with(Cmd()) {
             withTempFile(DANGER_FILE_EXECUTABLE) {
                 name("./$it")
                 args(inputJson, outputJson)

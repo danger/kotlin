@@ -9,9 +9,6 @@ object DangerKotlin {
     private const val FILE_TMP_INPUT_JSON = "danger_in.json"
     private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
 
-    val cmd: ICmd
-        get() = Cmd
-
     fun run() {
         withTempFile(FILE_TMP_INPUT_JSON) { inputJson ->
             stdinToFile(inputJson)
@@ -26,7 +23,7 @@ object DangerKotlin {
     }
 
     private fun printResult() {
-        with(cmd) {
+        with(Cmd()) {
             name("echo")
             args("danger-results:/`pwd`/$FILE_TMP_OUTPUT_JSON")
             exec()
