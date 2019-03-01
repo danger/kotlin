@@ -1,20 +1,35 @@
 package com.danger.runner
 
-import platform.posix.*
+import com.danger.runner.cmd.*
+import com.danger.runner.cmd.dangerfile.DangerFile
+import com.danger.runner.utils.stdinToFile
+import com.danger.runner.utils.withTempFile
 
-fun main(args: Array<String>) {
-    if (args.isNotEmpty()) {
-        when (val command = args.first()) {
-            "ci", "local", "pr" -> {
-                val dangerArgs = args.drop(1)
-                runDangerJS(command, dangerArgs)
+object DangerKotlin {
+    private const val FILE_TMP_INPUT_JSON = "danger_in.json"
+    private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
+
+    val cmd: ICmd
+        get() = Cmd
+
+    fun run() {
+        withTempFile(FILE_TMP_INPUT_JSON) { inputJson ->
+            stdinToFile(inputJson)
+            with(DangerFile) {
+                compile()
+                execute(inputJson, FILE_TMP_OUTPUT_JSON)
+
             }
-            "edit" -> runEditCommand()
-            else -> return
         }
-    } else {
-        runDangerKotlin()
+
+        printResult()
+    }
+
+    private fun printResult() {
+        with(cmd) {
+            name("echo")
+            args("danger-results:/`pwd`/$FILE_TMP_OUTPUT_JSON")
+            exec()
+        }
     }
 }
-
-fun String.exec() = system(this)
