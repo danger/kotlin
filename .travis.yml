@@ -6,7 +6,7 @@ matrix:
       install:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
-        - sdk install kscript 4.7.0
+        - sdk install kscript 4.6.0
         - sdk install gradle 4.10
         - sdk install kotlin
         - npm install -g danger
