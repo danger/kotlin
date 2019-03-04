@@ -15,7 +15,7 @@ class Cmd {
         this.args = args
     }
 
-    fun exec() : Int {
+    fun exec() {
         exec(true)
     }
 
