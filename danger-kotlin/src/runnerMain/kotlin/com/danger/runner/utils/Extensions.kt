@@ -9,6 +9,7 @@ inline fun withTempFile(tempFile: String, block: (String) -> Unit) {
 }
 
 fun Int.exitIfError() {
-    if (this != 0)
+    if (this != 0) {
         exit(this)
+    }
 }

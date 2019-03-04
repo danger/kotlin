@@ -23,7 +23,9 @@ class Cmd {
         "$name ${args.joinToString(" ")}".apply {
             if(printCallLog) println("Executing $this...")
         }.also {
-            system(it).exitIfError()
+            val res = system(it)
+            println("$it terminated with result $res")
+            res.exitIfError()
         }
     }
 }
