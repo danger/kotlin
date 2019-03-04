@@ -1,5 +1,6 @@
 package com.danger.runner.cmd
 
+import com.danger.runner.utils.exitIfError
 import platform.posix.system
 
 class Cmd {
@@ -14,7 +15,7 @@ class Cmd {
         this.args = args
     }
 
-    fun exec() {
+    fun exec() : Int {
         exec(true)
     }
 
@@ -22,7 +23,7 @@ class Cmd {
         "$name ${args.joinToString(" ")}".apply {
             if(printCallLog) println("Executing $this...")
         }.also {
-            system(it)
+            system(it).exitIfError()
         }
     }
 }
