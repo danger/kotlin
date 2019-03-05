@@ -1,6 +1,7 @@
 package com.danger.runner.cmd
 
 import com.danger.runner.utils.exitIfError
+import platform.posix.getpid
 import platform.posix.system
 
 class Cmd {
@@ -21,10 +22,10 @@ class Cmd {
 
     fun exec(printCallLog: Boolean) {
         "$name ${args.joinToString(" ")}".apply {
-            if(printCallLog) println("Executing $this...")
+            if(printCallLog) println("Executing $this - pid ${getpid()}")
         }.also {
             val res = system(it)
-            println("$it terminated with result $res")
+            println("$it terminated with result $res - pid ${getpid()}")
             res.exitIfError()
         }
     }
