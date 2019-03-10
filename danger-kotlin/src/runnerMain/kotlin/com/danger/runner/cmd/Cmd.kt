@@ -1,8 +1,7 @@
 package com.danger.runner.cmd
 
 import com.danger.runner.utils.exitIfError
-import platform.posix.getpid
-import platform.posix.system
+import platform.posix.*
 
 class Cmd {
     private lateinit var name: String
@@ -26,7 +25,7 @@ class Cmd {
         }.also {
             val res = system(it)
             println("$it terminated with result $res - pid ${getpid()}")
-            res.exitIfError()
+            posix_errno().exitIfError()
         }
     }
 }
