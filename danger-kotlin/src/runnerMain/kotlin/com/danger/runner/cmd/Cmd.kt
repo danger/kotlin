@@ -23,8 +23,7 @@ class Cmd {
         "$name ${args.joinToString(" ")}".apply {
             if(printCallLog) println("Executing $this - pid ${getpid()}")
         }.also {
-            val res = system(it)
-            println("$it terminated with result $res - pid ${getpid()}")
+            system(it)
             posix_errno().exitIfError()
         }
     }
