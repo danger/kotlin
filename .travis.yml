@@ -12,7 +12,7 @@ matrix:
         - npm install -g danger
       script:
         - make install
-        - DEBUG='*' danger-kotlin ci
+        - danger-kotlin ci
     - os: linux
       sudo: required
       dist: trusty
