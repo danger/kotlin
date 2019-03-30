@@ -21,10 +21,15 @@ class Cmd {
 
     fun exec(printCallLog: Boolean) {
         "$name ${args.joinToString(" ")}".apply {
-            if(printCallLog) println("Executing $this - pid ${getpid()}")
+            if(printCallLog) {
+                println("Executing $this - pid ${getpid()}")
+            }
         }.also {
-            system(it)
-            posix_errno().exitIfError()
+            val exitCode = system(it)
+
+            if(exitCode != 0) {
+                throw Exception("Command $it exited with code $exitCode")
+            }
         }
     }
 }
