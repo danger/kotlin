@@ -1,6 +1,5 @@
 package com.danger.runner.cmd
 
-import com.danger.runner.utils.exitIfError
 import platform.posix.*
 
 class Cmd {
