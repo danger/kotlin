@@ -1,6 +1,6 @@
 package com.danger.runner.cmd
 
-import platform.posix.system
+import platform.posix.*
 
 class Cmd {
     private lateinit var name: String
@@ -20,9 +20,15 @@ class Cmd {
 
     fun exec(printCallLog: Boolean) {
         "$name ${args.joinToString(" ")}".apply {
-            if(printCallLog) println("Executing $this...")
+            if(printCallLog) {
+                println("Executing $this - pid ${getpid()}")
+            }
         }.also {
-            system(it)
+            val exitCode = system(it)
+
+            if(exitCode != 0) {
+                throw Exception("Command $it exited with code $exitCode")
+            }
         }
     }
 }

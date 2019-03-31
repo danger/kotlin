@@ -1,5 +1,6 @@
 package com.danger.runner.utils
 
+import platform.posix.exit
 import platform.posix.remove
 
 inline fun withTempFile(tempFile: String, block: (String) -> Unit) {
