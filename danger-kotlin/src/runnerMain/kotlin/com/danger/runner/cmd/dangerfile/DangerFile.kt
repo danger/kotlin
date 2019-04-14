@@ -13,15 +13,6 @@ object DangerFile: DangerFileBridge {
 
     override fun compile() = apply {
         //kscript.pckg(DANGER_FILE)
-        Cmd().name("kotlinc")
-            .args(
-                DANGER_FILE,
-                "-cp",
-                "~/.m2/repository/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar",
-                "-include-runtime",
-                "-d",
-                DANGER_FILE_EXECUTABLE
-            ).exec()
     }
 
     override fun edit() {
@@ -29,12 +20,22 @@ object DangerFile: DangerFileBridge {
     }
 
     override fun execute(inputJson: String, outputJson: String) {
-        with(Cmd()) {
-            withTempFile(DANGER_FILE_EXECUTABLE) {
-                name("./$it")
-                args(inputJson, outputJson)
-                exec()
-            }
-        }
+//        with(Cmd()) {
+//            withTempFile(DANGER_FILE_EXECUTABLE) {
+//                name("./$it")
+//                args(inputJson, outputJson)
+//                exec()
+//            }
+//        }
+        Cmd().name("kotlinc")
+            .args(
+                "-cp",
+                "~/.m2/repository/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar",
+                "-include-runtime",
+                "-script",
+                DANGER_FILE,
+                inputJson,
+                outputJson
+            ).exec()
     }
 }
