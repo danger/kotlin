@@ -12,7 +12,13 @@ object DangerFile: DangerFileBridge {
         get() = KScript
 
     override fun compile() = apply {
-        kscript.pckg(DANGER_FILE)
+        //kscript.pckg(DANGER_FILE)
+        Cmd().name("kotlinc")
+            .args(
+                DANGER_FILE,
+                "-cp",
+                "~/.m2/repository/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar"
+            ).exec()
     }
 
     override fun edit() {
