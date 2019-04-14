@@ -17,7 +17,10 @@ object DangerFile: DangerFileBridge {
             .args(
                 DANGER_FILE,
                 "-cp",
-                "~/.m2/repository/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar"
+                "~/.m2/repository/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar",
+                "-include-runtime",
+                "-d",
+                DANGER_FILE_EXECUTABLE
             ).exec()
     }
 
