@@ -10,7 +10,7 @@ ext.utils = [
 ]
 
 ext.utilsDependencies = group {
-    api utils.gson
+    implementation utils.gson
 }
 
 // Kotlin
