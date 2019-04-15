@@ -88,7 +88,7 @@ data class GitHubPR(
         val assignees: Array<GitHubUser>,
         @Json(name = "created_at") val createdAt: Date,
         @Json(name = "updated_at") val updatedAt: Date,
-        @Json(name = "closed_at") val closedAt: Date,
+        @Json(name = "closed_at") val closedAt: Date?,
         @Json(name = "merged_at") val mergedAt: Date,
         val head: GitHubMergeRef,
         val base: GitHubMergeRef,
