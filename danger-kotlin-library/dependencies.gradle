@@ -4,14 +4,13 @@ def group(Closure closure) {
 }
 
 // Utils
-def gsonVersion = '2.8.2'
+def moshiVersion = '1.8.0'
 ext.utils = [
-        gson : "com.google.code.gson:gson:$gsonVersion"
+        moshi : "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 ]
 
 ext.utilsDependencies = group {
-    api utils.gson
-    classpath utils.gson
+    implementation utils.moshi
 }
 
 // Kotlin

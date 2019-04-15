@@ -1,16 +1,18 @@
 package com.danger.dangerkotlin
 
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import java.util.*
 
 class BitBucketServerParsingTests {
     private val jsonFiles = JSONFiles()
-    private val gson = Gson()
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter()).build().adapter(DSL::class.java)
     private val dsl
-        get() = gson.fromJson(jsonFiles.dangerBitBucketServerJSON, DSL::class.java)
+        get() = moshi.fromJson(jsonFiles.dangerBitBucketServerJSON)
     private val bitBucketServer: BitBucketServer
-        get() = dsl.danger.bitBucketServer
+        get() = dsl!!.danger.bitBucketServer!!
 
     @Test
     fun testItParsesTheBitBucketPullRequest() {
@@ -106,11 +108,11 @@ class BitBucketServerParsingTests {
 
     @Test
     fun testOnBitBucketIsTrue(){
-        assertEquals(true, dsl.danger.onBitBucketServer)
+        assertEquals(true, dsl!!.danger.onBitBucketServer)
     }
 
     @Test
     fun testOnGitHubIsFalse(){
-        assertEquals(false, dsl.danger.onGitHub)
+        assertEquals(false, dsl!!.danger.onGitHub)
     }
 }
