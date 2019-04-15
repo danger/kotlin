@@ -9,7 +9,7 @@ import java.util.*
 
 class GitParsingTests {
     private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter()).build().adapter(DSL::class.java)
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(DSL::class.java)
     private val dsl
         get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
 

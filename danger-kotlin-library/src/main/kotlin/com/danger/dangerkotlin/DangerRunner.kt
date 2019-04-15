@@ -49,7 +49,7 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(),arrayOf(), arrayOf())
 
     private val moshi = Moshi.Builder()
-        .add(Date::class.java, Rfc3339DateJsonAdapter())
+        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .add(KotlinJsonAdapterFactory())
         .build()
 

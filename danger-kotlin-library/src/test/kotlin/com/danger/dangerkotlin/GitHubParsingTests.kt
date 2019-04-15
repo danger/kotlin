@@ -7,7 +7,7 @@ import java.util.*
 
 class GitHubParsingTests {
     private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter()).build().adapter(DSL::class.java)
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(DSL::class.java)
     private val dsl
         get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
     private val github
@@ -121,7 +121,7 @@ class GitHubParsingTests {
             assertEquals(8, commentCount)
             assertEquals(Date(1469563050000), createdAt)
             assertEquals(Date(1471447574000), updatedAt)
-            assertEquals(Date(1471447574000), closedAt)
+            assertEquals(null, closedAt)
             assertTrue(labels.isEmpty())
 
             val expectedCreator = GitHubUser(1, "octocat", GitHubUserType.USER)
