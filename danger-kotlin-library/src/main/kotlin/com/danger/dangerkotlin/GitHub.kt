@@ -343,7 +343,7 @@ data class GitHubIssue(
     @Json(name = "comments") val commentCount: Int,
     val assignee: GitHubUser?,
     val assignees: Array<GitHubUser>,
-    val milestone: GitHubMilestone,
+    val milestone: GitHubMilestone?,
     @Json(name = "created_at") val createdAt: Date,
     @Json(name = "updated_at") val updatedAt: Date,
     @Json(name = "closed_at") val closedAt: Date,
