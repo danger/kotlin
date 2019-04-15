@@ -27,7 +27,7 @@ object DangerFile: DangerFileBridge {
 //                exec()
 //            }
 //        }
-        Cmd().name("MVN_HOME=\$(mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout) && && kotlinc")
+        Cmd().name("MVN_HOME=\$(mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout) && kotlinc")
             .args(
                 "-cp",
                 "\$MVN_HOME/com/danger/danger-kotlin-library/0.1.0/danger-kotlin-library-0.1.0.jar:\$MVN_HOME/com/squareup/moshi/moshi/1.8.0/moshi-1.8.0.jar:\$MVN_HOME/com/squareup/moshi/moshi-kotlin/1.8.0/moshi-kotlin-1.8.0.jar:\$MVN_HOME/com/squareup/okio/okio/1.16.0/okio-1.16.0.jar",
