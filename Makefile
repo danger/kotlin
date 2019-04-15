@@ -13,6 +13,7 @@ install: build
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 
 build:
+	mvn install com.squareup.moshi:moshi-kotlin:1.8.0
 	gradle publishToMavenLocal -p danger-kotlin-library
 	gradle build -p danger-kotlin
 
