@@ -1,5 +1,6 @@
 package com.danger.runner
 
+import com.danger.config.BuildConfig
 import com.danger.runner.cmd.*
 import com.danger.runner.cmd.dangerfile.DangerFile
 import com.danger.runner.utils.stdinToFile

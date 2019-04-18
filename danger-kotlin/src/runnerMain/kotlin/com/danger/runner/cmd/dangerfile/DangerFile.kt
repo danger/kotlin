@@ -12,7 +12,7 @@ object DangerFile: DangerFileBridge {
         get() = KScript
 
     override fun compile() = apply {
-        //kscript.pckg(DANGER_FILE)
+        //Compile step removed at the moment
     }
 
     override fun edit() {
@@ -20,13 +20,6 @@ object DangerFile: DangerFileBridge {
     }
 
     override fun execute(inputJson: String, outputJson: String) {
-//        with(Cmd()) {
-//            withTempFile(DANGER_FILE_EXECUTABLE) {
-//                name("./$it")
-//                args(inputJson, outputJson)
-//                exec()
-//            }
-//        }
         Cmd().name("MVN_HOME=\$(mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout) && kotlinc")
             .args(
                 "-cp",

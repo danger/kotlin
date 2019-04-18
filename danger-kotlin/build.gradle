@@ -1,5 +1,13 @@
+import gen.BuildConfigGeneratorPlugin
+
 plugins {
     id 'kotlin-multiplatform'
+}
+
+apply plugin: BuildConfigGeneratorPlugin
+
+sourceSets {
+    main.java.srcDirs += 'generated/source/main/kotlin'
 }
 
 kotlin {
