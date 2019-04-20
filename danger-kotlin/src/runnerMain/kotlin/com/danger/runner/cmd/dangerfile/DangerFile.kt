@@ -11,10 +11,6 @@ object DangerFile: DangerFileBridge {
     override val kscript: KScriptBridge
         get() = KScript
 
-    override fun compile() = apply {
-        //Compile step removed at the moment
-    }
-
     override fun edit() {
         kscript.idea(DANGER_FILE)
     }
