@@ -10,8 +10,4 @@ object KScript: KScriptBridge {
     override fun idea(ktsFile: String) {
         Cmd().name(KSCRIPT_CMD_NAME).args(OPT__IDEA, ktsFile).exec()
     }
-
-    override fun pckg(ktsFile: String) {
-        Cmd().name(KSCRIPT_CMD_NAME).args(OPT__PACKAGE, ktsFile).exec()
-    }
 }
