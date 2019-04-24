@@ -9,14 +9,14 @@ import java.io.File
 
 class BuildConfigGeneratorPlugin : Plugin<Project> {
     private companion object {
-        private const val PACKAGE_NAME = "com.danger.config"
+        private const val PACKAGE_NAME = "com.danger.runner"
         private const val FILENAME = "BuildConfig"
     }
 
     private val buildConfigBuilder = FileSpec.builder(PACKAGE_NAME, FILENAME)
 
     private val properties = listOf(
-        PropertySpec.builder("VERSION", String::class.java)
+        PropertySpec.builder("VERSION", String::class)
             .initializer("%S", "1.0.0")
             .build()
     )
@@ -25,7 +25,7 @@ class BuildConfigGeneratorPlugin : Plugin<Project> {
         .addProperties(properties)
         .build()
 
-    fun generateBuildConfig(to: File) {
+    private fun generateBuildConfig(to: File) {
         buildConfigBuilder
             .addType(buildConfigClassType)
             .build()

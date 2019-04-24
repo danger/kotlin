@@ -6,9 +6,6 @@ plugins {
 
 apply plugin: BuildConfigGeneratorPlugin
 
-sourceSets {
-    main.java.srcDirs += 'generated/source/main/kotlin'
-}
 
 kotlin {
     targets {
@@ -17,6 +14,18 @@ kotlin {
             compilations.main.entryPoint 'com.danger.runner.main'
         }
     }
+    sourceSets {
+        buildConfigSrc {
+            kotlin.srcDirs += "build/generated/source/main/kotlin"
+        }
+        runnerMain {
+            dependsOn buildConfigSrc
+        }
+    }
+}
+
+compileKotlinRunner {
+    dependsOn(generateBuildConfig)
 }
 
 
