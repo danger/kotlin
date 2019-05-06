@@ -33,14 +33,9 @@ class BuildConfigGeneratorPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create(BLOCK_NAME, BuildConfigExtension::class.java, project)
-        configure(project, extension)
         project.task("generateBuildConfig").doFirst {
             generateBuildConfig(project, File(project.buildDir, "generated/source/main/kotlin"))
         }
-    }
-
-    private fun configure(project: Project, extension: BuildConfigExtension) {
-
     }
 
     open class BuildConfigExtension @Inject constructor(project: Project){
