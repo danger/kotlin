@@ -1,35 +1,4 @@
-def group(Closure closure) {
-    closure.delegate = dependencies
-    return closure
-}
-
-// Utils
-def moshiVersion = '1.8.0'
-ext.utils = [
-        moshi : "com.squareup.moshi:moshi-kotlin:$moshiVersion"
-]
-
-ext.utilsDependencies = group {
-    implementation utils.moshi
-}
-
-// Kotlin
-def kotlinScriptRuntimeVersion = '1.3.0'
-ext.kotlin = [
-        runtime : "org.jetbrains.kotlin:kotlin-script-runtime:$kotlinScriptRuntimeVersion"
-]
-ext.kotlinDependencies = group {
-    implementation kotlin.runtime
-}
-
-// Testing
-def junitVersion = '4.12'
-ext.testing = [
-        junit : "junit:junit:$junitVersion"
-]
-ext.testingDependencies = group {
-    testImplementation testing.junit
-}
+apply from: rootProject.file('dependencyVersions.gradle')
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"

@@ -28,7 +28,8 @@ compileKotlinRunner {
     dependsOn(generateBuildConfig)
 }
 
-
 MPPTools.createRunTask(project, 'runProgram', kotlin.targets.runner) {
     
 }
+
+apply from: file('buildconfig.gradle')

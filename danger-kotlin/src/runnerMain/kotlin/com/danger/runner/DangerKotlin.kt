@@ -1,6 +1,5 @@
 package com.danger.runner
 
-import com.danger.runner.BuildConfig
 import com.danger.runner.cmd.*
 import com.danger.runner.cmd.dangerfile.DangerFile
 import com.danger.runner.utils.stdinToFile
@@ -11,7 +10,6 @@ object DangerKotlin {
     private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
 
     fun run() {
-        println("Version ${BuildConfig.VERSION}")
         withTempFile(FILE_TMP_INPUT_JSON) { inputJson ->
             stdinToFile(inputJson)
             with(DangerFile) {
