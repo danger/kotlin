@@ -4,6 +4,7 @@
 *.iws
 *.ipr
 /*/out
+local.properties
 
 #Gradle
 .gradle/
@@ -51,3 +52,4 @@ hs_err_pid*
 
 # Danger Temporary Files #
 danger_out.json
+
