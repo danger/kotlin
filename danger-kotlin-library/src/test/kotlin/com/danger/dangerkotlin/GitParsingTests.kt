@@ -1,14 +1,17 @@
 import com.danger.dangerkotlin.DSL
 import com.danger.dangerkotlin.JSONFiles
-import com.google.gson.Gson
+import com.danger.dangerkotlin.Rfc3339DateJsonAdapter
+import com.squareup.moshi.*
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.junit.Assert
 import org.junit.Test
+import java.util.*
 
 class GitParsingTests {
     private val jsonFiles = JSONFiles()
-    private val gson = Gson()
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(DSL::class.java)
     private val dsl
-        get() = gson.fromJson(jsonFiles.githubDangerJSON, DSL::class.java)
+        get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
 
     @Test
     fun testItParsesCorrectlyTheGitFiles() {

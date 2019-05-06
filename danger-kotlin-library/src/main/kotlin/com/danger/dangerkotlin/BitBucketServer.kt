@@ -1,5 +1,7 @@
 package com.danger.dangerkotlin
-import com.google.gson.annotations.SerializedName
+
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 /**
  * The BitBucket server data for your pull request.
@@ -9,9 +11,10 @@ import com.google.gson.annotations.SerializedName
  * @property comments The comments on the pull request
  * @property activities The activities such as OPENING, CLOSING, MERGING or UPDATING a pull request
 */
+@JsonClass(generateAdapter = true)
 data class BitBucketServer(
         val metadata: BitBucketServerMetadata,
-        @SerializedName("pr")
+        @Json(name = "pr")
         val pullRequest: BitBucketServerPR,
         val commits: Array<BitBucketServerCommit>,
         val comments: Array<BitBucketServerComment>,
@@ -50,9 +53,10 @@ data class BitBucketServer(
  * @property action The action the activity describes (e.g. "COMMENTED").
  * @property commentAction In case the action was "COMMENTED" it will state the command specific action (e.g. "CREATED").
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerActivity(
         val id: Int,
-        @SerializedName("createdDate")
+        @Json(name = "createdDate")
         val createdAt: Long,
         val user: BitBucketServerUser,
         val action: String,
@@ -64,11 +68,13 @@ data class BitBucketServerActivity(
  * @property pullRequestId The PR's ID
  * @property repoSlug The complete repo slug including project slug.
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerMetadata internal constructor(
     val pullRequestID: String,
     val repoSlug: String
 )
 
+@JsonClass(generateAdapter = true)
 internal data class BitBucketServerEnv(
     val pr: String,
     val repo: String
@@ -87,9 +93,10 @@ internal data class BitBucketServerEnv(
  * @property commentAction Action the user did (e.g. "ADDED") if it is a new task.
  * @property comment Detailed data of the comment.
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerComment(
     val id: Int,
-    @SerializedName("createdDate")
+    @Json(name = "createdDate")
     val createdAt: Long,
     val user: BitBucketServerUser,
     val action: String,
@@ -113,14 +120,15 @@ data class BitBucketServerComment(
  * @property properties Properties associated with the comment
  * @property tasks Tasks associated with the comment
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerCommentDetail(
     val id: Int,
     val version: Int,
     val text: String,
     val author: BitBucketServerUser,
-    @SerializedName("createdDate")
+    @Json(name = "createdDate")
     val createdAt: Long,
-    @SerializedName("updatedDate")
+    @Json(name = "updatedDate")
     val updatedAt: Long,
     val comments: Array<BitBucketServerCommentDetail>,
     val properties: BitBucketServerCommentInnerProperties,
@@ -167,9 +175,10 @@ data class BitBucketServerCommentDetail(
  * @property state The state of the task (e.g. "OPEN")
  * @property author The author of the comment
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerCommentTask(
         val id: Int,
-        @SerializedName("createdDate")
+        @Json(name = "createdDate")
         val createdAt: Long,
         val text: String,
         val state: String,
@@ -181,6 +190,7 @@ data class BitBucketServerCommentTask(
  * @property repositoryId The ID of the repo
  * @property issues Slugs of linkd Jira issues
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerCommentInnerProperties(
         val repositoryId: Int,
         val issues: Array<String>?
@@ -220,6 +230,7 @@ data class BitBucketServerCommentInnerProperties(
  * @property message The commit's message
  * @property parents The commit's parents
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerCommit(
         val id: String,
         val displayId: String,
@@ -266,6 +277,7 @@ data class BitBucketServerCommit(
  * @property id The SHA for the commit
  * @property displayId The shortened SHA for the commit
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerCommitParent(
         val id: String,
         val displayId: String
@@ -289,6 +301,7 @@ data class BitBucketServerCommitParent(
  * @property reviewers People requested as reviewers
  * @property participants People who have participated in the PR
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerPR(
         val id: Int,
         val version: Int,
@@ -297,13 +310,13 @@ data class BitBucketServerPR(
         val state: String,
         val open: Boolean,
         val closed: Boolean,
-        @SerializedName("createdDate")
+        @Json(name = "createdDate")
         val createdAt: Long,
-        @SerializedName("updatedDate")
+        @Json(name = "updatedDate")
         val updatedAt: Long,
         val fromRef: BitBucketServerMergeRef,
         val toRef: BitBucketServerMergeRef,
-        @SerializedName("locked")
+        @Json(name = "locked")
         val isLocked: Boolean,
         val author: BitBucketServerParticipant,
         val reviewers: Array<BitBucketServerReviewer>,
@@ -354,6 +367,7 @@ data class BitBucketServerPR(
     }
 }
 
+@JsonClass(generateAdapter = true)
 data class BitBucketServerParticipant(
         val user: BitBucketServerUser
 )
@@ -364,6 +378,7 @@ data class BitBucketServerParticipant(
  * @property approved The approval status.
  * @property lastReviewedCommit The commit SHA for the latest commit that was reviewed.
 */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerReviewer(
     val user: BitBucketServerUser,
     val approved: Boolean,
@@ -377,6 +392,7 @@ data class BitBucketServerReviewer(
  * @property latestCommit The SHA for the latest commit
  * @property repository Info of the associated repository
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerMergeRef(
         val id: String,
         val displayId: String,
@@ -393,11 +409,12 @@ data class BitBucketServerMergeRef(
  * @property forkable Can someone fork thie repo?
  * @property project An abtraction for grouping repos
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerRepo(
         val name: String?,
         val slug: String,
         val scmId: String,
-        @SerializedName("public")
+        @Json(name = "public")
         val isPublic: Boolean,
         val forkable: Boolean,
         val project: BitBucketServerProject
@@ -411,11 +428,12 @@ data class BitBucketServerRepo(
  * @property isPublic Is the project publicly available
  * @property type The project's type
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerProject(
     val id: Int,
     val key: String,
     val name: String,
-    @SerializedName("public")
+    @Json(name = "public")
     val isPublic: Boolean,
     val type: String
 )
@@ -430,6 +448,7 @@ data class BitBucketServerProject(
  * @property slug The user's slug for URLs
  * @property type The type of a user, "NORMAL" being a typical user3
  */
+@JsonClass(generateAdapter = true)
 data class BitBucketServerUser(
         val id: Int?,
         val name: String,

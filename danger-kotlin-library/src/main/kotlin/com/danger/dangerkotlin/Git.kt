@@ -1,6 +1,7 @@
 package com.danger.dangerkotlin
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 typealias FilePath = String
 
@@ -11,10 +12,11 @@ typealias FilePath = String
  * @property createdFiles Newly created file paths relative to the git root.
  * @property deletedFiles Removed file paths relative to the git root.
  */
+@JsonClass(generateAdapter = true)
 data class Git(
-    @SerializedName("modified_files") val modifiedFiles: Array<FilePath>,
-    @SerializedName("created_files") val createdFiles: Array<FilePath>,
-    @SerializedName("deleted_files") val deletedFiles: Array<FilePath>
+    @Json(name = "modified_files") val modifiedFiles: Array<FilePath>,
+    @Json(name = "created_files") val createdFiles: Array<FilePath>,
+    @Json(name = "deleted_files") val deletedFiles: Array<FilePath>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -47,6 +49,7 @@ data class Git(
  * @property parents SHAs for the commit's parents.
  * @property url The URL for the commit.
  */
+@JsonClass(generateAdapter = true)
 data class GitCommit(
     val sha: String?,
     val author: GitCommitAuthor,
@@ -92,6 +95,7 @@ data class GitCommit(
  * @property email The email for the author.
  * @property date The ISO8601 date string for the commit.
  */
+@JsonClass(generateAdapter = true)
 data class GitCommitAuthor(
         val name: String,
         val email: String,

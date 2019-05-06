@@ -1,22 +1,65 @@
 package com.danger.dangerkotlin
 
-import com.google.gson.Gson
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.io.File
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
+
+fun toISO8601UTC(date: Date): String {
+    val tz = TimeZone.getTimeZone("UTC")
+    val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    df.timeZone = tz
+    return df.format(date)
+}
+
+fun fromISO8601UTC(dateStr: String): Date? {
+    val tz = TimeZone.getTimeZone("UTC")
+    val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    df.timeZone = tz
+
+    try {
+        return df.parse(dateStr)
+    } catch (e: ParseException) {
+        e.printStackTrace()
+    }
+
+    return null
+}
+
+class Rfc3339DateJsonAdapter: JsonAdapter<Date>() {
+    @Synchronized
+    override fun fromJson(reader: JsonReader): Date {
+        val string = reader.nextString()
+        return fromISO8601UTC(string)!!
+    }
+
+    override fun toJson(writer: JsonWriter, value: Date?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
 
 private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
     val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(),arrayOf(), arrayOf())
 
-    private val gson = Gson()
+    private val moshi = Moshi.Builder()
+        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     init {
-        this.danger = gson.fromJson(jsonInputFilePath.readText(), DSL::class.java).danger
+        this.danger = moshi.adapter(DSL::class.java).fromJson(jsonInputFilePath.readText())!!.danger
         saveDangerResults()
     }
 
     fun saveDangerResults() {
-        val resultsJSON = gson.toJson(dangerResults)
+        val resultsJSON = moshi.adapter(DangerResults::class.java).toJson(dangerResults)
         jsonOutputFile.writeText(resultsJSON)
     }
 }
@@ -124,3 +167,4 @@ fun suggest(code: String, file: FilePath, line: Int) {
 }
 
 private fun FilePath.readText() = File(this).readText()
+

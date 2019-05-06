@@ -1,0 +1,20 @@
+apply from: rootProject.file('dependencyVersions.gradle')
+
+buildConfig {
+    field "versionDangerKotlinLibrary", '0.1.0'
+    field "groupIdDangerKotlinLibrary", 'com.danger.danger-kotlin-library'
+    field "artifactIdDangerKotlin", 'danger-kotlin-library'
+    field "versionMoshi", versionMoshi
+    field "groupIdMoshi", groupIdMoshi
+    field "artifactIdMoshi" , artifactIdMoshi
+    field "artifactIdMoshiKotlin", artifactIdMoshiKotlin
+    field "versionKotlinScriptRuntime", versionKotlinScriptRuntime
+    field "groupIdKotlinScriptRuntime", groupIdKotlinScriptRuntime
+    field "artifactIdKotlinScriptRuntime", artifactIdKotlinScriptRuntime
+    field "versionJunit", versionJunit
+    field "groupIdJunit", groupIdJunit
+    field "artifactIdJunit", artifactIdJunit
+    field "versionOkio", versionOkio
+    field "groupIdOkio", groupIdOkio
+    field "artifactIdOkio", artifactIdOkio
+}

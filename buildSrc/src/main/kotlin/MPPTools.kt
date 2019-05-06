@@ -39,7 +39,11 @@ val kotlinNativeDataPath by lazy {
 @JvmOverloads
 fun defaultHostPreset(
     subproject: Project,
-    whitelist: List<KotlinTargetPreset<*>> = listOf(subproject.kotlin.presets.macosX64, subproject.kotlin.presets.linuxX64, subproject.kotlin.presets.mingwX64)
+    whitelist: List<KotlinTargetPreset<*>> = listOf(
+        subproject.kotlin.presets.macosX64,
+        subproject.kotlin.presets.linuxX64,
+        subproject.kotlin.presets.mingwX64
+    )
 ): KotlinTargetPreset<*> {
 
     if (whitelist.isEmpty())
@@ -65,10 +69,10 @@ fun defaultHostPreset(
 // A short-cut to add a Kotlin/Native run task.
 @JvmOverloads
 fun createRunTask(
-        subproject: Project,
-        name: String,
-        target: KotlinTarget,
-        configureClosure: Closure<Any>? = null
+    subproject: Project,
+    name: String,
+    target: KotlinTarget,
+    configureClosure: Closure<Any>? = null
 ): Task {
     val task = subproject.tasks.create(name, RunKotlinNativeTask::class.java, target)
     task.configure(configureClosure ?: task.emptyConfigureClosure())

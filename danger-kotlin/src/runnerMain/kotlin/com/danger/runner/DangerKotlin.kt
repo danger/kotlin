@@ -13,9 +13,7 @@ object DangerKotlin {
         withTempFile(FILE_TMP_INPUT_JSON) { inputJson ->
             stdinToFile(inputJson)
             with(DangerFile) {
-                compile()
                 execute(inputJson, FILE_TMP_OUTPUT_JSON)
-
             }
         }
 

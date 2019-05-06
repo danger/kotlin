@@ -1,8 +1,8 @@
 package com.danger.runner.cmd.dangerfile
 
+import com.danger.runner.BuildConfig
 import com.danger.runner.cmd.*
 import com.danger.runner.cmd.kscript.KScriptBridge
-import com.danger.runner.utils.withTempFile
 
 object DangerFile: DangerFileBridge {
     private const val DANGER_FILE_EXECUTABLE = "Dangerfile"
@@ -11,21 +11,23 @@ object DangerFile: DangerFileBridge {
     override val kscript: KScriptBridge
         get() = KScript
 
-    override fun compile() = apply {
-        kscript.pckg(DANGER_FILE)
-    }
-
     override fun edit() {
         kscript.idea(DANGER_FILE)
     }
 
     override fun execute(inputJson: String, outputJson: String) {
-        with(Cmd()) {
-            withTempFile(DANGER_FILE_EXECUTABLE) {
-                name("./$it")
-                args(inputJson, outputJson)
-                exec()
-            }
-        }
+        Cmd().name("MVN_HOME=\$(mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout) && kotlinc")
+            .args(
+                "-cp",
+                "\$MVN_HOME/${BuildConfig.groupIdDangerKotlinLibrary.replace(".", "/")}/${BuildConfig.versionDangerKotlinLibrary}/${BuildConfig.artifactIdDangerKotlin}-${BuildConfig.versionDangerKotlinLibrary}.jar" +
+                        ":\$MVN_HOME/${BuildConfig.groupIdMoshi.replace(".","/")}/${BuildConfig.artifactIdMoshi}/${BuildConfig.versionMoshi}/${BuildConfig.artifactIdMoshi}-${BuildConfig.versionMoshi}.jar" +
+                        ":\$MVN_HOME/${BuildConfig.groupIdMoshi.replace(".","/")}/${BuildConfig.artifactIdMoshiKotlin}/${BuildConfig.versionMoshi}/${BuildConfig.artifactIdMoshiKotlin}-${BuildConfig.versionMoshi}.jar" +
+                        ":\$MVN_HOME/${BuildConfig.groupIdOkio.replace(".", "/")}/${BuildConfig.artifactIdOkio}/${BuildConfig.versionOkio}/${BuildConfig.artifactIdOkio}-${BuildConfig.versionOkio}.jar",
+                "-include-runtime",
+                "-script",
+                DANGER_FILE,
+                inputJson,
+                outputJson
+            ).exec()
     }
 }

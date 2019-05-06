@@ -1,16 +1,17 @@
 import com.danger.dangerkotlin.*
-import com.google.gson.Gson
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.*
 
 class GitHubParsingTests {
     private val jsonFiles = JSONFiles()
-    private val gson = Gson()
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(DSL::class.java)
     private val dsl
-        get() = gson.fromJson(jsonFiles.githubDangerJSON, DSL::class.java)
+        get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
     private val github
-        get() = dsl.danger.github
+        get() = dsl.danger.github!!
 
     @Test
     fun testItParsesTheGithubPullRequest() {
@@ -120,7 +121,7 @@ class GitHubParsingTests {
             assertEquals(8, commentCount)
             assertEquals(Date(1469563050000), createdAt)
             assertEquals(Date(1471447574000), updatedAt)
-            assertEquals(Date(1471447574000), closedAt)
+            assertEquals(null, closedAt)
             assertTrue(labels.isEmpty())
 
             val expectedCreator = GitHubUser(1, "octocat", GitHubUserType.USER)
