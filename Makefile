@@ -7,6 +7,9 @@ BUILD_PATH = danger-kotlin/build/bin/runner/main/release/executable/$(TOOL_NAME)
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
 TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 
+brew: install
+	cp -Rf $HOMEBREW_CACHE/java_cache/.m2/ ~/.m2
+
 install: build
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/lib/danger
