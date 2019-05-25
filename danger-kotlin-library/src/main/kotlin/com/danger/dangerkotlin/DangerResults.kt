@@ -3,9 +3,10 @@ package com.danger.dangerkotlin
 internal data class DangerResults(var fails: Array<Violation>,
                          var warnings: Array<Violation>,
                          var messages: Array<Violation>,
-                         var markdowns: Array<Violation>) {
+                         var markdowns: Array<Violation>,
+                                  val meta: Meta = Meta()) {
 
-    val meta = Meta()
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -30,7 +31,8 @@ internal data class DangerResults(var fails: Array<Violation>,
     }
 }
 
-internal class Meta {
-    val runtimeName = "Danger Kotlin"
-    val runtimeHref = "https://danger.systems"
+internal data class Meta(
+    val runtimeName: String = "Danger Kotlin",
+    val runtimeHref: String = "https://danger.systems"
+) {
 }
