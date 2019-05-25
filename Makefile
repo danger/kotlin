@@ -6,6 +6,7 @@ INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
 BUILD_PATH = danger-kotlin/build/bin/runner/main/release/executable/$(TOOL_NAME).kexe
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
 TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
+HOMEBREW_CACHE = $(HOME)/Library/Caches/Homebrew
 
 brew: install
 	cp -Rf $(HOMEBREW_CACHE)/java_cache/.m2/ ~/.m2
