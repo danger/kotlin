@@ -16,18 +16,14 @@ object DangerFile: DangerFileBridge {
     }
 
     override fun execute(inputJson: String, outputJson: String) {
-        Cmd().name("MVN_HOME=\$(mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout) && kotlinc")
-            .args(
-                "-cp",
-                "\$MVN_HOME/${BuildConfig.groupIdDangerKotlinLibrary.replace(".", "/")}/${BuildConfig.versionDangerKotlinLibrary}/${BuildConfig.artifactIdDangerKotlin}-${BuildConfig.versionDangerKotlinLibrary}.jar" +
-                        ":\$MVN_HOME/${BuildConfig.groupIdMoshi.replace(".","/")}/${BuildConfig.artifactIdMoshi}/${BuildConfig.versionMoshi}/${BuildConfig.artifactIdMoshi}-${BuildConfig.versionMoshi}.jar" +
-                        ":\$MVN_HOME/${BuildConfig.groupIdMoshi.replace(".","/")}/${BuildConfig.artifactIdMoshiKotlin}/${BuildConfig.versionMoshi}/${BuildConfig.artifactIdMoshiKotlin}-${BuildConfig.versionMoshi}.jar" +
-                        ":\$MVN_HOME/${BuildConfig.groupIdOkio.replace(".", "/")}/${BuildConfig.artifactIdOkio}/${BuildConfig.versionOkio}/${BuildConfig.artifactIdOkio}-${BuildConfig.versionOkio}.jar",
-                "-include-runtime",
-                "-script",
-                DANGER_FILE,
-                inputJson,
-                outputJson
-            ).exec()
+        Cmd().name("kotlinc").args(
+            "-cp",
+            "/usr/local/danger/danger-kotlin.jar",
+            "-include-runtime",
+            "-script",
+            DANGER_FILE,
+            inputJson,
+            outputJson
+        )
     }
 }

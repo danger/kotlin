@@ -1,7 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'maven-publish'
 }
+
+apply plugin: 'com.github.johnrengelman.shadow'
 
 apply from: file('dependencies.gradle')
 apply from: file('version.gradle')
