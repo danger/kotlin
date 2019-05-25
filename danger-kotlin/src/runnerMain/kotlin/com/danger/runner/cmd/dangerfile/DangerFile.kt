@@ -18,11 +18,10 @@ object DangerFile: DangerFileBridge {
         Cmd().name("kotlinc").args(
             "-cp",
             "/usr/local/lib/danger/danger-kotlin.jar",
-            "-include-runtime",
             "-script",
             DANGER_FILE,
             inputJson,
             outputJson
-        )
+        ).exec()
     }
 }
