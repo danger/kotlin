@@ -5,8 +5,7 @@ import com.danger.runner.cmd.*
 import com.danger.runner.cmd.kscript.KScriptBridge
 
 object DangerFile: DangerFileBridge {
-    private const val DANGER_FILE_EXECUTABLE = "Dangerfile"
-    private const val DANGER_FILE = "$DANGER_FILE_EXECUTABLE.kts"
+    private const val DANGER_FILE = "Dangerfile.kts"
 
     override val kscript: KScriptBridge
         get() = KScript
@@ -18,7 +17,7 @@ object DangerFile: DangerFileBridge {
     override fun execute(inputJson: String, outputJson: String) {
         Cmd().name("kotlinc").args(
             "-cp",
-            "/usr/local/danger/danger-kotlin.jar",
+            "/usr/local/lib/danger/danger-kotlin.jar",
             "-include-runtime",
             "-script",
             DANGER_FILE,
