@@ -6,39 +6,13 @@ matrix:
       install:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
-        - sdk install kscript 2.6.0
-        - sdk install gradle 4.10
-        - sdk install kotlin
-        - npm install -g danger
-      script:
-        - make install
-        - danger-kotlin ci
-    - os: linux
-      sudo: required
-      dist: trusty
-      install:
-        - curl -s "https://get.sdkman.io" | bash
-        - source ~/.bash_profile
-        - sdk install kscript
-        - sdk install gradle 4.10
-        - sdk install kotlin
-        - npm install -g danger
-        - sudo chmod -R a+rwx /usr/local/
-      script:
-        - make install
-        - danger-kotlin ci
-    - os: osx
-      osx_image: xcode10
-      install:
-        - curl -s "https://get.sdkman.io" | bash
-        - source ~/.bash_profile
         - sdk install kscript
         - sdk install gradle
         - sdk install kotlin
         - npm install -g danger
       script:
         - make install
-        - danger-kotlin ci
+        - DEBUG='*' danger-kotlin ci
     - os: linux
       sudo: required
       dist: trusty
@@ -52,4 +26,4 @@ matrix:
         - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
-        - danger-kotlin ci
+        - DEBUG='*' danger-kotlin ci

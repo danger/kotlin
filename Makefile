@@ -14,10 +14,10 @@ install: build
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/lib/danger
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
+	cp -f danger-kotlin-library/build/libs/danger-kotlin-library-0.1.0-all.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
 
 build:
-	mvn dependency:get -Dartifact=com.squareup.moshi:moshi-kotlin:1.8.0
-	gradle publishToMavenLocal -p danger-kotlin-library
+	gradle shadowJar -p danger-kotlin-library
 	gradle build -p danger-kotlin
 
 uninstall:
