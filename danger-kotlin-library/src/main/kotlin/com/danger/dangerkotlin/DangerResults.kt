@@ -34,5 +34,4 @@ internal data class DangerResults(var fails: Array<Violation>,
 internal data class Meta(
     val runtimeName: String = "Danger Kotlin",
     val runtimeHref: String = "https://danger.systems"
-) {
-}
+)
