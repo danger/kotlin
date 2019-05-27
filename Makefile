@@ -7,14 +7,11 @@ BUILD_PATH = danger-kotlin/build/bin/runner/main/release/executable/$(TOOL_NAME)
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
 TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 
-brew: install
-	cp -Rf $(HOMEBREW_CACHE)/java_cache/.m2/ ~/.m2
-
 install: build
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(PREFIX)/lib/danger
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
-	cp -f danger-kotlin-library/build/libs/danger-kotlin-library-0.1.0-all.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
+	cp -f danger-kotlin-library/build/libs/danger-kotlin-library-0.1.4-all.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
 
 build:
 	gradle shadowJar -p danger-kotlin-library
