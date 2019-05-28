@@ -11,7 +11,7 @@ If you want to try it:
 curl -s "https://get.sdkman.io" | bash
 source ~/.bash_profile
 sdk install kscript
-sdk install gradle 4.10
+sdk install gradle
 sdk install kotlin
 npm install -g danger
 ```
