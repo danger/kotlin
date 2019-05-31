@@ -4,19 +4,12 @@
 # Project status
 The project is still work in progress.
 Is possible to generate a working `danger-kotlin` instance from the code that is currently on this repo, but is not ready to be distributed yet.
-If you want to try it:
-- clone the project
-- run
-```sh
-curl -s "https://get.sdkman.io" | bash
-source ~/.bash_profile
-sdk install kscript
-sdk install gradle
-sdk install kotlin
-npm install -g danger
+
+### Setup
+#### MacOs
 ```
-- run `make install`
-- now you can run `danger command`
+brew install danger/tap/danger-kotlin 
+```
 
 ### Commands
 
