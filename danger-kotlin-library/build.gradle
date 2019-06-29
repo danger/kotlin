@@ -17,6 +17,12 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply from: file('dependencies.gradle')
 apply from: file('version.gradle')
 
+shadowJar {
+    baseName = 'danger-kotlin'
+    classifier = null
+    version = null
+}
+
 repositories {
     mavenCentral()
 }
