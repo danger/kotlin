@@ -26,10 +26,10 @@ class GitHubParsingTests {
                         "\n" + "I tried updating to CocoaPods 1.0, but things went quickly awry. It's a large job, but not necessary for now. \n",
                 body
             )
-            assertEquals("Tue Jul 26 20:57:30 BST 2016", createdAt.toString())
-            assertEquals("Wed Aug 17 16:26:15 BST 2016", updatedAt.toString())
-            assertEquals("Wed Aug 17 16:26:14 BST 2016", closedAt.toString())
-            assertEquals("Wed Aug 17 16:26:14 BST 2016", mergedAt.toString())
+            assertEquals(1469563050000, createdAt.time)
+            assertEquals(1471447575000, updatedAt.time)
+            assertEquals(1471447574000, closedAt?.time)
+            assertEquals(1471447574000, mergedAt?.time)
             assertEquals(false, isLocked)
             assertEquals(true, isMerged)
             assertEquals(15, commitCount)
