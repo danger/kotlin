@@ -1,3 +1,5 @@
+package com.danger.dangerkotlin
+
 import com.danger.dangerkotlin.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

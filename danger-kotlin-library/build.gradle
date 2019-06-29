@@ -23,6 +23,12 @@ shadowJar {
     version = null
 }
 
+test {
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+
 repositories {
     mavenCentral()
 }

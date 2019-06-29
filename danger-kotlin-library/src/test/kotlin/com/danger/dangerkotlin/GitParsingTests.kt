@@ -1,3 +1,5 @@
+package com.danger.dangerkotlin
+
 import com.danger.dangerkotlin.DSL
 import com.danger.dangerkotlin.JSONFiles
 import com.danger.dangerkotlin.Rfc3339DateJsonAdapter
