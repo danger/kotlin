@@ -9,7 +9,7 @@ matrix:
         - sdk install kscript
         - sdk install gradle
         - sdk install kotlin
-        - npm install -g danger
+        - npm install -g danger 7
       script:
         - make install
         - DEBUG='*' danger-kotlin ci
@@ -22,7 +22,7 @@ matrix:
         - sdk install kscript
         - sdk install gradle
         - sdk install kotlin
-        - npm install -g danger
+        - npm install -g danger 7
         - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
