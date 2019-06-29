@@ -12,6 +12,7 @@ matrix:
         - npm install -g danger@7.1.4
       script:
         - make install
+        - gradle danger-kotlin-library:test
         - DEBUG='*' danger-kotlin ci
     - os: linux
       sudo: required
@@ -26,4 +27,5 @@ matrix:
         - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
+        - gradle danger-kotlin-library:test
         - DEBUG='*' danger-kotlin ci
