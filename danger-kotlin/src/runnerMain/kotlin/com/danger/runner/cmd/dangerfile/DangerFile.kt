@@ -1,11 +1,10 @@
 package com.danger.runner.cmd.dangerfile
 
-import com.danger.runner.BuildConfig
 import com.danger.runner.cmd.*
 import com.danger.runner.cmd.kscript.KScriptBridge
 
 object DangerFile: DangerFileBridge {
-    private const val DANGER_FILE = "Dangerfile.kts"
+    private const val DANGER_FILE = "Dangerfile.main.kts"
 
     override val kscript: KScriptBridge
         get() = KScript

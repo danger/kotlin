@@ -23,14 +23,16 @@ project.ext.groupIdOkio = 'com.squareup.okio'
 project.ext.artifactIdOkio = 'okio'
 
 // Kotlin
-project.ext.versionKotlinScriptRuntime = '1.3.0'
-project.ext.groupIdKotlinScriptRuntime = 'org.jetbrains.kotlin'
+project.ext.versionKotlin = '1.3.41'
+project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
 project.ext.artifactIdKotlinScriptRuntime = 'kotlin-script-runtime'
+project.ext.artifactIdKotlinMainKts = 'kotlin-main-kts'
 ext.kotlin = [
-        runtime : "$groupIdKotlinScriptRuntime:$artifactIdKotlinScriptRuntime:$versionKotlinScriptRuntime"
+        runtime : "$groupIdKotlin:$artifactIdKotlinScriptRuntime:$versionKotlin" ,
+        mainKts: "$groupIdKotlin:$artifactIdKotlinMainKts:$versionKotlin"
 ]
 ext.kotlinDependencies = group {
-    implementation kotlin.runtime
+    implementation kotlin.mainKts
 }
 
 // Testing
@@ -42,4 +44,8 @@ ext.testing = [
 ]
 ext.testingDependencies = group {
     testImplementation testing.junit
+}
+
+ext.apacheDependencies = group {
+    implementation "org.apache.commons:commons-text:1.6"
 }
