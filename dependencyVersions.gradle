@@ -46,7 +46,3 @@ ext.testing = [
 ext.testingDependencies = group {
     testImplementation testing.junit
 }
-
-ext.apacheDependencies = group {
-    implementation "org.apache.commons:commons-text:1.6"
-}

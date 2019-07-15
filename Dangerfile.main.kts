@@ -1,4 +1,3 @@
-#!/usr/bin/env kscript
 @file:Repository("https://repo.maven.apache.org")
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
