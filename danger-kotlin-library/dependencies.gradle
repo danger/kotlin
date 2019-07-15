@@ -5,5 +5,5 @@ dependencies {
     utilsDependencies()
     kotlinDependencies()
     testingDependencies()
-    kotlinDependencies()
+    //kotlinDependencies()
 }
