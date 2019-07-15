@@ -1,9 +1,10 @@
-@file:Repository("https://repo.maven.apache.org")
-@file:DependsOn("org.apache.commons:commons-text:1.6")
+// Dangerfile.main.kts
+// Using external dependencies:
+//@file:Repository("https://repo.maven.apache.org")
+//@file:DependsOn("org.apache.commons:commons-text:1.6")
 
 import com.danger.dangerkotlin.*
 import org.jetbrains.kotlin.script.util.*
-import org.apache.commons.text.WordUtils
 
 val danger = Danger(args)
 
@@ -24,5 +25,3 @@ if (danger.git.createdFiles.size + danger.git.modifiedFiles.size - danger.git.de
 if (danger.github!!.pullRequest.title.contains("WIP" ,false)) {
     warn("PR is classed as Work in Progress")
 }
-
-warn(WordUtils.capitalize("thisIsAPr"))
