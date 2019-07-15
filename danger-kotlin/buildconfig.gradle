@@ -8,8 +8,8 @@ buildConfig {
     field "groupIdMoshi", groupIdMoshi
     field "artifactIdMoshi" , artifactIdMoshi
     field "artifactIdMoshiKotlin", artifactIdMoshiKotlin
-    field "versionKotlinScriptRuntime", versionKotlinScriptRuntime
-    field "groupIdKotlinScriptRuntime", groupIdKotlinScriptRuntime
+    field "versionKotlin", versionKotlin
+    field "groupIdKotlin", groupIdKotlin
     field "artifactIdKotlinScriptRuntime", artifactIdKotlinScriptRuntime
     field "versionJunit", versionJunit
     field "groupIdJunit", groupIdJunit
