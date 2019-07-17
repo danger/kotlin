@@ -16,3 +16,5 @@ include ':danger-kotlin-library'
 if (MPPTools.isMacos() || MPPTools.isLinux() || MPPTools.isWindows()) {
     include ':danger-kotlin'
 }
+include 'danger-kotlin-gradle'
+
