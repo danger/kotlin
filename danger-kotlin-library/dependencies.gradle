@@ -1,4 +1,4 @@
-apply from: rootProject.file('dependencyVersions.gradle')
+apply from: file('../dependencyVersions.gradle')
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
