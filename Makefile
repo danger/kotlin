@@ -15,7 +15,7 @@ install: build
 	curl https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-main-kts/1.3.41/kotlin-main-kts-1.3.41.jar -o $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
 
 build:
-    gradle wrapper
+	gradle wrapper
 	./gradlew shadowJar -p danger-kotlin-library
 	./gradlew build -p danger-kotlin
 
