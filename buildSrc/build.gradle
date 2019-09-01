@@ -1,3 +1,5 @@
+apply plugin: 'kotlin'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -9,8 +11,6 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
