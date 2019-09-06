@@ -8,6 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 # Install nodejs
+USER root
 RUN apk add --no-cache bash git openssh nodejs make gradle
 
 # Install danger-swift globally
