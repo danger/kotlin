@@ -8,8 +8,8 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 # Install nodejs
-USER root
-RUN apk add --no-cache bash git openssh nodejs make gradle
+RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
+RUN apt-get install -y nodejs
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
