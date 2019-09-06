@@ -1,4 +1,4 @@
-FROM openjdk:12-oraclelinux7
+FROM openjdk:12-alpine
 
 MAINTAINER Franco Meloni
 
@@ -8,8 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
-RUN apt-get install -y nodejs
+RUN apk add --update nodejs
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/danger-kotlin.git _danger-kotlin
