@@ -9,7 +9,7 @@ LABEL "com.github.actions.color"="blue"
 
 # Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs make
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
