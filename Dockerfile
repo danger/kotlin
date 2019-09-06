@@ -1,4 +1,4 @@
-FROM gradle:5.6.2-jdk8-alpine
+FROM gradle:5.6.2-jdk8
 
 MAINTAINER Franco Meloni
 
