@@ -12,7 +12,7 @@ RUN apk add --no-cache bash git openssh nodejs
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
-RUN cd _danger-swift && make install
+RUN cd _danger-kotlin && make install
 
 # Run Danger Swift via Danger JS, allowing for custom args
 ENTRYPOINT ["npx", "--package", "danger", "danger-kotlin", "ci"]
