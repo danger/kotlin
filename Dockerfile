@@ -1,3 +1,5 @@
+FROM openjdk:12
+
 MAINTAINER Franco Meloni
 
 LABEL "com.github.actions.name"="Danger Kotlin"
