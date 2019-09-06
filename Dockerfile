@@ -8,7 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 # Install nodejs
-RUN apk add --no-cache bash git openssh nodejs cmake
+RUN apk add --no-cache bash git openssh nodejs make
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
