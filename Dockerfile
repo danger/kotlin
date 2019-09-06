@@ -11,7 +11,7 @@ LABEL "com.github.actions.color"="blue"
 RUN apk add --no-cache bash git openssh nodejs
 
 # Install danger-swift globally
-RUN git clone https://github.com/danger/danger-kotlin.git _danger-kotlin
+RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-swift && make install
 
 # Run Danger Swift via Danger JS, allowing for custom args
