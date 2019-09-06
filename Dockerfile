@@ -1,4 +1,4 @@
-FROM openjdk:12-alpine
+FROM gradle:5.1.1-jdk8-alpine
 
 MAINTAINER Franco Meloni
 
