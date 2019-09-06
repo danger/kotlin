@@ -1,4 +1,4 @@
-FROM openjdk:12-jre
+FROM openjdk:12-oraclelinux7
 
 MAINTAINER Franco Meloni
 
