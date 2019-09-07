@@ -9,8 +9,9 @@ LABEL "com.github.actions.color"="blue"
 
 # Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
-RUN apt-get install -y nodejs make snapd snapd-xdg-open
-RUN snap install kotlin --classic
+RUN apt-get install -y nodejs make
+RUN curl -s https://get.sdkman.io | bash
+RUN sdk install kotlin
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
