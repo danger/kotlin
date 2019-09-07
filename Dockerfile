@@ -9,7 +9,7 @@ LABEL "com.github.actions.color"="blue"
 
 # Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
-RUN apt-get install -y nodejs make
+RUN apt-get install -y nodejs make zip
 RUN curl -s https://get.sdkman.io | bash
 RUN sdk install kotlin
 
