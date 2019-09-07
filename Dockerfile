@@ -22,5 +22,5 @@ ENV PATH $PATH:/usr/lib/kotlinc/bin
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-kotlin && make install
 
-# Run Danger Swift via Danger JS, allowing for custom args
+# Run Danger Kotlin via Danger JS, allowing for custom args
 ENTRYPOINT ["npx", "--package", "danger", "danger-kotlin", "ci"]
