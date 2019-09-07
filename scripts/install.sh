@@ -3,9 +3,8 @@ sudo chmod -R a+rwx /usr/local/
 if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo "Installing kotlin compiler 1.3.50"
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
-    mkdir /usr/lib/kotlin
-    unzip -d /usr/lib/kotlin kotlin-compiler.zip
-    export PATH=/usr/lib/kotlin/kotlinc/bin:$PATH
+    unzip -d /usr/local/ kotlin-compiler.zip
+    export PATH=/usr/local/kotlinc/bin:$PATH
     rm -rf kotlin-compiler.zip
 fi
 if ! [[ -x "$(command -v gradle)" ]]; then
