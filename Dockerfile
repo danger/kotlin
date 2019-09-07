@@ -11,9 +11,9 @@ LABEL "com.github.actions.color"="blue"
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs make zip
 RUN curl -s https://get.sdkman.io | bash
-RUN chmod a+x "$HOME/.sdkman/bin/sdkman-init.sh"
-RUN /bin/bash -c "source \"$HOME/.sdkman/bin/sdkman-init.sh\""
-RUN sdk install kotlin
+
+SHELL [ "/bin/bash", "-c" ]
+RUN source /root/.sdkman/bin/sdkman-init.sh && sdk install kotlin
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
