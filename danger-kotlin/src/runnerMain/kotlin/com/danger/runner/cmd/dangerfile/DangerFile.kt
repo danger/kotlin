@@ -7,12 +7,12 @@ object DangerFile: DangerFileBridge {
 
     override fun execute(inputJson: String, outputJson: String) {
         Cmd().name("$(which kotlinc)").args(
+            inputJson,
+            outputJson,
             "-cp",
             "/usr/local/lib/danger/danger-kotlin.jar:/usr/local/lib/danger/kotlin-main-kts.jar",
             "-script",
-            DANGER_FILE,
-            inputJson,
-            outputJson
+            DANGER_FILE
         ).exec()
     }
 }
