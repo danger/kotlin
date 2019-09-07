@@ -21,4 +21,5 @@ build:
 
 uninstall:
 	rm -rf $(INSTALL_PATH)
-	rm -rf $(LIB_INSTALL_PATH)
+	rm -f $(LIB_INSTALL_PATH)/danger-kotlin.jar
+	rm -f $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
