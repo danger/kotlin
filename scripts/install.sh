@@ -4,7 +4,7 @@ if ! [ -x "$(command -v kotlinc)" ]; then
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
     mkdir /opt/kotlin
     unzip -d /opt/kotlin kotlin-compiler.zip
-    export PATH=$PATH:/opt/kotlin/kotlinc/bin
+    export PATH=/opt/kotlin/kotlinc/bin:$PATH
     rm -rf kotlin-compiler.zip
 fi
 if ! [ -x "$(command -v gradle)" ]; then
@@ -12,7 +12,7 @@ if ! [ -x "$(command -v gradle)" ]; then
     curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-5.6.2-bin.zip
     mkdir /opt/gradle
     unzip -d /opt/gradle gradle.zip
-    export PATH=$PATH:/opt/gradle/gradle-5.6.2/bin
+    export PATH=/opt/gradle/gradle-5.6.2/bin:$PATH
     rm -rf gradle.zip
 fi
 git clone https://github.com/danger/kotlin.git _danger-kotlin
