@@ -21,4 +21,4 @@ RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-kotlin && make install
 
 # Run Danger Swift via Danger JS, allowing for custom args
-ENTRYPOINT ["npx", "--package", "danger", "danger-kotlin", "ci"]
+ENTRYPOINT ["source", "/root/.sdkman/bin/sdkman-init.sh", "&&" "npx", "--package", "danger", "danger-kotlin", "ci"]
