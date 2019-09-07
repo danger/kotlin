@@ -18,8 +18,6 @@ RUN cd /usr/lib && \
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
-RUN kotlinc -version
-
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-kotlin && make install
