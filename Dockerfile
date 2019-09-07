@@ -12,7 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs make zip
 RUN curl -s https://get.sdkman.io | bash
 RUN chmod a+x "$HOME/.sdkman/bin/sdkman-init.sh"
-RUN source "$HOME/.sdkman/bin/sdkman-init.sh"
+RUN /bin/bash -c "source \"$HOME/.sdkman/bin/sdkman-init.sh\""
 RUN sdk install kotlin
 
 # Install danger-swift globally
