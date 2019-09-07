@@ -15,6 +15,8 @@ RUN curl -s https://get.sdkman.io | bash
 SHELL [ "/bin/bash", "-c" ]
 RUN source /root/.sdkman/bin/sdkman-init.sh && sdk install kotlin
 
+RUN kotlinc -version
+
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-kotlin && make install
