@@ -1,10 +1,10 @@
 #!/bin/sh
+sudo chmod -R a+rwx /usr/local/
 if ! [ -x "$(command -v kotlinc)" ]; then
     echo "Installing kotlin compiler 1.3.50"
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
-    mkdir /opt/kotlin
-    unzip -d /opt/kotlin kotlin-compiler.zip
-    export PATH=/opt/kotlin/kotlinc/bin:$PATH
+    unzip -d /usr/lib kotlin-compiler.zip
+    export PATH=/usr/lib/kotlinc/bin:$PATH
     rm -rf kotlin-compiler.zip
 fi
 if ! [ -x "$(command -v gradle)" ]; then
@@ -16,7 +16,6 @@ if ! [ -x "$(command -v gradle)" ]; then
     rm -rf gradle.zip
 fi
 git clone https://github.com/danger/kotlin.git _danger-kotlin
-sudo chmod -R a+rwx /usr/local/
 cd _danger-kotlin && make install
 cd ..
 rm -rf _danger-kotlin
