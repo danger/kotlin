@@ -10,7 +10,6 @@ LABEL "com.github.actions.color"="blue"
 # Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs make zip
-RUN curl -s https://get.sdkman.io | bash
 
 RUN cd /usr/lib && \
     wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip && \
@@ -19,9 +18,11 @@ RUN cd /usr/lib && \
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
+RUN kotlinc -version
+
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
 RUN cd _danger-kotlin && make install
 
 # Run Danger Swift via Danger JS, allowing for custom args
-ENTRYPOINT ["npx, "--package", "danger", "danger-kotlin", "ci"]
+ENTRYPOINT ["npx", "--package", "danger", "danger-swift", "ci"]
