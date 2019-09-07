@@ -11,6 +11,7 @@ LABEL "com.github.actions.color"="blue"
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs make zip
 RUN curl -s https://get.sdkman.io | bash
+RUN source ~/.bash_profile 
 RUN sdk install kotlin
 
 # Install danger-swift globally
