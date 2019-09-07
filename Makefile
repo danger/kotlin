@@ -21,4 +21,4 @@ build:
 
 uninstall:
 	rm -f $(INSTALL_PATH)
-	rm -rf ~/.m2/repository/com/danger/danger-kotlin-library/
+	rm -rf $(LIB_INSTALL_PATH)
