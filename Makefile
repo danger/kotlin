@@ -20,5 +20,5 @@ build:
 	./gradlew build -p danger-kotlin
 
 uninstall:
-	rm -f $(INSTALL_PATH)
+	rm -rf $(INSTALL_PATH)
 	rm -rf $(LIB_INSTALL_PATH)
