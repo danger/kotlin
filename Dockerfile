@@ -7,9 +7,10 @@ LABEL "com.github.actions.description"="Runs Kotlin Dangerfiles"
 LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
-# Install nodejs
+# Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
-RUN apt-get install -y nodejs make
+RUN apt-get install -y nodejs make snapd snapd-xdg-open
+RUN snap install kotlin --classic
 
 # Install danger-swift globally
 RUN git clone https://github.com/danger/kotlin.git _danger-kotlin
