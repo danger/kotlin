@@ -1,5 +1,5 @@
 #!/bin/sh
-if ! [ -x "$(command -v kotlinc)" ]; then
+if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo "Installing kotlin compiler 1.3.50"
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
     mkdir /opt/kotlin
@@ -7,7 +7,7 @@ if ! [ -x "$(command -v kotlinc)" ]; then
     export PATH=/opt/kotlin/kotlinc/bin:$PATH
     rm -rf kotlin-compiler.zip
 fi
-if ! [ -x "$(command -v gradle)" ]; then
+if ! [[ -x "$(command -v gradle)" ]]; then
     echo "Installing gradle 5.6.2"
     curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-5.6.2-bin.zip
     mkdir /opt/gradle
