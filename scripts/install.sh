@@ -4,7 +4,7 @@ if ! [ -x "$(command -v kotlinc)" ]; then
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
     mkdir /opt/kotlin
     unzip -d /opt/kotlin kotlin-compiler.zip
-    export PATH=$PATH:/opt/kotlin
+    export PATH=$PATH:/opt/kotlin/kotlinc/bin
     rm -rf kotlin-compiler.zip
 fi
 if ! [ -x "$(command -v gradle)" ]; then
