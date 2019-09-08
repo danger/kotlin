@@ -6,7 +6,7 @@ object DangerFile: DangerFileBridge {
     private const val DANGER_FILE = "Dangerfile.main.kts"
 
     override fun execute(inputJson: String, outputJson: String) {
-        Cmd().name("$(which kotlinc)").args(
+        Cmd().name("kotlinc").args(
             "-cp",
             "/usr/local/lib/danger/danger-kotlin.jar:/usr/local/lib/danger/kotlin-main-kts.jar",
             "-script",
