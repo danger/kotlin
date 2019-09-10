@@ -12,7 +12,7 @@ brew install danger/tap/danger-kotlin
 ```
 
 ### GitHub Actions
-You can add danger/kotlin as GitHub action
+You can add danger/kotlin as action
 
 ### Commands
 
