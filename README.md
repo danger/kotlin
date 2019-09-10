@@ -11,6 +11,9 @@ Is possible to generate a working `danger-kotlin` instance from the code that is
 brew install danger/tap/danger-kotlin
 ```
 
+### GitHub Actions
+You can add danger/kotlin as GitHub action
+
 ### Commands
 
 - `danger-kotlin ci` - Use this on CI
