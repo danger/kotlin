@@ -7,8 +7,15 @@ Is possible to generate a working `danger-kotlin` instance from the code that is
 
 ### Setup
 #### MacOs
-```
+```sh
 brew install danger/tap/danger-kotlin
+```
+
+### Linux
+```sh
+npm install -g danger
+bash <(curl -s https://raw.githubusercontent.com/danger/kotlin/install-script/scripts/install.sh)
+source ~/.bash_profile
 ```
 
 ### GitHub Actions
