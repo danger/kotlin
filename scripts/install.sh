@@ -15,7 +15,7 @@ if ! [[ -x "$(command -v gradle)" ]]; then
     echo 'export PATH=/opt/gradle/gradle-5.6.2/bin:$PATH' >> ~/.bash_profile
     rm -rf gradle.zip
 fi
-git clone https://github.com/danger/kotlin.git _danger-kotlin
+git clone https://github.com/danger/kotlin.git --single-branch --depth 1 _danger-kotlin
 cd _danger-kotlin && make install
 cd ..
 rm -rf _danger-kotlin
