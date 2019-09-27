@@ -19,7 +19,20 @@ source ~/.bash_profile
 ```
 
 ### GitHub Actions
-You can add danger/kotlin as action
+You can add danger/kotlin to your actions
+
+```yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: "Run Danger"
+    steps:
+      - uses: actions/checkout@v1
+      - name: Danger
+        uses: danger/kotlin@0.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
 
 ### Commands
 
