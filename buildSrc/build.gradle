@@ -23,5 +23,4 @@ dependencies {
     compileOnly gradleApi()
     implementation 'org.jetbrains.kotlin:kotlin-gradle-plugin'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-    implementation 'com.squareup:kotlinpoet:1.2.0'
 }
