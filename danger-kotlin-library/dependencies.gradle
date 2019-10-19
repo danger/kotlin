@@ -3,6 +3,6 @@ apply from: file('../dependencyVersions.gradle')
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     utilsDependencies()
-    kotlinDependencies()
+    //kotlinDependencies()
     testingDependencies()
 }
