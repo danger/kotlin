@@ -6,3 +6,5 @@ pluginManagement {
 
 include ':danger-kotlin-library'
 include ':danger-kotlin'
+include ':danger-kotlin-kts'
+

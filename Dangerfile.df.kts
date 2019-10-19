@@ -1,10 +1,9 @@
-// Dangerfile.main.kts
+// Dangerfile.df.kts
 // Using external dependencies:
 //@file:Repository("https://repo.maven.apache.org")
 //@file:DependsOn("org.apache.commons:commons-text:1.6")
 
 import com.danger.dangerkotlin.*
-import org.jetbrains.kotlin.script.util.*
 
 val danger = Danger(args)
 

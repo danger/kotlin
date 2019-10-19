@@ -12,6 +12,7 @@ install: build
 	mkdir -p $(PREFIX)/lib/danger
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 	cp -f danger-kotlin-library/build/libs/danger-kotlin.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
+	cp -f danger-kotlin-kts/build/libs/danger-kotlin-kts.jar $(LIB_INSTALL_PATH)/danger-kotlin-kts.jar
 	curl https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-main-kts/1.3.50/kotlin-main-kts-1.3.50.jar -o $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
 
 build:
@@ -23,3 +24,4 @@ uninstall:
 	rm -rf $(INSTALL_PATH)
 	rm -f $(LIB_INSTALL_PATH)/danger-kotlin.jar
 	rm -f $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
+	rm -f $(LIB_INSTALL_PATH)/danger-kotlin-kts.jar
