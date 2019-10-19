@@ -18,6 +18,7 @@ install: build
 build:
 	gradle wrapper
 	./gradlew shadowJar -p danger-kotlin-library
+	./gradlew build -p danger-kotlin-kts
 	./gradlew build -p danger-kotlin
 
 uninstall:
