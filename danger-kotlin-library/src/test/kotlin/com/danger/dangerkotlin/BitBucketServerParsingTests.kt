@@ -12,7 +12,7 @@ class BitBucketServerParsingTests {
     private val dsl
         get() = moshi.fromJson(jsonFiles.dangerBitBucketServerJSON)
     private val bitBucketServer: BitBucketServer
-        get() = dsl!!.danger.bitBucketServer!!
+        get() = dsl!!.danger.bitBucketServer
 
     @Test
     fun testItParsesTheBitBucketPullRequest() {
