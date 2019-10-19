@@ -12,7 +12,7 @@ install: build
 	mkdir -p $(PREFIX)/lib/danger
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 	cp -f danger-kotlin-library/build/libs/danger-kotlin.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
-	curl https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-main-kts/1.3.41/kotlin-main-kts-1.3.41.jar -o $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
+	curl https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-main-kts/1.3.50/kotlin-main-kts-1.3.50.jar -o $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
 
 build:
 	gradle wrapper
