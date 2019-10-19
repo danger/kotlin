@@ -17,7 +17,7 @@ val danger = Danger(args)
 val allSourceFiles = danger.git.modifiedFiles + danger.git.createdFiles
 
 val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
-val sourceChanges = allSourceFiles.firstOrNull { it.contains("src")  }
+val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
 val isTrivial = danger.github!!.pullRequest.title.contains("#trivial")
 
 if (!isTrivial && !changelogChanged && sourceChanges != null) {
