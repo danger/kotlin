@@ -1,6 +1,6 @@
-package com.danger.dangerkotlin.sdk
+package systems.danger.kotlin.sdk
 
-import com.danger.dangerkotlin.DangerKotlinAPIProvider
+import com.danger.dangerkotlin.*
 
 interface DangerKotlinAPI {
     fun message(message: String)
@@ -16,7 +16,6 @@ interface DangerKotlinAPI {
 
 class DangerKotlinApiGetter {
     companion object {
-        @JvmStatic
         fun get() = DangerKotlinAPIProvider.getApi()
     }
 }
