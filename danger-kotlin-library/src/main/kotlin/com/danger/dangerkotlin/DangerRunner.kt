@@ -43,7 +43,7 @@ class Rfc3339DateJsonAdapter: JsonAdapter<Date>() {
     }
 }
 
-private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) {
+private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath)  {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
     val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(),arrayOf(), arrayOf())
@@ -64,7 +64,15 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 }
 
+class DangerKotlinAPIProvider {
+    companion object{
+        @JvmStatic
+        fun getApi() = apiImpl
+    }
+}
+
 private lateinit var dangerRunner: DangerRunner
+private lateinit var apiImpl: Unit
 
 fun Danger(args: Array<String>): DangerDSL {
     val argsCount = args.count()
