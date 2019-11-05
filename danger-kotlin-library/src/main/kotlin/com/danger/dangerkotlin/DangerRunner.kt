@@ -5,10 +5,14 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import systems.danger.kotlin.sdk.DangerContext
+import systems.danger.kotlin.sdk.DangerPlugin
 import java.io.File
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+
+private fun FilePath.readText() = File(this).readText()
 
 fun toISO8601UTC(date: Date): String {
     val tz = TimeZone.getTimeZone("UTC")
@@ -31,7 +35,7 @@ fun fromISO8601UTC(dateStr: String): Date? {
     return null
 }
 
-class Rfc3339DateJsonAdapter: JsonAdapter<Date>() {
+class Rfc3339DateJsonAdapter : JsonAdapter<Date>() {
     @Synchronized
     override fun fromJson(reader: JsonReader): Date {
         val string = reader.nextString()
@@ -39,14 +43,34 @@ class Rfc3339DateJsonAdapter: JsonAdapter<Date>() {
     }
 
     override fun toJson(writer: JsonWriter, value: Date?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //Implementation not needed right now
     }
 }
 
-private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath)  {
+object register {
+    internal var dangerPlugins = mutableListOf<DangerPlugin>()
+
+    infix fun plugin(plugin: DangerPlugin) {
+        dangerPlugins.add(plugin)
+    }
+
+    fun plugins(vararg pluginArgs: DangerPlugin) {
+        dangerPlugins.addAll(pluginArgs)
+    }
+}
+
+inline fun register(block: register.() -> Unit) = register.apply(block)
+
+inline fun danger(args: Array<String>, block: DangerDSL.()->Unit) = Danger(args).apply(block)
+
+internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
+    context = dangerContext
+}
+
+private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
-    val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(),arrayOf(), arrayOf())
+    val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(), arrayOf(), arrayOf())
 
     private val moshi = Moshi.Builder()
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
@@ -55,24 +79,111 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
 
     init {
         this.danger = moshi.adapter(DSL::class.java).fromJson(jsonInputFilePath.readText())!!.danger
+
+        register.dangerPlugins.forEach {
+            it.withContext(this)
+        }
+
         saveDangerResults()
     }
 
-    fun saveDangerResults() {
+    //Api Implementation
+    /**
+     * Adds an inline fail message to the Danger report
+     */
+    override fun fail(message: String) {
+        fail(Violation(message))
+    }
+
+    /**
+     * Adds an inline fail message to the Danger report
+     */
+    override fun fail(message: String, file: FilePath, line: Int) {
+        fail(Violation(message, file, line))
+    }
+
+    /**
+     * Adds an inline warning message to the Danger report
+     */
+    override fun warn(message: String) {
+        warn(Violation(message))
+    }
+
+    /**
+     * Adds an inline warning message to the Danger report
+     */
+    override fun warn(message: String, file: FilePath, line: Int) {
+        warn(Violation(message, file, line))
+    }
+
+    /**
+     * Adds an inline message to the Danger report
+     */
+    override fun message(message: String) {
+        message(Violation(message))
+    }
+
+    /**
+     * Adds an inline message to the Danger report
+     */
+    override fun message(message: String, file: FilePath, line: Int) {
+        message(Violation(message, file, line))
+    }
+
+    /**
+     * Adds an inline markdown message to the Danger report
+     */
+    override fun markdown(message: String) {
+        markdown(Violation(message))
+    }
+
+    /**
+     * Adds an inline markdown message to the Danger report
+     */
+    override fun markdown(message: String, file: FilePath, line: Int) {
+        markdown(Violation(message, file, line))
+    }
+
+    /**
+     * Adds an inline suggest markdown message to the Danger report
+     */
+    override fun suggest(code: String, file: FilePath, line: Int) {
+        if (dangerRunner.danger.onGitHub) {
+            val message = "```suggestion\n $code \n```"
+            markdown(Violation(message, file, line))
+        } else {
+            val message = "```\n $code \n```"
+            message(Violation(message))
+        }
+    }
+
+    private fun warn(violation: Violation) {
+        dangerResults.warnings += (violation)
+        saveDangerResults()
+    }
+
+    private fun fail(violation: Violation) {
+        dangerResults.fails += violation
+        saveDangerResults()
+    }
+
+    private fun message(violation: Violation) {
+        dangerResults.messages += violation
+        saveDangerResults()
+    }
+
+    private fun markdown(violation: Violation) {
+        dangerResults.markdowns += violation
+        saveDangerResults()
+    }
+
+    private fun saveDangerResults() {
         val resultsJSON = moshi.adapter(DangerResults::class.java).toJson(dangerResults)
         jsonOutputFile.writeText(resultsJSON)
     }
 }
 
-class DangerKotlinAPIProvider {
-    companion object{
-        @JvmStatic
-        fun getApi() = apiImpl
-    }
-}
-
 private lateinit var dangerRunner: DangerRunner
-private lateinit var apiImpl: Unit
 
 fun Danger(args: Array<String>): DangerDSL {
     val argsCount = args.count()
@@ -84,95 +195,29 @@ fun Danger(args: Array<String>): DangerDSL {
     return dangerRunner.danger
 }
 
-/**
-* Adds an inline fail message to the Danger report
-*/
-fun fail(message: String) {
-    fail(Violation(message))
-}
+fun fail(message: String) =
+    dangerRunner.fail(message)
 
-/**
-* Adds an inline fail message to the Danger report
-*/
-fun fail(message: String, file: FilePath, line: Int) {
-    fail(Violation(message, file, line))
-}
+fun fail(message: String, file: FilePath, line: Int) =
+    dangerRunner.fail(message, file, line)
 
-private fun fail(violation: Violation) {
-    dangerRunner.dangerResults.fails+=violation
-    dangerRunner.saveDangerResults()
-}
+fun warn(message: String) =
+    dangerRunner.warn(message)
 
-/**
-* Adds an inline warning message to the Danger report
-*/
-fun warn(message: String) {
-    warn(Violation(message))
-}
+fun warn(message: String, file: FilePath, line: Int) =
+    dangerRunner.warn(message, file, line)
 
-/**
-* Adds an inline warning message to the Danger report
-*/
-fun warn(message: String, file: FilePath, line: Int) {
-    warn(Violation(message, file, line))
-}
+fun message(message: String) =
+    dangerRunner.message(message)
 
-private fun warn(violation: Violation) {
-    dangerRunner.dangerResults.warnings+=(violation)
-    dangerRunner.saveDangerResults()
-}
+fun message(message: String, file: FilePath, line: Int) =
+    dangerRunner.message(message, file, line)
 
-/**
-* Adds an inline message to the Danger report
-*/
-fun message(message: String) {
-    message(Violation(message))
-}
+fun markdown(message: String) =
+    dangerRunner.markdown(message)
 
-/**
-* Adds an inline message to the Danger report
-*/
-fun message(message: String, file: FilePath, line: Int) {
-    message(Violation(message, file, line))
-}
+fun markdown(message: String, file: FilePath, line: Int) =
+    dangerRunner.markdown(message, file, line)
 
-private fun message(violation: Violation) {
-    dangerRunner.dangerResults.messages+=violation
-    dangerRunner.saveDangerResults()
-}
-
-/**
-* Adds an inline markdown message to the Danger report
-*/
-fun markdown(message: String) {
-    markdown(Violation(message))
-}
-
-/**
-* Adds an inline markdown message to the Danger report
-*/
-fun markdown(message: String, file: FilePath, line: Int) {
-    markdown(Violation(message, file, line))
-}
-
-private fun markdown(violation: Violation) {
-    dangerRunner.dangerResults.markdowns+=violation
-    dangerRunner.saveDangerResults()
-}
-
-
-/**
- * Adds an inline suggest markdown message to the Danger report
- */
-fun suggest(code: String, file: FilePath, line: Int) {
-    if (dangerRunner.danger.onGitHub) {
-        val message = "```suggestion\n $code \n```"
-        markdown(Violation(message, file, line))
-    } else {
-        val message = "```\n $code \n```"
-        message(Violation(message))
-    }
-}
-
-private fun FilePath.readText() = File(this).readText()
-
+fun suggest(code: String, file: FilePath, line: Int) =
+    dangerRunner.suggest(code, file, line)

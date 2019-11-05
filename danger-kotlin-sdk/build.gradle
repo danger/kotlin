@@ -1,9 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
 }
 
 group 'systems.danger'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -11,7 +12,6 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation project(":danger-kotlin-library")
 }
 
 compileKotlin {
@@ -19,4 +19,11 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }

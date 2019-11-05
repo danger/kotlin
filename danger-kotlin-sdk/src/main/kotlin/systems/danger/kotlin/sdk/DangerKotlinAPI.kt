@@ -1,8 +1,6 @@
 package systems.danger.kotlin.sdk
 
-import com.danger.dangerkotlin.*
-
-interface DangerKotlinAPI {
+interface DangerContext {
     fun message(message: String)
     fun message(message: String, file: String, line: Int)
     fun markdown(message: String)
@@ -14,8 +12,16 @@ interface DangerKotlinAPI {
     fun suggest(code: String, file: String, line: Int)
 }
 
-class DangerKotlinApiGetter {
+object Sdk {
+    const val VERSION_NAME = "1.0"
+    const val API_VERSION = 1
+}
+
+abstract class DangerPlugin {
     companion object {
-        fun get() = DangerKotlinAPIProvider.getApi()
+        const val DEVELOPED_WITH_API = Sdk.API_VERSION
     }
+
+    abstract val id: String
+    lateinit var context: DangerContext
 }
