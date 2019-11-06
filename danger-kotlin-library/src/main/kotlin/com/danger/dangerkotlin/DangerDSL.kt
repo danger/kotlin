@@ -8,13 +8,19 @@ data class DSL(
 )
 
 data class DangerDSL(
-        val github: GitHub?,
+        @Json(name ="github")
+        private val _github: GitHub?,
         @Json(name ="bitbucket_server")
-        val bitBucketServer: BitBucketServer?,
+        private val _bitBucketServer: BitBucketServer?,
         val git: Git
 ) {
+        val github: GitHub
+                get() = _github!!
+        val bitBucketServer: BitBucketServer
+                get() = _bitBucketServer!!
+
         val onGitHub
-                get() = github != null
+                get() = _github != null
         val onBitBucketServer
-                get() = bitBucketServer != null
+                get() = _bitBucketServer != null
 }
