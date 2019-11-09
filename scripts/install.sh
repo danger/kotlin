@@ -1,5 +1,11 @@
 #!/bin/sh
-sudo chmod -R a+rwx /usr/local/
+
+timeout 2 sudo -v && sudo="true" || sudo=""
+
+if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
+	echo "SUDO"
+	sudo chmod -R a+rwx /usr/local/
+fi
 if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo "Installing kotlin compiler 1.3.50"
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
