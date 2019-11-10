@@ -15,7 +15,7 @@ if ! [[ -x "$(command -v danger)" ]]; then
 	npm install -g danger
 fi
 
-timeout 2 sudo -v && sudo="true" || sudo=""
+sudo -v && sudo="true" || sudo=""
 if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
 	echo "SUDO"
 	sudo chmod -R a+rwx /usr/local/
