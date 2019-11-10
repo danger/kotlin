@@ -2,13 +2,8 @@
 
 if ! [[ -x "$(command -v danger)" ]]; then
 	if ! [[ -x "$(command -v npm)" ]]; then
-		if [[ "$OSTYPE" == "darwin"* ]]; then
-			echo "Please install node js"
-			exit 1
-		else
-			echo "Installing node js"
-			curl -sL https://rpm.nodesource.com/setup_12.x | bash -
-		fi
+		echo "Please install node js"
+		exit 1
 	fi
 
 	echo "Installing danger"
