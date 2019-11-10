@@ -2,7 +2,7 @@
 
 if ! [[ -x "$(command -v danger)" ]]; then
 	if ! [[ -x "$(command -v npm)" ]]; then
-		if [[ "$OSTYPE" != "darwin"* ]]; then
+		if [[ "$OSTYPE" == "darwin"* ]]; then
 			echo "Please install node js"
 			exit 1
 		else
