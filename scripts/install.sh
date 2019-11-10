@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sudo -v && sudo="true" || sudo=""
+
 if ! [[ -x "$(command -v danger)" ]]; then
 	if ! [[ -x "$(command -v npm)" ]]; then
 		echo "Please install node js"
@@ -7,12 +9,14 @@ if ! [[ -x "$(command -v danger)" ]]; then
 	fi
 
 	echo "Installing danger"
-	npm install -g danger
+	if [ -n "$sudo"]; then
+		sudo npm install -g danger
+	else
+		npm install -g danger
+	fi
 fi
 
-sudo -v && sudo="true" || sudo=""
 if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
-	echo "SUDO"
 	sudo chmod -R a+rwx /usr/local/
 fi
 
