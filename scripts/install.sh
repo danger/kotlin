@@ -1,11 +1,26 @@
 #!/bin/sh
 
-timeout 2 sudo -v && sudo="true" || sudo=""
+if ! [[ -x "$(command -v danger)" ]]; then
+	if ! [[ -x "$(command -v npm)" ]]; then
+		if [[ "$OSTYPE" != "darwin"* ]]; then
+			echo "Please install node js"
+			exit 1
+		else
+			echo "Installing node js"
+			curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+		fi
+	fi
 
+	echo "Installing danger"
+	npm install -g danger
+fi
+
+timeout 2 sudo -v && sudo="true" || sudo=""
 if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
 	echo "SUDO"
 	sudo chmod -R a+rwx /usr/local/
 fi
+
 if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo "Installing kotlin compiler 1.3.50"
     curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.3.50/kotlin-compiler-1.3.50.zip
@@ -13,6 +28,7 @@ if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo 'PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
     rm -rf kotlin-compiler.zip
 fi
+
 if ! [[ -x "$(command -v gradle)" ]]; then
     echo "Installing gradle 5.6.2"
     curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-5.6.2-bin.zip
@@ -21,6 +37,7 @@ if ! [[ -x "$(command -v gradle)" ]]; then
     echo 'export PATH=/opt/gradle/gradle-5.6.2/bin:$PATH' >> ~/.bash_profile
     rm -rf gradle.zip
 fi
+
 git clone https://github.com/danger/kotlin.git --single-branch --depth 1 _danger-kotlin
 cd _danger-kotlin && make install
 cd ..
