@@ -41,7 +41,6 @@ brew install danger/tap/danger-kotlin
 
 ### Linux
 ```sh
-npm install -g danger
 bash <(curl -s https://raw.githubusercontent.com/danger/kotlin/master/scripts/install.sh)
 source ~/.bash_profile
 ```
