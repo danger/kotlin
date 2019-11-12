@@ -18,7 +18,6 @@ object DangerKotlin {
     }
 
     private fun printResult() {
-        //TODO: find proper way to print the result in the stdout
-        Cmd().name("echo").args("danger-results:/`pwd`/$FILE_TMP_OUTPUT_JSON").exec(false)
+        println("danger-results:/$FILE_TMP_OUTPUT_JSON")
     }
 }
