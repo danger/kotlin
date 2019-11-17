@@ -70,7 +70,7 @@ internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
 private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
-    val dangerResults: DangerResults = DangerResults(arrayOf(), arrayOf(), arrayOf(), arrayOf())
+    val dangerResults: DangerResults = DangerResults()
 
     private val moshi = Moshi.Builder()
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())

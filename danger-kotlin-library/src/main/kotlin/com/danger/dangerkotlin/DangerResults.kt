@@ -1,12 +1,12 @@
 package com.danger.dangerkotlin
 
-internal data class DangerResults(var fails: Array<Violation>,
-                         var warnings: Array<Violation>,
-                         var messages: Array<Violation>,
-                         var markdowns: Array<Violation>,
-                                  val meta: Meta = Meta()) {
-
-
+internal data class DangerResults(
+    var fails: Array<Violation> = arrayOf(),
+    var warnings: Array<Violation> = arrayOf(),
+    var messages: Array<Violation> = arrayOf(),
+    var markdowns: Array<Violation> = arrayOf()
+) {
+    val meta: Meta = Meta()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
