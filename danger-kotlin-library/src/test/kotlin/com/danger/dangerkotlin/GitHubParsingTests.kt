@@ -13,7 +13,7 @@ class GitHubParsingTests {
     private val dsl
         get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
     private val github
-        get() = dsl.danger.github!!
+        get() = dsl.danger.github
 
     @Test
     fun testItParsesTheGithubPullRequest() {

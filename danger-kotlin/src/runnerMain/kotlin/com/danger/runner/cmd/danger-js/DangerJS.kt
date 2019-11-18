@@ -6,7 +6,7 @@ object DangerJS: DangerJSBridge {
 
     override fun process(command: String, processName: String, args: List<String>) {
         with(Cmd()) {
-            name("$(which danger) $command --process $processName")
+            name("$(which danger) $command --process $processName --passURLForDSL")
             args(args.joinToString(" "))
             exec()
         }
