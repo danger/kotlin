@@ -8,7 +8,7 @@ project.ext.versionMoshi = '1.8.0'
 project.ext.groupIdMoshi = 'com.squareup.moshi'
 project.ext.artifactIdMoshiKotlin = 'moshi-kotlin'
 
-project.ext.versionKotlinMain = '1.3.41'
+project.ext.versionKotlinMain = '1.3.60'
 project.ext.groupIdKotlinMain = 'org.jetbrains.kotlin'
 project.ext.artifactIdMKotlinMain = 'kotlin-main-kts'
 
