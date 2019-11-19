@@ -4,7 +4,6 @@
 //@file:DependsOn("org.apache.commons:commons-text:1.6")
 
 import com.danger.dangerkotlin.*
-import org.jetbrains.kotlin.script.util.*
 
 val danger = Danger(args)
 
