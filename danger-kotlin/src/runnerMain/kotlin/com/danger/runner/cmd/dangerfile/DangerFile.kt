@@ -5,14 +5,14 @@ import kotlinx.cinterop.CPointer
 import platform.posix.*
 
 object DangerFile: DangerFileBridge {
-    private const val DANGER_FILE = "Dangerfile.main.kts"
+    private const val DANGER_FILE = "Dangerfile.df.kts"
 
     override fun execute(inputJson: String, outputJson: String) {
         val dangerfile = dangerfileParameter(inputJson) ?: DANGER_FILE
 
         Cmd().name("kotlinc").args(
             "-cp",
-            "/usr/local/lib/danger/danger-kotlin.jar",
+            "/usr/local/lib/danger/danger-kotlin.jar:/usr/local/lib/danger/danger-kotlin-kts.jar",
             "-script",
             dangerfile,
             inputJson,
