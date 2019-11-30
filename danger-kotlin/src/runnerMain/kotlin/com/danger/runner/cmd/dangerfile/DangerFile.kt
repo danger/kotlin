@@ -5,10 +5,16 @@ import kotlinx.cinterop.CPointer
 import platform.posix.*
 
 object DangerFile: DangerFileBridge {
-    private const val DANGER_FILE = "Dangerfile.df.kts"
+    private const val DANGERFILE_EXTENSION = ".df.kts"
+    private const val DANGERFILE = "Dangerfile" + DANGERFILE_EXTENSION
 
     override fun execute(inputJson: String, outputJson: String) {
-        val dangerfile = dangerfileParameter(inputJson) ?: DANGER_FILE
+        val dangerfile = dangerfileParameter(inputJson) ?: DANGERFILE
+
+        if(!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
+            println("The dangerfile is not valid, it must have '$DANGERFILE_EXTENSION' as extension")
+            exit(1)
+        }
 
         Cmd().name("kotlinc").args(
             "-cp",
