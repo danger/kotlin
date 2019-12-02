@@ -12,7 +12,6 @@ install: build
 	mkdir -p $(PREFIX)/lib/danger
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 	cp -f danger-kotlin-library/build/libs/danger-kotlin.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
-	cp -f danger-kotlin-kts/build/libs/danger-kotlin-kts.jar $(LIB_INSTALL_PATH)/danger-kotlin-kts.jar
 
 build:
 	gradle wrapper
@@ -23,5 +22,3 @@ build:
 uninstall:
 	rm -rf $(INSTALL_PATH)
 	rm -f $(LIB_INSTALL_PATH)/danger-kotlin.jar
-	rm -f $(LIB_INSTALL_PATH)/kotlin-main-kts.jar
-	rm -f $(LIB_INSTALL_PATH)/danger-kotlin-kts.jar

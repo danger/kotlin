@@ -27,8 +27,6 @@ object DangerFileScriptDefinition : ScriptCompilationConfiguration(
         jvm {
             dependenciesFromClassContext(
                 DangerFileScriptDefinition::class,
-                "danger-kotlin-kts",
-                "kotlin-main-kts",
                 "kotlin-stdlib",
                 "kotlin-reflect",
                 "danger-kotlin"
