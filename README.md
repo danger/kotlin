@@ -67,7 +67,7 @@ You can activate the autocomplete following this additional steps:
 - Go to `Preferences -> Build, Execution, Deployment -> Compiler -> Kotlin Compiler` (`Preferences -> Kotlin Compiler` in Android Studio)
 - At the bottom you will find a section `Kotlin Scripting`
 - Complete the field `Script template classes` with  `com.danger.kotlin.kts.DangerFileScript`
-- Complete the field `Script templates classpath` with `/usr/local/lib/danger/danger-kotlin-kts.jar:/usr/local/lib/danger/kotlin-main-kts.jar:/usr/local/lib/danger/danger-kotlin.jar`
+- Complete the field `Script templates classpath` with `/usr/local/lib/danger/danger-kotlin.jar`
 - Go to `Preferences -> Language & Frameworks -> Kotlin -> Kotlin Scripting`
 - Make sure the script template `DangerFileScript` is active and above the default `Kotlin Script`
 - Apply changes

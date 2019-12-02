@@ -13,8 +13,7 @@ project.ext.groupIdKotlinMain = 'org.jetbrains.kotlin'
 project.ext.artifactIdMKotlinMain = 'kotlin-main-kts'
 
 ext.utils = [
-        moshi : "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi",
-        kotlinMain : "$groupIdKotlinMain:$artifactIdMKotlinMain:$versionKotlinMain"
+        moshi : "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi"
 ]
 
 ext.utilsDependencies = group {
