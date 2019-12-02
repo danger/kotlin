@@ -8,7 +8,7 @@ project.ext.versionMoshi = '1.8.0'
 project.ext.groupIdMoshi = 'com.squareup.moshi'
 project.ext.artifactIdMoshiKotlin = 'moshi-kotlin'
 
-project.ext.versionKotlinMain = '1.3.60'
+project.ext.versionKotlinMain = '1.3.61'
 project.ext.groupIdKotlinMain = 'org.jetbrains.kotlin'
 project.ext.artifactIdMKotlinMain = 'kotlin-main-kts'
 
@@ -27,7 +27,7 @@ project.ext.groupIdOkio = 'com.squareup.okio'
 project.ext.artifactIdOkio = 'okio'
 
 // Kotlin
-project.ext.versionKotlin = '1.3.60'
+project.ext.versionKotlin = '1.3.61'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
 project.ext.artifactIdKotlinScriptRuntime = 'kotlin-script-runtime'
 ext.kotlin = [
