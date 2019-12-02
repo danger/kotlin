@@ -2,7 +2,7 @@ language: java
 matrix:
   include:
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
       install:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
