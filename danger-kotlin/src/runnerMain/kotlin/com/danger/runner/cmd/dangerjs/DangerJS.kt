@@ -1,4 +1,4 @@
-package com.danger.runner.cmd.`danger-js`
+package com.danger.runner.cmd.dangerjs
 
 import com.danger.runner.cmd.Cmd
 
