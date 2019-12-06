@@ -408,11 +408,13 @@ data class GitHubIssueLabel(
         val color: String
 )
 
-enum class GitHubUserType(val value: String) {
+enum class GitHubUserType {
     @Json(name = "User")
-    USER("User"),
+    USER,
     @Json(name = "Organization")
-    ORGANIZATION("Organization")
+    ORGANIZATION,
+    @Json(name = "Bot")
+    BOT
 }
 
 /**
