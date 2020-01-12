@@ -1,4 +1,4 @@
-package com.danger.kotlin.kts
+package systems.danger.kts
 
 import org.jetbrains.kotlin.mainKts.MainKtsConfigurator
 import org.jetbrains.kotlin.mainKts.MainKtsEvaluationConfiguration

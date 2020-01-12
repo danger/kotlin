@@ -66,7 +66,7 @@ You can activate the autocomplete following this additional steps:
 - Install danger on your local machine
 - Go to `Preferences -> Build, Execution, Deployment -> Compiler -> Kotlin Compiler` (`Preferences -> Kotlin Compiler` in Android Studio)
 - At the bottom you will find a section `Kotlin Scripting`
-- Complete the field `Script template classes` with  `com.danger.kotlin.kts.DangerFileScript`
+- Complete the field `Script template classes` with  `systems.danger.kts.DangerFileScript`
 - Complete the field `Script templates classpath` with `/usr/local/lib/danger/danger-kotlin.jar`
 - Go to `Preferences -> Language & Frameworks -> Kotlin -> Kotlin Scripting`
 - Make sure the script template `DangerFileScript` is active and above the default `Kotlin Script`
