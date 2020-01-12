@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 internal data class DangerResults(
     var fails: Array<Violation> = arrayOf(),

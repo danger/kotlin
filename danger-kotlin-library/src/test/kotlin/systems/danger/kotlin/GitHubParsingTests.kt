@@ -1,6 +1,5 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
-import com.danger.dangerkotlin.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.junit.Assert.*
@@ -9,7 +8,8 @@ import java.util.*
 
 class GitHubParsingTests {
     private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(DSL::class.java)
+    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(
+        DSL::class.java)
     private val dsl
         get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
     private val github
@@ -42,14 +42,26 @@ class GitHubParsingTests {
             assertNull(milestone)
 
 
-            val expectedUser = GitHubUser(498212, "ashfurrow", GitHubUserType.USER)
+            val expectedUser = GitHubUser(
+                498212,
+                "ashfurrow",
+                GitHubUserType.USER
+            )
             assertEquals(expectedUser, user)
 
-            val expectedAssegnee = GitHubUser(49038, "orta", GitHubUserType.USER)
+            val expectedAssegnee = GitHubUser(
+                49038,
+                "orta",
+                GitHubUserType.USER
+            )
             assertEquals(expectedAssegnee, assignee)
             assertEquals(expectedAssegnee, assignees.first())
 
-            val artsyUser = GitHubUser(546231, "artsy", GitHubUserType.ORGANIZATION)
+            val artsyUser = GitHubUser(
+                546231,
+                "artsy",
+                GitHubUserType.ORGANIZATION
+            )
             val eidolonRepo = GitHubRepo(
                 22613546,
                 "eidolon",
@@ -85,9 +97,21 @@ class GitHubParsingTests {
 
         val commit = commits.first()
 
-        val expectedUser = GitHubUser(498212, "ashfurrow", GitHubUserType.USER)
-        val expectedGitAuthor = GitCommitAuthor("Ash Furrow", "ash@ashfurrow.com", "2016-07-26T19:54:16Z")
-        val expectedGitCommitter = GitCommitAuthor("Ash Furrow", "ash@ashfurrow.com", "2016-07-26T19:55:00Z")
+        val expectedUser = GitHubUser(
+            498212,
+            "ashfurrow",
+            GitHubUserType.USER
+        )
+        val expectedGitAuthor = GitCommitAuthor(
+            "Ash Furrow",
+            "ash@ashfurrow.com",
+            "2016-07-26T19:54:16Z"
+        )
+        val expectedGitCommitter = GitCommitAuthor(
+            "Ash Furrow",
+            "ash@ashfurrow.com",
+            "2016-07-26T19:55:00Z"
+        )
         val expectedCommit = GitCommit(
             null,
             expectedGitAuthor,
@@ -126,7 +150,11 @@ class GitHubParsingTests {
             assertEquals(null, closedAt)
             assertTrue(labels.isEmpty())
 
-            val expectedCreator = GitHubUser(1, "octocat", GitHubUserType.USER)
+            val expectedCreator = GitHubUser(
+                1,
+                "octocat",
+                GitHubUserType.USER
+            )
             val expectedMilestone = GitHubMilestone(
                 1002604,
                 1,
@@ -149,7 +177,11 @@ class GitHubParsingTests {
     fun testItParsesTheRequestedReviewersCorrectly() {
         with(github.requestedReviewers) {
 
-            val expectedUser = GitHubUser(1, "octocat", GitHubUserType.USER)
+            val expectedUser = GitHubUser(
+                1,
+                "octocat",
+                GitHubUserType.USER
+            )
             assertEquals(expectedUser, users.first())
 
             val expectedTeam = GitHubTeam(1, "Justice League")

@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -80,29 +80,29 @@ enum class GitHubPullRequestState(val value: String) {
  */
 @JsonClass(generateAdapter = true)
 data class GitHubPR(
-        val number: Int,
-        val title: String,
-        val body: String,
-        val user: GitHubUser,
-        val assignee: GitHubUser?,
-        val assignees: Array<GitHubUser>,
-        @Json(name = "created_at") val createdAt: Date,
-        @Json(name = "updated_at") val updatedAt: Date,
-        @Json(name = "closed_at") val closedAt: Date?,
-        @Json(name = "merged_at") val mergedAt: Date?,
-        val head: GitHubMergeRef,
-        val base: GitHubMergeRef,
-        val state: GitHubPullRequestState,
-        @Json(name = "locked") val isLocked: Boolean,
-        @Json(name = "merged") val isMerged: Boolean?,
-        @Json(name = "commits") val commitCount: Int?,
-        @Json(name = "comments") val commentCount: Int?,
-        @Json(name = "review_comments") val reviewCommentCount: Int?,
-        val additions: Int?,
-        val deletions: Int?,
-        @Json(name = "changed_files") val changedFiles: Int?,
-        val milestone: GitHubMilestone?,
-        @Json(name = "html_url") val htmlURL: String
+    val number: Int,
+    val title: String,
+    val body: String,
+    val user: GitHubUser,
+    val assignee: GitHubUser?,
+    val assignees: Array<GitHubUser>,
+    @Json(name = "created_at") val createdAt: Date,
+    @Json(name = "updated_at") val updatedAt: Date,
+    @Json(name = "closed_at") val closedAt: Date?,
+    @Json(name = "merged_at") val mergedAt: Date?,
+    val head: GitHubMergeRef,
+    val base: GitHubMergeRef,
+    val state: GitHubPullRequestState,
+    @Json(name = "locked") val isLocked: Boolean,
+    @Json(name = "merged") val isMerged: Boolean?,
+    @Json(name = "commits") val commitCount: Int?,
+    @Json(name = "comments") val commentCount: Int?,
+    @Json(name = "review_comments") val reviewCommentCount: Int?,
+    val additions: Int?,
+    val deletions: Int?,
+    @Json(name = "changed_files") val changedFiles: Int?,
+    val milestone: GitHubMilestone?,
+    @Json(name = "html_url") val htmlURL: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

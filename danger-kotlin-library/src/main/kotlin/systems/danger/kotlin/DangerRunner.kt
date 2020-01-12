@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
@@ -70,7 +70,8 @@ internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
 private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
     val jsonOutputFile: File = File(jsonOutputPath)
     val danger: DangerDSL
-    val dangerResults: DangerResults = DangerResults()
+    val dangerResults: DangerResults =
+        DangerResults()
 
     private val moshi = Moshi.Builder()
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
@@ -191,7 +192,8 @@ fun Danger(args: Array<String>): DangerDSL {
     val jsonInputFilePath = args[argsCount - 2]
     val jsonOutputPath = args[argsCount - 1]
 
-    dangerRunner = DangerRunner(jsonInputFilePath, jsonOutputPath)
+    dangerRunner =
+        DangerRunner(jsonInputFilePath, jsonOutputPath)
     return dangerRunner.danger
 }
 

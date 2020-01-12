@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 class Violation(message: String) {
     val message: String

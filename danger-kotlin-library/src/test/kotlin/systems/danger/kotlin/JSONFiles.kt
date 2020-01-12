@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 class JSONFiles {
     val githubDangerJSON

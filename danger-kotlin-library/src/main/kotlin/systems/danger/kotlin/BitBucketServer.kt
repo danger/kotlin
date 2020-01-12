@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -13,12 +13,12 @@ import com.squareup.moshi.JsonClass
 */
 @JsonClass(generateAdapter = true)
 data class BitBucketServer(
-        val metadata: BitBucketServerMetadata,
-        @Json(name = "pr")
+    val metadata: BitBucketServerMetadata,
+    @Json(name = "pr")
         val pullRequest: BitBucketServerPR,
-        val commits: Array<BitBucketServerCommit>,
-        val comments: Array<BitBucketServerComment>,
-        val activities: Array<BitBucketServerActivity>
+    val commits: Array<BitBucketServerCommit>,
+    val comments: Array<BitBucketServerComment>,
+    val activities: Array<BitBucketServerActivity>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -55,12 +55,12 @@ data class BitBucketServer(
  */
 @JsonClass(generateAdapter = true)
 data class BitBucketServerActivity(
-        val id: Int,
-        @Json(name = "createdDate")
+    val id: Int,
+    @Json(name = "createdDate")
         val createdAt: Long,
-        val user: BitBucketServerUser,
-        val action: String,
-        val commentAction: String?
+    val user: BitBucketServerUser,
+    val action: String,
+    val commentAction: String?
 )
 
 /**
@@ -232,14 +232,14 @@ data class BitBucketServerCommentInnerProperties(
  */
 @JsonClass(generateAdapter = true)
 data class BitBucketServerCommit(
-        val id: String,
-        val displayId: String,
-        val author: BitBucketServerUser,
-        val authorTimestamp: Long,
-        val committer: BitBucketServerUser?,
-        val committerTimestamp: Long,
-        val message: String,
-        val parents: Array<BitBucketServerCommitParent>
+    val id: String,
+    val displayId: String,
+    val author: BitBucketServerUser,
+    val authorTimestamp: Long,
+    val committer: BitBucketServerUser?,
+    val committerTimestamp: Long,
+    val message: String,
+    val parents: Array<BitBucketServerCommitParent>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -303,24 +303,24 @@ data class BitBucketServerCommitParent(
  */
 @JsonClass(generateAdapter = true)
 data class BitBucketServerPR(
-        val id: Int,
-        val version: Int,
-        val title: String,
-        val description: String?,
-        val state: String,
-        val open: Boolean,
-        val closed: Boolean,
-        @Json(name = "createdDate")
+    val id: Int,
+    val version: Int,
+    val title: String,
+    val description: String?,
+    val state: String,
+    val open: Boolean,
+    val closed: Boolean,
+    @Json(name = "createdDate")
         val createdAt: Long,
-        @Json(name = "updatedDate")
+    @Json(name = "updatedDate")
         val updatedAt: Long,
-        val fromRef: BitBucketServerMergeRef,
-        val toRef: BitBucketServerMergeRef,
-        @Json(name = "locked")
+    val fromRef: BitBucketServerMergeRef,
+    val toRef: BitBucketServerMergeRef,
+    @Json(name = "locked")
         val isLocked: Boolean,
-        val author: BitBucketServerParticipant,
-        val reviewers: Array<BitBucketServerReviewer>,
-        val participants: Array<BitBucketServerParticipant>
+    val author: BitBucketServerParticipant,
+    val reviewers: Array<BitBucketServerReviewer>,
+    val participants: Array<BitBucketServerParticipant>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

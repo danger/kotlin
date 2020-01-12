@@ -1,4 +1,4 @@
-package com.danger.dangerkotlin
+package systems.danger.kotlin
 
 import com.squareup.moshi.Json
 
@@ -8,11 +8,11 @@ data class DSL(
 )
 
 data class DangerDSL(
-        @Json(name ="github")
+    @Json(name ="github")
         private val _github: GitHub?,
-        @Json(name ="bitbucket_server")
+    @Json(name ="bitbucket_server")
         private val _bitBucketServer: BitBucketServer?,
-        val git: Git
+    val git: Git
 ) {
         val github: GitHub
                 get() = _github!!
