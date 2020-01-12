@@ -9,7 +9,7 @@ Is possible to generate a working `danger-kotlin` instance from the code that is
 You can make a `Dangerfile.df.kts` in your root project that looks through PR metadata, it's fully typed.
 
 ```kotlin
-import com.danger.dangerkotlin.*
+import systems.danger.kotlin.*
 import org.jetbrains.kotlin.script.util.*
 
 val danger = Danger(args)
