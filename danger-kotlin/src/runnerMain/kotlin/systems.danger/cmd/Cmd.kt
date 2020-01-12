@@ -1,4 +1,4 @@
-package com.danger.runner.cmd
+package systems.danger.cmd
 
 import platform.posix.*
 

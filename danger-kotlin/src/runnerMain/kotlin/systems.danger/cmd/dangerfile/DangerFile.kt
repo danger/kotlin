@@ -1,6 +1,6 @@
-package com.danger.runner.cmd.dangerfile
+package systems.danger.cmd.dangerfile
 
-import com.danger.runner.cmd.*
+import systems.danger.cmd.*
 import kotlinx.cinterop.CPointer
 import platform.posix.*
 

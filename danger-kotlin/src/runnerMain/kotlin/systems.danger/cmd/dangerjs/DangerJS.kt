@@ -1,6 +1,6 @@
-package com.danger.runner.cmd.dangerjs
+package systems.danger.cmd.dangerjs
 
-import com.danger.runner.cmd.Cmd
+import systems.danger.cmd.Cmd
 
 object DangerJS: DangerJSBridge {
 

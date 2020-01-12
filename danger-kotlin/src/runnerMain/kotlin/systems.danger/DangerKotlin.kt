@@ -1,7 +1,6 @@
-package com.danger.runner
+package systems.danger
 
-import com.danger.runner.cmd.*
-import com.danger.runner.cmd.dangerfile.DangerFile
+import systems.danger.cmd.dangerfile.DangerFile
 
 object DangerKotlin {
     private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
