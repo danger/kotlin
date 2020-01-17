@@ -36,7 +36,6 @@ ext.kotlin = [
 ]
 ext.kotlinDependencies = group {
     implementation kotlin.runtime
-    implementation kotlin.mainKts
 }
 
 // Testing
