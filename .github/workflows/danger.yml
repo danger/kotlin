@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@0.2.0
+        uses: danger/kotlin@master
         with:
           args: "--id DangerKotlinAction"
         env:
