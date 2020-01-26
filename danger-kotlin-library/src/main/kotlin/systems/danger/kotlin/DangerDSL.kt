@@ -13,7 +13,7 @@ data class DangerDSL(
     @Json(name ="bitbucket_server")
     private val _bitBucketServer: BitBucketServer?,
     @Json(name ="gitlab")
-    private val _gitlab: GitLab,
+    private val _gitlab: GitLab?,
     val git: Git
 ) {
         val github: GitHub
