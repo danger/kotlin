@@ -74,4 +74,19 @@ class GitLabParsingTests {
             assertEquals("danger-systems/danger.systems", repoSlug)
         }
     }
+
+    @Test
+    fun testOnGitHubIsFalse(){
+        assertEquals(false, dsl!!.danger.onGitHub)
+    }
+
+    @Test
+    fun testOnBitBucketIsFalse(){
+        assertEquals(false, dsl!!.danger.onBitBucketServer)
+    }
+
+    @Test
+    fun testOnGitLabIsTrue() {
+        assertEquals(true, dsl!!.danger.onGitLab)
+    }
 }
