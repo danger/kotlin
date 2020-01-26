@@ -10,10 +10,10 @@ project.ext.artifactIdMoshiKotlin = 'moshi-kotlin'
 
 project.ext.versionKotlinMain = '1.3.61'
 project.ext.groupIdKotlinMain = 'org.jetbrains.kotlin'
-project.ext.artifactIdMKotlinMain = 'kotlin-main-kts'
+project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 
 ext.utils = [
-        moshi : "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi"
+        moshi: "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi"
 ]
 
 ext.utilsDependencies = group {
@@ -31,7 +31,8 @@ project.ext.versionKotlin = '1.3.61'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
 project.ext.artifactIdKotlinScriptRuntime = 'kotlin-script-runtime'
 ext.kotlin = [
-        runtime : "$groupIdKotlin:$artifactIdKotlinScriptRuntime:$versionKotlin"
+        runtime: "$groupIdKotlin:$artifactIdKotlinScriptRuntime:$versionKotlin",
+        mainKts: "$groupIdKotlinMain:$artifactIdKotlinMain:$versionKotlinMain"
 ]
 ext.kotlinDependencies = group {
     implementation kotlin.runtime
@@ -42,7 +43,7 @@ project.ext.versionJunit = '4.12'
 project.ext.groupIdJunit = 'junit'
 project.ext.artifactIdJunit = 'junit'
 ext.testing = [
-        junit : "junit:junit:$versionJunit"
+        junit: "junit:junit:$versionJunit"
 ]
 ext.testingDependencies = group {
     testImplementation testing.junit

@@ -3,7 +3,7 @@
 //@file:Repository("https://repo.maven.apache.org")
 //@file:DependsOn("systems.danger.exampleplugin:example:1.0")
 
-import com.danger.dangerkotlin.*
+import systems.danger.kotlin.*
 
 val danger = Danger(args)
 

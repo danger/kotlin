@@ -1,5 +1,5 @@
-import com.danger.runner.DangerKotlin
-import com.danger.runner.cmd.dangerjs.DangerJS
+import systems.danger.DangerKotlin
+import systems.danger.cmd.dangerjs.DangerJS
 
 const val PROCESS_DANGER_KOTLIN = "danger-kotlin"
 
