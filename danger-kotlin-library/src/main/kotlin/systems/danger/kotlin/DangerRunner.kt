@@ -14,22 +14,23 @@ import java.util.*
 
 private fun FilePath.readText() = File(this).readText()
 
-fun toISO8601UTC(date: Date): String {
-    val tz = TimeZone.getTimeZone("UTC")
-    val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    df.timeZone = tz
-    return df.format(date)
-}
-
 fun fromISO8601UTC(dateStr: String): Date? {
     val tz = TimeZone.getTimeZone("UTC")
     val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
     df.timeZone = tz
 
+    val alternativeDf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+    alternativeDf.timeZone = tz
+
     try {
         return df.parse(dateStr)
-    } catch (e: ParseException) {
-        e.printStackTrace()
+    } catch(e: ParseException) {
+        try {
+            return alternativeDf.parse(dateStr)
+        } catch(e2: ParseException) {
+            e.printStackTrace()
+            e2.printStackTrace()
+        }
     }
 
     return null
