@@ -20,6 +20,7 @@ fun fromISO8601UTC(dateStr: String): Date? {
     df.timeZone = tz
 
     val alternativeDf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
+    alternativeDf.timeZone = tz
 
     try {
         return df.parse(dateStr)
