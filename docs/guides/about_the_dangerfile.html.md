@@ -34,10 +34,10 @@ Then the danger CLI will use authenticated API calls, which don't get hit by API
 The command `danger-kotlin pr` expects an argument of a PR url, e.g:
 
 ```sh
-danger-kotlin pr https://github.com/danger/swift/pull/95
+danger-kotlin pr https://github.com/danger/kotlin/pull/64
 ```
 
-This will use your local `Dangerfile.swift` against the metadata of the linked PR. Danger will then output the results
+This will use your local `Dangerfile.df.kts` against the metadata of the linked PR. Danger will then output the results
 into your terminal, instead of inside the PR itself.
 
 This _will not_ post comments in that PR.
@@ -61,7 +61,7 @@ Then you can run against a local branch that is attached to a pull-request, by r
 
 ```bash
 git checkout branch-for-pr-1234
-DANGER_TEST_PR='1234' [swift run] danger-swift ci
+DANGER_TEST_PR='1234' danger-kotlin ci
 ```
 
 Assuming that your local file-system matches up to that branch for your code review, this will be a good approximation
