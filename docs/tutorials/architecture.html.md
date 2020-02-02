@@ -53,6 +53,3 @@ compilation and runtime evaluation.
 review site. From the results of the run, Danger JS will then pass or fail the build.
 
 [provs]: https://github.com/danger/danger-js/tree/master/source/ci_source/providers
-[dangerdsl]: https://github.com/danger/danger-js/blob/master/sourformace/dsl/DangerDSL.ts
-[runner]: https://github.com/danger/danger-js/blob/master/source/commands/danger-runner.ts
-[in_runner]: https://github.com/danger/danger-js/blob/master/source/runner/runners/inline.ts
