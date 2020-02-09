@@ -8,7 +8,7 @@ object DangerFile: DangerFileBridge {
     private const val DANGERFILE_EXTENSION = ".df.kts"
     private const val DANGERFILE = "Dangerfile" + DANGERFILE_EXTENSION
 
-    override fun execute(inputJson: String, outputJson: String) {
+    override fun execute(inputJson: String, outputJson: String, vararg addToClassPath: String?) {
         val dangerfile = dangerfileParameter(inputJson) ?: DANGERFILE
 
         if(!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
@@ -16,9 +16,16 @@ object DangerFile: DangerFileBridge {
             exit(1)
         }
 
+        var classPath = "/usr/local/lib/danger/danger-kotlin.jar"
+        addToClassPath.forEach {
+            it?.let {
+                classPath += ":$it"
+            }
+        }
+
         Cmd().name("kotlinc").args(
             "-cp",
-            "/usr/local/lib/danger/danger-kotlin.jar",
+            classPath,
             "-script",
             dangerfile,
             inputJson,
