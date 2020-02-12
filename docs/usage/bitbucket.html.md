@@ -24,7 +24,7 @@ Then in your Dangerfiles you will have a fully fleshed out `danger.bitbucketServ
 ```kotlin
 val danger = Danger(args)
 
-let isAssignedToMe = danger.bitBucketServer.pullRequest.reviewers.map { it.user.name }.contains("orta")
+val isAssignedToMe = danger.bitBucketServer.pullRequest.reviewers.map { it.user.name }.contains("orta")
 if (isAssignedToMe) {
     fail("You should probably assign someone else")
 }
