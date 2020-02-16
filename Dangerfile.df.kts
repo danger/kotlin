@@ -6,6 +6,7 @@
 
 import systems.danger.kotlin.*
 import org.jetbrains.kotlin.script.util.*
+import org.apache.commons.text.WordUtils
 
 val danger = Danger(args)
 
