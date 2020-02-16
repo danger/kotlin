@@ -1,6 +1,6 @@
 // Dangerfile.df.kts
 // Using external dependencies:
-//@file:Repository("https://repo.maven.apache.org")
+@file:Repository("https://repo.maven.apache.org")
 //@file:DependsOn("systems.danger.exampleplugin:example:1.0")
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
