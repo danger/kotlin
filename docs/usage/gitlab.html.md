@@ -20,4 +20,4 @@ if (danger.gitlab.mr.title.contains("WIP")) {
 }
 ```
 
-The DSL is expansive, you can see all the details inside the [Danger Swift Reference][ref]
+The DSL is expansive, you can see all the details inside the [Danger Kotlin Reference][ref]
