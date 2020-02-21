@@ -1,7 +1,7 @@
 ---
 title: Cultural Changes
 subtitle: Cultural Changes
-layout: guide_sw
+layout: guide_kt
 order: 0
 blurb:
   Discussing introducing Danger into a team, how you can use it to provide positive feedback and encourage adoption of
