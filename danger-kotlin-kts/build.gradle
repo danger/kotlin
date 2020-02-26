@@ -1,8 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'maven-publish'
 }
 
 apply from: file('../dependencyVersions.gradle')
+apply from: file('version.gradle')
 
 repositories {
     mavenCentral()
@@ -18,4 +20,12 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
