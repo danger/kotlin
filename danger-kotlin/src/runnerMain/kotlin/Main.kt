@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
             "ci", "local", "pr" -> {
                 DangerJS.process(command ,PROCESS_DANGER_KOTLIN, args.drop(1))
             }
-            "version" -> println(VERSION)
+            "--version" -> println(VERSION)
             else -> return
         }
     } else {
