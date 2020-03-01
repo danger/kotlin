@@ -9,7 +9,7 @@ TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 
 install: build
 	mkdir -p $(PREFIX)/bin
-	mkdir -p $(PREFIX)/lib/danger
+	mkdir -p $(LIB_INSTALL_PATH)
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 	cp -f danger-kotlin-library/build/libs/danger-kotlin.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
 
