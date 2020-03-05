@@ -1,3 +1,5 @@
+apply from: file('../shadow.gradle')
+
 def group(Closure closure) {
     closure.delegate = dependencies
     return closure
@@ -8,34 +10,30 @@ project.ext.versionMoshi = '1.8.0'
 project.ext.groupIdMoshi = 'com.squareup.moshi'
 project.ext.artifactIdMoshiKotlin = 'moshi-kotlin'
 
-project.ext.versionKotlinMain = '1.3.61'
-project.ext.groupIdKotlinMain = 'org.jetbrains.kotlin'
-project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
-
 ext.utils = [
         moshi: "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi"
 ]
 
 ext.utilsDependencies = group {
-    implementation utils.moshi
+    includeRecursiveJar(utils.moshi) {
+        exclude group: groupIdKotlin
+    }
 }
 
-//TODO: when we resolve the dependencies dinamically this should be removed
 project.ext.artifactIdMoshi = 'moshi'
 project.ext.versionOkio = '1.16.0'
 project.ext.groupIdOkio = 'com.squareup.okio'
 project.ext.artifactIdOkio = 'okio'
 
 // Kotlin
-project.ext.versionKotlin = '1.3.61'
+project.ext.versionKotlin = '1.3.70'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
-project.ext.artifactIdKotlinScriptRuntime = 'kotlin-script-runtime'
+project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 ext.kotlin = [
-        runtime: "$groupIdKotlin:$artifactIdKotlinScriptRuntime:$versionKotlin",
-        mainKts: "$groupIdKotlinMain:$artifactIdKotlinMain:$versionKotlinMain"
+        mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin"
 ]
 ext.kotlinDependencies = group {
-    implementation kotlin.runtime
+    includeJar kotlin.mainKts
 }
 
 // Testing

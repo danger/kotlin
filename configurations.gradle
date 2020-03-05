@@ -1,0 +1,10 @@
+configurations {
+    provided
+    compile.extendsFrom provided
+    implementation.extendsFrom includeJar {
+        transitive = false
+    }
+    api.extendsFrom includeRecursiveJar {
+        transitive = true
+    }
+}
