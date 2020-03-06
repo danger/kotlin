@@ -1,0 +1,7 @@
+apply from: file('../configurations.gradle')
+shadowJar {
+    configurations = [
+            project.configurations.includeJar,
+            project.configurations.includeRecursiveJar
+    ]
+}

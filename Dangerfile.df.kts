@@ -1,9 +1,11 @@
 // Dangerfile.df.kts
 // Using external dependencies:
-//@file:Repository("https://repo.maven.apache.org")
+@file:Repository("https://repo.maven.apache.org")
 //@file:DependsOn("systems.danger.exampleplugin:example:1.0")
+@file:DependsOn("org.apache.commons:commons-text:1.6")
 
 import systems.danger.kotlin.*
+import org.apache.commons.text.WordUtils
 
 val danger = Danger(args)
 
@@ -30,3 +32,5 @@ danger.git.createdFiles.filter {
 }.forEach {
     warn("Please consider to create new files in Kotlin", it, 1)
 }
+
+warn(WordUtils.capitalize("test"))

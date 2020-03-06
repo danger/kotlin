@@ -1,18 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'maven-publish'
 }
 
+apply plugin: 'com.github.johnrengelman.shadow'
+
 apply from: file('../dependencyVersions.gradle')
 apply from: file('version.gradle')
 
-repositories {
-    mavenCentral()
+dependencies {
+    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    includeJar "org.jetbrains.kotlin:kotlin-main-kts:$versionKotlin"
 }
 
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "org.jetbrains.kotlin:kotlin-main-kts:$versionKotlin"
+shadowJar {
+    baseName = 'danger-kotlin-kts'
 }
 
 compileKotlin {

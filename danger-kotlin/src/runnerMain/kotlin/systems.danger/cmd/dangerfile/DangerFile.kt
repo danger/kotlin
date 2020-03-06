@@ -17,6 +17,8 @@ object DangerFile: DangerFileBridge {
         }
 
         Cmd().name("kotlinc").args(
+            "-script-templates",
+            "systems.danger.kts.DangerFileScript",
             "-cp",
             "/usr/local/lib/danger/danger-kotlin.jar",
             "-script",

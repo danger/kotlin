@@ -3,14 +3,11 @@ plugins {
     id 'maven-publish'
 }
 
+apply from: file('../configurations.gradle')
 apply from: file('version.gradle')
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 compileKotlin {
