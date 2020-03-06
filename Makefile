@@ -1,5 +1,5 @@
 TOOL_NAME = danger-kotlin
-VERSION = 0.3.1
+VERSION = 0.4.0
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
