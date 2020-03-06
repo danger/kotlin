@@ -6,6 +6,10 @@ plugins {
 apply from: file('../configurations.gradle')
 apply from: file('version.gradle')
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
