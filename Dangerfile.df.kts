@@ -16,7 +16,7 @@ val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
 val isTrivial = danger.github.pullRequest.title.contains("#trivial")
 
 if (!isTrivial && !changelogChanged && sourceChanges != null) {
-    warn("Any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md).")
+    warn(WordUtils.capitalize("any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md)."))
 }
 
 if ((danger.github.pullRequest.additions ?: 0) - (danger.github.pullRequest.deletions ?: 0) > 300) {
@@ -32,5 +32,3 @@ danger.git.createdFiles.filter {
 }.forEach {
     warn("Please consider to create new files in Kotlin", it, 1)
 }
-
-warn(WordUtils.capitalize("test"))
