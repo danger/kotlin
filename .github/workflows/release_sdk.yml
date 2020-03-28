@@ -1,0 +1,38 @@
+name: Release SDK
+
+on:
+  push:
+    tags:
+      - 'sdk_*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Install Java and Maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Install GNUPG2 & Import Key
+        env:
+          GPG_KEY_PRIVATE: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          sudo apt-get install gnupg2 -y
+          gpg2 --version
+          echo "$GPG_PRIVATE_KEY" > secret.key
+          echo "Importing GPG Key..."
+          gpg2 --import --batch secret.key &> /dev/null
+          echo "[ OK ] GPG Key imported."
+          rm secret.key
+      - name: Deploy & Release
+        env:
+          SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
+          SONATYPE_PASS: ${{ secrets.SONATYPE_PASS }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          gradle wrapper
+          ./gradlew :danger-kotlin-sdk:publish
+          ./gradlew :danger-kotlin-sdk:closeAndReleaseRepository

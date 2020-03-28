@@ -7,8 +7,11 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
     }
 }
+
+apply plugin: 'io.codearte.nexus-staging'
 
 allprojects {
     repositories {
@@ -16,3 +19,4 @@ allprojects {
         jcenter()
     }
 }
+
