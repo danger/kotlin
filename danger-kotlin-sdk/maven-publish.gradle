@@ -15,13 +15,6 @@ signing {
     sign publishing.publications
 }
 
-nexusStaging {
-    packageGroup = "systems.danger"
-    username = loadSecret("SONATYPE_USER")
-    password = loadSecret("SONATYPE_PASS")
-    delayBetweenRetriesInMillis = 5000
-}
-
 publishing {
     repositories {
         maven {
