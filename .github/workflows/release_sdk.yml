@@ -18,6 +18,7 @@ jobs:
       - name: Install GNUPG2 & Import Key
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
         run: |
           sudo apt-get install gnupg2 -y
           gpg2 --version
@@ -25,6 +26,8 @@ jobs:
           echo "Importing GPG Key..."
           gpg2 --import --batch secret.key &> /dev/null
           echo "[ OK ] GPG Key imported."
+          echo "Sending public key to the server..."
+          gpg2 --send-keys $GPG_KEY_ID
           rm secret.key
       - name: Deploy & Release
         env:
