@@ -1,0 +1,90 @@
+apply from: 'secrets.gradle'
+
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications
+}
+
+nexusStaging {
+    username = loadSecret("SONATYPE_USER")
+    password = loadSecret("SONATYPE_PASS")
+    delayBetweenRetriesInMillis = 5000
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "Sonatype"
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = loadSecret("SONATYPE_USER")
+                password = loadSecret("SONATYPE_PASS")
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourceJar {
+                classifier "sources"
+                from sourceSets.main.allJava
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+                from javadoc.destinationDir
+            }
+            pom {
+                name = 'Danger Kotlin SDK'
+                description = 'Develop your own plugin for Danger Kotlin'
+                url = "https://github.com/danger/kotlin"
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/danger/kotlin/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'gianluz'
+                        name = 'Gianluca Zuddas'
+                    }
+                    developer {
+                        id = 'f-meloni'
+                        name = 'Franco Meloni'
+                    }
+                    developer {
+                        id = 'danger'
+                        name = 'The Danger Community'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/danger/kotlin.git'
+                    developerConnection = 'scm:git:ssh://github.com/danger/kotlin.git'
+                    url = 'https://github.com/danger/kotlin'
+                }
+            }
+        }
+    }
+
+    gradle.taskGraph.whenReady { taskGraph ->
+        if (taskGraph.allTasks.any { it instanceof Sign }) {
+            allprojects {
+                ext."signing.gnupg.keyName" = loadSecret("GPG_KEY_ID")
+                ext."signing.gnupg.passphrase" = loadSecret("GPG_PASSPHRASE")
+            }
+        }
+    }
+}
