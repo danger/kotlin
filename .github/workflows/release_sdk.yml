@@ -27,7 +27,8 @@ jobs:
           gpg2 --import --batch secret.key &> /dev/null
           echo "[ OK ] GPG Key imported."
           echo "Sending public key to the server..."
-          gpg2 --send-keys $GPG_KEY_ID
+          gpg2 --keyserver hkps://keys.openpgp.org --send-keys $GPG_KEY_ID
+          echo "[ OK ] Public key was sent to the server."
           rm secret.key
       - name: Deploy & Release
         env:
