@@ -11,6 +11,7 @@ buildscript {
     }
 }
 
+apply from: file('secrets.gradle')
 apply plugin: 'io.codearte.nexus-staging'
 
 nexusStaging {

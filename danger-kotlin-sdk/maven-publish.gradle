@@ -1,4 +1,4 @@
-apply from: 'secrets.gradle'
+apply from: file('../secrets.gradle')
 
 task sourceJar(type: Jar) {
     classifier "sources"
