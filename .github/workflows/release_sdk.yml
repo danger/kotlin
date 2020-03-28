@@ -35,4 +35,4 @@ jobs:
         run: |
           gradle wrapper
           ./gradlew :danger-kotlin-sdk:publish
-          ./gradlew :danger-kotlin-sdk:closeAndReleaseRepository
+          ./gradlew closeAndReleaseRepository
