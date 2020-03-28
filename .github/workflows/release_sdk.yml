@@ -11,7 +11,6 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
-
       - name: Install Java and Maven
         uses: actions/setup-java@v1
         with:
