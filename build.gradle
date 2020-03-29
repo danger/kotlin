@@ -7,7 +7,18 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
     }
+}
+
+apply from: file('secrets.gradle')
+apply plugin: 'io.codearte.nexus-staging'
+
+nexusStaging {
+    packageGroup = "systems.danger"
+    username = loadSecret("SONATYPE_USER")
+    password = loadSecret("SONATYPE_PASS")
+    delayBetweenRetriesInMillis = 5000
 }
 
 allprojects {
@@ -16,3 +27,4 @@ allprojects {
         jcenter()
     }
 }
+
