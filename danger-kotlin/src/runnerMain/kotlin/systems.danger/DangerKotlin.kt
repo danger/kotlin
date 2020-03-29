@@ -21,6 +21,5 @@ object DangerKotlin {
         println("danger-results:/$FILE_TMP_OUTPUT_JSON")
     }
 
-    private fun String.stripEndLine() = replace("\u007F", "")
-
+    private fun String.stripEndLine() = trim('\u007F','\u0001', ' ')
 }
