@@ -8,8 +8,8 @@ blurb: How do i make a plugin for Danger Kotlin?
 
 ## Introduction
 
-Danger provides an sdk for the plugin development. This sdk works with the principle of dependency inversion, that means 
-you will be able to use the danger kotlin interfaces without import danger directly in your project.
+Danger provides an sdk for the plugin development. This sdk works with the principle of dependency inversion,
+that means you will be able to use the danger kotlin interfaces without import danger directly in your project.
 
 Everything you need is just IntelliJ IDEA and the kotlin environment setup on your machine.
 
@@ -55,8 +55,8 @@ MyAwesomePlugin.helloPlugin()
 ``` 
 If danger is setup correctly you should see a message on your PR: `Hello Danger Plugin!`
 
-**Step 5: Maven publication**. If you setup the autocomplete in `IntelliJ IDEA` for the DangerFiles, you will see that 
-the autocomplete doesn't work for the imported `jar`. This feature at the moment is not supported by kotlin. However by 
+**Step 5: Maven publication**. If you setup the autocomplete in `IntelliJ IDEA` for the DangerFiles, you will see that the autocomplete doesn't work for the imported `jar`.
+This feature at the moment is not supported by kotlin. However by 
 publishing your plugin to Maven Central this problem can be solved. Then your `Dangerfile.df.kts` will be like:
 ```kotlin
 @file:DependsOn("com.test:my-awesome-plugin:version")
@@ -74,6 +74,7 @@ MyAwesomePlugin.helloPlugin()
 ```
 
 ## Resources
+
 Some plugin examples can be found [here]
 
 [here]: https://github.com/danger/awesome-danger#kotlin-danger-kotlin
