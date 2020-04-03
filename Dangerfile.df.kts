@@ -1,11 +1,15 @@
 // Dangerfile.df.kts
-// Using external dependencies:
+
+/*
+ * Use external dependencies using the following annotations:
+ */
 @file:Repository("https://repo.maven.apache.org")
-//@file:DependsOn("systems.danger.exampleplugin:example:1.0")
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
-import systems.danger.kotlin.*
 import org.apache.commons.text.WordUtils
+import systems.danger.kotlin.*
+
+// register plugin MyDangerPlugin
 
 val danger = Danger(args)
 
@@ -30,5 +34,6 @@ if (danger.github.pullRequest.title.contains("WIP", false)) {
 danger.git.createdFiles.filter {
     it.endsWith(".java")
 }.forEach {
-    warn("Please consider to create new files in Kotlin", it, 1)
+    // Using apache commons-text dependency to be sure the dependency resolution always works
+    warn(WordUtils.capitalize("please consider to create new files in Kotlin"), it, 1)
 }

@@ -8,6 +8,10 @@ apply from: file('../configurations.gradle')
 apply from: file('version.gradle')
 apply from: file('maven-publish.gradle')
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
