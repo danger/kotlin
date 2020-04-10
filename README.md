@@ -39,6 +39,20 @@ if (danger.github.pullRequest.title.contains("WIP" ,false)) {
 brew install danger/tap/danger-kotlin
 ```
 
+You need to have Xcode installed and not relying on command line tools.
+If you're seeing this error when running xcodebuild:
+
+```sh
+$ xcodebuild -version
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+```
+
+You can fix it with:
+
+```
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+
 ### Linux
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/danger/kotlin/master/scripts/install.sh)
