@@ -14,7 +14,7 @@ install: build
 	cp -f danger-kotlin-library/build/libs/danger-kotlin.jar $(LIB_INSTALL_PATH)/danger-kotlin.jar
 
 build:
-	gradle wrapper
+	./gradlew wrapper
 	./gradlew shadowJar -p danger-kotlin-library
 	./gradlew build -p danger-kotlin-kts
 	./gradlew build -p danger-kotlin
