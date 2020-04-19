@@ -9,7 +9,12 @@ if ! [[ -x "$(command -v danger)" ]]; then
 	fi
 
 	echo "Installing danger"
-	sudo npm install -g danger
+
+	if [[ -n "$sudo" ]]; then
+        sudo npm install -g danger
+    else
+        npm install -g danger
+    fi
 fi
 
 if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
