@@ -47,7 +47,7 @@ class GitLabParsingTests {
             assertEquals(false, mergeOnPipelineSuccess)
             val expectedMilestone = GitLabMilestone(Date(1554933465346), "Test Description",Date(1560124800000), 1,  2, 1000, Date(1554933465346), GitLabMilestoneState.closed, "Test Milestone", Date(1554933465346), "https://gitlab.com/milestone")
             assertEquals(expectedMilestone, milestone)
-            val expectedPipeline = GitLabPipeline(50, "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f", "621bc3348549e51c5bd6ea9f094913e9e4667c7b", GitLabPapelineStatus.success, "https://gitlab.com/danger-systems/danger.systems/pipeline/621bc3348549e51c5bd6ea9f094913e9e4667c7b")
+            val expectedPipeline = GitLabPipeline(50, "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f", "621bc3348549e51c5bd6ea9f094913e9e4667c7b", GitLabPipelineStatus.success, "https://gitlab.com/danger-systems/danger.systems/pipeline/621bc3348549e51c5bd6ea9f094913e9e4667c7b")
             assertEquals(expectedPipeline, pipeline)
             assertEquals("1620437", projectId)
             assertEquals("621bc3348549e51c5bd6ea9f094913e9e4667c7b", sha)

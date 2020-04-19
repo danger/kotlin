@@ -20,7 +20,7 @@ Everything you need is just IntelliJ IDEA and the kotlin environment setup on yo
 **Step 2: Add the sdk as dependency**. In your `build.gradle` add the following dependency:
 ```groovy
 dependencies {
-    implementation "systems.danger:danger-kotlin-sdk:1.0"
+    implementation "systems.danger:danger-kotlin-sdk:1.1"
 }
 ```
 

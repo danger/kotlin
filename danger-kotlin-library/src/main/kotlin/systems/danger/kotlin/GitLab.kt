@@ -2,7 +2,6 @@ package systems.danger.kotlin
 
 import com.squareup.moshi.Json
 import java.util.*
-import kotlin.collections.ArrayList
 
 data class GitLab(
     @Json(name="mr")
@@ -244,15 +243,15 @@ enum class GitLabMilestoneState {
 }
 
 data class GitLabPipeline(
-    val id: Int,
-    val ref: String,
-    val sha: String,
-    val status: GitLabPapelineStatus,
-    @Json(name="web_url")
+        val id: Int,
+        val ref: String,
+        val sha: String,
+        val status: GitLabPipelineStatus,
+        @Json(name="web_url")
     val webUrl: String
 )
 
-enum class GitLabPapelineStatus {
+enum class GitLabPipelineStatus {
     @Json(name = "cancelled")
     cancelled,
     @Json(name = "failed")
