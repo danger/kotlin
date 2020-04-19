@@ -11,26 +11,16 @@ interface DangerContext {
     fun fail(message: String, file: String, line: Int)
     fun suggest(code: String, file: String, line: Int)
 
-    val dangerResults: DangerResults
+    val fails: List<Violation>
+    val warnings: List<Violation>
+    val messages: List<Violation>
+    val markdowns: List<Violation>
 }
 
 interface Violation {
     val message: String
     val file: String?
     val line: Int?
-}
-
-data class Meta(
-        val runtimeName: String = "Danger Kotlin",
-        val runtimeHref: String = "https://danger.systems"
-)
-
-interface DangerResults {
-    val fails: Array<Violation>
-    val warnings: Array<Violation>
-    val messages: Array<Violation>
-    val markdowns: Array<Violation>
-    val meta: Meta
 }
 
 object Sdk {

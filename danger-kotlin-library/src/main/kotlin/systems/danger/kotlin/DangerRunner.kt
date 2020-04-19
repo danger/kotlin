@@ -7,7 +7,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.DangerPlugin
-import systems.danger.kotlin.sdk.DangerResults
 import systems.danger.kotlin.sdk.Violation
 import java.io.File
 import java.text.ParseException
@@ -76,15 +75,29 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
 
     val danger: DangerDSL
 
-    override val dangerResults: DangerResults
-        get() = dangerResultsImpl
+    val dangerResults: DangerResults = DangerResults()
 
-    val dangerResultsImpl: DangerResultsImpl = DangerResultsImpl()
+    override val fails: List<Violation>
+        get() {
+            return dangerResults.fails.toList()
+        }
+    override val warnings: List<Violation>
+        get() {
+            return dangerResults.warnings.toList()
+        }
+    override val messages: List<Violation>
+        get() {
+            return dangerResults.messages.toList()
+        }
+    override val markdowns: List<Violation>
+        get() {
+            return dangerResults.markdowns.toList()
+        }
 
     private val moshi = Moshi.Builder()
-            .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
-            .add(KotlinJsonAdapterFactory())
-            .build()
+        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
     init {
         this.danger = moshi.adapter(DSL::class.java).fromJson(jsonInputFilePath.readText())!!.danger
@@ -166,28 +179,28 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
         }
     }
 
-    private fun warn(violation: Violation) {
-        dangerResultsImpl.warnings += (violation)
+    private fun warn(violation: ViolationImpl) {
+        dangerResults.warnings += (violation)
         saveDangerResults()
     }
 
-    private fun fail(violation: Violation) {
-        dangerResultsImpl.fails += violation
+    private fun fail(violation: ViolationImpl) {
+        dangerResults.fails += violation
         saveDangerResults()
     }
 
-    private fun message(violation: Violation) {
-        dangerResultsImpl.messages += violation
+    private fun message(violation: ViolationImpl) {
+        dangerResults.messages += violation
         saveDangerResults()
     }
 
-    private fun markdown(violation: Violation) {
-        dangerResultsImpl.markdowns += violation
+    private fun markdown(violation: ViolationImpl) {
+        dangerResults.markdowns += violation
         saveDangerResults()
     }
 
     private fun saveDangerResults() {
-        val resultsJSON = moshi.adapter(DangerResultsImpl::class.java).toJson(dangerResultsImpl)
+        val resultsJSON = moshi.adapter(DangerResults::class.java).toJson(dangerResults)
         jsonOutputFile.writeText(resultsJSON)
     }
 }
@@ -205,28 +218,28 @@ fun Danger(args: Array<String>): DangerDSL {
 }
 
 fun fail(message: String) =
-        dangerRunner.fail(message)
+    dangerRunner.fail(message)
 
 fun fail(message: String, file: FilePath, line: Int) =
-        dangerRunner.fail(message, file, line)
+    dangerRunner.fail(message, file, line)
 
 fun warn(message: String) =
-        dangerRunner.warn(message)
+    dangerRunner.warn(message)
 
 fun warn(message: String, file: FilePath, line: Int) =
-        dangerRunner.warn(message, file, line)
+    dangerRunner.warn(message, file, line)
 
 fun message(message: String) =
-        dangerRunner.message(message)
+    dangerRunner.message(message)
 
 fun message(message: String, file: FilePath, line: Int) =
-        dangerRunner.message(message, file, line)
+    dangerRunner.message(message, file, line)
 
 fun markdown(message: String) =
-        dangerRunner.markdown(message)
+    dangerRunner.markdown(message)
 
 fun markdown(message: String, file: FilePath, line: Int) =
-        dangerRunner.markdown(message, file, line)
+    dangerRunner.markdown(message, file, line)
 
 fun suggest(code: String, file: FilePath, line: Int) =
-        dangerRunner.suggest(code, file, line)
+    dangerRunner.suggest(code, file, line)
