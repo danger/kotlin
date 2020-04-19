@@ -12,7 +12,7 @@ import systems.danger.kotlin.*
 // register plugin MyDangerPlugin
 
 danger(args) {
-    
+
     val allSourceFiles = git.modifiedFiles + git.createdFiles
 
     val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
