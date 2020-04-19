@@ -187,7 +187,7 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 
     private fun saveDangerResults() {
-        val resultsJSON = moshi.adapter(DangerResults::class.java).toJson(dangerResultsImpl)
+        val resultsJSON = moshi.adapter(DangerResultsImpl::class.java).toJson(dangerResultsImpl)
         jsonOutputFile.writeText(resultsJSON)
     }
 }
