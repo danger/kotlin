@@ -15,7 +15,8 @@ matrix:
         - DEBUG='*' danger-kotlin ci
     - os: linux
       sudo: required
-      dist: trusty
+      dist: bionic
+      jdk: openjdk12
       install:
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
