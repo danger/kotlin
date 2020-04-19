@@ -1,12 +1,16 @@
 package systems.danger.kotlin
 
-internal data class DangerResults(
-    var fails: Array<Violation> = arrayOf(),
-    var warnings: Array<Violation> = arrayOf(),
-    var messages: Array<Violation> = arrayOf(),
-    var markdowns: Array<Violation> = arrayOf(),
-    val meta: Meta = Meta()
-) {
+import systems.danger.kotlin.sdk.DangerResults
+import systems.danger.kotlin.sdk.Meta
+import systems.danger.kotlin.sdk.Violation
+
+internal data class DangerResultsImpl(
+        override var fails: Array<Violation> = arrayOf(),
+        override var warnings: Array<Violation> = arrayOf(),
+        override var messages: Array<Violation> = arrayOf(),
+        override var markdowns: Array<Violation> = arrayOf(),
+        override val meta: Meta = Meta()
+): DangerResults {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -29,8 +33,3 @@ internal data class DangerResults(
         return result
     }
 }
-
-internal data class Meta(
-    val runtimeName: String = "Danger Kotlin",
-    val runtimeHref: String = "https://danger.systems"
-)
