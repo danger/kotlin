@@ -7,6 +7,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.DangerPlugin
+import systems.danger.kotlin.sdk.Violation
 import java.io.File
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -24,10 +25,10 @@ fun fromISO8601UTC(dateStr: String): Date? {
 
     try {
         return df.parse(dateStr)
-    } catch(e: ParseException) {
+    } catch (e: ParseException) {
         try {
             return alternativeDf.parse(dateStr)
-        } catch(e2: ParseException) {
+        } catch (e2: ParseException) {
             e.printStackTrace()
             e2.printStackTrace()
         }
@@ -60,19 +61,38 @@ object register {
     }
 }
 
-inline fun register(block: register.() -> Unit) = register.apply(block)
+inline fun register(block: register.() -> Unit) = register.run(block)
 
-inline fun danger(args: Array<String>, block: DangerDSL.()->Unit) = Danger(args).apply(block)
+inline fun danger(args: Array<String>, block: DangerDSL.() -> Unit) = Danger(args).run(block)
 
 internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
     context = dangerContext
 }
 
 private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
+
     val jsonOutputFile: File = File(jsonOutputPath)
+
     val danger: DangerDSL
-    val dangerResults: DangerResults =
-        DangerResults()
+
+    val dangerResults: DangerResults = DangerResults()
+
+    override val fails: List<Violation>
+        get() {
+            return dangerResults.fails.toList()
+        }
+    override val warnings: List<Violation>
+        get() {
+            return dangerResults.warnings.toList()
+        }
+    override val messages: List<Violation>
+        get() {
+            return dangerResults.messages.toList()
+        }
+    override val markdowns: List<Violation>
+        get() {
+            return dangerResults.markdowns.toList()
+        }
 
     private val moshi = Moshi.Builder()
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
@@ -193,8 +213,7 @@ fun Danger(args: Array<String>): DangerDSL {
     val jsonInputFilePath = args[argsCount - 2]
     val jsonOutputPath = args[argsCount - 1]
 
-    dangerRunner =
-        DangerRunner(jsonInputFilePath, jsonOutputPath)
+    dangerRunner = DangerRunner(jsonInputFilePath, jsonOutputPath)
     return dangerRunner.danger
 }
 

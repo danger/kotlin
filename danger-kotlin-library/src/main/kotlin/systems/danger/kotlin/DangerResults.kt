@@ -1,5 +1,12 @@
 package systems.danger.kotlin
 
+import systems.danger.kotlin.sdk.Violation
+
+data class Meta(
+    val runtimeName: String = "Danger Kotlin",
+    val runtimeHref: String = "https://danger.systems"
+)
+
 internal data class DangerResults(
     var fails: Array<Violation> = arrayOf(),
     var warnings: Array<Violation> = arrayOf(),
@@ -29,8 +36,3 @@ internal data class DangerResults(
         return result
     }
 }
-
-internal data class Meta(
-    val runtimeName: String = "Danger Kotlin",
-    val runtimeHref: String = "https://danger.systems"
-)

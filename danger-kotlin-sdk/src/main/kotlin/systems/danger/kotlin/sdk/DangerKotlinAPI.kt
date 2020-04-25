@@ -10,11 +10,22 @@ interface DangerContext {
     fun fail(message: String)
     fun fail(message: String, file: String, line: Int)
     fun suggest(code: String, file: String, line: Int)
+
+    val fails: List<Violation>
+    val warnings: List<Violation>
+    val messages: List<Violation>
+    val markdowns: List<Violation>
 }
 
+data class Violation(
+    val message: String,
+    val file: String? = null,
+    val line: Int? = null
+)
+
 object Sdk {
-    const val VERSION_NAME = "1.0"
-    const val API_VERSION = 1
+    const val VERSION_NAME = "1.1"
+    const val API_VERSION = 2
 }
 
 abstract class DangerPlugin {

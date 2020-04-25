@@ -201,6 +201,6 @@ class GitHubParsingTests {
 
     @Test
     fun testOnGitLabIsFalse() {
-        assertEquals(false, dsl!!.danger.onGitLab)
+        assertEquals(false, dsl.danger.onGitLab)
     }
 }

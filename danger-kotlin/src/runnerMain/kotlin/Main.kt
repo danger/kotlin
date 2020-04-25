@@ -2,7 +2,7 @@ import systems.danger.DangerKotlin
 import systems.danger.cmd.dangerjs.DangerJS
 
 const val PROCESS_DANGER_KOTLIN = "danger-kotlin"
-const val VERSION = "0.4.0"
+const val VERSION = "0.5.0"
 
 fun main(args: Array<String>) {
     if (args.isNotEmpty()) {
