@@ -114,56 +114,56 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
      * Adds an inline fail message to the Danger report
      */
     override fun fail(message: String) {
-        fail(ViolationImpl(message))
+        fail(Violation(message))
     }
 
     /**
      * Adds an inline fail message to the Danger report
      */
     override fun fail(message: String, file: FilePath, line: Int) {
-        fail(ViolationImpl(message, file, line))
+        fail(Violation(message, file, line))
     }
 
     /**
      * Adds an inline warning message to the Danger report
      */
     override fun warn(message: String) {
-        warn(ViolationImpl(message))
+        warn(Violation(message))
     }
 
     /**
      * Adds an inline warning message to the Danger report
      */
     override fun warn(message: String, file: FilePath, line: Int) {
-        warn(ViolationImpl(message, file, line))
+        warn(Violation(message, file, line))
     }
 
     /**
      * Adds an inline message to the Danger report
      */
     override fun message(message: String) {
-        message(ViolationImpl(message))
+        message(Violation(message))
     }
 
     /**
      * Adds an inline message to the Danger report
      */
     override fun message(message: String, file: FilePath, line: Int) {
-        message(ViolationImpl(message, file, line))
+        message(Violation(message, file, line))
     }
 
     /**
      * Adds an inline markdown message to the Danger report
      */
     override fun markdown(message: String) {
-        markdown(ViolationImpl(message))
+        markdown(Violation(message))
     }
 
     /**
      * Adds an inline markdown message to the Danger report
      */
     override fun markdown(message: String, file: FilePath, line: Int) {
-        markdown(ViolationImpl(message, file, line))
+        markdown(Violation(message, file, line))
     }
 
     /**
@@ -172,29 +172,29 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     override fun suggest(code: String, file: FilePath, line: Int) {
         if (dangerRunner.danger.onGitHub) {
             val message = "```suggestion\n $code \n```"
-            markdown(ViolationImpl(message, file, line))
+            markdown(Violation(message, file, line))
         } else {
             val message = "```\n $code \n```"
-            message(ViolationImpl(message))
+            message(Violation(message))
         }
     }
 
-    private fun warn(violation: ViolationImpl) {
+    private fun warn(violation: Violation) {
         dangerResults.warnings += (violation)
         saveDangerResults()
     }
 
-    private fun fail(violation: ViolationImpl) {
+    private fun fail(violation: Violation) {
         dangerResults.fails += violation
         saveDangerResults()
     }
 
-    private fun message(violation: ViolationImpl) {
+    private fun message(violation: Violation) {
         dangerResults.messages += violation
         saveDangerResults()
     }
 
-    private fun markdown(violation: ViolationImpl) {
+    private fun markdown(violation: Violation) {
         dangerResults.markdowns += violation
         saveDangerResults()
     }

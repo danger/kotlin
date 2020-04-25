@@ -1,15 +1,17 @@
 package systems.danger.kotlin
 
+import systems.danger.kotlin.sdk.Violation
+
 data class Meta(
     val runtimeName: String = "Danger Kotlin",
     val runtimeHref: String = "https://danger.systems"
 )
 
 internal data class DangerResults(
-    var fails: Array<ViolationImpl> = arrayOf(),
-    var warnings: Array<ViolationImpl> = arrayOf(),
-    var messages: Array<ViolationImpl> = arrayOf(),
-    var markdowns: Array<ViolationImpl> = arrayOf(),
+    var fails: Array<Violation> = arrayOf(),
+    var warnings: Array<Violation> = arrayOf(),
+    var messages: Array<Violation> = arrayOf(),
+    var markdowns: Array<Violation> = arrayOf(),
     val meta: Meta = Meta()
 ) {
     override fun equals(other: Any?): Boolean {

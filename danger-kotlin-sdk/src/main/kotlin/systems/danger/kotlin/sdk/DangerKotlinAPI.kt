@@ -17,11 +17,11 @@ interface DangerContext {
     val markdowns: List<Violation>
 }
 
-interface Violation {
-    val message: String
-    val file: String?
-    val line: Int?
-}
+data class Violation(
+    val message: String,
+    val file: String? = null,
+    val line: Int? = null
+)
 
 object Sdk {
     const val VERSION_NAME = "1.1"
