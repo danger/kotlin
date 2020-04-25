@@ -19,8 +19,6 @@ nexusStaging {
     username = loadSecret("SONATYPE_USER")
     password = loadSecret("SONATYPE_PASS")
     delayBetweenRetriesInMillis = 5000
-    packageGroup = "systems.danger"
-    stagingProfileId = "danger-kotlin"
 }
 
 allprojects {
