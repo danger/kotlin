@@ -10,26 +10,31 @@ You can make a `Dangerfile.df.kts` in your root project that looks through PR me
 
 ```kotlin
 import systems.danger.kotlin.*
-import org.jetbrains.kotlin.script.util.*
 
-val danger = Danger(args)
+danger(args) {
 
-val allSourceFiles = danger.git.modifiedFiles + danger.git.createdFiles
+    val allSourceFiles = git.modifiedFiles + git.createdFiles
+    val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
+    val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
 
-val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
-val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
-val isTrivial = danger.github.pullRequest.title.contains("#trivial")
+    onGitHub {
+        val isTrivial = pullRequest.title.contains("#trivial")
 
-if (!isTrivial && !changelogChanged && sourceChanges != null) {
-    warn("Any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md).")
-}
+        // Changelog
+        if (!isTrivial && !changelogChanged && sourceChanges != null) {
+            warn(WordUtils.capitalize("any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md)."))
+        }
 
-if (danger.git.createdFiles.size + danger.git.modifiedFiles.size - danger.git.deletedFiles.size > 10) {
-    warn("Big PR, try to keep changes smaller if you can")
-}
+        // Big PR Check
+        if ((pullRequest.additions ?: 0) - (pullRequest.deletions ?: 0) > 300) {
+            warn("Big PR, try to keep changes smaller if you can")
+        }
 
-if (danger.github.pullRequest.title.contains("WIP" ,false)) {
-    warn("PR is classed as Work in Progress")
+        // Work in progress check
+        if (pullRequest.title.contains("WIP", false)) {
+            warn("PR is classed as Work in Progress")
+        }
+    }
 }
 ```
 
