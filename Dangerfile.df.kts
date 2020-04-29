@@ -35,11 +35,13 @@ danger(args) {
         }
     }
 
-    //No Java files check
-    git.createdFiles.filter {
-        it.endsWith(".java")
-    }.forEach {
-        // Using apache commons-text dependency to be sure the dependency resolution always works
-        warn(WordUtils.capitalize("please consider to create new files in Kotlin"), it, 1)
+    onGit {
+        //No Java files check
+        createdFiles.filter {
+            it.endsWith(".java")
+        }.forEach {
+            // Using apache commons-text dependency to be sure the dependency resolution always works
+            warn(WordUtils.capitalize("please consider to create new files in Kotlin"), it, 1)
+        }
     }
 }
