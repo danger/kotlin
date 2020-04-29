@@ -83,6 +83,12 @@ inline fun DangerDSL.onBitBucket(onBitBucket: BitBucketServer.() -> Unit) {
     }
 }
 
+inline fun DangerDSL.onGit(onGit: Git.() -> Unit) {
+    if(this.onBitBucketServer) {
+        git.run(onGit)
+    }
+}
+
 internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
     context = dangerContext
 }
