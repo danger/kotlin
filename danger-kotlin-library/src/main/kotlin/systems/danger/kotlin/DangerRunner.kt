@@ -66,27 +66,25 @@ inline fun register(block: register.() -> Unit) = register.run(block)
 inline fun danger(args: Array<String>, block: DangerDSL.() -> Unit) = Danger(args).run(block)
 
 inline fun DangerDSL.onGitHub(onGitHub: GitHub.() -> Unit) {
-    if(this.onGitHub) {
+    if (this.onGitHub) {
         github.run(onGitHub)
     }
 }
 
 inline fun DangerDSL.onGitLab(onGitLab: GitLab.() -> Unit) {
-    if(this.onGitLab) {
+    if (this.onGitLab) {
         gitlab.run(onGitLab)
     }
 }
 
 inline fun DangerDSL.onBitBucket(onBitBucket: BitBucketServer.() -> Unit) {
-    if(this.onBitBucketServer) {
+    if (this.onBitBucketServer) {
         bitBucketServer.run(onBitBucket)
     }
 }
 
 inline fun DangerDSL.onGit(onGit: Git.() -> Unit) {
-    if(this.onBitBucketServer) {
-        git.run(onGit)
-    }
+    git.run(onGit)
 }
 
 internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
