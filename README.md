@@ -3,8 +3,7 @@
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
 <p align="center">
-<img width=200 src=https://danger.systems/images/js/danger-js-ktln-logo-hero-cachable@2x.png>
-
+<img width=200 src="https://danger.systems/images/js/danger-js-ktln-logo-hero-cachable@2x.png" /></br>
 ⚠️ Stop saying "you forgot to …" in code review in Kotlin
 </p>
 
