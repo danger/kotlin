@@ -4,9 +4,9 @@
 
 <p align="center">
 <img width=200 src=https://danger.systems/images/js/danger-js-ktln-logo-hero-cachable@2x.png>
-</p>
 
 ⚠️ Stop saying "you forgot to …" in code review in Kotlin
+</p>
 
 # Project status
 The project is still work in progress.
