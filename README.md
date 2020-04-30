@@ -1,6 +1,11 @@
+[![Current Version](https://img.shields.io/badge/danger%20kotlin-v0.5.1-orange)](https://danger.systems/kotlin/)
 [![Maven Central - SDK](https://img.shields.io/maven-central/v/systems.danger/danger-kotlin-sdk.svg?label=danger-kotlin-sdk)](https://search.maven.org/search?q=g:%22systems.danger%22%20AND%20a:%22danger-kotlin-sdk%22)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
-# kotlin
+
+<p align="center">
+<img width=200 src=https://danger.systems/images/js/danger-js-ktln-logo-hero-cachable@2x.png>
+</p>
+
 ⚠️ Stop saying "you forgot to …" in code review in Kotlin
 
 # Project status
@@ -77,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@0.5.0
+        uses: danger/kotlin@0.5.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
