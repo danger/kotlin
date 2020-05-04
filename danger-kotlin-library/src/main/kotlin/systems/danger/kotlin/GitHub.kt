@@ -428,7 +428,9 @@ enum class GitHubUserType {
 data class GitHubUser(
     val id: Int,
     val login: String,
-    val type: GitHubUserType
+    val type: GitHubUserType,
+    @Json(name="avatar_url")
+    val avatarUrl: String
 )
 
 enum class GitHubMilestoneState(val value: String) {
