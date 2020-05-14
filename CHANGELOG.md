@@ -12,3 +12,7 @@
 -->
 
 ## Master
+
+- Add readFile function [@f-meloni][] - [#93](https://github.com/danger/kotlin/pull/93)
+
+[@f-meloni]: https://github.com/f-meloni
