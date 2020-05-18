@@ -29,4 +29,6 @@ data class DangerDSL(
                 get() = _bitBucketServer != null
         val onGitLab
             get() = _gitlab != null
+
+        val utils = Utils()
 }
