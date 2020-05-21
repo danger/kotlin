@@ -45,14 +45,16 @@ class GitHubParsingTests {
             val expectedUser = GitHubUser(
                 498212,
                 "ashfurrow",
-                GitHubUserType.USER
+                GitHubUserType.USER,
+                "https://avatars3.githubusercontent.com/u/498212?v=4"
             )
             assertEquals(expectedUser, user)
 
             val expectedAssegnee = GitHubUser(
                 49038,
                 "orta",
-                GitHubUserType.USER
+                GitHubUserType.USER,
+                "https://avatars2.githubusercontent.com/u/49038?v=4"
             )
             assertEquals(expectedAssegnee, assignee)
             assertEquals(expectedAssegnee, assignees.first())
@@ -60,7 +62,8 @@ class GitHubParsingTests {
             val artsyUser = GitHubUser(
                 546231,
                 "artsy",
-                GitHubUserType.ORGANIZATION
+                GitHubUserType.ORGANIZATION,
+                "https://avatars3.githubusercontent.com/u/546231?v=4"
             )
             val eidolonRepo = GitHubRepo(
                 22613546,
@@ -100,7 +103,8 @@ class GitHubParsingTests {
         val expectedUser = GitHubUser(
             498212,
             "ashfurrow",
-            GitHubUserType.USER
+            GitHubUserType.USER,
+            "https://avatars3.githubusercontent.com/u/498212?v=4"
         )
         val expectedGitAuthor = GitCommitAuthor(
             "Ash Furrow",
@@ -153,7 +157,8 @@ class GitHubParsingTests {
             val expectedCreator = GitHubUser(
                 1,
                 "octocat",
-                GitHubUserType.USER
+                GitHubUserType.USER,
+                "https://github.com/images/error/octocat_happy.gif"
             )
             val expectedMilestone = GitHubMilestone(
                 1002604,
@@ -180,7 +185,8 @@ class GitHubParsingTests {
             val expectedUser = GitHubUser(
                 1,
                 "octocat",
-                GitHubUserType.USER
+                GitHubUserType.USER,
+                "https://github.com/images/error/octocat_happy.gif"
             )
             assertEquals(expectedUser, users.first())
 
