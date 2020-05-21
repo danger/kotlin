@@ -14,5 +14,7 @@
 ## Master
 
 - Add readFile function [@f-meloni][] - [#93](https://github.com/danger/kotlin/pull/93)
+- Made github.issue optional [@gianluz][] - [#95](https://github.com/danger/kotlin/pull/95)
 
 [@f-meloni]: https://github.com/f-meloni
+[@gianluz]: https://github.com/gianluz
