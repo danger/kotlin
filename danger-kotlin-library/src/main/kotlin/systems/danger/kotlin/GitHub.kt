@@ -9,7 +9,7 @@ import java.util.*
  */
 @JsonClass(generateAdapter = true)
 data class GitHub(
-    val issue: GitHubIssue,
+    val issue: GitHubIssue?,
     @Json(name = "pr") val pullRequest: GitHubPR,
     val commits: Array<GitHubCommit>,
     val reviews: Array<GitHubReview>,
