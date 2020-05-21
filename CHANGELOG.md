@@ -14,5 +14,6 @@
 ## Master
 
 - Add readFile function [@f-meloni][] - [#93](https://github.com/danger/kotlin/pull/93)
+- Github exposing user avatar [@gianluz] - [#96](https://github.com/danger/kotlin/pull/96)
 
 [@f-meloni]: https://github.com/f-meloni
