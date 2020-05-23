@@ -8,7 +8,7 @@ class Utils {
     }
 
     fun exec(command: String, arguments: Array<String> = arrayOf()): String {
-        var commandToExec = "/bin/bash -c $command" + if (arguments.isNotEmpty()) "" else " " + arguments.joinToString(" ")
+        var commandToExec = "/bin/bash -c $command" + if (arguments.isNotEmpty())  " " + arguments.joinToString(" ") else ""
 
         val process = Runtime.getRuntime().exec(commandToExec)
         process.waitFor()
