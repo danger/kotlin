@@ -3,7 +3,12 @@ package systems.danger.kotlin
 import java.io.File
 
 class Utils {
-
+    /**
+     * Let's you go from a file path to the contents of the file with less hassle.
+     *
+     * @param path the file reference from git.modified/creasted/deleted etc
+     * @return the file contents
+     */
     fun readFile(path: String): String {
         return File(path).readText()
     }
