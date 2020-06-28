@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 
 data class DSL(
-        val danger: DangerDSL
+    val danger: DangerDSL
 )
 
 data class DangerDSL(
