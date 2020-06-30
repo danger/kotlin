@@ -13,6 +13,8 @@
 
 ## Master
 
+- Add abstraction for executing shell commands via `ShellExecutor` [@davidbilik][] - [#105](https://github.com/danger/kotlin/pull/105)
+
 # 0.6.0
 
 - Fix to allow for large GitHub id values [@brentwatson][] - [#108](https://github.com/danger/kotlin/pull/108)
