@@ -16,7 +16,8 @@ typealias FilePath = String
 data class Git(
     @Json(name = "modified_files") val modifiedFiles: Array<FilePath>,
     @Json(name = "created_files") val createdFiles: Array<FilePath>,
-    @Json(name = "deleted_files") val deletedFiles: Array<FilePath>
+    @Json(name = "deleted_files") val deletedFiles: Array<FilePath>,
+    @Json(name = "commits") val commits: List<GitCommit>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
