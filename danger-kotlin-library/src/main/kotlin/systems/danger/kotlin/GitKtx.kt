@@ -14,7 +14,7 @@ val Git.changedLines: PullRequestChangedLines
             .filter { it.isNotEmpty() }
             .map { line ->
                 val parts = line.split("\\s+".toRegex())
-                parts[0].toInt() to parts[1].toInt()
+                (parts[0].toIntOrNull() ?: 0) to (parts[1].toIntOrNull() ?: 0)
             }
         val additions = additionDeletionPairs.fold(0) { acc, (addition, _) -> acc + addition }
         val deletions = additionDeletionPairs.fold(0) { acc, (_, deletion) -> acc + deletion }

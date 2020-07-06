@@ -12,7 +12,7 @@
 -->
 
 ## Master
-
+- Fix invalid parsing of changes in diff [@davidbilik][] - [#106](https://github.com/danger/kotlin/pull/106)
 - Add extensions for changed lines in Git [@davidbilik][] - [#102](https://github.com/danger/kotlin/pull/102)
 - Add exec function [@f-meloni][] - [#97](https://github.com/danger/kotlin/pull/97)
 - Add readFile function [@f-meloni][] - [#93](https://github.com/danger/kotlin/pull/93)
