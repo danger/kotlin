@@ -2,16 +2,14 @@ package systems.danger.kotlin
 
 import java.io.File
 
-class Utils {
+interface Utils {
     /**
      * Let's you go from a file path to the contents of the file with less hassle.
      *
      * @param path the file reference from git.modified/creasted/deleted etc
      * @return the file contents
      */
-    fun readFile(path: String): String {
-        return File(path).readText()
-    }
+    fun readFile(path: String): String
 
     /**
      * Gives you the ability to cheaply run a command and read the output without having to mess around
@@ -20,12 +18,20 @@ class Utils {
      * @param arguments An optional array of arguments to pass in extra
      * @return the stdout from the command
      */
-    fun exec(command: String, arguments: Array<String> = arrayOf()): String {
-        val commandWithArgs = command + if (arguments.isNotEmpty())  " " + arguments.joinToString(" ") else ""
+    fun exec(command: String, arguments: List<String> = emptyList()): String
+}
 
-        val process = Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", commandWithArgs))
-        process.waitFor()
+internal object UtilsImpl : Utils {
 
-        return process.inputStream.bufferedReader().readText()
+    override fun readFile(path: String): String {
+        return File(path).readText()
+    }
+
+    override fun exec(command: String, arguments: List<String>): String {
+        val commandWithArgs = command + if (arguments.isNotEmpty()) " " + arguments.joinToString(" ") else ""
+        return Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", commandWithArgs)).run {
+            waitFor()
+            inputStream.bufferedReader().readText()
+        }
     }
 }

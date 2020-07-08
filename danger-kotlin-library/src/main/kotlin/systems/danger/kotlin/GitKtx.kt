@@ -7,18 +7,20 @@ package systems.danger.kotlin
  */
 val Git.changedLines: PullRequestChangedLines
     get() {
-        // TODO replace with more generic way to process commands
-        val utils = Utils()
-        val commandRawOutput = utils.exec("git diff --numstat $headSha $baseSha")
-        val additionDeletionPairs = commandRawOutput.lines()
-            .filter { it.isNotEmpty() }
-            .map { line ->
-                val parts = line.split("\\s+".toRegex())
-                (parts[0].toIntOrNull() ?: 0) to (parts[1].toIntOrNull() ?: 0)
-            }
-        val additions = additionDeletionPairs.fold(0) { acc, (addition, _) -> acc + addition }
-        val deletions = additionDeletionPairs.fold(0) { acc, (_, deletion) -> acc + deletion }
-        return PullRequestChangedLines(additions, deletions)
+        return if (commits.isNotEmpty()) {
+            val commandRawOutput = UtilsImpl.exec("git diff --numstat $headSha $baseSha")
+            val additionDeletionPairs = commandRawOutput.lines()
+                .filter { it.isNotEmpty() }
+                .map { line ->
+                    val parts = line.split("\\s+".toRegex())
+                    (parts[0].toIntOrNull() ?: 0) to (parts[1].toIntOrNull() ?: 0)
+                }
+            val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
+            val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
+            PullRequestChangedLines(additions, deletions)
+        } else {
+            PullRequestChangedLines(0, 0)
+        }
     }
 
 /**
@@ -43,13 +45,13 @@ val Git.deletions: Int
  * Reference to a SHA of head commit of this PR
  */
 val Git.headSha: String?
-    get() = commits.first().sha
+    get() = commits.firstOrNull()?.sha
 
 /**
  * Reference to a SHA of base commit of this PR
  */
 val Git.baseSha: String?
-    get() = "${commits.last().sha}^1"
+    get() = commits.lastOrNull()?.sha?.let { "$it^1" }
 
 /**
  * Wrapper for number of additions and deletions in currently processed Pull (or Merge) Request
