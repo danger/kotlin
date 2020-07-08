@@ -173,7 +173,7 @@ data class GitHubPR(
  */
 @JsonClass(generateAdapter = true)
 data class GitHubTeam(
-    val id: Int,
+    val id: Long,
     val name: String
 )
 
@@ -238,7 +238,7 @@ data class GitHubMergeRef(
  */
 @JsonClass(generateAdapter = true)
 data class GitHubRepo(
-    val id: Int,
+    val id: Long,
     val name: String,
     @Json(name = "full_name") val fullName: String,
     @Json(name = "private") val isPrivate: Boolean,
@@ -272,7 +272,7 @@ enum class GitHubReviewState(val value: String) {
 @JsonClass(generateAdapter = true)
 data class GitHubReview(
     val user: GitHubUser,
-    val id: Int?,
+    val id: Long?,
     val body: String?,
     @Json(name = "commit_id") val commitId: String?,
     val state: GitHubReviewState?
@@ -333,7 +333,7 @@ enum class GitHubIssueState(val value: String) {
  */
 @JsonClass(generateAdapter = true)
 data class GitHubIssue(
-    val id: Int,
+    val id: Long,
     val number: Int,
     val title: String,
     val user: GitHubUser,
@@ -375,7 +375,7 @@ data class GitHubIssue(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + number
         result = 31 * result + title.hashCode()
         result = 31 * result + user.hashCode()
@@ -402,7 +402,7 @@ data class GitHubIssue(
  */
 @JsonClass(generateAdapter = true)
 data class GitHubIssueLabel(
-        val id: Int,
+        val id: Long,
         val url: String,
         val name: String,
         val color: String
@@ -426,7 +426,7 @@ enum class GitHubUserType {
  */
 @JsonClass(generateAdapter = true)
 data class GitHubUser(
-    val id: Int,
+    val id: Long,
     val login: String,
     val type: GitHubUserType,
     @Json(name="avatar_url")
@@ -460,7 +460,7 @@ enum class GitHubMilestoneState(val value: String) {
  */
 @JsonClass(generateAdapter = true)
 data class GitHubMilestone(
-    val id: Int,
+    val id: Long,
     val number: Int,
     val state: GitHubMilestoneState,
     val title: String,

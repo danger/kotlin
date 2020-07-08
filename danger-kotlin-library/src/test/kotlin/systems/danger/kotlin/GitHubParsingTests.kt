@@ -138,7 +138,7 @@ class GitHubParsingTests {
     @Test
     fun testItCorrectlyParsesTheIssue() {
         with(github.issue) {
-            assertEquals(167696965, id)
+            assertEquals(2190001234, id)
             assertEquals(609, number)
             assertEquals("Xcode updates", title)
             assertEquals(
