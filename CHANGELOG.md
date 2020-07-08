@@ -12,6 +12,7 @@
 -->
 
 ## Master
+- Fix to allow for large GitHub id values [@brentwatson][] - [#108](https://github.com/danger/kotlin/pull/108)
 - Fix invalid parsing of changes in diff [@davidbilik][] - [#106](https://github.com/danger/kotlin/pull/106)
 - Add extensions for changed lines in Git [@davidbilik][] - [#102](https://github.com/danger/kotlin/pull/102)
 - Add exec function [@f-meloni][] - [#97](https://github.com/danger/kotlin/pull/97)
@@ -21,3 +22,4 @@
 [@f-meloni]: https://github.com/f-meloni
 [@gianluz]: https://github.com/gianluz
 [@davidbilik]: https://github.com/davidbilik
+[@brentwatson]: https://github.com/brentwatson
