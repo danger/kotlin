@@ -7,7 +7,8 @@ package systems.danger.kotlin
  */
 val Git.changedLines: PullRequestChangedLines
     get() {
-        return if (commits.isNotEmpty()) {
+        return if (headSha == null || baseSha == null) return PullRequestChangedLines(0, 0)
+        else {
             val commandRawOutput = UtilsImpl.exec("git diff --numstat $headSha $baseSha")
             val additionDeletionPairs = commandRawOutput.lines()
                 .filter { it.isNotEmpty() }
@@ -18,8 +19,6 @@ val Git.changedLines: PullRequestChangedLines
             val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
             val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
             PullRequestChangedLines(additions, deletions)
-        } else {
-            PullRequestChangedLines(0, 0)
         }
     }
 
