@@ -19,7 +19,7 @@ internal class GitKtxTest {
         2       4       features/search/src/main/java/com/sampleapp/search/model/ApiInteractor.kt
         2       4       features/search/src/main/java/com/sampleapp/search/model/RecommendedPublishersRepository.kt
         1       3       features/search/src/main/java/com/sampleapp/search/model/RecommendedTopicsRepository.kt
-    """.trimIndent()
+        """.trimIndent()
 
         override fun execute(command: String, arguments: List<String>): String {
             return diffCommandOutput
