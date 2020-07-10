@@ -1,9 +1,10 @@
 package systems.danger.kotlin
 
+import io.mockk.every
+import io.mockk.mockk
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import systems.danger.kotlin.shell.ShellExecutor
 import systems.danger.kotlin.shell.ShellExecutorFactory
 
 /**
@@ -11,8 +12,7 @@ import systems.danger.kotlin.shell.ShellExecutorFactory
  */
 internal class GitKtxTest {
 
-    class MockShellExecutor : ShellExecutor {
-
+    companion object {
         private val diffCommandOutput = """
         0       1       features/search/build.gradle
         3       10      features/search/src/main/java/com/sampleapp/search/di/RepositoryModule.kt
@@ -20,10 +20,6 @@ internal class GitKtxTest {
         2       4       features/search/src/main/java/com/sampleapp/search/model/RecommendedPublishersRepository.kt
         1       3       features/search/src/main/java/com/sampleapp/search/model/RecommendedTopicsRepository.kt
         """.trimIndent()
-
-        override fun execute(command: String, arguments: List<String>): String {
-            return diffCommandOutput
-        }
     }
 
     private val basicGit = Git(
@@ -46,7 +42,9 @@ internal class GitKtxTest {
 
     @Before
     fun setup() {
-        ShellExecutorFactory.set(MockShellExecutor())
+        ShellExecutorFactory.set(mockk {
+            every { execute(any(), any()) } returns diffCommandOutput
+        })
     }
 
     @Test
