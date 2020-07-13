@@ -40,9 +40,14 @@ ext.kotlinDependencies = group {
 project.ext.versionJunit = '4.12'
 project.ext.groupIdJunit = 'junit'
 project.ext.artifactIdJunit = 'junit'
+project.ext.versionMockK = "1.10.0"
+project.ext.groupIdMockK = "io.mockk"
+project.ext.artifactIdMockK = "mockk"
 ext.testing = [
-        junit: "junit:junit:$versionJunit"
+        junit: "junit:junit:$versionJunit",
+        mockK: "$groupIdMockK:$artifactIdMockK:$versionMockK"
 ]
 ext.testingDependencies = group {
     testImplementation testing.junit
+    testImplementation testing.mockK
 }
