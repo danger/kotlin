@@ -12,7 +12,7 @@
 -->
 
 ## Master
-
+- Fix crash on milestone.closedAt [@anton46][] - [#108](https://github.com/danger/kotlin/pull/112)
 - Add abstraction for executing shell commands via `ShellExecutor` [@davidbilik][] - [#105](https://github.com/danger/kotlin/pull/105)
 
 # 0.6.0
@@ -28,3 +28,4 @@
 [@gianluz]: https://github.com/gianluz
 [@davidbilik]: https://github.com/davidbilik
 [@brentwatson]: https://github.com/brentwatson
+[@anton46]: https://github.com/anton46
