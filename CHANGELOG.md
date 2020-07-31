@@ -10,8 +10,11 @@
 //       see the bottom of this file
 
 -->
-
 ## Master
+
+
+# 0.6.1
+
 - Fix crash on milestone.closedAt [@anton46][] - [#108](https://github.com/danger/kotlin/pull/112)
 - Add abstraction for executing shell commands via `ShellExecutor` [@davidbilik][] - [#105](https://github.com/danger/kotlin/pull/105)
 
