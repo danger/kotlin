@@ -1,10 +1,9 @@
 package systems.danger.kts
 
 import org.jetbrains.kotlin.mainKts.*
-import org.jetbrains.kotlin.script.util.CompilerOptions
-import org.jetbrains.kotlin.script.util.DependsOn
-import org.jetbrains.kotlin.script.util.Import
-import org.jetbrains.kotlin.script.util.Repository
+import org.jetbrains.kotlin.mainKts.CompilerOptions
+import org.jetbrains.kotlin.mainKts.Import
+import kotlin.script.experimental.dependencies.*
 import java.io.File
 import java.security.MessageDigest
 import kotlin.script.experimental.annotations.KotlinScript
