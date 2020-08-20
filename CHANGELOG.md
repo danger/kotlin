@@ -11,7 +11,7 @@
 
 -->
 ## Master
-
+- Update Kotlin to 1.4.0 [@uzzu][] - [#116](https://github.com/danger/kotlin/pull/116)
 
 # 0.6.1
 
@@ -32,3 +32,4 @@
 [@davidbilik]: https://github.com/davidbilik
 [@brentwatson]: https://github.com/brentwatson
 [@anton46]: https://github.com/anton46
+[@uzzu]: https://github.com/uzzu
