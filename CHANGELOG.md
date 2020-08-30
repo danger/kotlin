@@ -11,6 +11,10 @@
 
 -->
 ## Master
+
+# 0.6.2
+
+- Release Danger Kotlin as package [f-meloni][] - [#117](https://github.com/danger/kotlin/pull/117)
 - Update Kotlin to 1.4.0 [@uzzu][] - [#116](https://github.com/danger/kotlin/pull/116)
 
 # 0.6.1
