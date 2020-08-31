@@ -196,12 +196,23 @@ class GitHubParsingTests {
     }
 
     @Test
-    fun testOnGitHubIsTrue(){
+    fun testItParsesTheMilestonesWithSomeNullAttributes() {
+        val dsl = moshi.fromJson(jsonFiles.githubWithSomeNullsAttributeDangerJSON)!!
+        val github = dsl.danger.github
+
+        with(github.issue.milestone!!) {
+            assertNull(dueOn)
+            assertNull(closedAt)
+        }
+    }
+
+    @Test
+    fun testOnGitHubIsTrue() {
         assertEquals(true, dsl.danger.onGitHub)
     }
 
     @Test
-    fun testOnBitBucketIsFalse(){
+    fun testOnBitBucketIsFalse() {
         assertEquals(false, dsl.danger.onBitBucketServer)
     }
 
