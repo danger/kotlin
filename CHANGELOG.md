@@ -10,8 +10,11 @@
 //       see the bottom of this file
 
 -->
-
 ## Master
+- Update Kotlin to 1.4.0 [@uzzu][] - [#116](https://github.com/danger/kotlin/pull/116)
+
+# 0.6.1
+
 - Fix crash on milestone.closedAt [@anton46][] - [#108](https://github.com/danger/kotlin/pull/112)
 - Add abstraction for executing shell commands via `ShellExecutor` [@davidbilik][] - [#105](https://github.com/danger/kotlin/pull/105)
 
@@ -29,3 +32,4 @@
 [@davidbilik]: https://github.com/davidbilik
 [@brentwatson]: https://github.com/brentwatson
 [@anton46]: https://github.com/anton46
+[@uzzu]: https://github.com/uzzu

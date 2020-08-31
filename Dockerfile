@@ -12,7 +12,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
 RUN apt-get install -y nodejs make zip
 
 RUN cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.3.70/kotlin-compiler-1.3.70.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.0/kotlin-compiler-1.4.0.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip
 
