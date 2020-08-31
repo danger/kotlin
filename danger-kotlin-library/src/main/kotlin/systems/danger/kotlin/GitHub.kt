@@ -471,5 +471,5 @@ data class GitHubMilestone(
     @Json(name = "created_at") val createdAt: Date,
     @Json(name = "updated_at") val updatedAt: Date,
     @Json(name = "closed_at") val closedAt: Date?,
-    @Json(name = "due_on") val dueOn: Date
+    @Json(name = "due_on") val dueOn: Date?
 )
