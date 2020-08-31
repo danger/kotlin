@@ -1,11 +1,9 @@
 TOOL_NAME = danger-kotlin
-VERSION = 0.6.1
 
 PREFIX = /usr/local
 INSTALL_PATH = $(PREFIX)/bin/$(TOOL_NAME)
 BUILD_PATH = danger-kotlin/build/bin/runner/releaseExecutable/$(TOOL_NAME).kexe
 LIB_INSTALL_PATH = $(PREFIX)/lib/danger
-TAR_FILENAME = $(TOOL_NAME)-$(VERSION).tar.gz
 
 install: build
 	mkdir -p $(PREFIX)/bin
