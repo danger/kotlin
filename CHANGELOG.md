@@ -14,6 +14,7 @@
 
 # 0.7.0
 
+- Fix DangerKotlinScriptDefinition [@gianluz] - [#121](https://github.com/danger/kotlin/pull/121)
 - Update Kotlin to 1.4.0 [@uzzu][] - [#116](https://github.com/danger/kotlin/pull/116)
 - Fix crash at milestone.dueOn [@anton46][] - [#108](https://github.com/danger/kotlin/pull/119) 
 
