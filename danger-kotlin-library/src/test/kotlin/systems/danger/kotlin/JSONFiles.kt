@@ -3,6 +3,8 @@ package systems.danger.kotlin
 class JSONFiles {
     val githubDangerJSON
         get() = loadJSON("githubDangerJSON.json")
+    val githubWithSomeNullsAttributeDangerJSON
+        get() = loadJSON("githubWithSomeNullsAttributeDangerJSON.json")
     val dangerBitBucketServerJSON
         get() = loadJSON("bitbucketServerDangerJSON.json")
     val gitlabJSON
