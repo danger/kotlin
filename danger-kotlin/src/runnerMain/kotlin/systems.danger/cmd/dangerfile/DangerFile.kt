@@ -23,8 +23,8 @@ object DangerFile: DangerFileBridge {
             "/usr/local/lib/danger/danger-kotlin.jar",
             "-script",
             dangerfile,
-            inputJson,
-            outputJson
+            "\\\"" + inputJson + "\\\"",
+            "\\\"" + outputJson  + "\\\""
         ).exec()
     }
 }

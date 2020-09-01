@@ -19,7 +19,7 @@ class Cmd {
     }
 
     fun exec(printCallLog: Boolean) {
-        "$name ${args.joinToString(" ")}".apply {
+        "/bin/bash -c \"$name ${args.joinToString(" ")}\"".apply {
             if(printCallLog) {
                 println("Executing $this - pid ${getpid()}")
             }
