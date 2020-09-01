@@ -8,7 +8,7 @@ matrix:
         - source ~/.bash_profile
         - sdk install gradle
         - sdk install kotlin
-        - npm install -g danger@7.1.4
+        - npm install -g danger
       script:
         - make install
         - gradle danger-kotlin-library:test
@@ -22,7 +22,7 @@ matrix:
         - source ~/.bash_profile
         - sdk install gradle
         - sdk install kotlin
-        - npm install -g danger@7.1.4
+        - npm install -g danger
         - sudo chmod -R a+rwx /usr/local/
       script:
         - make install
