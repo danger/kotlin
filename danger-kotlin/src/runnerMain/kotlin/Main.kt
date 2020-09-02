@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
             else -> return
         }
     } else {
-        print("Running danger-kotlin - args: $args")
+        println("Running danger-kotlin - args: $args")
         DangerKotlin.run()
     }
 }
