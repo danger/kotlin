@@ -15,6 +15,7 @@ fun main(args: Array<String>) {
             else -> return
         }
     } else {
+        print("Running danger-kotlin")
         DangerKotlin.run()
     }
 }
