@@ -8,7 +8,11 @@ object DangerKotlin {
     fun run(logger: Logger) {
         val dangerDSLPath = readLine()
 
-        logger.info("Got Danger DSL path ${dangerDSLPath.stripEndLine()}", true)
+        if (dangerDSLPath != null) {
+            logger.info("Got Danger DSL path ${dangerDSLPath.stripEndLine()}", true)
+        } else {
+            logger.error("Didn't receive a DSL path")
+        }
 
         dangerDSLPath?.removePrefix("danger://dsl/")?.stripEndLine()?.let {
             with(DangerFile) {
