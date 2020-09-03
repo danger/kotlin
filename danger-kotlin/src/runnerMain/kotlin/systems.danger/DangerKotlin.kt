@@ -9,7 +9,7 @@ object DangerKotlin {
         val dangerDSLPath = readLine()
 
         if (dangerDSLPath != null) {
-            logger.info("Got Danger DSL path ${dangerDSLPath.stripEndLine()}", true)
+            logger.info("Got Danger DSL path $dangerDSLPath", true)
         } else {
             logger.error("Didn't receive a DSL path")
         }
