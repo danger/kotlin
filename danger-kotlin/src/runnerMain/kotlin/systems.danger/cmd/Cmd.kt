@@ -1,10 +1,15 @@
 package systems.danger.cmd
-
 import platform.posix.*
+import systems.danger.Logger
 
 class Cmd {
     private lateinit var name: String
     private lateinit var args: Array<out String>
+    private val logger: Logger
+
+    constructor(logger: Logger) {
+        this.logger = logger
+    }
 
     fun name(name: String) = apply {
         this.name = name
@@ -21,7 +26,7 @@ class Cmd {
     fun exec(printCallLog: Boolean) {
         "$name ${args.joinToString(" ")}".apply {
             if(printCallLog) {
-                println("Executing $this - pid ${getpid()}")
+                logger.info("Executing $this - pid ${getpid()}")
             }
         }.also {
             val exitCode = system(it)

@@ -5,12 +5,12 @@ import systems.danger.cmd.dangerfile.DangerFile
 object DangerKotlin {
     private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
 
-    fun run() {
+    fun run(logger: Logger) {
         val dangerDSLPath = readLine()
 
         dangerDSLPath?.removePrefix("danger://dsl/")?.stripEndLine()?.let {
             with(DangerFile) {
-                execute(it, FILE_TMP_OUTPUT_JSON)
+                execute(it, FILE_TMP_OUTPUT_JSON,logger)
             }
 
             printResult()
