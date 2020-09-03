@@ -27,5 +27,11 @@ object DangerKotlin {
         println("danger-results:/$FILE_TMP_OUTPUT_JSON")
     }
 
-    private fun String.stripEndLine() = trim('\u007F','\u0001', ' ')
+    private fun String.stripEndLine(): String {
+        val extensionIndex = indexOf(".json")
+        if (extensionIndex != length - ".json".length - 1) {
+            removeRange(extensionIndex, length - 1)
+        }
+        return this
+    }
 }
