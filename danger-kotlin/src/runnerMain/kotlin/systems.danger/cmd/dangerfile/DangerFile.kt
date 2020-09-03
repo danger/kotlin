@@ -17,7 +17,7 @@ object DangerFile: DangerFileBridge {
             exit(1)
         }
 
-        logger.info("Executing Dangerfile $dangerfile", verbose = true)
+        logger.info("Compiling Dangerfile $dangerfile", true)
 
         Cmd(logger).name("kotlinc").args(
             "-script-templates",

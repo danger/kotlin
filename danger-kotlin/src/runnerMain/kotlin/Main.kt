@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
             }
             "runner" -> DangerKotlin.run(logger)
             "--version" -> logger.info(VERSION)
-            else -> return
+            else -> logger.error("Invalid command received: $command")
         }
     } else {
         DangerKotlin.run(logger)

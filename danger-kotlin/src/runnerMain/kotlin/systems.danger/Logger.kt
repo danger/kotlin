@@ -15,24 +15,20 @@ class Logger {
     }
 
     fun info(message: String, verbose: Boolean = false) {
-        if (!verbose || (verbose && this.verbose)) {
-            printMessage(message, Color.default)
-        }
+        printMessage(message, Color.default, verbose)
     }
 
     fun warning(message: String, verbose: Boolean = false) {
-        if (!verbose || (verbose && this.verbose)) {
-            printMessage("WARNING: $message", Color.yellow)
-        }
+        printMessage("WARNING: $message", Color.yellow, verbose)
     }
 
     fun error(message: String, verbose: Boolean = false) {
-        if (!verbose || (verbose && this.verbose)) {
-            printMessage("ERROR: $message", Color.red)
-        }
+        printMessage("ERROR: $message", Color.red, verbose)
     }
 
-    private fun printMessage(message: String, color: String) {
-        print(color + message + Color.default + "\n")
+    private fun printMessage(message: String, color: String, verbose: Boolean) {
+        if (!verbose || (verbose && this.verbose)) {
+            println(color + message + Color.default)
+        }
     }
 }
