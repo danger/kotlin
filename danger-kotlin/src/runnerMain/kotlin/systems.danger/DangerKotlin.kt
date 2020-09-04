@@ -15,6 +15,7 @@ object DangerKotlin {
         }
 
         dangerDSLPath?.removePrefix("danger://dsl/")?.stripEndLine()?.let {
+            logger.info("Stripped DSL Path $it", true)
             with(DangerFile) {
                 execute(it, FILE_TMP_OUTPUT_JSON, logger)
             }
@@ -28,10 +29,6 @@ object DangerKotlin {
     }
 
     private fun String.stripEndLine(): String {
-        val extensionIndex = indexOf(".json")
-        if (extensionIndex != length - ".json".length - 1) {
-            removeRange(extensionIndex, length - 1)
-        }
-        return this
+        return replaceAfter(".json", "")
     }
 }
