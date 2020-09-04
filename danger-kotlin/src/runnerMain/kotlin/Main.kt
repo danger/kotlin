@@ -4,7 +4,7 @@ import systems.danger.Log
 import systems.danger.cmd.dangerjs.DangerJS
 
 const val PROCESS_DANGER_KOTLIN = "danger-kotlin"
-const val VERSION = "0.6.1"
+const val VERSION = "0.7.0"
 
 fun main(args: Array<String>) {
     Log.isVerbose = args.contains("--verbose") || (getenv("DEBUG")?.toString()?.isNotEmpty() ?: false)
