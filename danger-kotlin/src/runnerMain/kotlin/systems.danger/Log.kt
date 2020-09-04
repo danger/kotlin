@@ -1,5 +1,7 @@
 package systems.danger
 
+import kotlin.native.concurrent.ThreadLocal
+
 private object Color {
     private const val escape = '\u001B'
     const val default = "$escape[0;0m"
@@ -7,12 +9,10 @@ private object Color {
     const val yellow = "$escape[33m"
 }
 
-class Logger {
-    private val verbose: Boolean
+@ThreadLocal
+object Log {
 
-    constructor(verbose: Boolean) {
-        this.verbose = verbose
-    }
+    var isVerbose: Boolean = false
 
     fun info(message: String, verbose: Boolean = false) {
         printMessage(message, Color.default, verbose)
@@ -27,7 +27,7 @@ class Logger {
     }
 
     private fun printMessage(message: String, color: String, verbose: Boolean) {
-        if (!verbose || (verbose && this.verbose)) {
+        if (!verbose || (verbose && this.isVerbose)) {
             println(color + message + Color.default)
         }
     }

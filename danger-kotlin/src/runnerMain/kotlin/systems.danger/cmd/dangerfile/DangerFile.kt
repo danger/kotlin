@@ -3,23 +3,23 @@ package systems.danger.cmd.dangerfile
 import systems.danger.cmd.*
 import kotlinx.cinterop.CPointer
 import platform.posix.*
-import systems.danger.Logger
+import systems.danger.Log
 
 object DangerFile: DangerFileBridge {
     private const val DANGERFILE_EXTENSION = ".df.kts"
     private const val DANGERFILE = "Dangerfile$DANGERFILE_EXTENSION"
 
-    override fun execute(inputJson: String, outputJson: String, logger: Logger) {
+    override fun execute(inputJson: String, outputJson: String) {
         val dangerfile = dangerfileParameter(inputJson) ?: DANGERFILE
 
         if(!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
-            logger.error("The Dangerfile is not valid, it must have '$DANGERFILE_EXTENSION' as extension")
+            Log.error("The Dangerfile is not valid, it must have '$DANGERFILE_EXTENSION' as extension")
             exit(1)
         }
 
-        logger.info("Compiling Dangerfile $dangerfile", true)
+        Log.info("Compiling Dangerfile $dangerfile", true)
 
-        Cmd(logger).name("kotlinc").args(
+        Cmd().name("kotlinc").args(
             "-script-templates",
             "systems.danger.kts.DangerFileScript",
             "-cp",
