@@ -12,6 +12,8 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
     apt-get install -y nodejs make zip && \
     npm install -g danger
 
+# Install danger-kotlin globally
+COPY . _danger-kotlin
 RUN cd /usr/lib && \
     wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.0/kotlin-compiler-1.4.0.zip && \
     unzip kotlin-compiler-*.zip && \
@@ -21,9 +23,6 @@ RUN cd /usr/lib && \
     rm -rf _danger-kotlin
 
 ENV PATH $PATH:/usr/lib/kotlinc/bin
-
-# Install danger-kotlin globally
-COPY . _danger-kotlin
 
 # Run Danger Kotlin via Danger JS, allowing for custom args
 ENTRYPOINT ["danger-kotlin", "ci"]
