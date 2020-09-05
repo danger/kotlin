@@ -9,7 +9,8 @@ LABEL "com.github.actions.color"="blue"
 
 # Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
-    apt-get install -y nodejs make zip danger
+    apt-get install -y nodejs make zip && \
+    npm install -g danger
 
 RUN cd /usr/lib && \
     wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.0/kotlin-compiler-1.4.0.zip && \
