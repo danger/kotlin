@@ -12,6 +12,8 @@
 -->
 ## Master
 
+- Optimise Dockerfile layers to make Danger-Kotlin faster when the image is pulled on CI [@f-meloni] - [#129](https://github.com/danger/kotlin/pull/129)
+
 # 0.7.0
 
 - Add logger [@f-meloni] - [#126](https://github.com/danger/kotlin/pull/126)
