@@ -1,9 +1,11 @@
 language: java
+
 matrix:
   include:
     - os: osx
       osx_image: xcode11
       install:
+        - nvm install 10.18.0
         - curl -s "https://get.sdkman.io" | bash
         - source ~/.bash_profile
         - sdk install gradle
