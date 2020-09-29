@@ -464,7 +464,7 @@ data class GitHubMilestone(
     val number: Int,
     val state: GitHubMilestoneState,
     val title: String,
-    val description: String,
+    val description: String?,
     val creator: GitHubUser,
     @Json(name = "open_issues") val openIssues: Int,
     @Json(name = "closed_issues") val closedIssues: Int,
