@@ -1,0 +1,5 @@
+name: 'danger-kotlin'
+description: 'Stop saying "you forgot to …" in code review'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
