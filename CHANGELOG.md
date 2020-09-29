@@ -12,6 +12,7 @@
 -->
 ## Master
 
+- Make milestone description optional [@f-meloni] - [#136](https://github.com/danger/kotlin/pull/136)
 - Optimise Dockerfile layers to make Danger-Kotlin faster when the image is pulled on CI [@f-meloni] - [#129](https://github.com/danger/kotlin/pull/129)
 - Add action.yml to make it possible to run locally through [act](https://github.com/nektos/act) [@mariusgreve] - [#135](https://github.com/danger/kotlin/pull/135)
 
