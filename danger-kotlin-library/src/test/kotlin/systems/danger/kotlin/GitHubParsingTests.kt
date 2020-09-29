@@ -203,6 +203,7 @@ class GitHubParsingTests {
         with(github.issue.milestone!!) {
             assertNull(dueOn)
             assertNull(closedAt)
+            assertNull(description)
         }
     }
 

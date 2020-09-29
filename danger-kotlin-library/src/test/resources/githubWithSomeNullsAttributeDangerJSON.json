@@ -444,7 +444,7 @@
                 "number": 1,
                 "state": "open",
                 "title": "v1.0",
-                "description": "Tracking milestone for version 1.0",
+                "description": null,
                 "creator": {
                     "login": "octocat",
                     "id": 1,
