@@ -13,6 +13,7 @@
 ## Master
 
 - Optimise Dockerfile layers to make Danger-Kotlin faster when the image is pulled on CI [@f-meloni] - [#129](https://github.com/danger/kotlin/pull/129)
+- Add action.yml to make it possible to run locally through [act](https://github.com/nektos/act) [@mariusgreve] - [#135](https://github.com/danger/kotlin/pull/135)
 
 # 0.7.0
 
@@ -41,3 +42,4 @@
 [@brentwatson]: https://github.com/brentwatson
 [@anton46]: https://github.com/anton46
 [@uzzu]: https://github.com/uzzu
+[@mariusgreve]: https://github.com/mariusgreve
