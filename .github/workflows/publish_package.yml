@@ -2,8 +2,6 @@ name: Release Danger-Kotlin package
 
 on:
   push:
-    tags:
-      - '*'
     tags-ignore: 
       - 'sdk_*'
 
