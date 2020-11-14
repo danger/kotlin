@@ -26,7 +26,7 @@ project.ext.groupIdOkio = 'com.squareup.okio'
 project.ext.artifactIdOkio = 'okio'
 
 // Kotlin
-project.ext.versionKotlin = '1.4.0'
+project.ext.versionKotlin = '1.4.10'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
 project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 ext.kotlin = [
