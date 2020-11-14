@@ -11,6 +11,7 @@
 
 -->
 ## Master
+- Update Kotlin to 1.4.10 [@gianluz] [#140](https://github.com/danger/kotlin/pull/140)
 
 # 0.7.1
 
