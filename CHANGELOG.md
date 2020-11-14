@@ -12,6 +12,7 @@
 -->
 ## Master
 - Update Kotlin to 1.4.10 [@gianluz] [#140](https://github.com/danger/kotlin/pull/140)
+- Migrate from moshi to kotlinx serialization [@gianluz] [#141] (https://github.com/danger/kotlin/pull/141)
 
 # 0.7.1
 
