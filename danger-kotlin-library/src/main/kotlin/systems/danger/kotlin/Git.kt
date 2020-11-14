@@ -1,7 +1,6 @@
 package systems.danger.kotlin
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.*
 
 typealias FilePath = String
 
@@ -12,12 +11,12 @@ typealias FilePath = String
  * @property createdFiles Newly created file paths relative to the git root.
  * @property deletedFiles Removed file paths relative to the git root.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Git(
-    @Json(name = "modified_files") val modifiedFiles: Array<FilePath>,
-    @Json(name = "created_files") val createdFiles: Array<FilePath>,
-    @Json(name = "deleted_files") val deletedFiles: Array<FilePath>,
-    @Json(name = "commits") val commits: List<GitCommit>
+    @SerialName("modified_files") val modifiedFiles: Array<FilePath>,
+    @SerialName("created_files") val createdFiles: Array<FilePath>,
+    @SerialName("deleted_files") val deletedFiles: Array<FilePath>,
+    @SerialName("commits") val commits: List<GitCommit>
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -50,13 +49,13 @@ data class Git(
  * @property parents SHAs for the commit's parents.
  * @property url The URL for the commit.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitCommit(
-    val sha: String?,
+    val sha: String? = null,
     val author: GitCommitAuthor,
     val committer: GitCommitAuthor,
     val message: String,
-    val parents: Array<String>?,
+    val parents: Array<String>? = null,
     val url: String
 ) {
     override fun equals(other: Any?): Boolean {
@@ -96,7 +95,7 @@ data class GitCommit(
  * @property email The email for the author.
  * @property date The ISO8601 date string for the commit.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitCommitAuthor(
         val name: String,
         val email: String,

@@ -1,19 +1,19 @@
 package systems.danger.kotlin
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.*
 
 class BitBucketServerParsingTests {
     private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(
-        DSL::class.java)
-    private val dsl
-        get() = moshi.fromJson(jsonFiles.dangerBitBucketServerJSON)
+    private val dsl: DSL
+        get() = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }.decodeFromString(jsonFiles.dangerBitBucketServerJSON)
     private val bitBucketServer: BitBucketServer
-        get() = dsl!!.danger.bitBucketServer
+        get() = dsl.danger.bitBucketServer
 
     @Test
     fun testItParsesTheBitBucketPullRequest() {
@@ -203,16 +203,16 @@ class BitBucketServerParsingTests {
 
     @Test
     fun testOnBitBucketIsTrue() {
-        assertEquals(true, dsl!!.danger.onBitBucketServer)
+        assertEquals(true, dsl.danger.onBitBucketServer)
     }
 
     @Test
     fun testOnGitHubIsFalse() {
-        assertEquals(false, dsl!!.danger.onGitHub)
+        assertEquals(false, dsl.danger.onGitHub)
     }
 
     @Test
     fun testOnGitLabIsFalse() {
-        assertEquals(false, dsl!!.danger.onGitLab)
+        assertEquals(false, dsl.danger.onGitLab)
     }
 }

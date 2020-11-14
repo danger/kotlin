@@ -1,10 +1,8 @@
 package systems.danger.kotlin
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonReader
-import com.squareup.moshi.JsonWriter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.DangerPlugin
 import systems.danger.kotlin.sdk.Violation
@@ -14,40 +12,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 private fun FilePath.readText() = File(this).readText()
-
-fun fromISO8601UTC(dateStr: String): Date? {
-    val tz = TimeZone.getTimeZone("UTC")
-    val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    df.timeZone = tz
-
-    val alternativeDf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'")
-    alternativeDf.timeZone = tz
-
-    try {
-        return df.parse(dateStr)
-    } catch (e: ParseException) {
-        try {
-            return alternativeDf.parse(dateStr)
-        } catch (e2: ParseException) {
-            e.printStackTrace()
-            e2.printStackTrace()
-        }
-    }
-
-    return null
-}
-
-class Rfc3339DateJsonAdapter : JsonAdapter<Date>() {
-    @Synchronized
-    override fun fromJson(reader: JsonReader): Date {
-        val string = reader.nextString()
-        return fromISO8601UTC(string)!!
-    }
-
-    override fun toJson(writer: JsonWriter, value: Date?) {
-        //Implementation not needed right now
-    }
-}
 
 object register {
     internal var dangerPlugins = mutableListOf<DangerPlugin>()
@@ -116,13 +80,11 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
             return dangerResults.markdowns.toList()
         }
 
-    private val moshi = Moshi.Builder()
-        .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
-        .add(KotlinJsonAdapterFactory())
-        .build()
-
     init {
-        this.danger = moshi.adapter(DSL::class.java).fromJson(jsonInputFilePath.readText())!!.danger
+        this.danger = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }.decodeFromString<DSL>(jsonInputFilePath.readText()).danger
 
         register.dangerPlugins.forEach {
             it.withContext(this)
@@ -222,7 +184,7 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 
     private fun saveDangerResults() {
-        val resultsJSON = moshi.adapter(DangerResults::class.java).toJson(dangerResults)
+        val resultsJSON = Json.encodeToString(dangerResults)
         jsonOutputFile.writeText(resultsJSON)
     }
 }

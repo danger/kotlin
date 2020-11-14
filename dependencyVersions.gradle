@@ -6,18 +6,12 @@ def group(Closure closure) {
 }
 
 // Utils
-project.ext.versionMoshi = '1.8.0'
-project.ext.groupIdMoshi = 'com.squareup.moshi'
-project.ext.artifactIdMoshiKotlin = 'moshi-kotlin'
-
 ext.utils = [
-        moshi: "$groupIdMoshi:$artifactIdMoshiKotlin:$versionMoshi"
+        // Empty
 ]
 
 ext.utilsDependencies = group {
-    includeRecursiveJar(utils.moshi) {
-        exclude group: groupIdKotlin
-    }
+    // Empty
 }
 
 project.ext.artifactIdMoshi = 'moshi'
@@ -28,12 +22,24 @@ project.ext.artifactIdOkio = 'okio'
 // Kotlin
 project.ext.versionKotlin = '1.4.10'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
+project.ext.groupIdKotlinx = 'org.jetbrains.kotlinx'
 project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
+project.ext.artifactIdKotlinSerializationJson = 'kotlinx-serialization-json'
+project.ext.artifactIdKotlinDatetime = "kotlinx-datetime"
+project.ext.versionKotlinSerializationJson = '1.0.1'
+project.ext.versionKotlinDatetime = '0.1.0'
+
 ext.kotlin = [
-        mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin"
+        mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin",
+        serialization: "$groupIdKotlinx:$artifactIdKotlinSerializationJson:$versionKotlinSerializationJson",
+        // Migrate to kotlin-datetime and replace java.util.Date
+        //datetime: "$groupIdKotlinx:$artifactIdKotlinDatetime:$versionKotlinDatetime"
 ]
 ext.kotlinDependencies = group {
     includeJar kotlin.mainKts
+    includeRecursiveJar kotlin.serialization
+    // Migrate to kotlin-datetime and replace java.util.Date
+    //includeRecursiveJar kotlin.datetime
 }
 
 // Testing

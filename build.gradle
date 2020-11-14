@@ -6,6 +6,7 @@ buildscript {
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
         classpath 'com.github.jengelman.gradle.plugins:shadow:5.0.0'
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.2"
     }
@@ -25,6 +26,9 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+        maven {
+            url = "https://kotlin.bintray.com/kotlinx/"
+        }
     }
 }
 

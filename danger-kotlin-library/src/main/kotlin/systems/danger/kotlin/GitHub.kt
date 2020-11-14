@@ -1,19 +1,21 @@
+@file:UseSerializers(DateSerializer::class)
+
 package systems.danger.kotlin
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import systems.danger.kotlin.serializers.DateSerializer
+import kotlinx.serialization.*
 import java.util.*
 
 /**
  * The GitHub metadata for your pull request.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHub(
     val issue: GitHubIssue,
-    @Json(name = "pr") val pullRequest: GitHubPR,
+    @SerialName("pr") val pullRequest: GitHubPR,
     val commits: Array<GitHubCommit>,
     val reviews: Array<GitHubReview>,
-    @Json(name = "requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
+    @SerialName("requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -40,14 +42,18 @@ data class GitHub(
     }
 }
 
+@Serializable
 enum class GitHubPullRequestState(val value: String) {
-   @Json(name = "closed")
+    @SerialName("closed")
     CLOSED("closed"),
-   @Json(name = "open")
+
+    @SerialName("open")
     OPEN("open"),
-   @Json(name = "merged")
+
+    @SerialName("merged")
     MERGED("merged"),
-   @Json(name = "locked")
+
+    @SerialName("locked")
     LOCKED("locked")
 }
 
@@ -78,7 +84,7 @@ enum class GitHubPullRequestState(val value: String) {
  * @property milestone The milestone of the pull request
  * @property htmlURL The link back to this PR as user-facing
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubPR(
     val number: Int,
     val title: String,
@@ -86,23 +92,23 @@ data class GitHubPR(
     val user: GitHubUser,
     val assignee: GitHubUser?,
     val assignees: Array<GitHubUser>,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
-    @Json(name = "merged_at") val mergedAt: Date?,
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
+    @SerialName("merged_at") val mergedAt: Date? = null,
     val head: GitHubMergeRef,
     val base: GitHubMergeRef,
     val state: GitHubPullRequestState,
-    @Json(name = "locked") val isLocked: Boolean,
-    @Json(name = "merged") val isMerged: Boolean?,
-    @Json(name = "commits") val commitCount: Int?,
-    @Json(name = "comments") val commentCount: Int?,
-    @Json(name = "review_comments") val reviewCommentCount: Int?,
+    @SerialName("locked") val isLocked: Boolean,
+    @SerialName("merged") val isMerged: Boolean?,
+    @SerialName("commits") val commitCount: Int?,
+    @SerialName("comments") val commentCount: Int?,
+    @SerialName("review_comments") val reviewCommentCount: Int?,
     val additions: Int?,
     val deletions: Int?,
-    @Json(name = "changed_files") val changedFiles: Int?,
+    @SerialName("changed_files") val changedFiles: Int?,
     val milestone: GitHubMilestone?,
-    @Json(name = "html_url") val htmlURL: String
+    @SerialName("html_url") val htmlURL: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -171,7 +177,7 @@ data class GitHubPR(
  * @property id The UUID for the team.
  * @property name The team name.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubTeam(
     val id: Long,
     val name: String
@@ -183,7 +189,7 @@ data class GitHubTeam(
  * @property users The list of users of whom a review has been requested..
  * @property teams The list of teams of whom a review has been requested.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubRequestedReviewers(
     val users: Array<GitHubUser>,
     val teams: Array<GitHubTeam>
@@ -216,7 +222,7 @@ data class GitHubRequestedReviewers(
  * @property user The user that owns the merge reference e.g. "artsy".
  * @property repo The repo from which the reference comes from.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubMergeRef(
     val label: String,
     val ref: String,
@@ -236,27 +242,32 @@ data class GitHubMergeRef(
  * @property isFork A boolean stating whether the repo is a fork.
  * @property htmlURL The root web URL for the repo, e.g. https://github.com/artsy/emission
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubRepo(
     val id: Long,
     val name: String,
-    @Json(name = "full_name") val fullName: String,
-    @Json(name = "private") val isPrivate: Boolean,
+    @SerialName("full_name") val fullName: String,
+    @SerialName("private") val isPrivate: Boolean,
     val description: String?,
-    @Json(name = "fork") val isFork: Boolean,
-    @Json(name = "html_url") val htmlURL: String
+    @SerialName("fork") val isFork: Boolean,
+    @SerialName("html_url") val htmlURL: String
 )
 
+@Serializable
 enum class GitHubReviewState(val value: String) {
-    @Json(name = "APPROVED")
+    @SerialName("APPROVED")
     APPROVED("APPROVED"),
-    @Json(name = "CHANGES_REQUESTED")
+
+    @SerialName("CHANGES_REQUESTED")
     CHANGES_REQUESTED("CHANGES_REQUESTED"),
-    @Json(name = "COMMENTED")
+
+    @SerialName("COMMENTED")
     COMMENTED("COMMENTED"),
-    @Json(name = "PENDING")
+
+    @SerialName("PENDING")
     PENDING("PENDING"),
-    @Json(name = "DISMISSED")
+
+    @SerialName("DISMISSED")
     DISMISSED("DISMISSED")
 }
 
@@ -269,12 +280,12 @@ enum class GitHubReviewState(val value: String) {
  * @property commitId The commit ID the review was made on (if a review was made).
  * @property state The state of the review (if a review was made).
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubReview(
     val user: GitHubUser,
     val id: Long?,
     val body: String?,
-    @Json(name = "commit_id") val commitId: String?,
+    @SerialName("commit_id") val commitId: String?,
     val state: GitHubReviewState?
 )
 
@@ -287,7 +298,7 @@ data class GitHubReview(
  * @property commit The raw commit metadata.
  * @property committer The GitHub user who shipped the code.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubCommit(
     val sha: String,
     val url: String,
@@ -296,12 +307,15 @@ data class GitHubCommit(
     val committer: GitHubUser?
 )
 
+@Serializable
 enum class GitHubIssueState(val value: String) {
-    @Json(name = "closed")
+    @SerialName("closed")
     CLOSED("closed"),
-    @Json(name = "open")
+
+    @SerialName("open")
     OPEN("open"),
-    @Json(name = "locked")
+
+    @SerialName("locked")
     LOCKED("locked")
 }
 
@@ -331,22 +345,22 @@ enum class GitHubIssueState(val value: String) {
  * @property changedFiles The number of files changed in the pull request.
  * @property milestone The milestone of the pull request
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubIssue(
     val id: Long,
     val number: Int,
     val title: String,
     val user: GitHubUser,
     val state: GitHubIssueState,
-    @Json(name = "locked") val isLocked: Boolean,
+    @SerialName("locked") val isLocked: Boolean,
     val body: String,
-    @Json(name = "comments") val commentCount: Int,
+    @SerialName("comments") val commentCount: Int,
     val assignee: GitHubUser?,
     val assignees: Array<GitHubUser>,
     val milestone: GitHubMilestone?,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
     val labels: Array<GitHubIssueLabel>
 ) {
     override fun equals(other: Any?): Boolean {
@@ -400,20 +414,23 @@ data class GitHubIssue(
  * @property name The name of the label.
  * @property color TThe color associated with this label.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubIssueLabel(
-        val id: Long,
-        val url: String,
-        val name: String,
-        val color: String
+    val id: Long,
+    val url: String,
+    val name: String,
+    val color: String
 )
 
+@Serializable
 enum class GitHubUserType {
-    @Json(name = "User")
+    @SerialName("User")
     USER,
-    @Json(name = "Organization")
+
+    @SerialName("Organization")
     ORGANIZATION,
-    @Json(name = "Bot")
+
+    @SerialName("Bot")
     BOT
 }
 
@@ -424,21 +441,24 @@ enum class GitHubUserType {
  * @property login The handle for the user or organization.
  * @property type The type of user: user or organization.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubUser(
     val id: Long,
     val login: String,
     val type: GitHubUserType,
-    @Json(name="avatar_url")
+    @SerialName("avatar_url")
     val avatarUrl: String
 )
 
+@Serializable
 enum class GitHubMilestoneState(val value: String) {
-    @Json(name = "close")
+    @SerialName("close")
     CLOSE("close"),
-    @Json(name = "open")
+
+    @SerialName("open")
     OPEN("open"),
-    @Json(name = "all")
+
+    @SerialName("all")
     ALL("all")
 }
 
@@ -458,18 +478,18 @@ enum class GitHubMilestoneState(val value: String) {
  * @property closedAt The date for when the milestone was closed.
  * @property dueOn The date for the due of this milestone.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubMilestone(
     val id: Long,
     val number: Int,
     val state: GitHubMilestoneState,
     val title: String,
-    val description: String?,
+    val description: String? = null,
     val creator: GitHubUser,
-    @Json(name = "open_issues") val openIssues: Int,
-    @Json(name = "closed_issues") val closedIssues: Int,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
-    @Json(name = "due_on") val dueOn: Date?
+    @SerialName("open_issues") val openIssues: Int,
+    @SerialName("closed_issues") val closedIssues: Int,
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
+    @SerialName("due_on") val dueOn: Date? = null
 )
