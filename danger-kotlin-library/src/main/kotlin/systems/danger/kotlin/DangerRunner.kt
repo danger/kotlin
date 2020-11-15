@@ -180,7 +180,9 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 
     private fun saveDangerResults() {
-        val resultsJSON = Json.encodeToString(dangerResults)
+        val resultsJSON = Json {
+            encodeDefaults = true
+        }.encodeToString(dangerResults)
         jsonOutputFile.writeText(resultsJSON)
     }
 }
