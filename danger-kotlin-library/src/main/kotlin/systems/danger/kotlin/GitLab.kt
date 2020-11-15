@@ -34,9 +34,9 @@ data class GitLabUserMergeData(
 @Serializable
 data class GitLabMergeRequest(
     @SerialName("allow_collaboration")
-    val allowCollaboration: Boolean?,
+    val allowCollaboration: Boolean = false,
     @SerialName("allow_maintainer_to_push")
-    val allowMaintainerToPush: Boolean?,
+    val allowMaintainerToPush: Boolean = false,
     @SerialName("approvals_before_merge")
     val approvalsBeforeMerge: Int?,
     val assignee: GitLabUser?,
