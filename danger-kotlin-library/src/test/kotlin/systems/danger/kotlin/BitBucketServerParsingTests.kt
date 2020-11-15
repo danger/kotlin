@@ -1,19 +1,16 @@
 package systems.danger.kotlin
 
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
+import systems.danger.kotlin.utils.TestUtils
 
 class BitBucketServerParsingTests {
-    private val jsonFiles = JSONFiles()
-    private val dsl: DSL
-        get() = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }.decodeFromString(jsonFiles.dangerBitBucketServerJSON)
-    private val bitBucketServer: BitBucketServer
-        get() = dsl.danger.bitBucketServer
+
+    private val dsl: DSL = TestUtils.Json.decodeFromString(JSONFiles.dangerBitBucketServerJSON)
+
+    private val bitBucketServer: BitBucketServer = dsl.danger.bitBucketServer
 
     @Test
     fun testItParsesTheBitBucketPullRequest() {

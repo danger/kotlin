@@ -1,18 +1,15 @@
 package systems.danger.kotlin
 
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import org.junit.Assert.*
 import org.junit.Test
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
+import systems.danger.kotlin.utils.TestUtils
 import java.util.*
 
 class GitLabParsingTests {
-    private val jsonFiles = JSONFiles()
     private val dsl: DSL
-        get() = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }.decodeFromString(jsonFiles.gitlabJSON)
+        get() = TestUtils.Json.decodeFromString(JSONFiles.gitlabJSON)
     private val gitLab: GitLab
         get() = dsl.danger.gitlab
 

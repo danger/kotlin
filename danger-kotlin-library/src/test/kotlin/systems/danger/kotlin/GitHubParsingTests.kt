@@ -4,17 +4,13 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.Assert.*
 import org.junit.Test
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
+import systems.danger.kotlin.utils.TestUtils
 import java.util.*
 
 class GitHubParsingTests {
-    private val jsonFiles = JSONFiles()
-    private val dsl: DSL
-        get() = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }.decodeFromString(jsonFiles.githubDangerJSON)
-    private val github
-        get() = dsl.danger.github
+    private val dsl: DSL = TestUtils.Json.decodeFromString(JSONFiles.githubDangerJSON)
+    private val github = dsl.danger.github
 
     @Test
     fun testItParsesTheGithubPullRequest() {
@@ -201,7 +197,7 @@ class GitHubParsingTests {
         val dsl: DSL = Json {
             ignoreUnknownKeys = true
             isLenient = true
-        }.decodeFromString(jsonFiles.githubWithSomeNullsAttributeDangerJSON)
+        }.decodeFromString(JSONFiles.githubWithSomeNullsAttributeDangerJSON)
         val github = dsl.danger.github
 
         with(github.issue.milestone!!) {
