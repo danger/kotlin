@@ -23,9 +23,9 @@ class BitBucketServerParsingTests {
                 "test",
                 null,
                 "user@email.com",
+                true,
                 null,
-                null,
-                null
+                BitBucketServerUser.Type.NORMAL
             )
             assertEquals(expectedUser, author.user)
 
@@ -62,7 +62,7 @@ class BitBucketServerParsingTests {
                 "user@email.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             assertEquals(1, participants.count())
             assertEquals(expectedPartecipant, participants[0].user)
@@ -71,7 +71,7 @@ class BitBucketServerParsingTests {
             assertEquals(1518863923273, createdAt)
             assertEquals(false, isLocked)
             assertEquals(true, open)
-            assertEquals("OPEN", state)
+            assertEquals(BitBucketServerPR.State.OPEN, state)
             assertEquals("Pull request title", title)
 
             val expectedReviewerUser = BitBucketServerUser(
@@ -81,7 +81,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedReviewer = BitBucketServerReviewer(
                 expectedReviewerUser,
@@ -103,7 +103,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedParent = BitBucketServerCommitParent(
                 "c62ada76533a2de045d4c6062988ba84df140729",
@@ -117,7 +117,7 @@ class BitBucketServerParsingTests {
                 expectedUser,
                 1519442341000,
                 "Modify and remove files",
-                arrayOf(expectedParent)
+                listOf(expectedParent)
             )
             assertEquals(expectedCommit, first())
             assertEquals(2, count())
@@ -134,11 +134,11 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val commentText = "test"
             val expectedProperty =
-                BitBucketServerCommentInnerProperties(1, null)
+                BitBucketServerCommentInnerProperties(1, listOf())
             val expectedCommentDetail = BitBucketServerCommentDetail(
                 10,
                 23,
@@ -146,9 +146,9 @@ class BitBucketServerParsingTests {
                 expectedUser,
                 1518939353345,
                 1519449132488,
-                arrayOf(),
+                listOf(),
                 expectedProperty,
-                arrayOf<BitBucketServerCommentTask>()
+                listOf()
             )
             val expectedComment = BitBucketServerComment(
                 52,
@@ -186,7 +186,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "test",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedActivity = BitBucketServerActivity(
                 61,

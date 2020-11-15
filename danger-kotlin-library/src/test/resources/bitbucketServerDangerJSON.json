@@ -65,7 +65,8 @@
           "status": "UNAPPROVED",
           "user": {
             "emailAddress": "user@email.com",
-            "name": "test"
+            "name": "test",
+            "active": true
           }
         },
         "closed": false,

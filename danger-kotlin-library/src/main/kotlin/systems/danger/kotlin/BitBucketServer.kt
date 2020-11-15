@@ -15,34 +15,10 @@ data class BitBucketServer(
     val metadata: BitBucketServerMetadata,
     @SerialName("pr")
     val pullRequest: BitBucketServerPR,
-    val commits: Array<BitBucketServerCommit>,
-    val comments: Array<BitBucketServerComment>,
-    val activities: Array<BitBucketServerActivity>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as BitBucketServer
-
-        if (metadata != other.metadata) return false
-        if (pullRequest != other.pullRequest) return false
-        if (!commits.contentEquals(other.commits)) return false
-        if (!comments.contentEquals(other.comments)) return false
-        if (!activities.contentEquals(other.activities)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = metadata.hashCode()
-        result = 31 * result + pullRequest.hashCode()
-        result = 31 * result + commits.contentHashCode()
-        result = 31 * result + comments.contentHashCode()
-        result = 31 * result + activities.contentHashCode()
-        return result
-    }
-}
+    val commits: List<BitBucketServerCommit>,
+    val comments: List<BitBucketServerComment>,
+    val activities: List<BitBucketServerActivity>
+)
 
 /**
  * Defines and activity such as OPENING, CLOSING, MERGING or UPDATING a pull request
@@ -130,42 +106,10 @@ data class BitBucketServerCommentDetail(
     val createdAt: Long,
     @SerialName("updatedDate")
     val updatedAt: Long,
-    val comments: Array<BitBucketServerCommentDetail>,
+    val comments: List<BitBucketServerCommentDetail>,
     val properties: BitBucketServerCommentInnerProperties,
-    val tasks: Array<BitBucketServerCommentTask>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as BitBucketServerCommentDetail
-
-        if (id != other.id) return false
-        if (version != other.version) return false
-        if (text != other.text) return false
-        if (author != other.author) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (!comments.contentEquals(other.comments)) return false
-        if (properties != other.properties) return false
-        if (!tasks.contentEquals(other.tasks)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + version
-        result = 31 * result + text.hashCode()
-        result = 31 * result + author.hashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + comments.contentHashCode()
-        result = 31 * result + properties.hashCode()
-        result = 31 * result + tasks.contentHashCode()
-        return result
-    }
-}
+    val tasks: List<BitBucketServerCommentTask>
+)
 
 /**
  * Task associated with a comment
@@ -193,29 +137,8 @@ data class BitBucketServerCommentTask(
 @Serializable
 data class BitBucketServerCommentInnerProperties(
     val repositoryId: Int,
-    val issues: Array<String>? = null
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as BitBucketServerCommentInnerProperties
-
-        if (repositoryId != other.repositoryId) return false
-        if (issues != null) {
-            if (other.issues == null) return false
-            if (!issues.contentEquals(other.issues)) return false
-        } else if (other.issues != null) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = repositoryId
-        result = 31 * result + (issues?.contentHashCode() ?: 0)
-        return result
-    }
-}
+    val issues: List<String> = listOf()
+)
 
 /**
  * A BitBucket server commit
@@ -237,38 +160,8 @@ data class BitBucketServerCommit(
     val committer: BitBucketServerUser? = null,
     val committerTimestamp: Long,
     val message: String,
-    val parents: Array<BitBucketServerCommitParent>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as BitBucketServerCommit
-
-        if (id != other.id) return false
-        if (displayId != other.displayId) return false
-        if (author != other.author) return false
-        if (authorTimestamp != other.authorTimestamp) return false
-        if (committer != other.committer) return false
-        if (committerTimestamp != other.committerTimestamp) return false
-        if (message != other.message) return false
-        if (!parents.contentEquals(other.parents)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + displayId.hashCode()
-        result = 31 * result + author.hashCode()
-        result = 31 * result + authorTimestamp.hashCode()
-        result = 31 * result + (committer?.hashCode() ?: 0)
-        result = 31 * result + committerTimestamp.hashCode()
-        result = 31 * result + message.hashCode()
-        result = 31 * result + parents.contentHashCode()
-        return result
-    }
-}
+    val parents: List<BitBucketServerCommitParent>
+)
 
 /**
  * A commit's parent
@@ -305,7 +198,7 @@ data class BitBucketServerPR(
     val version: Int,
     val title: String,
     val description: String? = null,
-    val state: String,
+    val state: State,
     val open: Boolean,
     val closed: Boolean,
     @SerialName("createdDate")
@@ -317,51 +210,12 @@ data class BitBucketServerPR(
     @SerialName("locked")
     val isLocked: Boolean,
     val author: BitBucketServerParticipant,
-    val reviewers: Array<BitBucketServerReviewer>,
-    val participants: Array<BitBucketServerParticipant>
+    val reviewers: List<BitBucketServerReviewer>,
+    val participants: List<BitBucketServerParticipant>
 ) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as BitBucketServerPR
-
-        if (id != other.id) return false
-        if (version != other.version) return false
-        if (title != other.title) return false
-        if (description != other.description) return false
-        if (state != other.state) return false
-        if (open != other.open) return false
-        if (closed != other.closed) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (fromRef != other.fromRef) return false
-        if (toRef != other.toRef) return false
-        if (isLocked != other.isLocked) return false
-        if (author != other.author) return false
-        if (!reviewers.contentEquals(other.reviewers)) return false
-        if (!participants.contentEquals(other.participants)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id
-        result = 31 * result + version
-        result = 31 * result + title.hashCode()
-        result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + state.hashCode()
-        result = 31 * result + open.hashCode()
-        result = 31 * result + closed.hashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + fromRef.hashCode()
-        result = 31 * result + toRef.hashCode()
-        result = 31 * result + isLocked.hashCode()
-        result = 31 * result + author.hashCode()
-        result = 31 * result + reviewers.contentHashCode()
-        result = 31 * result + participants.contentHashCode()
-        return result
+    @Serializable
+    enum class State {
+        OPEN, MERGED, SUPERSEDED, DECLINED
     }
 }
 
@@ -414,7 +268,8 @@ data class BitBucketServerRepo(
     val scmId: String,
     @SerialName("public")
     val isPublic: Boolean,
-    val forkable: Boolean,
+    @SerialName("forkable")
+    val isForkable: Boolean,
     val project: BitBucketServerProject
 )
 
@@ -452,7 +307,12 @@ data class BitBucketServerUser(
     val name: String,
     val displayName: String? = null,
     val emailAddress: String,
-    val active: Boolean? = null,
+    val active: Boolean = false,
     val slug: String? = null,
-    val type: String? = null
-)
+    val type: Type = Type.NORMAL
+) {
+    @Serializable
+    enum class Type {
+        NORMAL, SERVICE
+    }
+}
