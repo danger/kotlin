@@ -7,9 +7,6 @@ import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.DangerPlugin
 import systems.danger.kotlin.sdk.Violation
 import java.io.File
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 private fun FilePath.readText() = File(this).readText()
 
@@ -59,7 +56,10 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
 
     val jsonOutputFile: File = File(jsonOutputPath)
 
-    val danger: DangerDSL
+    val danger: DangerDSL = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }.decodeFromString<DSL>(jsonInputFilePath.readText()).danger
 
     val dangerResults: DangerResults = DangerResults()
 
@@ -81,10 +81,6 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
         }
 
     init {
-        this.danger = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }.decodeFromString<DSL>(jsonInputFilePath.readText()).danger
 
         register.dangerPlugins.forEach {
             it.withContext(this)
@@ -164,22 +160,22 @@ private class DangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath
     }
 
     private fun warn(violation: Violation) {
-        dangerResults.warnings += (violation)
+        dangerResults.warnings.add(violation)
         saveDangerResults()
     }
 
     private fun fail(violation: Violation) {
-        dangerResults.fails += violation
+        dangerResults.fails.add(violation)
         saveDangerResults()
     }
 
     private fun message(violation: Violation) {
-        dangerResults.messages += violation
+        dangerResults.messages.add(violation)
         saveDangerResults()
     }
 
     private fun markdown(violation: Violation) {
-        dangerResults.markdowns += violation
+        dangerResults.markdowns.add(violation)
         saveDangerResults()
     }
 
