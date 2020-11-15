@@ -2,7 +2,7 @@ package systems.danger.kotlin
 
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import org.junit.Assert
+import org.junit.Assert.*
 import org.junit.Test
 
 class GitParsingTests {
@@ -18,11 +18,11 @@ class GitParsingTests {
     fun testItParsesCorrectlyTheGitFiles() {
         val git = dsl.danger.git
 
-        Assert.assertTrue(expectedModifiedFiles.containsAll(git.modifiedFiles.toList()))
-        Assert.assertTrue(git.createdFiles[0] == ".ruby-version")
+        assertTrue(expectedModifiedFiles.containsAll(git.modifiedFiles.toList()))
+        assertTrue(git.createdFiles[0] == ".ruby-version")
     }
 
-    private val expectedModifiedFiles = arrayListOf(
+    private val expectedModifiedFiles = listOf(
         ".travis.yml",
         "Kiosk.xcodeproj/project.pbxproj",
         "Kiosk/App/Logger.swift",
