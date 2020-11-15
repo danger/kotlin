@@ -24,14 +24,14 @@ class GitLabParsingTests {
             assertEquals(1, approvalsBeforeMerge)
             val orta = GitLabUser(
                 "https://secure.gravatar.com/avatar/f116cb3be23153ec08b94e8bd4dbcfeb?s=80&d=identicon", 377669, "Orta",
-                GitLabUserState.active, "orta", "https://gitlab.com/orta"
+                GitLabUserState.ACTIVE, "orta", "https://gitlab.com/orta"
             )
             assertEquals(orta, assignee)
             val fmeloni = GitLabUser(
                 "https://secure.gravatar.com/avatar/3d90e967de2beab6d44cfadbb4976b87?s=80&d=identicon",
                 3331525,
                 "Franco Meloni",
-                GitLabUserState.active,
+                GitLabUserState.ACTIVE,
                 "f-meloni",
                 "https://gitlab.com/f-meloni"
             )
@@ -54,7 +54,7 @@ class GitLabParsingTests {
             assertEquals(182, iid)
             assertEquals(Date(1554942802492), latestBuildFinishedAt)
             assertEquals(Date(1554942022492), latestBuildStartedAt)
-            assertArrayEquals(arrayOf(), labels)
+            assertEquals(listOf<String>(), labels)
             assertEquals("377a24fb7a0f30364f089f7bca67752a8b61f477", mergeCommitSha)
             assertEquals(Date(1554943042492), mergedAt)
             assertEquals(orta, mergedBy)
@@ -67,7 +67,7 @@ class GitLabParsingTests {
                 2,
                 1000,
                 Date(1554933465346),
-                GitLabMilestoneState.closed,
+                GitLabMilestoneState.CLOSED,
                 "Test Milestone",
                 Date(1554933465346),
                 "https://gitlab.com/milestone"
@@ -77,7 +77,7 @@ class GitLabParsingTests {
                 50,
                 "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f",
                 "621bc3348549e51c5bd6ea9f094913e9e4667c7b",
-                GitLabPipelineStatus.success,
+                GitLabPipelineStatus.SUCCESS,
                 "https://gitlab.com/danger-systems/danger.systems/pipeline/621bc3348549e51c5bd6ea9f094913e9e4667c7b"
             )
             assertEquals(expectedPipeline, pipeline)
@@ -86,7 +86,7 @@ class GitLabParsingTests {
             assertEquals(null, shouldRemoveSourceBranch)
             assertEquals("patch-2", sourceBranch)
             assertEquals("10132593", sourceProjectId)
-            assertEquals(GitLabMergeRequestState.merged, state)
+            assertEquals(GitLabMergeRequestState.MERGED, state)
             assertEquals(false, subscribed)
             assertEquals("master", targetBranch)
             assertEquals("1620437", targetProjectId)

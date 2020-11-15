@@ -44,7 +44,6 @@ data class GitLabMergeRequest(
     @SerialName("changes_count")
     val changesCount: String,
     @SerialName("closed_at")
-
     val closedAt: Date? = null,
     @SerialName("closed_by")
     val closedBy: GitLabUser?,
@@ -53,7 +52,6 @@ data class GitLabMergeRequest(
     val diffRefs: GitLabDiffRefs,
     val downvotes: Int,
     @SerialName("first_deployed_to_production_at")
-
     val firstDeployedToProductionAt: Date? = null,
     @SerialName("force_remove_source_branch")
     val forceRemoveSourceBranch: Boolean,
@@ -65,7 +63,7 @@ data class GitLabMergeRequest(
     @SerialName("latest_build_started_at")
 
     val latestBuildStartedAt: Date? = null,
-    val labels: Array<String>,
+    val labels: List<String>,
     @SerialName("merge_commit_sha")
     val mergeCommitSha: String? = null,
     @SerialName("merged_at")
@@ -105,100 +103,6 @@ data class GitLabMergeRequest(
 ) {
     val canMerge: Boolean
         get() = this.userMergeData.canMerge
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitLabMergeRequest
-
-        if (allowCollaboration != other.allowCollaboration) return false
-        if (allowMaintainerToPush != other.allowMaintainerToPush) return false
-        if (approvalsBeforeMerge != other.approvalsBeforeMerge) return false
-        if (assignee != other.assignee) return false
-        if (author != other.author) return false
-        if (changesCount != other.changesCount) return false
-        if (closedAt != other.closedAt) return false
-        if (closedBy != other.closedBy) return false
-        if (description != other.description) return false
-        if (diffRefs != other.diffRefs) return false
-        if (downvotes != other.downvotes) return false
-        if (firstDeployedToProductionAt != other.firstDeployedToProductionAt) return false
-        if (forceRemoveSourceBranch != other.forceRemoveSourceBranch) return false
-        if (id != other.id) return false
-        if (iid != other.iid) return false
-        if (latestBuildFinishedAt != other.latestBuildFinishedAt) return false
-        if (latestBuildStartedAt != other.latestBuildStartedAt) return false
-        if (!labels.contentEquals(other.labels)) return false
-        if (mergeCommitSha != other.mergeCommitSha) return false
-        if (mergedAt != other.mergedAt) return false
-        if (mergedBy != other.mergedBy) return false
-        if (mergeOnPipelineSuccess != other.mergeOnPipelineSuccess) return false
-        if (milestone != other.milestone) return false
-        if (pipeline != other.pipeline) return false
-        if (projectId != other.projectId) return false
-        if (sha != other.sha) return false
-        if (shouldRemoveSourceBranch != other.shouldRemoveSourceBranch) return false
-        if (sourceBranch != other.sourceBranch) return false
-        if (sourceProjectId != other.sourceProjectId) return false
-        if (state != other.state) return false
-        if (subscribed != other.subscribed) return false
-        if (targetBranch != other.targetBranch) return false
-        if (targetProjectId != other.targetProjectId) return false
-        if (timeStats != other.timeStats) return false
-        if (userMergeData != other.userMergeData) return false
-        if (title != other.title) return false
-        if (upvotes != other.upvotes) return false
-        if (userNotesCount != other.userNotesCount) return false
-        if (webUrl != other.webUrl) return false
-        if (workInProgress != other.workInProgress) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = allowCollaboration.hashCode()
-        result = 31 * result + allowMaintainerToPush.hashCode()
-        result = 31 * result + approvalsBeforeMerge.hashCode()
-        result = 31 * result + (assignee?.hashCode() ?: 0)
-        result = 31 * result + author.hashCode()
-        result = 31 * result + changesCount.hashCode()
-        result = 31 * result + closedAt.hashCode()
-        result = 31 * result + closedBy.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + diffRefs.hashCode()
-        result = 31 * result + downvotes
-        result = 31 * result + (firstDeployedToProductionAt?.hashCode() ?: 0)
-        result = 31 * result + forceRemoveSourceBranch.hashCode()
-        result = 31 * result + id
-        result = 31 * result + iid
-        result = 31 * result + latestBuildFinishedAt.hashCode()
-        result = 31 * result + latestBuildStartedAt.hashCode()
-        result = 31 * result + labels.contentHashCode()
-        result = 31 * result + (mergeCommitSha?.hashCode() ?: 0)
-        result = 31 * result + (mergedAt?.hashCode() ?: 0)
-        result = 31 * result + (mergedBy?.hashCode() ?: 0)
-        result = 31 * result + mergeOnPipelineSuccess.hashCode()
-        result = 31 * result + (milestone?.hashCode() ?: 0)
-        result = 31 * result + pipeline.hashCode()
-        result = 31 * result + projectId.hashCode()
-        result = 31 * result + sha.hashCode()
-        result = 31 * result + (shouldRemoveSourceBranch?.hashCode() ?: 0)
-        result = 31 * result + sourceBranch.hashCode()
-        result = 31 * result + sourceProjectId.hashCode()
-        result = 31 * result + state.hashCode()
-        result = 31 * result + subscribed.hashCode()
-        result = 31 * result + targetBranch.hashCode()
-        result = 31 * result + targetProjectId.hashCode()
-        result = 31 * result + timeStats.hashCode()
-        result = 31 * result + userMergeData.hashCode()
-        result = 31 * result + title.hashCode()
-        result = 31 * result + upvotes
-        result = 31 * result + userNotesCount
-        result = 31 * result + webUrl.hashCode()
-        result = 31 * result + workInProgress.hashCode()
-        return result
-    }
 }
 
 @Serializable
@@ -222,38 +126,34 @@ data class GitLabMetadata(
 @Serializable
 enum class GitLabMergeRequestState {
     @SerialName("closed")
-    closed,
+    CLOSED,
 
     @SerialName("locked")
-    locked,
+    LOCKED,
 
     @SerialName("merged")
-    merged,
+    MERGED,
 
     @SerialName("opened")
-    opened
+    OPENED
 }
 
 @Serializable
 data class GitLabMilestone(
     @SerialName("created_at")
-
     val createdAt: Date,
     val description: String,
     @SerialName("due_date")
-
     val dueDate: Date,
     val id: Int,
     val iid: Int,
     @SerialName("project_id")
     val projectID: Int,
     @SerialName("start_date")
-
     val startDate: Date,
     val state: GitLabMilestoneState,
     val title: String,
     @SerialName("updated_at")
-
     val updatedAt: Date,
     @SerialName("web_url")
     val webUrl: String
@@ -262,10 +162,10 @@ data class GitLabMilestone(
 @Serializable
 enum class GitLabMilestoneState {
     @SerialName("active")
-    active,
+    ACTIVE,
 
     @SerialName("closed")
-    closed
+    CLOSED
 }
 
 @Serializable
@@ -281,22 +181,22 @@ data class GitLabPipeline(
 @Serializable
 enum class GitLabPipelineStatus {
     @SerialName("cancelled")
-    cancelled,
+    CANCELLED,
 
     @SerialName("failed")
-    failed,
+    FAILED,
 
     @SerialName("pending")
-    pending,
+    PENDING,
 
     @SerialName("running")
-    running,
+    RUNNING,
 
     @SerialName("skipped")
-    skipped,
+    SKIPPED,
 
     @SerialName("success")
-    success
+    SUCCESS
 }
 
 @Serializable
@@ -314,8 +214,8 @@ data class GitLabUser(
 @Serializable
 enum class GitLabUserState {
     @SerialName("active")
-    active,
+    ACTIVE,
 
     @SerialName("blocked")
-    blocked
+    BLOCKED
 }
