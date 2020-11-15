@@ -13,48 +13,24 @@ import java.util.*
 data class GitHub(
     val issue: GitHubIssue,
     @SerialName("pr") val pullRequest: GitHubPR,
-    val commits: Array<GitHubCommit>,
-    val reviews: Array<GitHubReview>,
+    val commits: List<GitHubCommit>,
+    val reviews: List<GitHubReview>,
     @SerialName("requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHub
-
-        if (issue != other.issue) return false
-        if (pullRequest != other.pullRequest) return false
-        if (!commits.contentEquals(other.commits)) return false
-        if (!reviews.contentEquals(other.reviews)) return false
-        if (requestedReviewers != other.requestedReviewers) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = issue.hashCode()
-        result = 31 * result + pullRequest.hashCode()
-        result = 31 * result + commits.contentHashCode()
-        result = 31 * result + reviews.contentHashCode()
-        result = 31 * result + requestedReviewers.hashCode()
-        return result
-    }
-}
+)
 
 @Serializable
-enum class GitHubPullRequestState(val value: String) {
+enum class GitHubPullRequestState {
     @SerialName("closed")
-    CLOSED("closed"),
+    CLOSED,
 
     @SerialName("open")
-    OPEN("open"),
+    OPEN,
 
     @SerialName("merged")
-    MERGED("merged"),
+    MERGED,
 
     @SerialName("locked")
-    LOCKED("locked")
+    LOCKED
 }
 
 /**
@@ -91,7 +67,7 @@ data class GitHubPR(
     val body: String,
     val user: GitHubUser,
     val assignee: GitHubUser?,
-    val assignees: Array<GitHubUser>,
+    val assignees: List<GitHubUser>,
     @SerialName("created_at") val createdAt: Date,
     @SerialName("updated_at") val updatedAt: Date,
     @SerialName("closed_at") val closedAt: Date? = null,
@@ -109,67 +85,7 @@ data class GitHubPR(
     @SerialName("changed_files") val changedFiles: Int?,
     val milestone: GitHubMilestone?,
     @SerialName("html_url") val htmlURL: String
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubPR
-
-        if (number != other.number) return false
-        if (title != other.title) return false
-        if (body != other.body) return false
-        if (user != other.user) return false
-        if (assignee != other.assignee) return false
-        if (!assignees.contentEquals(other.assignees)) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (closedAt != other.closedAt) return false
-        if (mergedAt != other.mergedAt) return false
-        if (head != other.head) return false
-        if (base != other.base) return false
-        if (state != other.state) return false
-        if (isLocked != other.isLocked) return false
-        if (isMerged != other.isMerged) return false
-        if (commitCount != other.commitCount) return false
-        if (commentCount != other.commentCount) return false
-        if (reviewCommentCount != other.reviewCommentCount) return false
-        if (additions != other.additions) return false
-        if (deletions != other.deletions) return false
-        if (changedFiles != other.changedFiles) return false
-        if (milestone != other.milestone) return false
-        if (htmlURL != other.htmlURL) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = number
-        result = 31 * result + title.hashCode()
-        result = 31 * result + body.hashCode()
-        result = 31 * result + user.hashCode()
-        result = 31 * result + (assignee?.hashCode() ?: 0)
-        result = 31 * result + assignees.contentHashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + closedAt.hashCode()
-        result = 31 * result + mergedAt.hashCode()
-        result = 31 * result + head.hashCode()
-        result = 31 * result + base.hashCode()
-        result = 31 * result + state.hashCode()
-        result = 31 * result + isLocked.hashCode()
-        result = 31 * result + (isMerged?.hashCode() ?: 0)
-        result = 31 * result + (commitCount ?: 0)
-        result = 31 * result + (commentCount ?: 0)
-        result = 31 * result + (reviewCommentCount ?: 0)
-        result = 31 * result + (additions ?: 0)
-        result = 31 * result + (deletions ?: 0)
-        result = 31 * result + (changedFiles ?: 0)
-        result = 31 * result + (milestone?.hashCode() ?: 0)
-        result = 31 * result + htmlURL.hashCode()
-        return result
-    }
-}
+)
 
 /**
  * A GitHub team
@@ -191,27 +107,9 @@ data class GitHubTeam(
  */
 @Serializable
 data class GitHubRequestedReviewers(
-    val users: Array<GitHubUser>,
-    val teams: Array<GitHubTeam>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubRequestedReviewers
-
-        if (!users.contentEquals(other.users)) return false
-        if (!teams.contentEquals(other.teams)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = users.contentHashCode()
-        result = 31 * result + teams.contentHashCode()
-        return result
-    }
-}
+    val users: List<GitHubUser>,
+    val teams: List<GitHubTeam>
+)
 
 /**
  * Represents a branch in PR
@@ -246,29 +144,24 @@ data class GitHubMergeRef(
 data class GitHubRepo(
     val id: Long,
     val name: String,
-    @SerialName("full_name") val fullName: String,
-    @SerialName("private") val isPrivate: Boolean,
+    @SerialName("full_name")
+    val fullName: String,
+    @SerialName("private")
+    val isPrivate: Boolean,
     val description: String?,
-    @SerialName("fork") val isFork: Boolean,
-    @SerialName("html_url") val htmlURL: String
+    @SerialName("fork")
+    val isFork: Boolean,
+    @SerialName("html_url")
+    val htmlURL: String
 )
 
 @Serializable
-enum class GitHubReviewState(val value: String) {
-    @SerialName("APPROVED")
-    APPROVED("APPROVED"),
-
-    @SerialName("CHANGES_REQUESTED")
-    CHANGES_REQUESTED("CHANGES_REQUESTED"),
-
-    @SerialName("COMMENTED")
-    COMMENTED("COMMENTED"),
-
-    @SerialName("PENDING")
-    PENDING("PENDING"),
-
-    @SerialName("DISMISSED")
-    DISMISSED("DISMISSED")
+enum class GitHubReviewState {
+    APPROVED,
+    CHANGES_REQUESTED,
+    COMMENTED,
+    PENDING,
+    DISMISSED
 }
 
 /**
@@ -308,15 +201,15 @@ data class GitHubCommit(
 )
 
 @Serializable
-enum class GitHubIssueState(val value: String) {
+enum class GitHubIssueState {
     @SerialName("closed")
-    CLOSED("closed"),
+    CLOSED,
 
     @SerialName("open")
-    OPEN("open"),
+    OPEN,
 
     @SerialName("locked")
-    LOCKED("locked")
+    LOCKED
 }
 
 /**
@@ -356,57 +249,13 @@ data class GitHubIssue(
     val body: String,
     @SerialName("comments") val commentCount: Int,
     val assignee: GitHubUser?,
-    val assignees: Array<GitHubUser>,
+    val assignees: List<GitHubUser>,
     val milestone: GitHubMilestone?,
     @SerialName("created_at") val createdAt: Date,
     @SerialName("updated_at") val updatedAt: Date,
     @SerialName("closed_at") val closedAt: Date? = null,
-    val labels: Array<GitHubIssueLabel>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubIssue
-
-        if (id != other.id) return false
-        if (number != other.number) return false
-        if (title != other.title) return false
-        if (user != other.user) return false
-        if (state != other.state) return false
-        if (isLocked != other.isLocked) return false
-        if (body != other.body) return false
-        if (commentCount != other.commentCount) return false
-        if (assignee != other.assignee) return false
-        if (!assignees.contentEquals(other.assignees)) return false
-        if (milestone != other.milestone) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (closedAt != other.closedAt) return false
-        if (!labels.contentEquals(other.labels)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + number
-        result = 31 * result + title.hashCode()
-        result = 31 * result + user.hashCode()
-        result = 31 * result + state.hashCode()
-        result = 31 * result + isLocked.hashCode()
-        result = 31 * result + body.hashCode()
-        result = 31 * result + commentCount
-        result = 31 * result + (assignee?.hashCode() ?: 0)
-        result = 31 * result + assignees.contentHashCode()
-        result = 31 * result + milestone.hashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + closedAt.hashCode()
-        result = 31 * result + labels.contentHashCode()
-        return result
-    }
-}
+    val labels: List<GitHubIssueLabel>
+)
 
 /**
  * @property id The id number of this label.
@@ -451,15 +300,15 @@ data class GitHubUser(
 )
 
 @Serializable
-enum class GitHubMilestoneState(val value: String) {
+enum class GitHubMilestoneState {
     @SerialName("close")
-    CLOSE("close"),
+    CLOSE,
 
     @SerialName("open")
-    OPEN("open"),
+    OPEN,
 
     @SerialName("all")
-    ALL("all")
+    ALL
 }
 
 /**
