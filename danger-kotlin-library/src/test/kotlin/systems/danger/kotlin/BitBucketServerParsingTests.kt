@@ -1,19 +1,16 @@
 package systems.danger.kotlin
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.serialization.decodeFromString
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.util.*
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
+import systems.danger.kotlin.utils.TestUtils
 
 class BitBucketServerParsingTests {
-    private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(
-        DSL::class.java)
-    private val dsl
-        get() = moshi.fromJson(jsonFiles.dangerBitBucketServerJSON)
-    private val bitBucketServer: BitBucketServer
-        get() = dsl!!.danger.bitBucketServer
+
+    private val dsl: DSL = TestUtils.Json.decodeFromString(JSONFiles.dangerBitBucketServerJSON)
+
+    private val bitBucketServer: BitBucketServer = dsl.danger.bitBucketServer
 
     @Test
     fun testItParsesTheBitBucketPullRequest() {
@@ -23,9 +20,9 @@ class BitBucketServerParsingTests {
                 "test",
                 null,
                 "user@email.com",
+                true,
                 null,
-                null,
-                null
+                BitBucketServerUser.Type.NORMAL
             )
             assertEquals(expectedUser, author.user)
 
@@ -62,7 +59,7 @@ class BitBucketServerParsingTests {
                 "user@email.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             assertEquals(1, participants.count())
             assertEquals(expectedPartecipant, participants[0].user)
@@ -71,7 +68,7 @@ class BitBucketServerParsingTests {
             assertEquals(1518863923273, createdAt)
             assertEquals(false, isLocked)
             assertEquals(true, open)
-            assertEquals("OPEN", state)
+            assertEquals(BitBucketServerPR.State.OPEN, state)
             assertEquals("Pull request title", title)
 
             val expectedReviewerUser = BitBucketServerUser(
@@ -81,7 +78,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedReviewer = BitBucketServerReviewer(
                 expectedReviewerUser,
@@ -103,7 +100,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedParent = BitBucketServerCommitParent(
                 "c62ada76533a2de045d4c6062988ba84df140729",
@@ -117,7 +114,7 @@ class BitBucketServerParsingTests {
                 expectedUser,
                 1519442341000,
                 "Modify and remove files",
-                arrayOf(expectedParent)
+                listOf(expectedParent)
             )
             assertEquals(expectedCommit, first())
             assertEquals(2, count())
@@ -134,11 +131,11 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "danger",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val commentText = "test"
             val expectedProperty =
-                BitBucketServerCommentInnerProperties(1, null)
+                BitBucketServerCommentInnerProperties(1, listOf())
             val expectedCommentDetail = BitBucketServerCommentDetail(
                 10,
                 23,
@@ -146,9 +143,9 @@ class BitBucketServerParsingTests {
                 expectedUser,
                 1518939353345,
                 1519449132488,
-                arrayOf(),
+                listOf(),
                 expectedProperty,
-                arrayOf<BitBucketServerCommentTask>()
+                listOf()
             )
             val expectedComment = BitBucketServerComment(
                 52,
@@ -186,7 +183,7 @@ class BitBucketServerParsingTests {
                 "foo@bar.com",
                 true,
                 "test",
-                "NORMAL"
+                BitBucketServerUser.Type.NORMAL
             )
             val expectedActivity = BitBucketServerActivity(
                 61,
@@ -203,16 +200,16 @@ class BitBucketServerParsingTests {
 
     @Test
     fun testOnBitBucketIsTrue() {
-        assertEquals(true, dsl!!.danger.onBitBucketServer)
+        assertEquals(true, dsl.danger.onBitBucketServer)
     }
 
     @Test
     fun testOnGitHubIsFalse() {
-        assertEquals(false, dsl!!.danger.onGitHub)
+        assertEquals(false, dsl.danger.onGitHub)
     }
 
     @Test
     fun testOnGitLabIsFalse() {
-        assertEquals(false, dsl!!.danger.onGitLab)
+        assertEquals(false, dsl.danger.onGitLab)
     }
 }

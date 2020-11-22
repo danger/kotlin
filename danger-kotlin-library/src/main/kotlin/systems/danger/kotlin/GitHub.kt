@@ -1,54 +1,36 @@
+@file:UseSerializers(DateSerializer::class)
+
 package systems.danger.kotlin
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import systems.danger.kotlin.serializers.DateSerializer
+import kotlinx.serialization.*
 import java.util.*
 
 /**
  * The GitHub metadata for your pull request.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHub(
     val issue: GitHubIssue,
-    @Json(name = "pr") val pullRequest: GitHubPR,
-    val commits: Array<GitHubCommit>,
-    val reviews: Array<GitHubReview>,
-    @Json(name = "requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    @SerialName("pr") val pullRequest: GitHubPR,
+    val commits: List<GitHubCommit>,
+    val reviews: List<GitHubReview>,
+    @SerialName("requested_reviewers") val requestedReviewers: GitHubRequestedReviewers
+)
 
-        other as GitHub
+@Serializable
+enum class GitHubPullRequestState {
+    @SerialName("closed")
+    CLOSED,
 
-        if (issue != other.issue) return false
-        if (pullRequest != other.pullRequest) return false
-        if (!commits.contentEquals(other.commits)) return false
-        if (!reviews.contentEquals(other.reviews)) return false
-        if (requestedReviewers != other.requestedReviewers) return false
+    @SerialName("open")
+    OPEN,
 
-        return true
-    }
+    @SerialName("merged")
+    MERGED,
 
-    override fun hashCode(): Int {
-        var result = issue.hashCode()
-        result = 31 * result + pullRequest.hashCode()
-        result = 31 * result + commits.contentHashCode()
-        result = 31 * result + reviews.contentHashCode()
-        result = 31 * result + requestedReviewers.hashCode()
-        return result
-    }
-}
-
-enum class GitHubPullRequestState(val value: String) {
-   @Json(name = "closed")
-    CLOSED("closed"),
-   @Json(name = "open")
-    OPEN("open"),
-   @Json(name = "merged")
-    MERGED("merged"),
-   @Json(name = "locked")
-    LOCKED("locked")
+    @SerialName("locked")
+    LOCKED
 }
 
 /**
@@ -78,92 +60,32 @@ enum class GitHubPullRequestState(val value: String) {
  * @property milestone The milestone of the pull request
  * @property htmlURL The link back to this PR as user-facing
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubPR(
     val number: Int,
     val title: String,
     val body: String,
     val user: GitHubUser,
     val assignee: GitHubUser?,
-    val assignees: Array<GitHubUser>,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
-    @Json(name = "merged_at") val mergedAt: Date?,
+    val assignees: List<GitHubUser>,
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
+    @SerialName("merged_at") val mergedAt: Date? = null,
     val head: GitHubMergeRef,
     val base: GitHubMergeRef,
     val state: GitHubPullRequestState,
-    @Json(name = "locked") val isLocked: Boolean,
-    @Json(name = "merged") val isMerged: Boolean?,
-    @Json(name = "commits") val commitCount: Int?,
-    @Json(name = "comments") val commentCount: Int?,
-    @Json(name = "review_comments") val reviewCommentCount: Int?,
+    @SerialName("locked") val isLocked: Boolean,
+    @SerialName("merged") val isMerged: Boolean?,
+    @SerialName("commits") val commitCount: Int?,
+    @SerialName("comments") val commentCount: Int?,
+    @SerialName("review_comments") val reviewCommentCount: Int?,
     val additions: Int?,
     val deletions: Int?,
-    @Json(name = "changed_files") val changedFiles: Int?,
+    @SerialName("changed_files") val changedFiles: Int?,
     val milestone: GitHubMilestone?,
-    @Json(name = "html_url") val htmlURL: String
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubPR
-
-        if (number != other.number) return false
-        if (title != other.title) return false
-        if (body != other.body) return false
-        if (user != other.user) return false
-        if (assignee != other.assignee) return false
-        if (!assignees.contentEquals(other.assignees)) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (closedAt != other.closedAt) return false
-        if (mergedAt != other.mergedAt) return false
-        if (head != other.head) return false
-        if (base != other.base) return false
-        if (state != other.state) return false
-        if (isLocked != other.isLocked) return false
-        if (isMerged != other.isMerged) return false
-        if (commitCount != other.commitCount) return false
-        if (commentCount != other.commentCount) return false
-        if (reviewCommentCount != other.reviewCommentCount) return false
-        if (additions != other.additions) return false
-        if (deletions != other.deletions) return false
-        if (changedFiles != other.changedFiles) return false
-        if (milestone != other.milestone) return false
-        if (htmlURL != other.htmlURL) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = number
-        result = 31 * result + title.hashCode()
-        result = 31 * result + body.hashCode()
-        result = 31 * result + user.hashCode()
-        result = 31 * result + (assignee?.hashCode() ?: 0)
-        result = 31 * result + assignees.contentHashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + closedAt.hashCode()
-        result = 31 * result + mergedAt.hashCode()
-        result = 31 * result + head.hashCode()
-        result = 31 * result + base.hashCode()
-        result = 31 * result + state.hashCode()
-        result = 31 * result + isLocked.hashCode()
-        result = 31 * result + (isMerged?.hashCode() ?: 0)
-        result = 31 * result + (commitCount ?: 0)
-        result = 31 * result + (commentCount ?: 0)
-        result = 31 * result + (reviewCommentCount ?: 0)
-        result = 31 * result + (additions ?: 0)
-        result = 31 * result + (deletions ?: 0)
-        result = 31 * result + (changedFiles ?: 0)
-        result = 31 * result + (milestone?.hashCode() ?: 0)
-        result = 31 * result + htmlURL.hashCode()
-        return result
-    }
-}
+    @SerialName("html_url") val htmlURL: String
+)
 
 /**
  * A GitHub team
@@ -171,7 +93,7 @@ data class GitHubPR(
  * @property id The UUID for the team.
  * @property name The team name.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubTeam(
     val id: Long,
     val name: String
@@ -183,29 +105,11 @@ data class GitHubTeam(
  * @property users The list of users of whom a review has been requested..
  * @property teams The list of teams of whom a review has been requested.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubRequestedReviewers(
-    val users: Array<GitHubUser>,
-    val teams: Array<GitHubTeam>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubRequestedReviewers
-
-        if (!users.contentEquals(other.users)) return false
-        if (!teams.contentEquals(other.teams)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = users.contentHashCode()
-        result = 31 * result + teams.contentHashCode()
-        return result
-    }
-}
+    val users: List<GitHubUser>,
+    val teams: List<GitHubTeam>
+)
 
 /**
  * Represents a branch in PR
@@ -216,7 +120,7 @@ data class GitHubRequestedReviewers(
  * @property user The user that owns the merge reference e.g. "artsy".
  * @property repo The repo from which the reference comes from.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubMergeRef(
     val label: String,
     val ref: String,
@@ -236,28 +140,28 @@ data class GitHubMergeRef(
  * @property isFork A boolean stating whether the repo is a fork.
  * @property htmlURL The root web URL for the repo, e.g. https://github.com/artsy/emission
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubRepo(
     val id: Long,
     val name: String,
-    @Json(name = "full_name") val fullName: String,
-    @Json(name = "private") val isPrivate: Boolean,
+    @SerialName("full_name")
+    val fullName: String,
+    @SerialName("private")
+    val isPrivate: Boolean,
     val description: String?,
-    @Json(name = "fork") val isFork: Boolean,
-    @Json(name = "html_url") val htmlURL: String
+    @SerialName("fork")
+    val isFork: Boolean,
+    @SerialName("html_url")
+    val htmlURL: String
 )
 
-enum class GitHubReviewState(val value: String) {
-    @Json(name = "APPROVED")
-    APPROVED("APPROVED"),
-    @Json(name = "CHANGES_REQUESTED")
-    CHANGES_REQUESTED("CHANGES_REQUESTED"),
-    @Json(name = "COMMENTED")
-    COMMENTED("COMMENTED"),
-    @Json(name = "PENDING")
-    PENDING("PENDING"),
-    @Json(name = "DISMISSED")
-    DISMISSED("DISMISSED")
+@Serializable
+enum class GitHubReviewState {
+    APPROVED,
+    CHANGES_REQUESTED,
+    COMMENTED,
+    PENDING,
+    DISMISSED
 }
 
 /**
@@ -269,12 +173,12 @@ enum class GitHubReviewState(val value: String) {
  * @property commitId The commit ID the review was made on (if a review was made).
  * @property state The state of the review (if a review was made).
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubReview(
     val user: GitHubUser,
     val id: Long?,
     val body: String?,
-    @Json(name = "commit_id") val commitId: String?,
+    @SerialName("commit_id") val commitId: String?,
     val state: GitHubReviewState?
 )
 
@@ -287,7 +191,7 @@ data class GitHubReview(
  * @property commit The raw commit metadata.
  * @property committer The GitHub user who shipped the code.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubCommit(
     val sha: String,
     val url: String,
@@ -296,13 +200,16 @@ data class GitHubCommit(
     val committer: GitHubUser?
 )
 
-enum class GitHubIssueState(val value: String) {
-    @Json(name = "closed")
-    CLOSED("closed"),
-    @Json(name = "open")
-    OPEN("open"),
-    @Json(name = "locked")
-    LOCKED("locked")
+@Serializable
+enum class GitHubIssueState {
+    @SerialName("closed")
+    CLOSED,
+
+    @SerialName("open")
+    OPEN,
+
+    @SerialName("locked")
+    LOCKED
 }
 
 /**
@@ -331,68 +238,24 @@ enum class GitHubIssueState(val value: String) {
  * @property changedFiles The number of files changed in the pull request.
  * @property milestone The milestone of the pull request
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubIssue(
     val id: Long,
     val number: Int,
     val title: String,
     val user: GitHubUser,
     val state: GitHubIssueState,
-    @Json(name = "locked") val isLocked: Boolean,
+    @SerialName("locked") val isLocked: Boolean,
     val body: String,
-    @Json(name = "comments") val commentCount: Int,
+    @SerialName("comments") val commentCount: Int,
     val assignee: GitHubUser?,
-    val assignees: Array<GitHubUser>,
+    val assignees: List<GitHubUser>,
     val milestone: GitHubMilestone?,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
-    val labels: Array<GitHubIssueLabel>
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as GitHubIssue
-
-        if (id != other.id) return false
-        if (number != other.number) return false
-        if (title != other.title) return false
-        if (user != other.user) return false
-        if (state != other.state) return false
-        if (isLocked != other.isLocked) return false
-        if (body != other.body) return false
-        if (commentCount != other.commentCount) return false
-        if (assignee != other.assignee) return false
-        if (!assignees.contentEquals(other.assignees)) return false
-        if (milestone != other.milestone) return false
-        if (createdAt != other.createdAt) return false
-        if (updatedAt != other.updatedAt) return false
-        if (closedAt != other.closedAt) return false
-        if (!labels.contentEquals(other.labels)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + number
-        result = 31 * result + title.hashCode()
-        result = 31 * result + user.hashCode()
-        result = 31 * result + state.hashCode()
-        result = 31 * result + isLocked.hashCode()
-        result = 31 * result + body.hashCode()
-        result = 31 * result + commentCount
-        result = 31 * result + (assignee?.hashCode() ?: 0)
-        result = 31 * result + assignees.contentHashCode()
-        result = 31 * result + milestone.hashCode()
-        result = 31 * result + createdAt.hashCode()
-        result = 31 * result + updatedAt.hashCode()
-        result = 31 * result + closedAt.hashCode()
-        result = 31 * result + labels.contentHashCode()
-        return result
-    }
-}
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
+    val labels: List<GitHubIssueLabel>
+)
 
 /**
  * @property id The id number of this label.
@@ -400,20 +263,23 @@ data class GitHubIssue(
  * @property name The name of the label.
  * @property color TThe color associated with this label.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubIssueLabel(
-        val id: Long,
-        val url: String,
-        val name: String,
-        val color: String
+    val id: Long,
+    val url: String,
+    val name: String,
+    val color: String
 )
 
+@Serializable
 enum class GitHubUserType {
-    @Json(name = "User")
+    @SerialName("User")
     USER,
-    @Json(name = "Organization")
+
+    @SerialName("Organization")
     ORGANIZATION,
-    @Json(name = "Bot")
+
+    @SerialName("Bot")
     BOT
 }
 
@@ -424,22 +290,25 @@ enum class GitHubUserType {
  * @property login The handle for the user or organization.
  * @property type The type of user: user or organization.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubUser(
     val id: Long,
     val login: String,
     val type: GitHubUserType,
-    @Json(name="avatar_url")
+    @SerialName("avatar_url")
     val avatarUrl: String
 )
 
-enum class GitHubMilestoneState(val value: String) {
-    @Json(name = "close")
-    CLOSE("close"),
-    @Json(name = "open")
-    OPEN("open"),
-    @Json(name = "all")
-    ALL("all")
+@Serializable
+enum class GitHubMilestoneState {
+    @SerialName("close")
+    CLOSE,
+
+    @SerialName("open")
+    OPEN,
+
+    @SerialName("all")
+    ALL
 }
 
 /**
@@ -458,18 +327,18 @@ enum class GitHubMilestoneState(val value: String) {
  * @property closedAt The date for when the milestone was closed.
  * @property dueOn The date for the due of this milestone.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class GitHubMilestone(
     val id: Long,
     val number: Int,
     val state: GitHubMilestoneState,
     val title: String,
-    val description: String?,
+    val description: String? = null,
     val creator: GitHubUser,
-    @Json(name = "open_issues") val openIssues: Int,
-    @Json(name = "closed_issues") val closedIssues: Int,
-    @Json(name = "created_at") val createdAt: Date,
-    @Json(name = "updated_at") val updatedAt: Date,
-    @Json(name = "closed_at") val closedAt: Date?,
-    @Json(name = "due_on") val dueOn: Date?
+    @SerialName("open_issues") val openIssues: Int,
+    @SerialName("closed_issues") val closedIssues: Int,
+    @SerialName("created_at") val createdAt: Date,
+    @SerialName("updated_at") val updatedAt: Date,
+    @SerialName("closed_at") val closedAt: Date? = null,
+    @SerialName("due_on") val dueOn: Date? = null
 )

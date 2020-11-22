@@ -23,9 +23,9 @@ internal class GitKtxTest {
     }
 
     private val basicGit = Git(
-        modifiedFiles = emptyArray(),
-        createdFiles = emptyArray(),
-        deletedFiles = emptyArray(),
+        modifiedFiles = emptyList(),
+        createdFiles = emptyList(),
+        deletedFiles = emptyList(),
         commits = listOf(
             GitCommit(
                 sha = "commit1",

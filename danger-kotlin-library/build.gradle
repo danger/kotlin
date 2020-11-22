@@ -1,10 +1,12 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
     id 'maven-publish'
 }
 
 apply from: file('dependencies.gradle')
 apply from: file('version.gradle')
+apply plugin: 'kotlinx-serialization'
 
 shadowJar {
     baseName = 'danger-kotlin'

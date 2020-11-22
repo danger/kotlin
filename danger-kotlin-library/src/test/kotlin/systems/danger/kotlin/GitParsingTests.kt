@@ -1,28 +1,25 @@
 package systems.danger.kotlin
 
-import com.squareup.moshi.*
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import org.junit.Assert
+import kotlinx.serialization.decodeFromString
+import org.junit.Assert.*
 import org.junit.Test
-import java.util.*
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
+import systems.danger.kotlin.utils.TestUtils
 
 class GitParsingTests {
-    private val jsonFiles = JSONFiles()
-    private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe()).build().adapter(
-        DSL::class.java)
-    private val dsl
-        get() = moshi.fromJson(jsonFiles.githubDangerJSON)!!
+
+    private val dsl: DSL = TestUtils.Json.decodeFromString(JSONFiles.githubDangerJSON)
 
     @Test
     fun testItParsesCorrectlyTheGitFiles() {
         val git = dsl.danger.git
 
-        Assert.assertTrue(expectedModifiedFiles.containsAll(git.modifiedFiles.toList()))
-        Assert.assertTrue(git.createdFiles[0] == ".ruby-version")
+        assertTrue(expectedModifiedFiles.containsAll(git.modifiedFiles.toList()))
+        assertTrue(git.createdFiles[0] == ".ruby-version")
     }
 
-
-    private val expectedModifiedFiles = arrayListOf(".travis.yml",
+    private val expectedModifiedFiles = listOf(
+        ".travis.yml",
         "Kiosk.xcodeproj/project.pbxproj",
         "Kiosk/App/Logger.swift",
         "Kiosk/App/Networking/NetworkLogger.swift",
@@ -76,5 +73,6 @@ class GitParsingTests {
         "KioskTests/ReferenceImages/YourBiddingDetailsViewControllerTests/displays_bidder_number_and_PIN@2x.png",
         "KioskTests/XAppTokenSpec.swift",
         "Podfile",
-        "Podfile.lock")
+        "Podfile.lock"
+    )
 }
