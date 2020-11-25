@@ -4,7 +4,10 @@ import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.DangerPlugin
 
 /**
- * R
+ * Register helper
+ * example usages:
+ * register plugin DangerPluginName
+ * register.plugins(DangerPluginName1, DangerPluginName2)
  */
 object register {
     internal var dangerPlugins = mutableListOf<DangerPlugin>()
