@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     if (args.isNotEmpty()) {
         when (val command = args.first()) {
             "ci", "local", "pr" -> {
-                DangerJS.process(command ,PROCESS_DANGER_KOTLIN, args.drop(1))
+                DangerJS.process(command, PROCESS_DANGER_KOTLIN, args.drop(1))
             }
             "runner" -> DangerKotlin.run()
             "--version" -> Log.info(VERSION)
