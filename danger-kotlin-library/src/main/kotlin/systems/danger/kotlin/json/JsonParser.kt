@@ -6,6 +6,7 @@ import kotlinx.serialization.json.Json
 import systems.danger.kotlin.models.git.FilePath
 import java.io.File
 
+// internal Json parser to decode and encode jsons from/to danger-js
 internal object JsonParser {
 
     private val decodeJsonParser = Json {

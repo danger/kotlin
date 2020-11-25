@@ -56,6 +56,10 @@ val Git.baseSha: String?
 
 /**
  * Wrapper for number of additions and deletions in currently processed Pull (or Merge) Request
+ *
+ * @param additions the number of additions
+ * @param deletions the number of deletions
+ * @constructor Create empty PullRequestChangedLines
  */
 data class PullRequestChangedLines(
     val additions: Int,

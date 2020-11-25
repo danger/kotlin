@@ -14,7 +14,7 @@ object register {
     internal var dangerPlugins = mutableListOf<DangerPlugin>()
 
     /**
-     * Plugin
+     * Add a plugin to Danger
      * Example code:
      * ```
      * register plugin DangerPluginName
@@ -33,7 +33,7 @@ object register {
     }
 
     /**
-     * Plugins
+     * Add more than one plugin to Danger
      * Example code:
      * ```
      * register.plugins(DangerPluginName1, DangerPluginName2, ...)
@@ -53,7 +53,6 @@ object register {
 }
 
 /**
- * Register
  * Block that gave another option for registering plugins
  * Example code:
  * ```
@@ -76,7 +75,6 @@ object register {
 inline fun register(block: register.() -> Unit) = register.run(block)
 
 /**
- * With context
  * internal util function that assign the [DangerContext] to a target [DangerPlugin]
  *
  * @param dangerContext the [DangerContext]

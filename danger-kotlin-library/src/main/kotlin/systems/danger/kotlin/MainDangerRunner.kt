@@ -42,10 +42,9 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
             return dangerResults.markdowns.toList()
         }
 
-    /**
-     * Collect the registered plugins and initialize with the DangerContext
-     * then creates an output json file
-     */
+
+    // Collect the registered plugins and initialize with the DangerContext
+    // then creates an output json file
     init {
         register.dangerPlugins.forEach {
             it.withContext(this)
@@ -115,10 +114,7 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
         commit()
     }
 
-    /**
-     * Commit
-     * commit all the inline violations into the json output file
-     */
+    // commit all the inline violations into the json output file
     private fun commit() {
         JsonParser.encodeJson(dangerResults, jsonOutputFile)
     }
