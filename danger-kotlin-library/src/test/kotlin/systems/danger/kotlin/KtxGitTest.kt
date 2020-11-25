@@ -5,7 +5,10 @@ import io.mockk.mockk
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
-import systems.danger.kotlin.shell.ShellExecutorFactory
+import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.models.git.GitCommit
+import systems.danger.kotlin.models.git.GitCommitAuthor
+import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 
 /**
  * Tests for [Git] extensions

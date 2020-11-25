@@ -1,6 +1,7 @@
 package systems.danger.kotlin
 
-import systems.danger.kotlin.shell.ShellExecutorFactory
+import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 
 // extensions over [Git] object
 

@@ -1,4 +1,4 @@
-package systems.danger.kotlin.serializers
+package systems.danger.kotlin.models.serializers
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer

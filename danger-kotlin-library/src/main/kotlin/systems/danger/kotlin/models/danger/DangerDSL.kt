@@ -1,9 +1,13 @@
-package systems.danger.kotlin
+package systems.danger.kotlin.models.danger
 
 import kotlinx.serialization.*
+import systems.danger.kotlin.models.bitbucket.BitBucketServer
+import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.models.github.GitHub
+import systems.danger.kotlin.models.gitlab.GitLab
 
 @Serializable
-data class DSL(
+internal data class DSL(
     val danger: DangerDSL
 )
 

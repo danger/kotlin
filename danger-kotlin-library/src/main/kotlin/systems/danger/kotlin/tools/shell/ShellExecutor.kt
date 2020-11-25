@@ -1,4 +1,4 @@
-package systems.danger.kotlin.shell
+package systems.danger.kotlin.tools.shell
 
 interface ShellExecutor {
 
@@ -9,7 +9,7 @@ interface ShellExecutor {
     fun execute(command: String, arguments: List<String> = emptyList()): String
 }
 
-class ShellExecutorImpl : ShellExecutor {
+internal class ShellExecutorImpl : ShellExecutor {
 
     override fun execute(command: String, arguments: List<String>): String {
         val commandWithArgs = command + if (arguments.isNotEmpty()) " " + arguments.joinToString(" ") else ""
@@ -29,7 +29,7 @@ object ShellExecutorFactory {
      * Useful for testing
      */
     internal fun set(executor: ShellExecutor) {
-        this.shellExecutor = executor
+        shellExecutor = executor
     }
 
     fun get() = shellExecutor

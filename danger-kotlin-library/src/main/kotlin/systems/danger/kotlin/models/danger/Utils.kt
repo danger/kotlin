@@ -1,6 +1,6 @@
-package systems.danger.kotlin
+package systems.danger.kotlin.models.danger
 
-import systems.danger.kotlin.shell.ShellExecutorFactory
+import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 import java.io.File
 
 class Utils {

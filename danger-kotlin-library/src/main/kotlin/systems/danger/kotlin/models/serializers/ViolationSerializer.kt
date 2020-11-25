@@ -1,4 +1,4 @@
-package systems.danger.kotlin.serializers
+package systems.danger.kotlin.models.serializers
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -22,7 +22,6 @@ object ViolationSerializer : KSerializer<Violation> {
         }
 
     override fun deserialize(decoder: Decoder): Violation {
-        // Do not need implementation (we are only serialising
         return decoder.decodeStructure(descriptor) {
             lateinit var message: String
             var file: String? = null
