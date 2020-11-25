@@ -9,6 +9,14 @@ import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.Violation
 import java.io.File
 
+/**
+ * Main Danger runner
+ *
+ * @constructor Creates the main DangerContext
+ *
+ * @param jsonInputFilePath the input json file path (received from danger-js)
+ * @param jsonOutputPath the output json file path used to publish the danger results on your Pull Request
+ */
 internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
 
     private val jsonOutputFile: File = File(jsonOutputPath)
@@ -34,74 +42,49 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
             return dangerResults.markdowns.toList()
         }
 
+    /**
+     * Collect the registered plugins and initialize with the DangerContext
+     * then creates an output json file
+     */
     init {
-        // Collect the registered plugins and initialize with the danger context
         register.dangerPlugins.forEach {
             it.withContext(this)
         }
         commit()
     }
 
-    //Api Implementation
-    /**
-     * Adds an inline fail message to the Danger report
-     */
     override fun fail(message: String) {
         fail(Violation(message))
     }
 
-    /**
-     * Adds an inline fail message to the Danger report
-     */
     override fun fail(message: String, file: FilePath, line: Int) {
         fail(Violation(message, file, line))
     }
 
-    /**
-     * Adds an inline warning message to the Danger report
-     */
     override fun warn(message: String) {
         warn(Violation(message))
     }
 
-    /**
-     * Adds an inline warning message to the Danger report
-     */
     override fun warn(message: String, file: FilePath, line: Int) {
         warn(Violation(message, file, line))
     }
 
-    /**
-     * Adds an inline message to the Danger report
-     */
     override fun message(message: String) {
         message(Violation(message))
     }
 
-    /**
-     * Adds an inline message to the Danger report
-     */
     override fun message(message: String, file: FilePath, line: Int) {
         message(Violation(message, file, line))
     }
 
-    /**
-     * Adds an inline markdown message to the Danger report
-     */
     override fun markdown(message: String) {
         markdown(Violation(message))
     }
 
-    /**
-     * Adds an inline markdown message to the Danger report
-     */
     override fun markdown(message: String, file: FilePath, line: Int) {
         markdown(Violation(message, file, line))
     }
 
-    /**
-     * Adds an inline suggest markdown message to the Danger report
-     */
     override fun suggest(code: String, file: FilePath, line: Int) {
         if (dangerRunner.danger.onGitHub) {
             val message = "```suggestion\n $code \n```"
@@ -132,6 +115,10 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
         commit()
     }
 
+    /**
+     * Commit
+     * commit all the inline violations into the json output file
+     */
     private fun commit() {
         JsonParser.encodeJson(dangerResults, jsonOutputFile)
     }
