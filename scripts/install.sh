@@ -23,7 +23,7 @@ fi
 
 if ! [[ -x "$(command -v kotlinc)" ]]; then
     echo "Installing kotlin compiler 1.4.10"
-    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.0.zip
+    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip
     unzip -d /usr/local/ kotlin-compiler.zip
     echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
     rm -rf kotlin-compiler.zip
