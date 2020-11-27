@@ -15,7 +15,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
 # Install danger-kotlin globally
 COPY . /usr/local/_danger-kotlin
 RUN cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.0.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     cd /usr/local/_danger-kotlin && \
