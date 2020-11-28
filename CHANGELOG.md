@@ -11,9 +11,11 @@
 
 -->
 ## Master
-- Update Kotlin to 1.4.10 [@gianluz] [#140](https://github.com/danger/kotlin/pull/140)
-- Migrate from moshi to kotlinx serialization [@gianluz] [#141] (https://github.com/danger/kotlin/pull/141)
+- Update Kotlin to 1.4.10 [@gianluz] - [#140](https://github.com/danger/kotlin/pull/140)
+- Migrate from moshi to kotlinx serialization [@gianluz] - [#141](https://github.com/danger/kotlin/pull/141)
 - Fix incorrect url in install.sh script and in Dockerfile [@davidbilik][] - [#144](https://github.com/danger/kotlin/pull/144)
+- Fix gitlab approvals_before_merge field default to 1 [@gianluz] - [#146](https://github.com/danger/kotlin/pull/146)
+
 
 # 0.7.1
 
