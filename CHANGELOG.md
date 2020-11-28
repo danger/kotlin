@@ -11,8 +11,9 @@
 
 -->
 ## Master
-- Update Kotlin to 1.4.10 [@gianluz] - [#140](https://github.com/danger/kotlin/pull/140)
-- Migrate from moshi to kotlinx serialization [@gianluz] - [#141](https://github.com/danger/kotlin/pull/141)
+- Update Kotlin to 1.4.10 [@gianluz] [#140](https://github.com/danger/kotlin/pull/140)
+- Migrate from moshi to kotlinx serialization [@gianluz] [#141] (https://github.com/danger/kotlin/pull/141)
+- Fix incorrect url in install.sh script and in Dockerfile [@davidbilik] - [#144](https://github.com/danger/kotlin/pull/144)
 - Road to 1.0 - Refactor project structure [@gianluz] - [#142](https://github.com/danger/kotlin/pull/142)
 
 # 0.7.1
