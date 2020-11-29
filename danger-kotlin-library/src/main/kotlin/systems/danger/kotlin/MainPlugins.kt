@@ -22,7 +22,7 @@ object register {
      * // Then
      *
      * danger(args) {
-     * ...
+     *   ...
      * }
      * ```
      *
