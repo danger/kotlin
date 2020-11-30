@@ -1,4 +1,4 @@
-package systems.danger.kotlin.serializers
+package systems.danger.kotlin.models.serializers
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
