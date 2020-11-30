@@ -4,6 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+@SuppressWarnings("unused")
 internal fun fromISO8601UTC(dateStr: String): Date? {
     val tz = TimeZone.getTimeZone("UTC")
     val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")

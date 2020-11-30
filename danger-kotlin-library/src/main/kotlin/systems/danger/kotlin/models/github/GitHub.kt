@@ -2,10 +2,10 @@
 
 package systems.danger.kotlin.models.github
 
+import kotlinx.datetime.Instant
 import systems.danger.kotlin.models.serializers.DateSerializer
 import kotlinx.serialization.*
 import systems.danger.kotlin.models.git.GitCommit
-import java.util.*
 
 /**
  * The GitHub metadata for your pull request.
@@ -69,10 +69,10 @@ data class GitHubPR(
     val user: GitHubUser,
     val assignee: GitHubUser?,
     val assignees: List<GitHubUser>,
-    @SerialName("created_at") val createdAt: Date,
-    @SerialName("updated_at") val updatedAt: Date,
-    @SerialName("closed_at") val closedAt: Date? = null,
-    @SerialName("merged_at") val mergedAt: Date? = null,
+    @SerialName("created_at") val createdAt: Instant,
+    @SerialName("updated_at") val updatedAt: Instant,
+    @SerialName("closed_at") val closedAt: Instant? = null,
+    @SerialName("merged_at") val mergedAt: Instant? = null,
     val head: GitHubMergeRef,
     val base: GitHubMergeRef,
     val state: GitHubPullRequestState,
@@ -252,9 +252,9 @@ data class GitHubIssue(
     val assignee: GitHubUser?,
     val assignees: List<GitHubUser>,
     val milestone: GitHubMilestone?,
-    @SerialName("created_at") val createdAt: Date,
-    @SerialName("updated_at") val updatedAt: Date,
-    @SerialName("closed_at") val closedAt: Date? = null,
+    @SerialName("created_at") val createdAt: Instant,
+    @SerialName("updated_at") val updatedAt: Instant,
+    @SerialName("closed_at") val closedAt: Instant? = null,
     val labels: List<GitHubIssueLabel>
 )
 
@@ -338,8 +338,8 @@ data class GitHubMilestone(
     val creator: GitHubUser,
     @SerialName("open_issues") val openIssues: Int,
     @SerialName("closed_issues") val closedIssues: Int,
-    @SerialName("created_at") val createdAt: Date,
-    @SerialName("updated_at") val updatedAt: Date,
-    @SerialName("closed_at") val closedAt: Date? = null,
-    @SerialName("due_on") val dueOn: Date? = null
+    @SerialName("created_at") val createdAt: Instant,
+    @SerialName("updated_at") val updatedAt: Instant,
+    @SerialName("closed_at") val closedAt: Instant? = null,
+    @SerialName("due_on") val dueOn: Instant? = null
 )
