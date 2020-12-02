@@ -1,4 +1,4 @@
-package systems.danger.kotlin
+package systems.danger.kotlin.models.bitbucket
 
 import kotlinx.serialization.*
 

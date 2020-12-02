@@ -1,9 +1,10 @@
 @file:UseSerializers(DateSerializer::class)
 
-package systems.danger.kotlin
+package systems.danger.kotlin.models.github
 
-import systems.danger.kotlin.serializers.DateSerializer
+import systems.danger.kotlin.models.serializers.DateSerializer
 import kotlinx.serialization.*
+import systems.danger.kotlin.models.git.GitCommit
 import java.util.*
 
 /**

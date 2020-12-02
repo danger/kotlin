@@ -5,14 +5,14 @@ import kotlinx.cinterop.CPointer
 import platform.posix.*
 import systems.danger.Log
 
-object DangerFile: DangerFileBridge {
+object DangerFile : DangerFileBridge {
     private const val DANGERFILE_EXTENSION = ".df.kts"
     private const val DANGERFILE = "Dangerfile$DANGERFILE_EXTENSION"
 
     override fun execute(inputJson: String, outputJson: String) {
         val dangerfile = dangerfileParameter(inputJson) ?: DANGERFILE
 
-        if(!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
+        if (!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
             Log.error("The Dangerfile is not valid, it must have '$DANGERFILE_EXTENSION' as extension")
             exit(1)
         }
@@ -40,7 +40,8 @@ private fun dangerfileParameter(inputJson: String): String? {
             val line = readLine(this)?.let {
                 val trimmedLine = it.trim()
                 if (trimmedLine.startsWith("\"dangerfile\":")) {
-                    val dangerFile = trimmedLine.removePrefix("\"dangerfile\": \"").removeSuffix("\"").removeSuffix("\",")
+                    val dangerFile =
+                        trimmedLine.removePrefix("\"dangerfile\": \"").removeSuffix("\"").removeSuffix("\",")
                     result = dangerFile
                 }
             }

@@ -15,7 +15,7 @@
 - Migrate from moshi to kotlinx serialization [@gianluz] - [#141](https://github.com/danger/kotlin/pull/141)
 - Fix incorrect url in install.sh script and in Dockerfile [@davidbilik][] - [#144](https://github.com/danger/kotlin/pull/144)
 - Fix gitlab approvals_before_merge field default to 0 [@gianluz] - [#146](https://github.com/danger/kotlin/pull/146)
-
+- Road to 1.0 - Refactor project structure [@gianluz] - [#142](https://github.com/danger/kotlin/pull/142)
 
 # 0.7.1
 

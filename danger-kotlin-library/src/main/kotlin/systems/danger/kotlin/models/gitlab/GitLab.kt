@@ -1,11 +1,11 @@
 @file:UseSerializers(DateSerializer::class)
 
-package systems.danger.kotlin
+package systems.danger.kotlin.models.gitlab
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
-import systems.danger.kotlin.serializers.DateSerializer
+import systems.danger.kotlin.models.serializers.DateSerializer
 import java.util.*
 
 @Serializable
