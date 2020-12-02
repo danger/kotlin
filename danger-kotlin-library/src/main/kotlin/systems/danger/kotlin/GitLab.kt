@@ -38,7 +38,7 @@ data class GitLabMergeRequest(
     @SerialName("allow_maintainer_to_push")
     val allowMaintainerToPush: Boolean = false,
     @SerialName("approvals_before_merge")
-    val approvalsBeforeMerge: Int? = 1,
+    val approvalsBeforeMerge: Int? = 0,
     val assignee: GitLabUser?,
     val author: GitLabUser,
     @SerialName("changes_count")
