@@ -2,11 +2,11 @@
 
 package systems.danger.kotlin.models.gitlab
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import systems.danger.kotlin.models.serializers.DateSerializer
-import java.util.*
 
 @Serializable
 data class GitLab(
@@ -44,7 +44,7 @@ data class GitLabMergeRequest(
     @SerialName("changes_count")
     val changesCount: String,
     @SerialName("closed_at")
-    val closedAt: Date? = null,
+    val closedAt: Instant? = null,
     @SerialName("closed_by")
     val closedBy: GitLabUser?,
     val description: String,
@@ -52,22 +52,22 @@ data class GitLabMergeRequest(
     val diffRefs: GitLabDiffRefs,
     val downvotes: Int,
     @SerialName("first_deployed_to_production_at")
-    val firstDeployedToProductionAt: Date? = null,
+    val firstDeployedToProductionAt: Instant? = null,
     @SerialName("force_remove_source_branch")
     val forceRemoveSourceBranch: Boolean,
     val id: Int,
     val iid: Int,
     @SerialName("latest_build_finished_at")
 
-    val latestBuildFinishedAt: Date? = null,
+    val latestBuildFinishedAt: Instant? = null,
     @SerialName("latest_build_started_at")
 
-    val latestBuildStartedAt: Date? = null,
+    val latestBuildStartedAt: Instant? = null,
     val labels: List<String>,
     @SerialName("merge_commit_sha")
     val mergeCommitSha: String? = null,
     @SerialName("merged_at")
-    val mergedAt: Date? = null,
+    val mergedAt: Instant? = null,
     @SerialName("merged_by")
     val mergedBy: GitLabUser?,
     @SerialName("merge_when_pipeline_succeeds")
@@ -141,20 +141,20 @@ enum class GitLabMergeRequestState {
 @Serializable
 data class GitLabMilestone(
     @SerialName("created_at")
-    val createdAt: Date,
+    val createdAt: Instant,
     val description: String,
     @SerialName("due_date")
-    val dueDate: Date,
+    val dueDate: Instant,
     val id: Int,
     val iid: Int,
     @SerialName("project_id")
     val projectID: Int,
     @SerialName("start_date")
-    val startDate: Date,
+    val startDate: Instant,
     val state: GitLabMilestoneState,
     val title: String,
     @SerialName("updated_at")
-    val updatedAt: Date,
+    val updatedAt: Instant,
     @SerialName("web_url")
     val webUrl: String
 )

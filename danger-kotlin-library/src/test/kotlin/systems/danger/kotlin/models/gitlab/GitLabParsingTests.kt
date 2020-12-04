@@ -1,12 +1,12 @@
 package systems.danger.kotlin.models.gitlab
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.decodeFromString
 import org.junit.Assert.*
 import org.junit.Test
 import systems.danger.kotlin.models.danger.DSL
 import systems.danger.kotlin.utils.TestUtils.JSONFiles
 import systems.danger.kotlin.utils.TestUtils
-import java.util.*
 
 class GitLabParsingTests {
     private val dsl: DSL
@@ -46,28 +46,28 @@ class GitLabParsingTests {
             )
             assertEquals(expectedDiffRefs, diffRefs)
             assertEquals(0, downvotes)
-            assertEquals(Date(1554942622492), firstDeployedToProductionAt)
+            assertEquals(Instant.fromEpochMilliseconds(1554942622492), firstDeployedToProductionAt)
             assertEquals(true, forceRemoveSourceBranch)
             assertEquals(27469633, id)
             assertEquals(182, iid)
-            assertEquals(Date(1554942802492), latestBuildFinishedAt)
-            assertEquals(Date(1554942022492), latestBuildStartedAt)
+            assertEquals(Instant.fromEpochMilliseconds(1554942802492), latestBuildFinishedAt)
+            assertEquals(Instant.fromEpochMilliseconds(1554942022492), latestBuildStartedAt)
             assertEquals(listOf<String>(), labels)
             assertEquals("377a24fb7a0f30364f089f7bca67752a8b61f477", mergeCommitSha)
-            assertEquals(Date(1554943042492), mergedAt)
+            assertEquals(Instant.fromEpochMilliseconds(1554943042492), mergedAt)
             assertEquals(orta, mergedBy)
             assertEquals(false, mergeOnPipelineSuccess)
             val expectedMilestone = GitLabMilestone(
-                Date(1554933465346),
+                Instant.fromEpochMilliseconds(1554933465346),
                 "Test Description",
-                Date(1560124800000),
+                Instant.fromEpochMilliseconds(1560124800000),
                 1,
                 2,
                 1000,
-                Date(1554933465346),
+                Instant.fromEpochMilliseconds(1554933465346),
                 GitLabMilestoneState.CLOSED,
                 "Test Milestone",
-                Date(1554933465346),
+                Instant.fromEpochMilliseconds(1554933465346),
                 "https://gitlab.com/milestone"
             )
             assertEquals(expectedMilestone, milestone)
