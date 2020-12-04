@@ -1,6 +1,7 @@
 package systems.danger.kotlin
 
-import systems.danger.kotlin.shell.ShellExecutorFactory
+import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 
 // extensions over [Git] object
 
@@ -55,6 +56,10 @@ val Git.baseSha: String?
 
 /**
  * Wrapper for number of additions and deletions in currently processed Pull (or Merge) Request
+ *
+ * @param additions the number of additions
+ * @param deletions the number of deletions
+ * @constructor Create empty PullRequestChangedLines
  */
 data class PullRequestChangedLines(
     val additions: Int,

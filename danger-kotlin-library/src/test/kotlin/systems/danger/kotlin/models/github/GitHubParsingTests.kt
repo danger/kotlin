@@ -1,9 +1,12 @@
-package systems.danger.kotlin
+package systems.danger.kotlin.models.github
 
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.Assert.*
 import org.junit.Test
+import systems.danger.kotlin.models.danger.DSL
+import systems.danger.kotlin.models.git.GitCommit
+import systems.danger.kotlin.models.git.GitCommitAuthor
 import systems.danger.kotlin.utils.TestUtils.JSONFiles
 import systems.danger.kotlin.utils.TestUtils
 import java.util.*

@@ -1,15 +1,23 @@
-package systems.danger.kotlin.shell
+package systems.danger.kotlin.tools.shell
 
+/**
+ * ShellExecutor
+ */
 interface ShellExecutor {
 
     /**
      * Execute [command] with optional list of arguments and return output from
      * stdout
+     *
+     * @param command the shell command
+     * @param arguments the list of arguments to be passed to [command]
+     * @return the stdout output
      */
     fun execute(command: String, arguments: List<String> = emptyList()): String
 }
 
-class ShellExecutorImpl : ShellExecutor {
+// Internal implementation for ShellExecutor
+internal class ShellExecutorImpl : ShellExecutor {
 
     override fun execute(command: String, arguments: List<String>): String {
         val commandWithArgs = command + if (arguments.isNotEmpty()) " " + arguments.joinToString(" ") else ""
@@ -21,16 +29,22 @@ class ShellExecutorImpl : ShellExecutor {
     }
 }
 
+/**
+ * ShellExecutorFactory
+ *
+ * @constructor Creates a ShellExecutorFactory
+ */
 object ShellExecutorFactory {
 
     private var shellExecutor: ShellExecutor = ShellExecutorImpl()
 
-    /**
-     * Useful for testing
-     */
+    // Useful for testing
     internal fun set(executor: ShellExecutor) {
-        this.shellExecutor = executor
+        shellExecutor = executor
     }
 
+    /**
+     * Get the danger [ShellExecutor]
+     */
     fun get() = shellExecutor
 }
