@@ -1,5 +1,6 @@
 package systems.danger.kotlin.models.github
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.junit.Assert.*
@@ -9,7 +10,6 @@ import systems.danger.kotlin.models.git.GitCommit
 import systems.danger.kotlin.models.git.GitCommitAuthor
 import systems.danger.kotlin.utils.TestUtils.JSONFiles
 import systems.danger.kotlin.utils.TestUtils
-import java.util.*
 
 class GitHubParsingTests {
     private val dsl: DSL = TestUtils.Json.decodeFromString(JSONFiles.githubDangerJSON)
@@ -26,10 +26,10 @@ class GitHubParsingTests {
                         "\n" + "I tried updating to CocoaPods 1.0, but things went quickly awry. It's a large job, but not necessary for now. \n",
                 body
             )
-            assertEquals(1469563050000, createdAt.time)
-            assertEquals(1471447575000, updatedAt.time)
-            assertEquals(1471447574000, closedAt?.time)
-            assertEquals(1471447574000, mergedAt?.time)
+            assertEquals(1469563050000, createdAt.toEpochMilliseconds())
+            assertEquals(1471447575000, updatedAt.toEpochMilliseconds())
+            assertEquals(1471447574000, closedAt?.toEpochMilliseconds())
+            assertEquals(1471447574000, mergedAt?.toEpochMilliseconds())
             assertEquals(false, isLocked)
             assertEquals(true, isMerged)
             assertEquals(15, commitCount)
@@ -149,8 +149,8 @@ class GitHubParsingTests {
             assertEquals(GitHubIssueState.CLOSED, state)
             assertEquals(false, isLocked)
             assertEquals(8, commentCount)
-            assertEquals(Date(1469563050000), createdAt)
-            assertEquals(Date(1471447574000), updatedAt)
+            assertEquals(Instant.fromEpochMilliseconds(1469563050000), createdAt)
+            assertEquals(Instant.fromEpochMilliseconds(1471447574000), updatedAt)
             assertEquals(null, closedAt)
             assertTrue(labels.isEmpty())
 
@@ -169,10 +169,10 @@ class GitHubParsingTests {
                 expectedCreator,
                 4,
                 8,
-                Date(1302466171000),
-                Date(1393873090000),
-                Date(1360675321000),
-                Date(1349825941000)
+                Instant.fromEpochMilliseconds(1302466171000),
+                Instant.fromEpochMilliseconds(1393873090000),
+                Instant.fromEpochMilliseconds(1360675321000),
+                Instant.fromEpochMilliseconds(1349825941000)
             )
             assertEquals(expectedMilestone, milestone)
         }

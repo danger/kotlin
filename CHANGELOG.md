@@ -16,6 +16,7 @@
 - Fix incorrect url in install.sh script and in Dockerfile [@davidbilik] - [#144](https://github.com/danger/kotlin/pull/144)
 - Road to 1.0 - Refactor project structure [@gianluz] - [#142](https://github.com/danger/kotlin/pull/142)
 - Fix gitlab defaults following kotlinx serialisation [@gianluz] - [#146](https://github.com/danger/kotlin/pull/146)
+- Road to 1.0 - Migrate from java.util.Date to kotlinx.datetime [@gianluz] - [#147](https://github.com/danger/kotlin/pull/147)
 
 # 0.7.1
 
