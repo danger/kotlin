@@ -78,7 +78,7 @@ data class GitLabMergeRequest(
     val projectId: String,
     val sha: String,
     @SerialName("should_remove_source_branch")
-    val shouldRemoveSourceBranch: Boolean? = null,
+    val shouldRemoveSourceBranch: Boolean = false,
     @SerialName("source_branch")
     val sourceBranch: String,
     @SerialName("source_project_id")
@@ -108,9 +108,9 @@ data class GitLabMergeRequest(
 @Serializable
 data class GitLabMergeRequestTimeStats(
     @SerialName("human_time_estimate")
-    val humanTimeEstimate: Int? = 0,
+    val humanTimeEstimate: Int = 0,
     @SerialName("human_time_spent")
-    val humanTimeSpent: Int? = 0,
+    val humanTimeSpent: Int = 0,
     @SerialName("time_estimate")
     val timeEstimate: Int,
     @SerialName("total_time_spent")
