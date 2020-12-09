@@ -19,6 +19,11 @@ object TestUtils {
         val githubWithSomeNullsAttributeDangerJSON by lazy {
             loadJSON("githubWithSomeNullsAttributeDangerJSON.json")
         }
+
+        val githubWithClosedMilestoneDangerJSON by lazy {
+            loadJSON("githubWithClosedMilestoneDangerJSON.json")
+        }
+
         val dangerBitBucketServerJSON by lazy {
             loadJSON("bitbucketServerDangerJSON.json")
         }

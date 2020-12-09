@@ -211,6 +211,19 @@ class GitHubParsingTests {
     }
 
     @Test
+    fun testItParsesTheClosedMilestone() {
+        val dsl: DSL = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }.decodeFromString(JSONFiles.githubWithClosedMilestoneDangerJSON)
+        val github = dsl.danger.github
+
+        with(github.issue.milestone!!) {
+            assertEquals(GitHubMilestoneState.CLOSED, state)
+        }
+    }
+
+    @Test
     fun testOnGitHubIsTrue() {
         assertEquals(true, dsl.danger.onGitHub)
     }
