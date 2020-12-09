@@ -78,7 +78,7 @@ data class GitLabMergeRequest(
     val projectId: String,
     val sha: String,
     @SerialName("should_remove_source_branch")
-    val shouldRemoveSourceBranch: Boolean = false,
+    val shouldRemoveSourceBranch: Boolean? = false,
     @SerialName("source_branch")
     val sourceBranch: String,
     @SerialName("source_project_id")
