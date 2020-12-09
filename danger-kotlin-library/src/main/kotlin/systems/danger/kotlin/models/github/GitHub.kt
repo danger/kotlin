@@ -302,8 +302,8 @@ data class GitHubUser(
 
 @Serializable
 enum class GitHubMilestoneState {
-    @SerialName("close")
-    CLOSE,
+    @SerialName("closed")
+    CLOSED,
 
     @SerialName("open")
     OPEN,
