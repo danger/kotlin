@@ -35,7 +35,7 @@ internal class GitKtxTest {
                 author = GitCommitAuthor("John Doe", "john@doe.com", "now"),
                 committer = GitCommitAuthor("John Doe", "john@doe.com", "now"),
                 message = "Random message",
-                parents = null,
+                parents = listOf(),
                 url = ""
             )
         )
