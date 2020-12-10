@@ -35,7 +35,7 @@ data class GitCommit(
     val author: GitCommitAuthor,
     val committer: GitCommitAuthor,
     val message: String,
-    val parents: List<String>? = null,
+    val parents: List<String> = listOf(),
     val url: String
 )
 

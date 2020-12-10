@@ -121,7 +121,7 @@ class GitHubParsingTests {
             expectedGitAuthor,
             expectedGitCommitter,
             "[Xcode] Updates for compatibility with Xcode 7.3.1.",
-            null,
+            listOf(),
             "https://api.github.com/repos/artsy/eidolon/git/commits/93ae30cf2aee4241c442fb3242543490998cffdb"
         )
         val expectedGitHubCommit = GitHubCommit(
@@ -207,6 +207,19 @@ class GitHubParsingTests {
             assertNull(dueOn)
             assertNull(closedAt)
             assertNull(description)
+        }
+    }
+
+    @Test
+    fun testItParsesTheClosedMilestone() {
+        val dsl: DSL = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+        }.decodeFromString(JSONFiles.githubWithClosedMilestoneDangerJSON)
+        val github = dsl.danger.github
+
+        with(github.issue.milestone!!) {
+            assertEquals(GitHubMilestoneState.CLOSED, state)
         }
     }
 
