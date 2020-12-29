@@ -38,7 +38,8 @@ if ! [[ -x "$(command -v gradle)" ]]; then
     rm -rf gradle.zip
 fi
 
-git clone https://github.com/danger/kotlin.git --single-branch --depth 1 _danger-kotlin
+LATEST_STABLE_VERSION=0.7.1
+git clone https://github.com/danger/kotlin.git --branch $LATEST_STABLE_VERSION --depth 1 _danger-kotlin
 cd _danger-kotlin && make install
 cd ..
 rm -rf _danger-kotlin
