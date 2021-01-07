@@ -10,9 +10,9 @@ object DangerJS: DangerJSBridge {
             val dangerJSArgumentIndex = args.indexOf("--danger-js-path")
             val dangerJSPath: String
             if (dangerJSArgumentIndex != -1 && args.count() > dangerJSArgumentIndex + 1) {
-                dangerJSPath = "$(which danger)"
-            } else {
                 dangerJSPath = args[dangerJSArgumentIndex + 1]
+            } else {
+                dangerJSPath = "$(which danger)"
             }
             name("$dangerJSPath $command --process $processName --passURLForDSL")
             args(args.joinToString(" "))
