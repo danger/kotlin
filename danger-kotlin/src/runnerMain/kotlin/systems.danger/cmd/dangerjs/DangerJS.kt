@@ -9,7 +9,7 @@ object DangerJS: DangerJSBridge {
         with(Cmd()) {
             val dangerJSArgumentIndex = args.indexOf("--danger-js-path")
             val dangerJSPath: String
-            if (dangerJSArgumentIndex == -1 && args.count() > dangerJSArgumentIndex + 1) {
+            if (dangerJSArgumentIndex != -1 && args.count() > dangerJSArgumentIndex + 1) {
                 dangerJSPath = "$(which danger)"
             } else {
                 dangerJSPath = args[dangerJSArgumentIndex + 1]
