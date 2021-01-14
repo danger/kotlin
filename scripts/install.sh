@@ -22,8 +22,8 @@ if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
 fi
 
 if ! [[ -x "$(command -v kotlinc)" ]]; then
-    echo "Installing kotlin compiler 1.4.10"
-    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.10/kotlin-compiler-1.4.10.zip
+    echo "Installing kotlin compiler 1.4.20"
+    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
     unzip -d /usr/local/ kotlin-compiler.zip
     echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
     rm -rf kotlin-compiler.zip
@@ -38,7 +38,8 @@ if ! [[ -x "$(command -v gradle)" ]]; then
     rm -rf gradle.zip
 fi
 
-git clone https://github.com/danger/kotlin.git --single-branch --depth 1 _danger-kotlin
+LATEST_STABLE_VERSION=0.7.1
+git clone https://github.com/danger/kotlin.git --branch $LATEST_STABLE_VERSION --depth 1 _danger-kotlin
 cd _danger-kotlin && make install
 cd ..
 rm -rf _danger-kotlin

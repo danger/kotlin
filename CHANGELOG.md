@@ -11,11 +11,16 @@
 
 -->
 ## Master
-- Update Kotlin to 1.4.10 [@gianluz] [#140](https://github.com/danger/kotlin/pull/140)
-- Migrate from moshi to kotlinx serialization [@gianluz] [#141] (https://github.com/danger/kotlin/pull/141)
+- Update Kotlin to 1.4.10 [@gianluz] - [#140](https://github.com/danger/kotlin/pull/140)
+- Migrate from moshi to kotlinx serialization [@gianluz] - [#141](https://github.com/danger/kotlin/pull/141)
 - Fix incorrect url in install.sh script and in Dockerfile [@davidbilik] - [#144](https://github.com/danger/kotlin/pull/144)
 - Road to 1.0 - Refactor project structure [@gianluz] - [#142](https://github.com/danger/kotlin/pull/142)
 - Handle danger-js custom paths with parameter `--danger-js-path` [@f-meloni] - [#153](https://github.com/danger/kotlin/pull/153)
+- Update Kotlin to 1.4.20 [@gianluz] - [#148](https://github.com/danger/kotlin/pull/148)
+- Fix gitlab defaults following kotlinx serialisation [@gianluz] - [#146](https://github.com/danger/kotlin/pull/146)
+- Road to 1.0 - Migrate from java.util.Date to kotlinx.datetime [@gianluz] - [#147](https://github.com/danger/kotlin/pull/147)
+- Fix typo in Github Milestone serialization [@doodeec] - [#151](https://github.com/danger/kotlin/pull/151)
+- Use fixed commit of danger/kotlin repository in install.sh script [@davidbilik]- [#152](https://github.com/danger/kotlin/pull/152)
 
 # 0.7.1
 

@@ -38,15 +38,15 @@ data class GitLabMergeRequest(
     @SerialName("allow_maintainer_to_push")
     val allowMaintainerToPush: Boolean = false,
     @SerialName("approvals_before_merge")
-    val approvalsBeforeMerge: Int?,
-    val assignee: GitLabUser?,
+    val approvalsBeforeMerge: Int = 0,
+    val assignee: GitLabUser? = null,
     val author: GitLabUser,
     @SerialName("changes_count")
     val changesCount: String,
     @SerialName("closed_at")
     val closedAt: Instant? = null,
     @SerialName("closed_by")
-    val closedBy: GitLabUser?,
+    val closedBy: GitLabUser? = null,
     val description: String,
     @SerialName("diff_refs")
     val diffRefs: GitLabDiffRefs,
@@ -69,7 +69,7 @@ data class GitLabMergeRequest(
     @SerialName("merged_at")
     val mergedAt: Instant? = null,
     @SerialName("merged_by")
-    val mergedBy: GitLabUser?,
+    val mergedBy: GitLabUser? = null,
     @SerialName("merge_when_pipeline_succeeds")
     val mergeOnPipelineSuccess: Boolean,
     val milestone: GitLabMilestone? = null,
@@ -78,7 +78,7 @@ data class GitLabMergeRequest(
     val projectId: String,
     val sha: String,
     @SerialName("should_remove_source_branch")
-    val shouldRemoveSourceBranch: Boolean? = null,
+    val shouldRemoveSourceBranch: Boolean? = false,
     @SerialName("source_branch")
     val sourceBranch: String,
     @SerialName("source_project_id")
@@ -108,9 +108,9 @@ data class GitLabMergeRequest(
 @Serializable
 data class GitLabMergeRequestTimeStats(
     @SerialName("human_time_estimate")
-    val humanTimeEstimate: Int?,
+    val humanTimeEstimate: Int = 0,
     @SerialName("human_time_spent")
-    val humanTimeSpent: Int?,
+    val humanTimeSpent: Int = 0,
     @SerialName("time_estimate")
     val timeEstimate: Int,
     @SerialName("total_time_spent")
@@ -202,7 +202,7 @@ enum class GitLabPipelineStatus {
 @Serializable
 data class GitLabUser(
     @SerialName("avatar_url")
-    val avatarUrl: String?,
+    val avatarUrl: String? = null,
     val id: Int,
     val name: String,
     val state: GitLabUserState,
