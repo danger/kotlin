@@ -86,6 +86,26 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+Danger a pre built images that you can use with your action:
+
+https://github.com/orgs/danger/packages/container/package/danger-kotlin
+In order to import one of those use the docker:// prefix
+
+```yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: "Run Danger"
+    steps:
+      - uses: actions/checkout@v1
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-kotlin:0.7.1
+        with:
+            args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
 ### Autocomplete and Syntax highlighting in IntelliJ IDEA or Android Studio
 You can activate the autocomplete following this additional steps:
 - Install danger on your local machine
