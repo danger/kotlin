@@ -2,9 +2,10 @@ package systems.danger.cmd.dangerjs
 
 import systems.danger.Log
 import systems.danger.cmd.Cmd
+import systems.danger.cmd.Command
 
 object DangerJS: DangerJSBridge {
-    override fun process(command: String, processName: String, args: List<String>) {
+    override fun process(command: Command, processName: String, args: List<String>) {
         Log.info("Launching Danger-JS", verbose = true)
         with(Cmd()) {
             val dangerJSArgumentIndex = args.indexOf("--danger-js-path")
@@ -14,9 +15,10 @@ object DangerJS: DangerJSBridge {
             } else {
                 dangerJSPath = "$(which danger)"
             }
-            name("$dangerJSPath $command --process $processName --passURLForDSL")
+            name("$dangerJSPath ${command.argument} --process $processName --passURLForDSL")
             args(args.joinToString(" "))
             exec()
         }
     }
 }
+
