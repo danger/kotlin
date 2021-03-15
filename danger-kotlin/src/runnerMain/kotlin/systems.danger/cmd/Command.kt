@@ -20,7 +20,7 @@ enum class Command(val argument: String) {
                     return "Use this to run danger against your local changes from master/main"
                 }
                 Command.PR -> {
-                    return "Run danger-swift locally against a PR"
+                    return "Run danger-kotlin locally against a PR"
                 }
                 Command.RUNNER -> {
                     return "Triggers the Dangerfile evaluation (used mainly by DangerJS)"
