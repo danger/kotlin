@@ -14,7 +14,7 @@ matrix:
       script:
         - make install
         - gradle danger-kotlin-library:test
-        - gradle danger-plugin-installer
+        - gradle danger-plugin-installer:install
         - gradle danger-kotlin-sample-plugin:jar
         - gradle danger-kotlin-sample-plugin:installDangerPlugin
         - DEBUG='*' danger-kotlin ci
@@ -32,6 +32,7 @@ matrix:
       script:
         - make install
         - gradle danger-kotlin-library:test
+        - gradle danger-plugin-installer:install
         - gradle danger-kotlin-sample-plugin:jar
         - gradle danger-kotlin-sample-plugin:installDangerPlugin
         - DEBUG='*' danger-kotlin ci
