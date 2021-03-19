@@ -1,0 +1,21 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply plugin: 'danger-kotlin-plugin-installer'
+
+group 'systems.danger'
+version 'sample'
+
+repositories {
+    mavenCentral()
+}
+
+dangerPlugin {
+    outputJar = "${buildDir}/libs/danger-kotlin-sample-plugin-sample.jar"
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation project(":danger-kotlin-sdk")
+}

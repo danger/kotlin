@@ -5,15 +5,21 @@
 @file:Repository("https://repo.maven.apache.org")
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
+//Testing plugin
+@file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
+
 import org.apache.commons.text.WordUtils
 import systems.danger.kotlin.*
+import systems.danger.samples.plugin.SamplePlugin
 
-// register plugin MyDangerPlugin
+register plugin SamplePlugin
 
 danger(args) {
     val allSourceFiles = git.modifiedFiles + git.createdFiles
     val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
     val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
+
+    SamplePlugin.myCustomCheck()
 
     onGitHub {
         val isTrivial = pullRequest.title.contains("#trivial")

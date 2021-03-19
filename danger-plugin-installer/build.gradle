@@ -1,0 +1,32 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'java-gradle-plugin'
+    id 'maven'
+}
+
+group 'systems.danger'
+version '0.1-alpha'
+
+repositories {
+    mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = "danger-kotlin-plugin-installer"
+            implementationClass = "systems.danger.kotlin.plugininstaller.PluginInstaller"
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation gradleApi()
+}
+
+test {
+    useJUnitPlatform()
+}
