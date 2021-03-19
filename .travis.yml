@@ -15,7 +15,7 @@ matrix:
         - make install
         - gradle danger-kotlin-library:test
         - gradle danger-kotlin-sample-plugin:jar
-        - gradle danger-koglin-sample-plugin:installDangerPlugin
+        - gradle danger-kotlin-sample-plugin:installDangerPlugin
         - DEBUG='*' danger-kotlin ci
     - os: linux
       sudo: required
@@ -32,5 +32,5 @@ matrix:
         - make install
         - gradle danger-kotlin-library:test
         - gradle danger-kotlin-sample-plugin:jar
-        - gradle danger-koglin-sample-plugin:installDangerPlugin
+        - gradle danger-kotlin-sample-plugin:installDangerPlugin
         - DEBUG='*' danger-kotlin ci
