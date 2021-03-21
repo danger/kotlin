@@ -18,9 +18,6 @@ jobs:
         with:
           candidate: kotlin
           version: 1.4.0
-      
-      - name: Install dependencies
-        run: source ~/.bash_profile && sdk install gradle && sdk install kotlin
         
       - uses: actions/setup-node@v2
         with:
