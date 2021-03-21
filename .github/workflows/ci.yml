@@ -9,8 +9,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Get sdkman
-        run: curl -s "https://get.sdkman.io" | bash
+      - uses: sdkman/sdkman-action@master
+        with:
+          candidate: gradle
+          version: 6.7.1
+          
+      - uses: sdkman/sdkman-action@master
+        with:
+          candidate: kotlin
+          version: 1.4.0
       
       - name: Install dependencies
         run: source ~/.bash_profile && sdk install gradle && sdk install kotlin
