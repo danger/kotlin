@@ -18,22 +18,20 @@ jobs:
         run: sdk install gradle && sdk install kotlin
         
       - uses: actions/setup-node@v2
-          with:
-            node-version: '10'
-            
-       - name: Install Danger JS
-         run: npm install -g danger
+        with:
+          node-version: '10'
+          
+      - name: Install Danger JS
+        run: npm install -g danger
          
-       - run: sudo chmod -R a+rwx /usr/local/
+      - run: sudo chmod -R a+rwx /usr/local/
        
-       - name: Install Danger Kotlin
-         run: make install
+      - name: Install Danger Kotlin
+        run: make install
          
-       - name: Run tests
-         run: gradle danger-kotlin-library:test
+      - name: Run tests
+        run: gradle danger-kotlin-library:test
       
-       - name: Run Danger-Kotlin
-         run: DEBUG='*' danger-kotlin ci
-      
-      
+      - name: Run Danger-Kotlin
+        run: DEBUG='*' danger-kotlin ci
       
