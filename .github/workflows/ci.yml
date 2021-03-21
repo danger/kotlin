@@ -11,11 +11,9 @@ jobs:
 
       - name: Get sdkman
         run: curl -s "https://get.sdkman.io" | bash
-
-      - run: source ~/.bash_profile
       
       - name: Install dependencies
-        run: sdk install gradle && sdk install kotlin
+        run: source ~/.bash_profile && sdk install gradle && sdk install kotlin
         
       - uses: actions/setup-node@v2
         with:
