@@ -8,7 +8,7 @@
 </p>
 
 # Project status
-The project is still work in progress.
+The project is now on beta.
 Is possible to generate a working `danger-kotlin` instance from the code that is currently on this repo, but is not ready to be distributed yet.
 
 ### What it looks like today
