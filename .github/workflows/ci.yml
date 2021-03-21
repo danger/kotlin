@@ -30,12 +30,11 @@ jobs:
        
       - name: Install Danger Kotlin
         run: make install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          
       - name: Run tests
         run: gradle danger-kotlin-library:test
       
       - name: Run Danger-Kotlin
         run: DEBUG='*' danger-kotlin ci
-      
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
