@@ -18,11 +18,13 @@ jobs:
           candidate: gradle
           version: 6.7.1
           
-      - run: |
+      - name: Install Kotlin
+        run: |
+          /bin/bash -c "\
           cd /usr/lib && \
           wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip && \
           unzip kotlin-compiler-*.zip && \
-          rm kotlin-compiler-*.zip
+          rm kotlin-compiler-*.zip"
         
       - uses: actions/setup-node@v2
         with:
