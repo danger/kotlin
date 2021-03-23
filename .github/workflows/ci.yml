@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, macos-latest]
     
     steps:
       - uses: actions/checkout@v2
@@ -14,10 +14,10 @@ jobs:
           candidate: gradle
           version: 6.7.1
           
-      - uses: sdkman/sdkman-action@master
+      - uses: fwilhe2/setup-kotlin@main
         with:
-          candidate: kotlin
-          version: 1.4.31
+          install-native: true
+          version: 1.4.20
         
       - uses: actions/setup-node@v2
         with:
