@@ -23,7 +23,7 @@ jobs:
           curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
           sudo chmod -R a+rwx /usr/local/
           unzip -d /usr/local/ kotlin-compiler.zip
-          echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
+          echo "/usr/local/kotlinc/bin" >> $GITHUB_PATH
           rm -rf kotlin-compiler.zip
         
       - uses: actions/setup-node@v2
