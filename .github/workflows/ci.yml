@@ -20,11 +20,10 @@ jobs:
           
       - name: Install Kotlin
         run: |
-          /bin/bash -c "\
-          cd /usr/lib && \
-          wget -q https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip && \
-          unzip kotlin-compiler-*.zip && \
-          rm kotlin-compiler-*.zip"
+          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
+          unzip -d /usr/local/ kotlin-compiler.zip
+          echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
+          rm -rf kotlin-compiler.zip
         
       - uses: actions/setup-node@v2
         with:
