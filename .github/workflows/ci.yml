@@ -21,6 +21,7 @@ jobs:
       - name: Install Kotlin
         run: |
           curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
+          sudo chmod -R a+rwx /usr/local/
           unzip -d /usr/local/ kotlin-compiler.zip
           echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
           rm -rf kotlin-compiler.zip
@@ -31,8 +32,6 @@ jobs:
           
       - name: Install Danger JS
         run: npm install -g danger
-         
-      - run: sudo chmod -R a+rwx /usr/local/
        
       - name: Install Danger Kotlin
         run: make install
