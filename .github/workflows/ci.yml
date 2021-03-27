@@ -21,7 +21,11 @@ jobs:
       - name: Install Kotlin
         run: |
           curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
-          sudo chmod -R a+rwx /usr/local/
+          
+          if [[ "$?" -eq 0 || "$OSTYPE" == "darwin"* ]]
+          then
+            sudo chmod -R a+rwx /usr/local/
+          fi
           unzip -d /usr/local/ kotlin-compiler.zip
           echo "/usr/local/kotlinc/bin" >> $GITHUB_PATH
           rm -rf kotlin-compiler.zip
