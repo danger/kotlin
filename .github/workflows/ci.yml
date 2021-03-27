@@ -1,0 +1,50 @@
+name: CI
+
+on: pull_request
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: sdkman/sdkman-action@master
+        with:
+          candidate: gradle
+          version: 6.7.1
+          
+      - name: Install Kotlin
+        run: |
+          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.4.20/kotlin-compiler-1.4.20.zip
+          
+          if [[ "$OSTYPE" != "darwin"* ]]
+          then
+            sudo chmod -R a+rwx /usr/local/
+          fi
+          
+          unzip -d /usr/local/bin kotlin-compiler.zip
+          echo "/usr/local/bin/kotlinc/bin" >> $GITHUB_PATH
+          rm -rf kotlin-compiler.zip
+        
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '10'
+          
+      - name: Install Danger JS
+        run: npm install -g danger
+       
+      - name: Install Danger Kotlin
+        run: make install
+         
+      - name: Run tests
+        run: gradle danger-kotlin-library:test
+      
+      - name: Run Danger-Kotlin
+        run: DEBUG='*' danger-kotlin ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
