@@ -43,6 +43,16 @@ jobs:
          
       - name: Run tests
         run: gradle danger-kotlin-library:test
+
+      - name: Install Plugin Installer
+        run: gradle danger-plugin-installer:install
+
+      - name: Build and Install Sample Plugin
+        run: |
+          cd danger-kotlin-sample-plugin
+          gradle build
+          gradle installDangerPlugin
+          cd ..
       
       - name: Run Danger-Kotlin
         run: DEBUG='*' danger-kotlin ci
