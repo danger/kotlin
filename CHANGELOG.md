@@ -23,6 +23,7 @@
 - Road to 1.0 - Migrate from java.util.Date to kotlinx.datetime [@gianluz] - [#147](https://github.com/danger/kotlin/pull/147)
 - Fix typo in Github Milestone serialization [@doodeec] - [#151](https://github.com/danger/kotlin/pull/151)
 - Use fixed commit of danger/kotlin repository in install.sh script [@davidbilik]- [#152](https://github.com/danger/kotlin/pull/152)
+- Update Kotlin to 1.4.31 [@gianluz] - [#160](https://github.com/danger/kotlin/pull/160)
 - Library resolver and plugin installer gradle plugin [@gianluz] - [#158](https://github.com/danger/kotlin/pull/158)
 
 # 0.7.1
