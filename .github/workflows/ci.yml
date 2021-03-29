@@ -55,6 +55,6 @@ jobs:
           cd ..
       
       - name: Run Danger-Kotlin
-        run: DEBUG='*' danger-kotlin ci --dangerfile=Dangerfile_ci.df.kts
+        run: DEBUG='*' danger-kotlin ci --dangerfile Dangerfile_ci.df.kts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
