@@ -7,6 +7,6 @@ object SamplePlugin : DangerPlugin() {
         get() = "systems.danger.kotlin.samplePlugin"
 
     fun myCustomCheck() {
-        context.message("Verified custom plugins")
+        context.message("✅ Custom plugin successfully linked")
     }
 }
