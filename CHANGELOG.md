@@ -12,7 +12,7 @@
 -->
 ## Master
 
-# 1.0-beta
+# 1.0.0-beta
 
 - Support --help parameter [@f-meloni] - [#153](https://github.com/danger/kotlin/pull/155)
 - Update Kotlin to 1.4.10 [@gianluz] - [#140](https://github.com/danger/kotlin/pull/140)
