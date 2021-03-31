@@ -1,4 +1,4 @@
-[![Current Version](https://img.shields.io/badge/danger%20kotlin-v0.7.1-orange)](https://danger.systems/kotlin/)
+[![Current Version](https://img.shields.io/badge/danger%20kotlin-v1.0.0(beta)-orange)](https://danger.systems/kotlin/)
 [![Maven Central - SDK](https://img.shields.io/maven-central/v/systems.danger/danger-kotlin-sdk.svg?label=danger-kotlin-sdk)](https://search.maven.org/search?q=g:%22systems.danger%22%20AND%20a:%22danger-kotlin-sdk%22)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
@@ -8,7 +8,7 @@
 </p>
 
 # Project status
-The project is still work in progress.
+The project is now on beta.
 Is possible to generate a working `danger-kotlin` instance from the code that is currently on this repo, but is not ready to be distributed yet.
 
 ### What it looks like today
@@ -81,7 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@0.7.1
+        uses: danger/kotlin@1.0.0-beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -99,7 +99,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:0.7.1
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         with:
             args: --failOnErrors --no-publish-check
         env:
