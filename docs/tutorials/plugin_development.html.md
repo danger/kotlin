@@ -20,7 +20,7 @@ Everything you need is just IntelliJ IDEA and the kotlin environment setup on yo
 **Step 2: Add the sdk as dependency**. In your `build.gradle` add the following dependency:
 ```groovy
 dependencies {
-    implementation "systems.danger:danger-kotlin-sdk:1.1"
+    implementation "systems.danger:danger-kotlin-sdk:1.2"
 }
 ```
 
@@ -40,9 +40,32 @@ object MyAwesomeDangerPlugin : DangerPlugin() {
 }
 ```
 
-**Step 4: Try your plugin with Danger**. Create your `Dangerfile.df.kts` and import your plugin.
+**Step 4: Build your plugin**. You can copy manually your compiled jar into `/usr/local/lib/danger/libs` or alternatively use the gradle plugin as follow:
+```groovy
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath "systems.danger:danger-plugin-installer:0.1-alpha"
+    }
+}
+
+apply plugin: 'danger-kotlin-plugin-installer'
+
+group 'com.test'
+version '0.0.1'
+
+dangerPlugin {
+    outputJar = "${buildDir}/libs/my-awesome-plugin-0.0.1.jar"
+}
+```
+then invoke `./gradlew build` and `./gradlew installDangerPlugin`.
+
+**Step 5: Try your plugin with Danger**. Create your `Dangerfile.df.kts` and import your plugin.
 ```kotlin
-@file:DependsOn("./build/libs/my-awesome-plugin-0.0.1.jar")
+@file:DependsOn("my-awesome-plugin-0.0.1.jar")
 
 import com.test.myawesomeplugin.MyAwesomePlugin
 import systems.danger.kotlin.*
@@ -55,12 +78,10 @@ MyAwesomePlugin.helloPlugin()
 ``` 
 If danger is setup correctly you should see a message on your PR: `Hello Danger Plugin!`
 
-**Step 5: Maven publication**. If you setup the autocomplete in `IntelliJ IDEA` for the DangerFiles, you will see that the autocomplete doesn't work for the imported `jar`.
-This feature at the moment is not supported by kotlin. However by 
-publishing your plugin to Maven Central this problem can be solved. Then your `Dangerfile.df.kts` will be like:
+**Step 5: Maven publication**. Publish your plugin to maven central and add your plugin in [awesome-danger]. Then your `Dangerfile.df.kts` will be like:
 ```kotlin
 @file:DependsOn("com.test:my-awesome-plugin:version")
-//If the repository url is not specified, will be Maven central by default
+//You can add more than one maven repository
 @file:Repository("http://url.to.maven.repo/repository")
 
 import com.test.myawesomeplugin.MyAwesomePlugin
@@ -75,6 +96,7 @@ MyAwesomePlugin.helloPlugin()
 
 ## Resources
 
-Some plugin examples can be found [here]
+Some plugins can be found in [awesome-danger] and an example plugin is also available [here]
 
-[here]: https://github.com/danger/awesome-danger#kotlin-danger-kotlin
+[awesome-danger]: https://github.com/danger/awesome-danger#kotlin-danger-kotlin
+[here]: https://github.com/danger/kotlin/danger-kotlin-sample-plugin

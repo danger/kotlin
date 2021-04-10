@@ -19,6 +19,8 @@ apply from: file('version.gradle')
 
 dependencies {
     provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    provided "org.jetbrains.kotlin:kotlin-script-runtime:$versionKotlin"
+    provided "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
     includeJar "org.jetbrains.kotlin:kotlin-main-kts:$versionKotlin"
 }
 

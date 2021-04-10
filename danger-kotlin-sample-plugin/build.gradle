@@ -1,0 +1,31 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath "systems.danger:danger-plugin-installer:0.1-alpha"
+    }
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.31'
+}
+
+apply plugin: 'danger-kotlin-plugin-installer'
+
+group 'systems.danger'
+version 'sample'
+
+repositories {
+    mavenCentral()
+}
+
+dangerPlugin {
+    outputJar = "${buildDir}/libs/danger-kotlin-sample-plugin-sample.jar"
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "systems.danger:danger-kotlin-sdk:1.2"
+}
