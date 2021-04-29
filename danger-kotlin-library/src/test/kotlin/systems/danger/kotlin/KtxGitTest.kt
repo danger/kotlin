@@ -41,7 +41,7 @@ internal class GitKtxTest {
         )
     )
 
-    private val expectedResult = PullRequestChangedLines(22, 8)
+    private val expectedResult = PullRequestChangedLines(22, 8, diffCommandOutput)
 
     @Before
     fun setup() {

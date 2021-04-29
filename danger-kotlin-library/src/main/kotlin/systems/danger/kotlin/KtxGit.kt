@@ -21,7 +21,8 @@ val Git.changedLines: PullRequestChangedLines
             }
         val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
         val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
-        return PullRequestChangedLines(additions, deletions)
+        val commandRawDiffOutput = shellExecutor.execute("git diff $headSha $baseSha")
+        return PullRequestChangedLines(additions, deletions, commandRawDiffOutput)
     }
 
 /**
@@ -55,13 +56,21 @@ val Git.baseSha: String?
     get() = commits.lastOrNull()?.sha?.let { "$it^1" }
 
 /**
+ * Unified diff of this PR 
+ */
+val Git.diff: String?
+    get() = changedLines.diff
+
+/**
  * Wrapper for number of additions and deletions in currently processed Pull (or Merge) Request
  *
  * @param additions the number of additions
  * @param deletions the number of deletions
+ * @param diff unified diff of the pr
  * @constructor Create empty PullRequestChangedLines
  */
 data class PullRequestChangedLines(
     val additions: Int,
-    val deletions: Int
+    val deletions: Int,
+    val diff: String? = null
 )
