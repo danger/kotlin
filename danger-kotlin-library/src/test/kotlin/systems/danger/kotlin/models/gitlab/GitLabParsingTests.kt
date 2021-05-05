@@ -51,7 +51,7 @@ class GitLabParsingTests {
             assertEquals(27469633, id)
             assertEquals(182, iid)
             assertEquals(Instant.fromEpochMilliseconds(1554942802492), latestBuildFinishedAt)
-            assertEquals(Instant.fromEpochMilliseconds(1554942022492), latestBuildStartedAt)
+            assertEquals(Instant.fromEpochMilliseconds(1619786100103), latestBuildStartedAt)
             assertEquals(listOf<String>(), labels)
             assertEquals("377a24fb7a0f30364f089f7bca67752a8b61f477", mergeCommitSha)
             assertEquals(Instant.fromEpochMilliseconds(1554943042492), mergedAt)

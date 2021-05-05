@@ -9,6 +9,9 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 @ExperimentalSerializationApi
 @Serializer(forClass = DateSerializer::class)
@@ -22,6 +25,25 @@ object DateSerializer : KSerializer<Instant> {
     }
 
     override fun deserialize(decoder: Decoder): Instant {
-        return Instant.parse(decoder.decodeString())
+        val value = decoder.decodeString()
+
+        return try {
+            Instant.parse(value)
+        } catch(e: Throwable) {
+            Instant.fromEpochMilliseconds(GitLabISO8601DateFormat().parse(value).toInstant().toEpochMilli())
+        }
     }
+}
+
+class GitLabISO8601DateFormat {
+    fun parse(string: String?): Date {
+        val formatter = SimpleDateFormat(
+            "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+        ).apply {
+            timeZone = TimeZone.getTimeZone("UTC")
+        }
+
+        return formatter.parse(string.toString())
+    }
+
 }
