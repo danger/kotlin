@@ -42,16 +42,16 @@ jobs:
         run: make install
          
       - name: Run tests
-        run: gradle danger-kotlin-library:test
+        run: ./gradlew danger-kotlin-library:test
 
       - name: Install Plugin Installer
-        run: gradle danger-plugin-installer:install
+        run: ./gradlew danger-plugin-installer:install
 
       - name: Build and Install Sample Plugin
         run: |
           cd danger-kotlin-sample-plugin
-          gradle build
-          gradle installDangerPlugin
+          ./gradlew build
+          ./gradlew installDangerPlugin
           cd ..
       
       - name: Run Danger-Kotlin
