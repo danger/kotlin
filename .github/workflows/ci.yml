@@ -50,6 +50,7 @@ jobs:
       - name: Build and Install Sample Plugin
         run: |
           cd danger-kotlin-sample-plugin
+          gradle wrapper
           ./gradlew build
           ./gradlew installDangerPlugin
           cd ..
