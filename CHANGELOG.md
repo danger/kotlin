@@ -12,6 +12,8 @@
 -->
 ## Master
 
+- Update kotlinx-datetime to 0.1.1 [@f-meloni] - [@gianluz] - [#167](https://github.com/danger/kotlin/pull/167)
+
 # 1.0.0-beta
 
 - Support --help parameter [@f-meloni] - [#153](https://github.com/danger/kotlin/pull/155)
