@@ -13,6 +13,7 @@
 ## Master
 
 - Update kotlinx-datetime to 0.1.1 [@f-meloni] - [@gianluz] - [#167](https://github.com/danger/kotlin/pull/167)
+- Support GitLab different time zones on the JSON [@f-meloni] - [#169](https://github.com/danger/kotlin/pull/169)
 
 # 1.0.0-beta
 
