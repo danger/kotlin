@@ -45,7 +45,8 @@ danger(args) {
 ```
 
 ### Setup
-#### MacOs
+
+#### macOS
 ```sh
 brew install danger/tap/danger-kotlin
 ```
@@ -60,7 +61,7 @@ xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer dire
 
 You can fix it with:
 
-```
+```sh
 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 ```
 
