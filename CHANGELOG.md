@@ -12,6 +12,8 @@
 -->
 ## Master
 
+# 1.0.0-beta2
+
 - Update kotlinx-datetime to 0.1.1 [@f-meloni] - [@gianluz] - [#167](https://github.com/danger/kotlin/pull/167)
 - Support GitLab different time zones on the JSON [@f-meloni] - [#169](https://github.com/danger/kotlin/pull/169)
 - Update Kotlin to 1.5.0 [@gianluz] - [#171](https://github.com/danger/kotlin/pull/171)
