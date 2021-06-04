@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta2
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta.2
         with:
             args: --failOnErrors --no-publish-check
         env:
