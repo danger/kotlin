@@ -65,7 +65,7 @@ enum class GitHubPullRequestState {
 data class GitHubPR(
     val number: Int,
     val title: String,
-    val body: String,
+    val body: String?,
     val user: GitHubUser,
     val assignee: GitHubUser?,
     val assignees: List<GitHubUser>,
@@ -247,7 +247,7 @@ data class GitHubIssue(
     val user: GitHubUser,
     val state: GitHubIssueState,
     @SerialName("locked") val isLocked: Boolean,
-    val body: String,
+    val body: String?,
     @SerialName("comments") val commentCount: Int,
     val assignee: GitHubUser?,
     val assignees: List<GitHubUser>,
