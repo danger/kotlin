@@ -12,6 +12,8 @@
 -->
 ## Master
 
+- Fix body parameter in github models  [@tegorov] - [#175](https://github.com/danger/kotlin/pull/175)
+
 # 1.0.0-beta2
 
 - Update kotlinx-datetime to 0.1.1 [@f-meloni] - [@gianluz] - [#167](https://github.com/danger/kotlin/pull/167)
@@ -68,3 +70,4 @@
 [@anton46]: https://github.com/anton46
 [@uzzu]: https://github.com/uzzu
 [@mariusgreve]: https://github.com/mariusgreve
+[@tegorov]: https://github.com/tegorov
