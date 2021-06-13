@@ -20,21 +20,22 @@ project.ext.groupIdOkio = 'com.squareup.okio'
 project.ext.artifactIdOkio = 'okio'
 
 // Kotlin
-project.ext.versionKotlin = '1.5.0'
+project.ext.versionKotlin = '1.5.10'
 project.ext.groupIdKotlin = 'org.jetbrains.kotlin'
 project.ext.groupIdKotlinx = 'org.jetbrains.kotlinx'
 project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 project.ext.artifactIdKotlinSerializationJson = 'kotlinx-serialization-json'
 project.ext.artifactIdKotlinDatetime = "kotlinx-datetime"
 project.ext.artifactIdKotlinCoroutines = "kotlinx-coroutines-core"
-project.ext.versionKotlinSerializationJson = '1.0.1'
+project.ext.versionKotlinSerializationJson = '1.2.1'
 project.ext.versionKotlinDatetime = '0.2.0'
+project.ext.versionKotlinCoroutines = '1.5.0'
 
 ext.kotlin = [
         mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin",
         serialization: "$groupIdKotlinx:$artifactIdKotlinSerializationJson:$versionKotlinSerializationJson",
         datetime: "$groupIdKotlinx:$artifactIdKotlinDatetime:$versionKotlinDatetime",
-        coroutines: "$groupIdKotlinx:$artifactIdKotlinCoroutines:$versionKotlin"
+        coroutines: "$groupIdKotlinx:$artifactIdKotlinCoroutines:$versionKotlinCoroutines"
 ]
 ext.kotlinDependencies = group {
     includeJar kotlin.mainKts

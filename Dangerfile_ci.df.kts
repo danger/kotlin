@@ -65,7 +65,7 @@ danger(args) {
     }
     val after = Clock.System.now()
     val runningTime = after.minus(current)
-    message("Coroutines checks terminated in ${runningTime.toDateTimePeriod().seconds} seconds.")
+    message("Coroutines checks terminated - runningFor $runningTime")
 }
 
 suspend fun DangerDSL.expensiveCheck(runForMillis: Long) {
