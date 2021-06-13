@@ -26,18 +26,21 @@ project.ext.groupIdKotlinx = 'org.jetbrains.kotlinx'
 project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 project.ext.artifactIdKotlinSerializationJson = 'kotlinx-serialization-json'
 project.ext.artifactIdKotlinDatetime = "kotlinx-datetime"
+project.ext.artifactIdKotlinCoroutines = "kotlinx-coroutines-core"
 project.ext.versionKotlinSerializationJson = '1.0.1'
-project.ext.versionKotlinDatetime = '0.1.1'
+project.ext.versionKotlinDatetime = '0.2.0'
 
 ext.kotlin = [
         mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin",
         serialization: "$groupIdKotlinx:$artifactIdKotlinSerializationJson:$versionKotlinSerializationJson",
-        datetime: "$groupIdKotlinx:$artifactIdKotlinDatetime:$versionKotlinDatetime"
+        datetime: "$groupIdKotlinx:$artifactIdKotlinDatetime:$versionKotlinDatetime",
+        coroutines: "$groupIdKotlinx:$artifactIdKotlinCoroutines:$versionKotlin"
 ]
 ext.kotlinDependencies = group {
     includeJar kotlin.mainKts
     includeRecursiveJar kotlin.serialization
     includeRecursiveJar kotlin.datetime
+    includeRecursiveJar kotlin.coroutines
 }
 
 // Testing
