@@ -8,14 +8,13 @@
 //Testing plugin
 @file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
 
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
-import kotlinx.datetime.toDateTimePeriod
 import org.apache.commons.text.WordUtils
 import systems.danger.kotlin.*
 import systems.danger.kotlin.models.danger.DangerDSL
 import systems.danger.samples.plugin.SamplePlugin
-import kotlin.time.Duration
 
 register plugin SamplePlugin
 
@@ -70,5 +69,5 @@ danger(args) {
 
 suspend fun DangerDSL.expensiveCheck(runForMillis: Long) {
     // Example expensive check
-    Thread.sleep(runForMillis)
+    delay(runForMillis)
 }
