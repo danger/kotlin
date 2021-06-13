@@ -8,6 +8,7 @@
 //Testing plugin
 @file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
 
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Clock
@@ -57,10 +58,14 @@ danger(args) {
     // Coroutines checks in parallel test
     val current = Clock.System.now()
     runBlocking {
-        expensiveCheck(1000)
-        expensiveCheck(3000)
-        expensiveCheck(2000)
-        expensiveCheck(5000)
+        val task1 = async { expensiveCheck(1000) }
+        val task2 = async { expensiveCheck(3000) }
+        val task3 = async { expensiveCheck(2000) }
+        val task4 = async { expensiveCheck(5000) }
+        task1.await()
+        task2.await()
+        task3.await()
+        task4.await()
     }
     val after = Clock.System.now()
     val runningTime = after.minus(current)
