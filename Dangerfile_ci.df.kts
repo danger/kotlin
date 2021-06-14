@@ -58,10 +58,10 @@ danger(args) {
     // Coroutines checks in parallel test
     val current = Clock.System.now()
     runBlocking {
-        val task1 = async { expensiveCheck(1000) }
-        val task2 = async { expensiveCheck(3000) }
-        val task3 = async { expensiveCheck(2000) }
-        val task4 = async { expensiveCheck(5000) }
+        val task1 = async { expensiveCheck("1", 1000) }
+        val task2 = async { expensiveCheck("2", 3000) }
+        val task3 = async { expensiveCheck("3", 2000) }
+        val task4 = async { expensiveCheck("4", 5000) }
         task1.await()
         task2.await()
         task3.await()
@@ -72,7 +72,8 @@ danger(args) {
     message("Coroutines checks terminated - runningFor $runningTime")
 }
 
-suspend fun DangerDSL.expensiveCheck(runForMillis: Long) {
+suspend fun DangerDSL.expensiveCheck(name: String, runForMillis: Long) {
     // Example expensive check
     delay(runForMillis)
+    message("Coroutine $name terminated in $runForMillis ms")
 }
