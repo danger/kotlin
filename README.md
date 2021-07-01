@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@1.0.0-beta2
+        uses: danger/kotlin@1.0.0-beta.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
