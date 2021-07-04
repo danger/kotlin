@@ -1,13 +1,14 @@
 package systems.danger.kotlin
 
 import systems.danger.kotlin.json.JsonParser
+import systems.danger.kotlin.models.danger.ConcurrentDangerResults
 import systems.danger.kotlin.models.danger.DSL
 import systems.danger.kotlin.models.danger.DangerDSL
-import systems.danger.kotlin.models.danger.DangerResults
 import systems.danger.kotlin.models.git.FilePath
 import systems.danger.kotlin.sdk.DangerContext
 import systems.danger.kotlin.sdk.Violation
 import java.io.File
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * Main Danger runner
@@ -23,23 +24,23 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
 
     val danger: DangerDSL = JsonParser.decodeJson<DSL>(jsonInputFilePath).danger
 
-    private val dangerResults: DangerResults = DangerResults()
+    private val concurrentDangerResults: ConcurrentDangerResults = ConcurrentDangerResults()
 
     override val fails: List<Violation>
         get() {
-            return dangerResults.fails.toList()
+            return concurrentDangerResults.fails.get()
         }
     override val warnings: List<Violation>
         get() {
-            return dangerResults.warnings.toList()
+            return concurrentDangerResults.warnings.get()
         }
     override val messages: List<Violation>
         get() {
-            return dangerResults.messages.toList()
+            return concurrentDangerResults.messages.get()
         }
     override val markdowns: List<Violation>
         get() {
-            return dangerResults.markdowns.toList()
+            return concurrentDangerResults.markdowns.get()
         }
 
 
@@ -95,27 +96,34 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
     }
 
     private fun warn(violation: Violation) {
-        dangerResults.warnings.add(violation)
-        commit()
+        concurrentDangerResults.warnings.updateWith(violation)
     }
 
     private fun fail(violation: Violation) {
-        dangerResults.fails.add(violation)
-        commit()
+        concurrentDangerResults.fails.updateWith(violation)
     }
 
     private fun message(violation: Violation) {
-        dangerResults.messages.add(violation)
-        commit()
+        concurrentDangerResults.messages.updateWith(violation)
     }
 
     private fun markdown(violation: Violation) {
-        dangerResults.markdowns.add(violation)
+        concurrentDangerResults.markdowns.updateWith(violation)
+    }
+
+    private fun AtomicReference<MutableList<Violation>>.updateWith(violation: Violation) {
+        this.getAndUpdate {
+            it.apply {
+                add(violation)
+            }
+        }
         commit()
     }
 
     // commit all the inline violations into the json output file
     private fun commit() {
-        JsonParser.encodeJson(dangerResults, jsonOutputFile)
+        synchronized(this) {
+            JsonParser.encodeJson(concurrentDangerResults.toDangerResults(), jsonOutputFile)
+        }
     }
 }

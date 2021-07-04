@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import systems.danger.kotlin.sdk.Violation
 import systems.danger.kotlin.models.serializers.ViolationSerializer
+import java.util.concurrent.atomic.AtomicReference
 
 @Serializable
 internal data class Meta(
@@ -15,9 +16,20 @@ internal data class Meta(
 
 @Serializable
 internal data class DangerResults(
-    var fails: MutableList<Violation> = mutableListOf(),
-    var warnings: MutableList<Violation> = mutableListOf(),
-    var messages: MutableList<Violation> = mutableListOf(),
-    var markdowns: MutableList<Violation> = mutableListOf(),
+    val fails: List<Violation>,
+    val warnings: List<Violation>,
+    val messages: List<Violation>,
+    val markdowns: List<Violation>,
     val meta: Meta = Meta()
 )
+
+internal data class ConcurrentDangerResults(
+    val fails: AtomicReference<MutableList<Violation>> = AtomicReference(mutableListOf()),
+    val warnings: AtomicReference<MutableList<Violation>> = AtomicReference(mutableListOf()),
+    val messages: AtomicReference<MutableList<Violation>> = AtomicReference(mutableListOf()),
+    val markdowns: AtomicReference<MutableList<Violation>> = AtomicReference(mutableListOf())
+) {
+    fun toDangerResults() = DangerResults(
+        fails.get(), warnings.get(), messages.get(), markdowns.get()
+    )
+}
