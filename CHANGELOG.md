@@ -12,6 +12,7 @@
 -->
 ## Master
 
+- Improving error message for when a DangerPlugin was not registered [@rojanthomas] - [#181](https://github.com/danger/kotlin/pull/181)
 - Fix body parameter in github models  [@tegorov] - [#175](https://github.com/danger/kotlin/pull/175)
 
 # 1.0.0-beta2
@@ -71,3 +72,4 @@
 [@uzzu]: https://github.com/uzzu
 [@mariusgreve]: https://github.com/mariusgreve
 [@tegorov]: https://github.com/tegorov
+[@rojanthomas]: https://github.com/rojanthomas

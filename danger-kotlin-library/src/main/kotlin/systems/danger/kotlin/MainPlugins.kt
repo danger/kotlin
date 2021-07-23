@@ -80,5 +80,5 @@ inline fun register(block: register.() -> Unit) = register.run(block)
  * @param dangerContext the [DangerContext]
  */
 internal fun DangerPlugin.withContext(dangerContext: DangerContext) {
-    context = dangerContext
+    registeredContext = dangerContext
 }
