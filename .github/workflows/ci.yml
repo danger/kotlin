@@ -25,11 +25,11 @@ jobs:
           if [[ "$OSTYPE" != "darwin"* ]]
           then
             sudo chmod -R a+rwx /usr/local/
+            
+            unzip -d /usr/local/bin kotlin-compiler.zip
+            echo "/usr/local/bin/kotlinc/bin" >> $GITHUB_PATH
+            rm -rf kotlin-compiler.zip
           fi
-          
-          unzip -d /usr/local/bin kotlin-compiler.zip
-          echo "/usr/local/bin/kotlinc/bin" >> $GITHUB_PATH
-          rm -rf kotlin-compiler.zip
         
       - uses: actions/setup-node@v2
         with:
