@@ -1,5 +1,14 @@
 #!/bin/sh
 
+VERSION=0.7.1
+
+while getopts v:h: flag
+do
+    case "${flag}" in
+        v) VERSION=${OPTARG};;
+    esac
+done
+
 sudo -v && sudo="true" || sudo=""
 
 if ! [[ -x "$(command -v danger)" ]]; then
@@ -38,8 +47,7 @@ if ! [[ -x "$(command -v gradle)" ]]; then
     rm -rf gradle.zip
 fi
 
-LATEST_STABLE_VERSION=0.7.1
-git clone https://github.com/danger/kotlin.git --branch $LATEST_STABLE_VERSION --depth 1 _danger-kotlin
+git clone https://github.com/danger/kotlin.git --branch $VERSION --depth 1 _danger-kotlin
 cd _danger-kotlin && make install
 cd ..
 rm -rf _danger-kotlin
