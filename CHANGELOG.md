@@ -12,6 +12,7 @@
 -->
 ## Master
 
+- Coroutines compatibility [@gianluz] - [#177](https://github.com/danger/kotlin/pull/177)
 - Improving error message for when a DangerPlugin was not registered [@rojanthomas] - [#181](https://github.com/danger/kotlin/pull/181)
 - Fix body parameter in github models  [@tegorov] - [#175](https://github.com/danger/kotlin/pull/175)
 
