@@ -31,12 +31,14 @@ inline fun danger(args: Array<String>, block: DangerDSL.() -> Unit) = Danger(arg
  * @return a new [DangerDSL] descriptor
  */
 fun Danger(args: Array<String>): DangerDSL {
-    val argsCount = args.count()
+    if (dangerRunner == null) {
+        val argsCount = args.count()
 
-    val jsonInputFilePath = args[argsCount - 2]
-    val jsonOutputPath = args[argsCount - 1]
+        val jsonInputFilePath = args[argsCount - 2]
+        val jsonOutputPath = args[argsCount - 1]
 
-    dangerRunner = MainDangerRunner(jsonInputFilePath, jsonOutputPath)
+        dangerRunner = MainDangerRunner(jsonInputFilePath, jsonOutputPath)
+    }
 
     return dangerRunner.danger
 }
