@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicReference
  * @param jsonOutputPath the output json file path used to publish the danger results on your Pull Request
  */
 internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: FilePath) : DangerContext {
-
     private val jsonOutputFile: File = File(jsonOutputPath)
 
     val danger: DangerDSL = JsonParser.decodeJson<DSL>(jsonInputFilePath).danger
@@ -86,7 +85,7 @@ internal class MainDangerRunner(jsonInputFilePath: FilePath, jsonOutputPath: Fil
     }
 
     override fun suggest(code: String, file: FilePath, line: Int) {
-        if (dangerRunner.danger.onGitHub) {
+        if (runnerInstance.danger.onGitHub) {
             val message = "```suggestion\n $code \n```"
             markdown(Violation(message, file, line))
         } else {
