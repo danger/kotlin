@@ -3,7 +3,16 @@ package systems.danger.kotlin
 import systems.danger.kotlin.models.danger.DangerDSL
 import systems.danger.kotlin.models.git.FilePath
 
-internal lateinit var dangerRunner: MainDangerRunner
+internal var dangerRunner: MainDangerRunner? = null
+
+internal val runnerInstance: MainDangerRunner
+    get() {
+        if(dangerRunner != null) {
+            return dangerRunner!!
+        } else {
+            throw IllegalArgumentException("Danger must be initialised before accessing it")
+        }
+    }
 
 /**
  * Syntactic sugar that allows you to work with a [DangerDSL] descriptor in a single Danger block.
@@ -31,14 +40,16 @@ inline fun danger(args: Array<String>, block: DangerDSL.() -> Unit) = Danger(arg
  * @return a new [DangerDSL] descriptor
  */
 fun Danger(args: Array<String>): DangerDSL {
-    val argsCount = args.count()
+    if (dangerRunner == null) {
+        val argsCount = args.count()
 
-    val jsonInputFilePath = args[argsCount - 2]
-    val jsonOutputPath = args[argsCount - 1]
+        val jsonInputFilePath = args[argsCount - 2]
+        val jsonOutputPath = args[argsCount - 1]
 
-    dangerRunner = MainDangerRunner(jsonInputFilePath, jsonOutputPath)
+        dangerRunner = MainDangerRunner(jsonInputFilePath, jsonOutputPath)
+    }
 
-    return dangerRunner.danger
+    return dangerRunner!!.danger
 }
 
 /**
@@ -47,7 +58,7 @@ fun Danger(args: Array<String>): DangerDSL {
  * @param message the standard message
  */
 fun message(message: String) =
-    dangerRunner.message(message)
+    runnerInstance.message(message)
 
 /**
  * Adds an inline message message to the Danger report
@@ -57,7 +68,7 @@ fun message(message: String) =
  * @param line the line number into the target file
  */
 fun message(message: String, file: FilePath, line: Int) =
-    dangerRunner.message(message, file, line)
+    runnerInstance.message(message, file, line)
 
 /**
  * Adds an inline markdown message to the Danger report
@@ -65,7 +76,7 @@ fun message(message: String, file: FilePath, line: Int) =
  * @param message the markdown formatted message
  */
 fun markdown(message: String) =
-    dangerRunner.markdown(message)
+    runnerInstance.markdown(message)
 
 /**
  * Adds an inline markdown message to the Danger report
@@ -75,7 +86,7 @@ fun markdown(message: String) =
  * @param line the line number into the target file
  */
 fun markdown(message: String, file: FilePath, line: Int) =
-    dangerRunner.markdown(message, file, line)
+    runnerInstance.markdown(message, file, line)
 
 /**
  * Adds an inline warning message to the Danger report
@@ -83,7 +94,7 @@ fun markdown(message: String, file: FilePath, line: Int) =
  * @param message the warning message
  */
 fun warn(message: String) =
-    dangerRunner.warn(message)
+    runnerInstance.warn(message)
 
 /**
  * Adds an inline warning message to the Danger report
@@ -93,7 +104,7 @@ fun warn(message: String) =
  * @param line the line number into the target file
  */
 fun warn(message: String, file: FilePath, line: Int) =
-    dangerRunner.warn(message, file, line)
+    runnerInstance.warn(message, file, line)
 
 /**
  * Adds an inline fail message to the Danger report
@@ -101,7 +112,7 @@ fun warn(message: String, file: FilePath, line: Int) =
  * @param message the fail message
  */
 fun fail(message: String) =
-    dangerRunner.fail(message)
+    runnerInstance.fail(message)
 
 /**
  * Adds an inline fail message to the Danger report
@@ -111,7 +122,7 @@ fun fail(message: String) =
  * @param line the line number into the target file
  */
 fun fail(message: String, file: FilePath, line: Int) =
-    dangerRunner.fail(message, file, line)
+    runnerInstance.fail(message, file, line)
 
 /**
  * Adds an inline suggested code message to the Danger report
@@ -121,4 +132,4 @@ fun fail(message: String, file: FilePath, line: Int) =
  * @param line the line number into the target file
  */
 fun suggest(code: String, file: FilePath, line: Int) =
-    dangerRunner.suggest(code, file, line)
+    runnerInstance.suggest(code, file, line)
