@@ -1,4 +1,4 @@
-[![Current Version](https://img.shields.io/badge/danger%20kotlin-v1.0.0(beta3)-orange)](https://danger.systems/kotlin/)
+[![Current Version](https://img.shields.io/badge/danger%20kotlin-v1.0.0(beta4)-orange)](https://danger.systems/kotlin/)
 [![Maven Central - SDK](https://img.shields.io/maven-central/v/systems.danger/danger-kotlin-sdk.svg?label=danger-kotlin-sdk)](https://search.maven.org/search?q=g:%22systems.danger%22%20AND%20a:%22danger-kotlin-sdk%22)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 
@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@1.0.0-beta.3
+        uses: danger/kotlin@1.0.0-beta.4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta.3
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta.4
         with:
             args: --failOnErrors --no-publish-check
         env:
