@@ -8,7 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 # Install dependencies
-RUN apt-get install -y make zip ca-certificates &&
+RUN apt-get install -y make zip ca-certificates && \
     curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
     apt-get install -y nodejs && \
     npm install -g danger
