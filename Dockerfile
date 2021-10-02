@@ -9,7 +9,7 @@ LABEL "com.github.actions.color"="blue"
 
 # Install dependencies
 RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
-    apt-get install -y nodejs make zip && \
+    apt-get install -y nodejs make zip ca-certificates && \
     npm install -g danger
 
 # Install danger-kotlin globally
