@@ -12,6 +12,8 @@
 -->
 ## Master
 
+# 1.0.0-beta4
+
 - Create the Danger main instance only once [@f-meloni] - [#185](https://github.com/danger/kotlin/pull/185)
 
 # 1.0.0-beta3
