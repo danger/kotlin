@@ -58,14 +58,10 @@ danger(args) {
     // Coroutines checks in parallel test
     val current = Clock.System.now()
     runBlocking {
-        val task1 = async { expensiveCheck("1", 1000) }
-        val task2 = async { expensiveCheck("2", 3000) }
-        val task3 = async { expensiveCheck("3", 2000) }
-        val task4 = async { expensiveCheck("4", 5000) }
-        task1.await()
-        task2.await()
-        task3.await()
-        task4.await()
+        async { expensiveCheck("1", 1000) }
+        async { expensiveCheck("2", 3000) }
+        async { expensiveCheck("3", 2000) }
+        async { expensiveCheck("4", 5000) }
     }
     val after = Clock.System.now()
     val runningTime = after.minus(current)
