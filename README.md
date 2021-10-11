@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@1.0.0-beta.4
+        uses: danger/kotlin@1.0.0-beta4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta.4
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta4
         with:
             args: --failOnErrors --no-publish-check
         env:
