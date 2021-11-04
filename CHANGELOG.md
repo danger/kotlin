@@ -12,6 +12,8 @@
 -->
 ## Master
 
+- Make `force_remove_source_branch` nullable in GitLab Merge request entity [@davidbilik] - [#197](https://github.com/danger/kotlin/pull/197)
+
 # 1.0.0-beta4, 1.0.0
 
 - Create the Danger main instance only once [@f-meloni] - [#185](https://github.com/danger/kotlin/pull/185)
