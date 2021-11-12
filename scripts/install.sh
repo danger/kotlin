@@ -39,7 +39,7 @@ if ! [[ -x "$(command -v kotlinc)" ]]; then
 fi
 
 if ! [[ -x "$(command -v gradle)" ]]; then
-    echo "Installing gradle 5.6.2"
+    echo "Installing gradle 7.2"
     curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-7.2-bin.zip
     mkdir /opt/gradle
     unzip -d /opt/gradle gradle.zip
