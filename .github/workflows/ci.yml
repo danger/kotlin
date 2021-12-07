@@ -45,7 +45,7 @@ jobs:
         run: ./gradlew danger-kotlin-library:test
 
       - name: Install Plugin Installer
-        run: ./gradlew danger-plugin-installer:install
+        run: ./gradlew danger-plugin-installer:publishToMavenLocal
 
       - name: Build and Install Sample Plugin
         run: |
