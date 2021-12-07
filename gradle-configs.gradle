@@ -1,0 +1,13 @@
+System.out.println("Configurations: ")
+System.out.println(configurations.getNames())
+
+def providedConf = configurations.create('provided')
+configurations.getByName('compileOnly').extendsFrom(providedConf)
+def includeJarConf = configurations.create('includeJar') {
+    transitive = false
+}
+configurations.getByName('implementation').extendsFrom(includeJarConf)
+def includeRecursiveJarConf = configurations.create('includeRecursiveJar') {
+    transitive = true
+}
+configurations.getByName('api').extendsFrom(includeRecursiveJarConf)

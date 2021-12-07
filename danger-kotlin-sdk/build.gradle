@@ -4,7 +4,7 @@ plugins {
     id 'signing'
 }
 
-apply from: file('../configurations.gradle')
+apply from: file('../gradle-configs.gradle')
 apply from: file('version.gradle')
 apply from: file('maven-publish.gradle')
 

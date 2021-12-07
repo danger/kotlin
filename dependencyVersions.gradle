@@ -1,19 +1,5 @@
 apply from: file('../shadow.gradle')
 
-def group(Closure closure) {
-    closure.delegate = dependencies
-    return closure
-}
-
-// Utils
-ext.utils = [
-        // Empty
-]
-
-ext.utilsDependencies = group {
-    // Empty
-}
-
 project.ext.artifactIdMoshi = 'moshi'
 project.ext.versionOkio = '1.16.0'
 project.ext.groupIdOkio = 'com.squareup.okio'
@@ -27,6 +13,7 @@ project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 project.ext.artifactIdKotlinSerializationJson = 'kotlinx-serialization-json'
 project.ext.artifactIdKotlinDatetime = "kotlinx-datetime"
 project.ext.artifactIdKotlinCoroutines = "kotlinx-coroutines-core"
+project.ext.artifactIdKotlinScriptRuntime = "kotlin-script-runtime"
 project.ext.versionKotlinSerializationJson = '1.2.1'
 project.ext.versionKotlinDatetime = '0.2.0'
 project.ext.versionKotlinCoroutines = '1.5.0'
@@ -35,14 +22,9 @@ ext.kotlin = [
         mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin",
         serialization: "$groupIdKotlinx:$artifactIdKotlinSerializationJson:$versionKotlinSerializationJson",
         datetime: "$groupIdKotlinx:$artifactIdKotlinDatetime:$versionKotlinDatetime",
-        coroutines: "$groupIdKotlinx:$artifactIdKotlinCoroutines:$versionKotlinCoroutines"
+        coroutines: "$groupIdKotlinx:$artifactIdKotlinCoroutines:$versionKotlinCoroutines",
+        scriptRuntime: "$groupIdKotlin:$artifactIdKotlinScriptRuntime:$versionKotlin"
 ]
-ext.kotlinDependencies = group {
-    includeJar kotlin.mainKts
-    includeRecursiveJar kotlin.serialization
-    includeRecursiveJar kotlin.datetime
-    includeRecursiveJar kotlin.coroutines
-}
 
 // Testing
 project.ext.versionJunit = '4.12'
@@ -55,7 +37,3 @@ ext.testing = [
         junit: "junit:junit:$versionJunit",
         mockK: "$groupIdMockK:$artifactIdMockK:$versionMockK"
 ]
-ext.testingDependencies = group {
-    testImplementation testing.junit
-    testImplementation testing.mockK
-}

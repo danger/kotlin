@@ -2,10 +2,15 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply from: file('../dependencyVersions.gradle')
 
 dependencies {
-    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    provided 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0'
     includeJar project(":danger-kotlin-sdk")
     includeJar project(":danger-kotlin-kts")
-    utilsDependencies()
-    kotlinDependencies()
-    testingDependencies()
+
+    includeJar kotlin.mainKts
+    includeRecursiveJar kotlin.serialization
+    includeRecursiveJar kotlin.datetime
+    includeRecursiveJar kotlin.coroutines
+
+    testImplementation testing.junit
+    testImplementation testing.mockK
 }

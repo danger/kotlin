@@ -1,4 +1,5 @@
-apply from: file('../configurations.gradle')
+apply from: file('../gradle-configs.gradle')
+
 shadowJar {
     configurations = [
             project.configurations.includeJar,
