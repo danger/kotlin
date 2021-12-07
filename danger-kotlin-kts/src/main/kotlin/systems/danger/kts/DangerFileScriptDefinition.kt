@@ -2,13 +2,13 @@ package systems.danger.kts
 
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.kotlin.mainKts.*
-import org.jetbrains.kotlin.mainKts.impl.IvyResolver
 import java.io.File
 import kotlin.script.dependencies.ScriptContents
 import kotlin.script.dependencies.ScriptDependenciesResolver
 import kotlin.script.experimental.annotations.KotlinScript
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.dependencies.*
+import kotlin.script.experimental.dependencies.maven.MavenDependenciesResolver
 import kotlin.script.experimental.host.FileBasedScriptSource
 import kotlin.script.experimental.host.FileScriptSource
 import kotlin.script.experimental.jvm.compat.mapLegacyDiagnosticSeverity
@@ -64,13 +64,13 @@ class DangerFileKtsConfigurator : RefineScriptCompilationConfigurationHandler {
 
     private val resolver = CompoundDependenciesResolver(
         FileSystemDependenciesResolver(DANGER_LIBS_FLAT_DIR),
-        IvyResolver()
+        MavenDependenciesResolver()
     )
 
     override operator fun invoke(context: ScriptConfigurationRefinementContext): ResultWithDiagnostics<ScriptCompilationConfiguration> =
         processAnnotations(context)
 
-    fun processAnnotations(context: ScriptConfigurationRefinementContext): ResultWithDiagnostics<ScriptCompilationConfiguration> {
+    private fun processAnnotations(context: ScriptConfigurationRefinementContext): ResultWithDiagnostics<ScriptCompilationConfiguration> {
         val diagnostics = arrayListOf<ScriptDiagnostic>()
 
         fun report(severity: ScriptDependenciesResolver.ReportSeverity, message: String, position: ScriptContents.Position?) {
