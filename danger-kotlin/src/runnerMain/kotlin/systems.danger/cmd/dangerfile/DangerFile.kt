@@ -57,7 +57,7 @@ private fun readLine(file: CPointer<FILE>): String? {
     var ch = getc(file)
     var lineBuffer: Array<Char> = arrayOf()
 
-    while ((ch != '\n'.toInt()) && (ch != EOF)) {
+    while ((ch != '\n'.code) && (ch != EOF)) {
         lineBuffer += ch.toChar()
 
         ch = getc(file)
