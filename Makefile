@@ -15,7 +15,7 @@ install: build
 
 build:
 	./gradlew build -p danger-plugin-installer
-	./gradlew install -p danger-plugin-installer
+	./gradlew publishToMavenLocal -p danger-plugin-installer
 	./gradlew shadowJar -p danger-kotlin-library
 	./gradlew build -p danger-kotlin-kts
 	./gradlew build -p danger-kotlin
