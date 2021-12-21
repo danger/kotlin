@@ -56,7 +56,7 @@ danger(args) {
     }
 
     // Coroutines checks in parallel test
-    val current = Clock.System.now()
+    val before = Clock.System.now()
     runBlocking {
         async { expensiveCheck("1", 1000) }
         async { expensiveCheck("2", 3000) }
@@ -64,7 +64,9 @@ danger(args) {
         async { expensiveCheck("4", 5000) }
     }
     val after = Clock.System.now()
-    val runningTime = after.minus(current)
+    @OptIn(kotlin.time.ExperimentalTime::class)
+    val runningTime = after.minus(before)
+    @OptIn(kotlin.time.ExperimentalTime::class)
     message("Coroutines checks terminated - runningFor $runningTime")
 }
 
