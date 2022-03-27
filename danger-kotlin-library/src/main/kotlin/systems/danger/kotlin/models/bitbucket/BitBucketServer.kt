@@ -234,7 +234,7 @@ data class BitBucketServerParticipant(
 data class BitBucketServerReviewer(
     val user: BitBucketServerUser,
     val approved: Boolean,
-    val lastReviewedCommit: String?
+    val lastReviewedCommit: String? = null
 )
 
 /**
