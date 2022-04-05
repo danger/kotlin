@@ -99,7 +99,8 @@ data class GitLabMergeRequest(
     @SerialName("web_url")
     val webUrl: String,
     @SerialName("work_in_progress")
-    val workInProgress: Boolean
+    val workInProgress: Boolean,
+    val squash: Boolean,
 ) {
     val canMerge: Boolean
         get() = this.userMergeData.canMerge
