@@ -13,6 +13,7 @@
 ## Master
 
 - Make `force_remove_source_branch` nullable in GitLab Merge request entity [@davidbilik] - [#197](https://github.com/danger/kotlin/pull/197)
+- Make `lastReviewedCommit` nullable on BitBucket Server [@f-meloni] - [#211](https://github.com/danger/kotlin/pull/211)
 
 # 1.0.0-beta4, 1.0.0
 
