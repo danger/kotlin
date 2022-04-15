@@ -28,6 +28,11 @@ object TestUtils {
             loadJSON("bitbucketServerDangerJSON.json")
         }
 
+        // TODO: add
+        val dangerBitBucketCloudJSON by lazy {
+            loadJSON("bitbucketCloudDangerJSON.json")
+        }
+
         val gitlabJSON by lazy {
             loadJSON("gitlabDangerJSON.json")
         }

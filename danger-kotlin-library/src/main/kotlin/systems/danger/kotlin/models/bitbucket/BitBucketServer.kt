@@ -12,7 +12,7 @@ import kotlinx.serialization.*
  */
 @Serializable
 data class BitBucketServer(
-    val metadata: BitBucketServerMetadata,
+    val metadata: BitBucketMetadata,
     @SerialName("pr")
     val pullRequest: BitBucketServerPR,
     val commits: List<BitBucketServerCommit>,
@@ -36,17 +36,6 @@ data class BitBucketServerActivity(
     val user: BitBucketServerUser,
     val action: String,
     val commentAction: String? = null
-)
-
-/**
- * The pull request and repository metadata
- * @property pullRequestId The PR's ID
- * @property repoSlug The complete repo slug including project slug.
- */
-@Serializable
-data class BitBucketServerMetadata internal constructor(
-    val pullRequestID: String,
-    val repoSlug: String
 )
 
 @Serializable
