@@ -48,7 +48,6 @@ data class BitBucketCloud(
         @SerialName("updated_on")
         val updatedOn: Instant,
         val deleted: Boolean,
-        val type: String,
         val user: User,
     )
 

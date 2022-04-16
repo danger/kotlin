@@ -1,5 +1,6 @@
 package systems.danger.kotlin.models.bitbucket
 
+import kotlinx.datetime.Instant
 import kotlinx.serialization.decodeFromString
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -16,153 +17,118 @@ class BitBucketCloudParsingTests {
     @Test
     fun testItParsesTheBitBucketPullRequest() {
         with(bitBucketCloud.pullRequest) {
-            val expectedUser = BitBucketServerUser(
-                null,
-                "test",
-                null,
-                "user@email.com",
-                true,
-                null,
-                BitBucketServerUser.Type.NORMAL
+            val expectedUser = BitBucketCloud.User(
+                uuid = "test",
+                accountId = "test",
+                displayName = "Foo Bar",
+                nickname = "foo.bar"
             )
-            assertEquals(expectedUser, author.user)
+            assertEquals(expectedUser, author)
 
-            val expectedProject =
-                BitBucketServerProject(1, "PROJ", "Project", false, "NORMAL")
-            val expectedRepo = BitBucketServerRepo(
-                "Repo",
-                "repo",
-                "git",
-                false,
-                true,
-                expectedProject
+            val expectedDestination = BitBucketCloud.MergeRef(
+                branch = BitBucketCloud.MergeRef.Branch(
+                    name = "destination",
+                ),
+                commit = BitBucketCloud.MergeRef.Commit(
+                    hash = "test"
+                ),
+                repository = BitBucketCloud.Repo(
+                    uuid = "test",
+                    name = "test",
+                    fullName = "test"
+                )
             )
-            val expectedHead = BitBucketServerMergeRef(
-                "refs/heads/foo",
-                "foo",
-                "d6725486c38d46a33e76f622cf24b9a388c8d13d",
-                expectedRepo
-            )
-            assertEquals(expectedHead, toRef)
+            assertEquals(expectedDestination, destination)
 
-            val expectedBase = BitBucketServerMergeRef(
-                "refs/heads/master",
-                "master",
-                "8942a1f75e4c95df836f19ef681d20a87da2ee20",
-                expectedRepo
+            val expectedSource = BitBucketCloud.MergeRef(
+                branch = BitBucketCloud.MergeRef.Branch(
+                    name = "source",
+                ),
+                commit = BitBucketCloud.MergeRef.Commit(
+                    hash = "test"
+                ),
+                repository = BitBucketCloud.Repo(
+                    uuid = "test",
+                    name = "test",
+                    fullName = "test"
+                )
             )
-            assertEquals(expectedBase, fromRef)
+            assertEquals(expectedSource, source)
 
-            val expectedPartecipant = BitBucketServerUser(
-                2,
-                "danger",
-                "DangerCI",
-                "user@email.com",
-                true,
-                "danger",
-                BitBucketServerUser.Type.NORMAL
+            val expectedParticipant = BitBucketCloud.PullRequest.Participant(
+                approved = false,
+                role = BitBucketCloud.PullRequest.Participant.Role.REVIEWER,
+                user = BitBucketCloud.User(
+                    uuid = "danger",
+                    accountId = "danger",
+                    displayName = "Danger",
+                    nickname = "danger"
+                )
             )
             assertEquals(1, participants.count())
-            assertEquals(expectedPartecipant, participants[0].user)
+            assertEquals(expectedParticipant, participants[0])
 
-            assertEquals(false, closed)
-            assertEquals(1518863923273, createdAt)
-            assertEquals(false, isLocked)
-            assertEquals(true, open)
-            assertEquals(BitBucketServerPR.State.OPEN, state)
-            assertEquals("Pull request title", title)
+            assertEquals(Instant.parse("2022-04-07T15:19:56.209142+00:00"), createdOn)
+            assertEquals(Instant.parse("2022-04-09T12:51:23.384574+00:00"), updatedOn)
+            assertEquals(BitBucketCloud.PullRequest.State.OPEN, state)
+            assertEquals("test", title)
 
-            val expectedReviewerUser = BitBucketServerUser(
-                2,
-                "danger",
-                "DangerCI",
-                "foo@bar.com",
-                true,
-                "danger",
-                BitBucketServerUser.Type.NORMAL
-            )
-            val expectedReviewer = BitBucketServerReviewer(
-                expectedReviewerUser,
-                true,
-                "8942a1f75e4c95df836f19ef681d20a87da2ee20"
+            val expectedReviewer = BitBucketCloud.User(
+                uuid = "danger",
+                accountId = "danger",
+                displayName = "Danger",
+                nickname = "danger"
             )
             assertEquals(1, reviewers.count())
-            assertEquals(expectedReviewer, reviewers[0])
+            assertEquals(expectedReviewer, reviewers.first())
         }
     }
 
     @Test
     fun testItParsesTheBitBucketCommits() {
         with(bitBucketCloud.commits) {
-            val expectedUser = BitBucketServerUser(
-                2,
-                "danger",
-                "DangerCI",
-                "foo@bar.com",
-                true,
-                "danger",
-                BitBucketServerUser.Type.NORMAL
+            val expectedCommit = BitBucketCloud.Commit(
+                hash = "test",
+                author = BitBucketCloud.Commit.Author(
+                    raw = "test",
+                    user = BitBucketCloud.User(
+                        uuid = "test",
+                        accountId = "test",
+                        displayName = "Foo Bar",
+                        nickname = "foo.bar"
+                    )
+                ),
+                date = Instant.parse("2022-04-07T15:18:09+00:00"),
+                message = "test"
             )
-            val expectedParent = BitBucketServerCommitParent(
-                "c62ada76533a2de045d4c6062988ba84df140729",
-                "c62ada76533"
-            )
-            val expectedCommit = BitBucketServerCommit(
-                "d6725486c38d46a33e76f622cf24b9a388c8d13d",
-                "d6725486c38",
-                expectedUser,
-                1519442341000,
-                expectedUser,
-                1519442341000,
-                "Modify and remove files",
-                listOf(expectedParent)
-            )
+            assertEquals(1, count())
             assertEquals(expectedCommit, first())
-            assertEquals(2, count())
         }
     }
 
     @Test
     fun testItParsesTheBitBucketComments() {
-        with(bitBucketServer.comments) {
-            val expectedUser = BitBucketServerUser(
-                2,
-                "danger",
-                "DangerCI",
-                "foo@bar.com",
-                true,
-                "danger",
-                BitBucketServerUser.Type.NORMAL
-            )
-            val commentText = "test"
-            val expectedProperty =
-                BitBucketServerCommentInnerProperties(1, listOf())
-            val expectedCommentDetail = BitBucketServerCommentDetail(
-                10,
-                23,
-                commentText,
-                expectedUser,
-                1518939353345,
-                1519449132488,
-                listOf(),
-                expectedProperty,
-                listOf()
-            )
-            val expectedComment = BitBucketServerComment(
-                52,
-                1518939353345,
-                expectedUser,
-                "COMMENTED",
-                null,
-                null,
-                null,
-                null,
-                "ADDED",
-                expectedCommentDetail
+        with(bitBucketCloud.comments) {
+            val expectedComment = BitBucketCloud.Comment(
+                id = 1,
+                content = BitBucketCloud.Content(
+                    html = "test",
+                    markup = "markdown",
+                    raw = "test"
+                ),
+                createdOn = Instant.parse("2022-04-07T15:25:25.184212+00:00"),
+                updatedOn = Instant.parse("2022-04-07T15:25:25.184261+00:00"),
+                deleted = false,
+                user = BitBucketCloud.User(
+                    uuid = "danger",
+                    accountId = "danger",
+                    displayName = "Danger",
+                    nickname = "danger"
+                )
             )
 
-            assertEquals(expectedComment.toString(), this[1].toString())
-            assertEquals(7, count())
+            assertEquals(1, count())
+            assertEquals(expectedComment, first())
         }
     }
 
@@ -177,31 +143,34 @@ class BitBucketCloudParsingTests {
     @Test
     fun testItParsesTheBitBucketActivities() {
         with(bitBucketCloud.activities) {
-            val expectedUser = BitBucketServerUser(
-                1,
-                "test",
-                "test",
-                "foo@bar.com",
-                true,
-                "test",
-                BitBucketServerUser.Type.NORMAL
-            )
-            val expectedActivity = BitBucketServerActivity(
-                61,
-                1519442356495,
-                expectedUser,
-                "RESCOPED",
-                null
+            val expectedActivity = BitBucketCloud.Activity(
+                comment = BitBucketCloud.Comment(
+                    id = 1,
+                    content = BitBucketCloud.Content(
+                        html = "test",
+                        markup = "markdown",
+                        raw = "test"
+                    ),
+                    createdOn = Instant.parse("2022-04-07T15:25:25.184212+00:00"),
+                    updatedOn = Instant.parse("2022-04-07T15:25:25.184261+00:00"),
+                    deleted = false,
+                    user = BitBucketCloud.User(
+                        uuid = "danger",
+                        accountId = "danger",
+                        displayName = "Danger",
+                        nickname = "danger"
+                    )
+                )
             )
 
+            assertEquals(1, count())
             assertEquals(expectedActivity, first())
-            assertEquals(7, count())
         }
     }
 
     @Test
     fun testOnBitBucketIsTrue() {
-        assertEquals(true, dsl.danger.onBitBucketServer)
+        assertEquals(true, dsl.danger.onBitBucketCloud)
     }
 
     @Test
