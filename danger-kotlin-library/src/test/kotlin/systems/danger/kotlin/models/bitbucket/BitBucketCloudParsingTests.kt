@@ -5,8 +5,8 @@ import kotlinx.serialization.decodeFromString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import systems.danger.kotlin.models.danger.DSL
-import systems.danger.kotlin.utils.TestUtils.JSONFiles
 import systems.danger.kotlin.utils.TestUtils
+import systems.danger.kotlin.utils.TestUtils.JSONFiles
 
 class BitBucketCloudParsingTests {
 
@@ -169,8 +169,13 @@ class BitBucketCloudParsingTests {
     }
 
     @Test
-    fun testOnBitBucketIsTrue() {
+    fun testOnBitBucketCloudIsTrue() {
         assertEquals(true, dsl.danger.onBitBucketCloud)
+    }
+
+    @Test
+    fun testOnBitBucketServerIsFalse() {
+        assertEquals(false, dsl.danger.onBitBucketServer)
     }
 
     @Test

@@ -229,7 +229,12 @@ class GitHubParsingTests {
     }
 
     @Test
-    fun testOnBitBucketIsFalse() {
+    fun testOnBitBucketCloudIsFalse() {
+        assertEquals(false, dsl.danger.onBitBucketCloud)
+    }
+
+    @Test
+    fun testOnBitBucketServerIsFalse() {
         assertEquals(false, dsl.danger.onBitBucketServer)
     }
 

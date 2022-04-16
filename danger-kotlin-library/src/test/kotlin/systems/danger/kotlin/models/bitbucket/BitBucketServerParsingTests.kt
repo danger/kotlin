@@ -200,8 +200,13 @@ class BitBucketServerParsingTests {
     }
 
     @Test
-    fun testOnBitBucketIsTrue() {
+    fun testOnBitBucketServerIsTrue() {
         assertEquals(true, dsl.danger.onBitBucketServer)
+    }
+
+    @Test
+    fun testOnBitBucketCloudIsFalse() {
+        assertEquals(false, dsl.danger.onBitBucketCloud)
     }
 
     @Test
