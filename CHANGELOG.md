@@ -13,6 +13,7 @@
 ## Master
 
 - Make `force_remove_source_branch` nullable in GitLab Merge request entity [@davidbilik] - [#197](https://github.com/danger/kotlin/pull/197)
+- Make `lastReviewedCommit` nullable on BitBucket Server [@f-meloni] - [#211](https://github.com/danger/kotlin/pull/211)
 - Update `GitLabMergeRequest` model: add `squash` field [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
 - Add Gitlab extensions for url's: to project, to file diff, to current version of file [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
 
