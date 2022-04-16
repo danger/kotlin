@@ -94,6 +94,7 @@ class GitLabParsingTests {
             assertEquals(0, userNotesCount)
             assertEquals("https://gitlab.com/danger-systems/danger.systems/merge_requests/182", webUrl)
             assertEquals(false, workInProgress)
+            assertEquals(false, squash)
         }
     }
 
