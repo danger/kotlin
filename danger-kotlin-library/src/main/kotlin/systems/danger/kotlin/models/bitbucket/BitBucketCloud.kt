@@ -8,14 +8,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import systems.danger.kotlin.models.serializers.DateSerializer
 
-/**
- * The BitBucket server data for your pull request.
- * @property metadata The pull request and repository metadata
- * @property pullRequest The pull request metadata
- * @property commits The commits associated with the pull request
- * @property comments The comments on the pull request
- * @property activities The activities such as OPENING, CLOSING, MERGING or UPDATING a pull request
- */
 @Serializable
 data class BitBucketCloud(
     val metadata: BitBucketMetadata,
@@ -26,19 +18,11 @@ data class BitBucketCloud(
     val activities: List<Activity>
 ) {
 
-    /**
-     * Defines and activity such as OPENING, CLOSING, MERGING or UPDATING a pull request
-     * @property comment The activity's ID
-     */
     @Serializable
     data class Activity(
         val comment: Comment? = null
     )
 
-    /**
-     * Defines and activity such as OPENING, CLOSING, MERGING or UPDATING a pull request
-     * @property comment The activity's ID
-     */
     @Serializable
     data class Comment(
         val id: Int,
@@ -51,10 +35,6 @@ data class BitBucketCloud(
         val user: User,
     )
 
-    /**
-     * Defines and activity such as OPENING, CLOSING, MERGING or UPDATING a pull request
-     * @property comment The activity's ID
-     */
     @Serializable
     data class Content(
         val html: String,
@@ -62,10 +42,6 @@ data class BitBucketCloud(
         val raw: String
     )
 
-    /**
-     * Defines and activity such as OPENING, CLOSING, MERGING or UPDATING a pull request
-     * @property comment The activity's ID
-     */
     @Serializable
     data class User(
         val uuid: String,
