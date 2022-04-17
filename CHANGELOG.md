@@ -12,6 +12,7 @@
 -->
 ## Master
 
+- Add support of BitBucketCloud [@vchernyshov] - [#214](https://github.com/danger/kotlin/pull/214)
 - Make `force_remove_source_branch` nullable in GitLab Merge request entity [@davidbilik] - [#197](https://github.com/danger/kotlin/pull/197)
 - Update `GitLabMergeRequest` model: add `squash` field [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
 - Add Gitlab extensions for url's: to project, to file diff, to current version of file [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
