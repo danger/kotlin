@@ -9,7 +9,6 @@ import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,12 +29,12 @@ object DateSerializer : KSerializer<Instant> {
         return try {
             Instant.parse(value)
         } catch(e: Throwable) {
-            Instant.fromEpochMilliseconds(GitLabISO8601DateFormat().parse(value).toInstant().toEpochMilli())
+            Instant.fromEpochMilliseconds(ISO8601DateFormat().parse(value).toInstant().toEpochMilli())
         }
     }
 }
 
-class GitLabISO8601DateFormat {
+class ISO8601DateFormat {
     fun parse(string: String?): Date {
         val formatter = SimpleDateFormat(
             "yyyy-MM-dd'T'HH:mm:ss.SSSXXX"

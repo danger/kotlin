@@ -1,5 +1,6 @@
 package systems.danger.kotlin
 
+import systems.danger.kotlin.models.bitbucket.BitBucketCloud
 import systems.danger.kotlin.models.bitbucket.BitBucketServer
 import systems.danger.kotlin.models.danger.DangerDSL
 import systems.danger.kotlin.models.git.Git
@@ -65,6 +66,26 @@ inline fun DangerDSL.onGitLab(onGitLab: GitLab.() -> Unit) {
 inline fun DangerDSL.onBitBucket(onBitBucket: BitBucketServer.() -> Unit) {
     if (this.onBitBucketServer) {
         bitBucketServer.run(onBitBucket)
+    }
+}
+
+/**
+ * Execute the block only if danger is running on BitBucketCloud
+ * Example code:
+ * ```
+ * danger(args) {
+ *     onBitBucketCloud {
+ *         ...
+ *     }
+ * }
+ * ```
+ *
+ * @param onBitBucket the block
+ * @receiver the [BitBucketCloud] descriptor
+ */
+inline fun DangerDSL.onBitBucketCloud(onBitBucket: BitBucketCloud.() -> Unit) {
+    if (this.onBitBucketCloud) {
+        bitBucketCloud.run(onBitBucket)
     }
 }
 
