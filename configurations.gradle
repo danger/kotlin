@@ -1,6 +1,4 @@
 configurations {
-    provided
-    compile.extendsFrom provided
     implementation.extendsFrom includeJar {
         transitive = false
     }

@@ -2,7 +2,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply from: file('../dependencyVersions.gradle')
 
 dependencies {
-    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     includeJar project(":danger-kotlin-sdk")
     includeJar project(":danger-kotlin-kts")
     utilsDependencies()
