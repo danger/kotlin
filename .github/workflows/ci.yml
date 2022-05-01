@@ -31,7 +31,7 @@ jobs:
             rm -rf kotlin-compiler.zip
           fi
         
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '10'
           
