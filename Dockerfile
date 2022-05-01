@@ -10,7 +10,7 @@ LABEL "com.github.actions.color"="blue"
 # Install dependencies
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
-    curl -sL https://deb.nodesource.com/setup_10.x |  bash - && \
+    curl -sL https://deb.nodesource.com/setup_14.x |  bash - && \
     apt-get install -y make zip nodejs && \
     npm install -g danger
 

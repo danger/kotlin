@@ -16,6 +16,7 @@
 - Make `lastReviewedCommit` nullable on BitBucket Server [@f-meloni] - [#211](https://github.com/danger/kotlin/pull/211)
 - Update `GitLabMergeRequest` model: add `squash` field [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
 - Add Gitlab extensions for url's: to project, to file diff, to current version of file [@sonulen] - [#212](https://github.com/danger/kotlin/pull/212)
+- Upgrade action to use node14 [@eygraber] - [#215](https://github.com/danger/kotlin/pull/215)
 
 # 1.0.0-beta4, 1.0.0
 
@@ -85,3 +86,4 @@
 [@mariusgreve]: https://github.com/mariusgreve
 [@tegorov]: https://github.com/tegorov
 [@rojanthomas]: https://github.com/rojanthomas
+[@eygraber]: https://github.com/eygraber
