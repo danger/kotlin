@@ -20,7 +20,7 @@ apply from: file('version.gradle')
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:$versionKotlin"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     includeJar "org.jetbrains.kotlin:kotlin-main-kts:$versionKotlin"
 }
 

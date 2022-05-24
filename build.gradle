@@ -13,6 +13,7 @@ buildscript {
 }
 
 apply from: file('secrets.gradle')
+apply plugin: 'base'
 apply plugin: 'io.codearte.nexus-staging'
 
 nexusStaging {
@@ -31,4 +32,9 @@ allprojects {
         }
     }
 }
+
+task cleanRoot(type: Delete) {
+    delete rootProject.buildDir
+}
+clean.dependsOn cleanRoot
 
