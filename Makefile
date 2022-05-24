@@ -15,7 +15,7 @@ install: build
 
 build:
 	./gradlew build -p danger-plugin-installer
-	./gradlew install -p danger-plugin-installer
+	./gradlew publishToMavenLocal -p danger-plugin-installer
 	./gradlew shadowJar -p danger-kotlin-library
 	./gradlew build -p danger-kotlin-kts
 	./gradlew build -p danger-kotlin
@@ -23,4 +23,4 @@ build:
 uninstall:
 	rm -rf $(INSTALL_PATH)
 	rm -f $(LIB_INSTALL_PATH)/danger-kotlin.jar
-	rm -f $(LIB_FLAT_DIR)
+	rm -rf $(LIB_FLAT_DIR)

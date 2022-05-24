@@ -9,9 +9,10 @@ apply from: file('version.gradle')
 apply plugin: 'kotlinx-serialization'
 
 shadowJar {
-    baseName = 'danger-kotlin'
-    classifier = null
-    version = null
+    getArchiveBaseName().set('danger-kotlin')
+    getArchiveAppendix().set('')
+    getArchiveClassifier().set('')
+    getArchiveVersion().set('')
 }
 
 test {
