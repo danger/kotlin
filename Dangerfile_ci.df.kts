@@ -20,7 +20,6 @@ import systems.danger.samples.plugin.SamplePlugin
 register plugin SamplePlugin
 
 danger(args) {
-
     val allSourceFiles = git.modifiedFiles + git.createdFiles
     val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
     val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
