@@ -17,6 +17,9 @@ jobs:
         with:
           candidate: gradle
           version: 7.4.2
+
+      - name: Install ncurses
+        run: sudo apt-get install libncurses5
           
       - name: Install Kotlin
         run: |
