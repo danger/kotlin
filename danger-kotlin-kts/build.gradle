@@ -20,7 +20,15 @@ apply from: file('version.gradle')
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:$versionKotlin"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2"
+
+    /*implementation("org.apache.maven:maven-core:3.8.5")
+    implementation("org.apache.maven.wagon:wagon-http:3.5.1")
+    implementation("org.apache.maven.resolver:maven-resolver-connector-basic:1.8.0")
+    implementation("org.apache.maven.resolver:maven-resolver-transport-file:1.8.0")
+    implementation("org.apache.maven.resolver:maven-resolver-transport-wagon:1.8.0")
+    implementation("org.apache.maven.resolver:maven-resolver-impl:1.8.0")*/
+
     includeJar "org.jetbrains.kotlin:kotlin-main-kts:$versionKotlin"
 }
 
