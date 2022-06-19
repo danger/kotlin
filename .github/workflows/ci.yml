@@ -18,8 +18,10 @@ jobs:
           candidate: gradle
           version: 7.4.2
 
-      - name: Install ncurses
-        run: sudo apt-get install libncurses5
+      - uses: sdkman/sdkman-action@master
+          with:
+            candidate: libncurses5
+            version: 7.4.2
           
       - name: Install Kotlin
         run: |
