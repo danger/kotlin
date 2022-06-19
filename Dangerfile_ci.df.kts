@@ -2,7 +2,7 @@
 /*
  * Use external dependencies using the following annotations:
  */
-@file:Repository("https://repo.maven.apache.org")
+@file:Repository("https://repo.maven.apache.org/maven2/")
 @file:DependsOn("org.apache.commons:commons-text:1.6")
 
 //Testing plugin
