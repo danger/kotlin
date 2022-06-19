@@ -11,6 +11,7 @@
 
 -->
 ## Master
+- Update `Kotlin` to `1.7.0` and added support for Apple Silicon Chipset [@gianluz] - [#231](https://github.com/danger/kotlin/pull/231)
 
 # 1.1.0
 
