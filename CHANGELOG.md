@@ -13,6 +13,9 @@
 ## Master
 - Update `Kotlin` to `1.7.0` and added support for Apple Silicon Chipset [@gianluz] - [#231](https://github.com/danger/kotlin/pull/231)
 
+# 1.1.1
+- Make GitLab approvals_before_merge variable nullable [#227](https://github.com/danger/kotlin/pull/227)
+
 # 1.1.0
 
 - Add support of BitBucketCloud [@vchernyshov] - [#214](https://github.com/danger/kotlin/pull/214)
