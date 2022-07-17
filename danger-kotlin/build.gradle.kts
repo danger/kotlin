@@ -9,6 +9,7 @@ kotlin {
     val hostTarget = when (val hostOs = System.getProperty("os.name")) {
         "Mac OS X" -> macosX64("runner")
         "Linux" -> linuxX64("runner")
+        "Mac OS X Apple silicon" -> macosArm64("runner")
         else -> throw GradleException("Host OS '$hostOs' is not supported.") as Throwable
     }
 

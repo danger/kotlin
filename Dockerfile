@@ -17,7 +17,7 @@ RUN apt-get update && \
 # Install danger-kotlin globally
 COPY . /usr/local/_danger-kotlin
 RUN cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.5.0/kotlin-compiler-1.5.0.zip && \
+    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.7.0/kotlin-compiler-1.7.0.zip && \
     unzip kotlin-compiler-*.zip && \
     rm kotlin-compiler-*.zip && \
     cd /usr/local/_danger-kotlin && \

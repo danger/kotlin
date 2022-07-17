@@ -17,10 +17,10 @@ jobs:
         with:
           candidate: gradle
           version: 7.4.2
-          
+
       - name: Install Kotlin
         run: |
-          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.5.10/kotlin-compiler-1.5.10.zip
+          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.7.0/kotlin-compiler-1.7.0.zip
           
           if [[ "$OSTYPE" != "darwin"* ]]
           then
@@ -34,7 +34,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-          
+
+      - name: Install libncurses5
+        run: |
+          if [[ "$OSTYPE" == "darwin"* ]]
+          then
+            brew install ncurses
+          else
+            sudo apt-get install libncurses5
+          fi
+
       - name: Install Danger JS
         run: npm install -g danger
        
