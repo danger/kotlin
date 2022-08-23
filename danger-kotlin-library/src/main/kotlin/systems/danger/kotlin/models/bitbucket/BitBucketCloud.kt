@@ -63,7 +63,7 @@ data class BitBucketCloud(
         @Serializable
         data class Author(
             val raw: String,
-            val user: User
+            val user: User?
         )
     }
 
@@ -99,7 +99,7 @@ data class BitBucketCloud(
         data class Participant(
             val approved: Boolean,
             val role: Role,
-            val user: User
+            val user: User?
         ) {
 
             @Serializable
