@@ -32,7 +32,7 @@ data class BitBucketCloud(
         @SerialName("updated_on")
         val updatedOn: Instant,
         val deleted: Boolean,
-        val user: User,
+        val user: User? = null,
     )
 
     @Serializable
