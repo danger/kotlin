@@ -13,6 +13,7 @@
 ## Master
 - Update README.md with guidance to enable auto-complete in Android Studio [@gianluz] - [#242](https://github.com/danger/kotlin/pull/242)
 - Update install script with Kotlin compiler 1.7.0 [@gianluz] - [#241](https://github.com/danger/kotlin/pull/241)
+- Add accessors for Danger reports [@417-72KI] - [#245](https://github.com/danger/kotlin/pull/245)
 
 # 1.2.0
 - Update `Kotlin` to `1.7.0` and added support for Apple Silicon Chipset [@gianluz] - [#231](https://github.com/danger/kotlin/pull/231)
@@ -97,3 +98,4 @@
 [@tegorov]: https://github.com/tegorov
 [@rojanthomas]: https://github.com/rojanthomas
 [@eygraber]: https://github.com/eygraber
+[@417-72KI]: https://github.com/417-72KI
