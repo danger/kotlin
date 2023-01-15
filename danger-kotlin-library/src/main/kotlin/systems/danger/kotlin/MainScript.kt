@@ -2,6 +2,7 @@ package systems.danger.kotlin
 
 import systems.danger.kotlin.models.danger.DangerDSL
 import systems.danger.kotlin.models.git.FilePath
+import systems.danger.kotlin.sdk.Violation
 
 internal var dangerRunner: MainDangerRunner? = null
 
@@ -133,3 +134,19 @@ fun fail(message: String, file: FilePath, line: Int) =
  */
 fun suggest(code: String, file: FilePath, line: Int) =
     runnerInstance.suggest(code, file, line)
+
+/** Fails on the Danger report */
+val fails: List<Violation>
+    get() = runnerInstance.fails.toList()
+
+/** Warnings on the Danger report */
+val warnings: List<Violation>
+    get() = runnerInstance.warnings.toList()
+
+/** Messages on the Danger report */
+val messages: List<Violation>
+    get() = runnerInstance.messages.toList()
+
+/** Markdowns on the Danger report */
+val markdowns: List<Violation>
+    get() = runnerInstance.markdowns.toList()

@@ -68,6 +68,10 @@ danger(args) {
     val runningTime = after.minus(before)
     @OptIn(kotlin.time.ExperimentalTime::class)
     message("Coroutines checks terminated - runningFor $runningTime")
+
+    if ((fails + warnings).isEmpty()) {
+        message(":rocket: No errors or warnings!")
+    }
 }
 
 suspend fun DangerDSL.expensiveCheck(name: String, runForMillis: Long) {
