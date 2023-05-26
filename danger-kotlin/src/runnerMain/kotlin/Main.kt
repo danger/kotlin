@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
             else -> {
                 when (val command = Command.forArgument(args.first())) {
                     Command.CI, Command.LOCAL, Command.PR -> {
-                        DangerJS.process(command, PROCESS_DANGER_KOTLIN, args.drop(1))
+                        DangerJS.process(command, PROCESS_DANGER_KOTLIN, args.drop(1).map { if(it.contains(" ")) "'$it'" else it })
                     }
                     Command.RUNNER -> DangerKotlin.run()
                     else -> Log.error("Invalid command received: $command")
