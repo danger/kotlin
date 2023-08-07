@@ -39,11 +39,11 @@ if ! [[ -x "$(command -v kotlinc)" ]]; then
 fi
 
 if ! [[ -x "$(command -v gradle)" ]]; then
-    echo "Installing gradle 7.4.2"
-    curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-7.4.2-bin.zip
+    echo "Installing gradle 7.5.1"
+    curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-7.5.1-bin.zip
     mkdir /opt/gradle
     unzip -d /opt/gradle gradle.zip
-    echo 'export PATH=/opt/gradle/gradle-7.4.2/bin:$PATH' >> ~/.bash_profile
+    echo 'export PATH=/opt/gradle/gradle-7.5.1/bin:$PATH' >> ~/.bash_profile
     rm -rf gradle.zip
 fi
 
