@@ -16,7 +16,7 @@ jobs:
       - uses: sdkman/sdkman-action@master
         with:
           candidate: gradle
-          version: 7.6.2
+          version: 8.0.2
 
       - name: Install Kotlin
         run: |
