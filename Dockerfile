@@ -1,4 +1,4 @@
-FROM gradle:8.2.1-jdk8
+FROM gradle:8.3.0-jdk8
 
 MAINTAINER Franco Meloni
 
