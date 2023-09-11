@@ -90,14 +90,14 @@ data class BitBucketServerCommentDetail(
     val id: Int,
     val version: Int,
     val text: String,
-    val author: BitBucketServerUser,
+    val author: BitBucketServerUser? = null,
     @SerialName("createdDate")
     val createdAt: Long,
     @SerialName("updatedDate")
     val updatedAt: Long,
-    val comments: List<BitBucketServerCommentDetail>,
-    val properties: BitBucketServerCommentInnerProperties,
-    val tasks: List<BitBucketServerCommentTask>
+    val comments: List<BitBucketServerCommentDetail>? = null,
+    val properties: BitBucketServerCommentInnerProperties? = null,
+    val tasks: List<BitBucketServerCommentTask>? = null
 )
 
 /**
@@ -115,7 +115,7 @@ data class BitBucketServerCommentTask(
     val createdAt: Long,
     val text: String,
     val state: String,
-    val author: BitBucketServerUser
+    val author: BitBucketServerUser? = null,
 )
 
 /**
@@ -144,7 +144,7 @@ data class BitBucketServerCommentInnerProperties(
 data class BitBucketServerCommit(
     val id: String,
     val displayId: String,
-    val author: BitBucketServerUser,
+    val author: BitBucketServerUser? = null,
     val authorTimestamp: Long,
     val committer: BitBucketServerUser? = null,
     val committerTimestamp: Long,
@@ -198,9 +198,9 @@ data class BitBucketServerPR(
     val toRef: BitBucketServerMergeRef,
     @SerialName("locked")
     val isLocked: Boolean,
-    val author: BitBucketServerParticipant,
-    val reviewers: List<BitBucketServerReviewer>,
-    val participants: List<BitBucketServerParticipant>
+    val author: BitBucketServerParticipant? = null,
+    val reviewers: List<BitBucketServerReviewer>? = null,
+    val participants: List<BitBucketServerParticipant>? = null
 ) {
     @Serializable
     enum class State {
@@ -293,9 +293,9 @@ data class BitBucketServerProject(
 @Serializable
 data class BitBucketServerUser(
     val id: Int? = null,
-    val name: String,
+    val name: String? = null,
     val displayName: String? = null,
-    val emailAddress: String,
+    val emailAddress: String? = null,
     val active: Boolean = false,
     val slug: String? = null,
     val type: Type = Type.NORMAL

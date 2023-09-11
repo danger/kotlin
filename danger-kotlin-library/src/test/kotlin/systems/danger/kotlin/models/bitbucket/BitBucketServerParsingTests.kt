@@ -25,7 +25,7 @@ class BitBucketServerParsingTests {
                 null,
                 BitBucketServerUser.Type.NORMAL
             )
-            assertEquals(expectedUser, author.user)
+            assertEquals(expectedUser, author?.user)
 
             val expectedProject =
                 BitBucketServerProject(1, "PROJ", "Project", false, "NORMAL")
@@ -62,8 +62,8 @@ class BitBucketServerParsingTests {
                 "danger",
                 BitBucketServerUser.Type.NORMAL
             )
-            assertEquals(1, participants.count())
-            assertEquals(expectedPartecipant, participants[0].user)
+            assertEquals(1, participants?.count())
+            assertEquals(expectedPartecipant, participants?.get(0)?.user)
 
             assertEquals(false, closed)
             assertEquals(1518863923273, createdAt)
@@ -86,8 +86,8 @@ class BitBucketServerParsingTests {
                 true,
                 "8942a1f75e4c95df836f19ef681d20a87da2ee20"
             )
-            assertEquals(1, reviewers.count())
-            assertEquals(expectedReviewer, reviewers[0])
+            assertEquals(1, reviewers?.count())
+            assertEquals(expectedReviewer, reviewers?.get(0))
         }
     }
 
