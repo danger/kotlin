@@ -76,6 +76,7 @@ data class GitHubPR(
     val head: GitHubMergeRef,
     val base: GitHubMergeRef,
     val state: GitHubPullRequestState,
+    @SerialName("draft") val isDraft: Boolean,
     @SerialName("locked") val isLocked: Boolean,
     @SerialName("merged") val isMerged: Boolean?,
     @SerialName("commits") val commitCount: Int?,

@@ -512,6 +512,7 @@
           "issue_url": "https://api.github.com/repos/artsy/eidolon/issues/609",
           "number": 609,
           "state": "closed",
+          "draft": false
           "locked": false,
           "title": "Xcode updates",
           "user": {

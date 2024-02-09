@@ -10,6 +10,7 @@ kotlin {
         "Mac OS X" -> macosX64("runner")
         "Linux" -> linuxX64("runner")
         "Mac OS X Apple silicon" -> macosArm64("runner")
+        "Windows 11" -> mingwX64("runner")
         else -> throw GradleException("Host OS '$hostOs' is not supported.") as Throwable
     }
 

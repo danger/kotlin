@@ -32,6 +32,7 @@ class GitHubParsingTests {
             assertEquals(1471447574000, mergedAt?.toEpochMilliseconds())
             assertEquals(false, isLocked)
             assertEquals(true, isMerged)
+            assertEquals(false, isDraft)
             assertEquals(15, commitCount)
             assertEquals(8, commentCount)
             assertEquals(11, reviewCommentCount)
