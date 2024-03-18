@@ -1,30 +1,29 @@
-FROM gradle:7.4.2-jdk8
+FROM adoptopenjdk/openjdk8
 
-MAINTAINER Franco Meloni
+MAINTAINER Konstantin Aksenov
 
 LABEL "com.github.actions.name"="Danger Kotlin"
 LABEL "com.github.actions.description"="Runs Kotlin Dangerfiles"
 LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
+ARG KOTLINC_VERSION="1.7.0"
+ARG DANGER_KOTLIN_VERSION="1.3.0"
+
 # Install dependencies
-RUN apt-get update && \
-    apt-get install -y ca-certificates && \
-    curl -sL https://deb.nodesource.com/setup_14.x |  bash - && \
-    apt-get install -y make zip nodejs && \
-    npm install -g danger
+RUN apt-get update
+RUN apt-get install -y npm nodejs wget unzip
 
-# Install danger-kotlin globally
-COPY . /usr/local/_danger-kotlin
-RUN cd /usr/lib && \
-    wget -q https://github.com/JetBrains/kotlin/releases/download/v1.7.0/kotlin-compiler-1.7.0.zip && \
-    unzip kotlin-compiler-*.zip && \
-    rm kotlin-compiler-*.zip && \
-    cd /usr/local/_danger-kotlin && \
-    make install && \
-    rm -rf /usr/local/_danger-kotlin
-
+# Install Kotlin compiler
+RUN wget -q "https://github.com/JetBrains/kotlin/releases/download/v$KOTLINC_VERSION/kotlin-compiler-$KOTLINC_VERSION.zip" && \
+    unzip "kotlin-compiler-$KOTLINC_VERSION.zip" -d /usr/lib && \
+    rm "kotlin-compiler-$KOTLINC_VERSION.zip"
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
-# Run Danger Kotlin via Danger JS, allowing for custom args
-ENTRYPOINT ["danger-kotlin", "ci"]
+# Install Danger-JS
+RUN npm install -g danger
+
+# Install Danger-Kotlin
+RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" && \
+    unzip "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" -d /usr/local && \
+    rm "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip"
