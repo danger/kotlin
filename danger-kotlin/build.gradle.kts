@@ -6,15 +6,23 @@ kotlin {
     /* Targets configuration omitted. 
     *  To find out how to configure the targets, please follow the link:
     *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
-    val hostTarget = when (val hostOs = System.getProperty("os.name")) {
+
+    val targetOS: String by project
+    val osName = if (project.hasProperty("targetOS")) {
+        targetOS
+    } else {
+        System.getProperty("os.name")
+    }
+
+    val buildTarget = when (osName) {
         "Mac OS X" -> macosX64("runner")
         "Linux" -> linuxX64("runner")
         "Mac OS X Apple silicon" -> macosArm64("runner")
         "Windows 11" -> mingwX64("runner")
-        else -> throw GradleException("Host OS '$hostOs' is not supported.") as Throwable
+        else -> throw GradleException("OS '$osName' is not supported.") as Throwable
     }
 
-    hostTarget.apply {
+    buildTarget.apply {
         binaries {
             executable()
         }
