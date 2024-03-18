@@ -24,11 +24,6 @@ ENV PATH $PATH:/usr/lib/kotlinc/bin
 RUN npm install -g danger
 
 # Install Danger-Kotlin
-RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-linux.kexe" && \
-    mv "danger-kotlin-linux.kexe" "danger-kotlin" && \
-    mv "danger-kotlin" "/usr/local/bin"
-
-RUN chmod +x "/usr/local/bin/danger-kotlin"
-
-RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin.jar" && \
-    mv "danger-kotlin.jar" "/usr/local/lib/danger" \
+RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" && \
+    unzip "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" -d /usr/local && \
+    rm "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip"
