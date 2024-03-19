@@ -1,0 +1,61 @@
+name: Release distribution
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dangerKotlinLibrary-shadowJar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 8
+      - name: danger-kotlin-library:shadowJar
+        run: ./gradlew danger-kotlin-library:shadowJar
+      - name: Upload Artifact lib
+        uses: actions/upload-artifact@v4
+        with:
+          name: lib
+          path: danger-kotlin-library/build/libs/danger-kotlin.jar
+
+  dangerKotlin-build:
+    needs: [ dangerKotlinLibrary-shadowJar ]
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [ {os: ubuntu-latest, compiler: linuxX64}, {os: macos-latest, compiler: macosX64}, {os: macos-latest, compiler: macosArm64}  ]
+
+    runs-on: ${{ matrix.target.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Artifact lib
+        uses: actions/download-artifact@v4
+        with:
+          name: lib
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: 8
+      - name: danger-kotlin:build -PtargetOS="${{ matrix.target.compiler }}"
+        run: ./gradlew danger-kotlin:build -PtargetOS="${{ matrix.target.compiler }}"
+      - name: Prepare distribution package
+        run: |
+          mkdir -p dist
+          mkdir -p dist/lib/danger
+          mkdir -p dist/bin
+          ls -R
+          mv "danger-kotlin.jar" "dist/lib/danger"
+          mv "danger-kotlin/build/bin/runner/releaseExecutable/danger-kotlin.kexe" "dist/bin/danger-kotlin"
+          chmod +x dist/bin/danger-kotlin
+      - name: Zip target release
+        uses: actions/upload-artifact@v4
+        with:
+          name: danger-kotlin-${{ matrix.compiler.compiler }}
+          path: dist/*
