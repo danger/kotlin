@@ -27,3 +27,5 @@ RUN npm install -g danger
 RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" && \
     unzip "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" -d /usr/local && \
     rm "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip"
+
+ENTRYPOINT ["danger-kotlin", "ci"]
