@@ -28,4 +28,6 @@ RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_V
     unzip "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" -d /usr/local && \
     rm "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip"
 
+RUN mkdir "/usr/local/lib/danger/libs"
+
 ENTRYPOINT ["danger-kotlin", "ci"]
