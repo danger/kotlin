@@ -12,7 +12,7 @@ ARG DANGER_KOTLIN_VERSION="1.3.0"
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install -y npm nodejs wget unzip
+RUN apt-get install -y npm nodejs wget unzip git
 
 # Install Kotlin compiler
 RUN wget -q "https://github.com/JetBrains/kotlin/releases/download/v$KOTLINC_VERSION/kotlin-compiler-$KOTLINC_VERSION.zip" && \
