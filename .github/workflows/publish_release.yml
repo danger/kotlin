@@ -2,7 +2,7 @@ name: Release distribution
 
 on:
   release:
-    types: [created]
+    types: [ created ]
 
 jobs:
   dangerKotlinLibrary-shadowJar:
@@ -28,7 +28,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [ {os: ubuntu-latest, compiler: linuxX64}, {os: macos-latest, compiler: macosX64}, {os: macos-latest, compiler: macosArm64}  ]
+        target: [ { os: ubuntu-latest, compiler: linuxX64 }, { os: macos-latest, compiler: macosX64 }, { os: macos-latest, compiler: macosArm64 } ]
 
     runs-on: ${{ matrix.target.os }}
 
@@ -55,7 +55,7 @@ jobs:
           mv "danger-kotlin/build/bin/runner/releaseExecutable/danger-kotlin.kexe" "dist/bin/danger-kotlin"
           chmod +x dist/bin/danger-kotlin
       - name: Tar files
-        run: | 
+        run: |
           tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
           shasum -a 256 danger-kotlin-${{ matrix.target.compiler }}.tar
       - name: Get release information
@@ -72,3 +72,31 @@ jobs:
           asset_path: ./danger-kotlin-${{ matrix.target.compiler }}.tar
           asset_name: danger-kotlin-${{ matrix.target.compiler }}.tar
           asset_content_type: application/x-tar
+
+  docker-build-push:
+    runs-on: ubuntu-latest
+    needs: [ dangerKotlin-build-and-distribute ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get release information
+        id: get_release
+        uses: bruceadams/get-release@v1.3.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Docker Login
+        run: echo $PACKAGES_WRITE_TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
+        env:
+          PACKAGES_WRITE_TOKEN: ${{ secrets.DOCKER_GITHUB_PASSWORD }}
+          USERNAME: ${{ secrets.DOCKER_GITHUB_USERNAME }}
+
+      - name: Docker Build
+        run: docker build -t ghcr.io/danger/danger-kotlin:$VERSION .
+        env:
+          VERSION: ${{ steps.get_release.outputs.tag_name }}
+
+      - name: Deploy
+        run: docker push ghcr.io/danger/danger-kotlin:$VERSION
+        env:
+          VERSION: ${{ steps.get_release.outputs.tag_name }}
