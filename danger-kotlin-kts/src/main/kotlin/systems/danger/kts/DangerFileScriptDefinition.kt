@@ -63,12 +63,17 @@ object DangerFileScriptDefinition : ScriptCompilationConfiguration(
 )
 
 class DangerFileKtsConfigurator : RefineScriptCompilationConfigurationHandler {
-
-    private val resolver = CompoundDependenciesResolver(
-        FileSystemDependenciesResolver(DANGER_LIBS_FLAT_DIR),
-        FileSystemDependenciesResolver(),
+    private val externalDependenciesResolvers = setOf(
         MavenDependenciesResolver()
     )
+    private val resolvers = DANGER_DEFAULT_FLAT_DIRS
+        .map { File(it) }
+        .filter { it.exists() }
+        .map { FileSystemDependenciesResolver(it) } +
+            FileSystemDependenciesResolver() +
+            externalDependenciesResolvers
+
+    private val resolver = CompoundDependenciesResolver(resolvers)
 
     override operator fun invoke(context: ScriptConfigurationRefinementContext): ResultWithDiagnostics<ScriptCompilationConfiguration> =
         processAnnotations(context)
@@ -136,7 +141,13 @@ class DangerFileKtsConfigurator : RefineScriptCompilationConfigurationHandler {
     }
 
     private companion object {
-        const val DANGER_DEFAULT_FLAT_DIR = "/usr/local/lib/danger/libs"
-        private val DANGER_LIBS_FLAT_DIR = File(DANGER_DEFAULT_FLAT_DIR)
+        val DANGER_DEFAULT_FLAT_DIRS = setOf(
+            "/usr/local", // x86 location
+            "/opt/local", // Arm
+            "/opt/homebrew", // Homebrew Arm
+            "/usr", // Fallback
+        ).map {
+            "$it/lib/danger/libs"
+        }
     }
 }

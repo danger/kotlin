@@ -8,8 +8,24 @@ import systems.danger.Log
 object DangerFile : DangerFileBridge {
     private const val DANGERFILE_EXTENSION = ".df.kts"
     private const val DANGERFILE = "Dangerfile$DANGERFILE_EXTENSION"
+    private val platformExpectedLibLocations = setOf(
+        "/usr/local", // x86 location
+        "/opt/local", // Arm
+        "/opt/homebrew", // Homebrew Arm
+        "/usr", // Fallback
+    )
 
     override fun execute(inputJson: String, outputJson: String) {
+        val dangerKotlinJarPath = platformExpectedLibLocations
+            .map { "$it/lib/danger/danger-kotlin.jar" }
+            .filter { access(it, F_OK) == 0 }
+            .also {
+                if (it.isEmpty()) {
+                    Log.error("lib/danger/danger-kotlin.jar not found in following location ${platformExpectedLibLocations.joinToString()}")
+                    exit(1)
+                }
+            }.first()
+
         val dangerfile = dangerfileParameter(inputJson) ?: DANGERFILE
 
         if (!dangerfile.endsWith(DANGERFILE_EXTENSION)) {
@@ -23,7 +39,7 @@ object DangerFile : DangerFileBridge {
             "-script-templates",
             "systems.danger.kts.DangerFileScript",
             "-cp",
-            "/usr/local/lib/danger/danger-kotlin.jar",
+            dangerKotlinJarPath,
             "-script",
             dangerfile,
             inputJson,

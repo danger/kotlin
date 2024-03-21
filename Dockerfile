@@ -12,7 +12,7 @@ ARG DANGER_KOTLIN_VERSION="1.3.0"
 
 # Install dependencies
 RUN apt-get update
-RUN apt-get install -y npm nodejs wget unzip
+RUN apt-get install -y npm nodejs wget unzip git
 
 # Install Kotlin compiler
 RUN wget -q "https://github.com/JetBrains/kotlin/releases/download/v$KOTLINC_VERSION/kotlin-compiler-$KOTLINC_VERSION.zip" && \
@@ -27,3 +27,7 @@ RUN npm install -g danger
 RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" && \
     unzip "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip" -d /usr/local && \
     rm "danger-kotlin-$DANGER_KOTLIN_VERSION-linux.zip"
+
+RUN mkdir "/usr/local/lib/danger/libs"
+
+ENTRYPOINT ["danger-kotlin", "ci"]
