@@ -56,7 +56,7 @@ jobs:
           chmod +x dist/bin/danger-kotlin
       - name: Tar files
         run: |
-          tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
+          tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist/bin dist/lib
           shasum -a 256 danger-kotlin-${{ matrix.target.compiler }}.tar
       - name: Get release information
         id: get_release
@@ -84,6 +84,11 @@ jobs:
         uses: bruceadams/get-release@v1.3.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Docker release version
+        run: echo $VERSION
+        env:
+          VERSION: ${{ steps.get_release.outputs.tag_name }}
 
       - name: Docker Login
         run: echo $PACKAGES_WRITE_TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
