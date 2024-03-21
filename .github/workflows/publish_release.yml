@@ -1,7 +1,8 @@
 name: Release distribution
 
 on:
-  workflow_dispatch:
+  release:
+    types: [created]
 
 jobs:
   dangerKotlinLibrary-shadowJar:
@@ -22,7 +23,7 @@ jobs:
           name: lib
           path: danger-kotlin-library/build/libs/danger-kotlin.jar
 
-  dangerKotlin-build:
+  dangerKotlin-build-and-distribute:
     needs: [ dangerKotlinLibrary-shadowJar ]
     strategy:
       fail-fast: false
@@ -50,12 +51,22 @@ jobs:
           mkdir -p dist
           mkdir -p dist/lib/danger
           mkdir -p dist/bin
-          ls -R
           mv "danger-kotlin.jar" "dist/lib/danger"
           mv "danger-kotlin/build/bin/runner/releaseExecutable/danger-kotlin.kexe" "dist/bin/danger-kotlin"
           chmod +x dist/bin/danger-kotlin
-      - name: Zip target release
-        uses: actions/upload-artifact@v4
+      - name: Tar files
+        run: tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
+      - name: Get release information
+        id: get_release
+        uses: bruceadams/get-release@v1.3.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Upload artifacts to release
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: danger-kotlin-${{ matrix.compiler.compiler }}
-          path: dist/*
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./danger-kotlin-${{ matrix.target.compiler }}.tar
+          asset_name: danger-kotlin-${{ matrix.target.compiler }}.tar
+          asset_content_type: application/x-tar
