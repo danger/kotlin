@@ -55,7 +55,9 @@ jobs:
           mv "danger-kotlin/build/bin/runner/releaseExecutable/danger-kotlin.kexe" "dist/bin/danger-kotlin"
           chmod +x dist/bin/danger-kotlin
       - name: Tar files
-        run: tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
+        run: | 
+          tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
+          shasum -a 256 tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar
       - name: Get release information
         id: get_release
         uses: bruceadams/get-release@v1.3.2
