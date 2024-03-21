@@ -88,11 +88,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      - name: Docker release version
-        run: echo $VERSION
-        env:
-          VERSION: ${{ steps.get_release.outputs.tag_name }}
-
       - name: Docker Login
         run: echo $PACKAGES_WRITE_TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
         env:
