@@ -1,5 +1,31 @@
 name: 'danger-kotlin'
 description: 'Stop saying "you forgot to …" in code review'
+author: 'Konstantin Aksenov'
+branding:
+  icon: 'check-square'
+  color: 'green'
+inputs:
+  dangerfile:
+    description: 'Path to danger file'
+    required: false
+    default: 'Dangerfile.df.kts'
+  run-mode:
+    description: 'Run mode: ci, local, pr'
+    required: false
+    default: 'ci'
+  job-id:
+    description: 'Reported CI job ID'
+    required: false
+    default: 'danger/kotlin'
+  args:
+    description: 'Extra custom arguments like "--failOnErrors --no-publish-check" and etc'
+    required: false
+
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'github-action/Dockerfile'
+  args:
+    - ${{ inputs.dangerfile }}
+    - ${{ inputs.run-mode }}
+    - ${{ inputs.job-id }}
+    - ${{ inputs.args }}
