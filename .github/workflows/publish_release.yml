@@ -57,7 +57,7 @@ jobs:
       - name: Tar files
         run: | 
           tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar dist
-          shasum -a 256 tar -cvf danger-kotlin-${{ matrix.target.compiler }}.tar
+          shasum -a 256 danger-kotlin-${{ matrix.target.compiler }}.tar
       - name: Get release information
         id: get_release
         uses: bruceadams/get-release@v1.3.2
