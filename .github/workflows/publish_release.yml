@@ -90,8 +90,8 @@ jobs:
       - name: Docker Login
         run: echo $PACKAGES_WRITE_TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
         env:
-          PACKAGES_WRITE_TOKEN: ${{ secrets.DOCKER_GITHUB_PASSWORD }}
-          USERNAME: ${{ secrets.DOCKER_GITHUB_USERNAME }}
+          PACKAGES_WRITE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.actor }}
 
       - name: Docker Build
         run: docker build -t ghcr.io/danger/danger-kotlin:$VERSION .
