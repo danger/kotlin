@@ -4,8 +4,6 @@ on:
   release:
     types: [ created ]
 
-permissions: write-all
-
 jobs:
   dangerKotlinLibrary-shadowJar:
     name: Build Library
@@ -78,6 +76,9 @@ jobs:
 
   docker-build-push:
     name: Build and Push Docker image
+    permissions:
+      contents: read
+      packages: write
     runs-on: ubuntu-latest
     needs: [ dangerKotlin-build-and-distribute ]
     steps:
