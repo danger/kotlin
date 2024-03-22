@@ -4,9 +4,7 @@ on:
   release:
     types: [ created ]
 
-permissions:
-  contents: write
-  packages: write
+permissions: write-all
 
 jobs:
   dangerKotlinLibrary-shadowJar:
