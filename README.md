@@ -47,9 +47,14 @@ danger(args) {
 
 ### Setup
 
-#### macOS
+#### macOS (ARM)
 ```sh
 brew install danger/tap/danger-kotlin
+```
+
+#### macOS (Intel)
+```sh
+brew install danger/tap/danger-kotlin-intel
 ```
 
 You need to have Xcode installed and not relying on command line tools.
@@ -75,6 +80,12 @@ source ~/.bash_profile
 ### GitHub Actions
 You can add danger/kotlin to your actions
 
+Parameters:
+* `dangerfile`: Path to danger file,  required: `false`,  default: `Dangerfile.df.kts`
+* `run-mode`: Run mode: `ci`, `local`, `pr`, required: `false`  default: `ci`
+* `job-id:` Reported CI job ID, required: `false`, default: `danger/kotlin`
+* `args`: Extra custom arguments like "--failOnErrors --no-publish-check" and etc, required: `false`
+
 ```yml
 jobs:
   build:
@@ -83,7 +94,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: danger/kotlin@1.2.0
+        uses: danger/kotlin@1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -101,9 +112,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.2.0
-        with:
-            args: --failOnErrors --no-publish-check
+        uses: docker://ghcr.io/danger/danger-kotlin:1.3.0
+        run: danger-kotlin ci --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
