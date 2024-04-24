@@ -54,7 +54,7 @@ data class GitLabMergeRequest(
     @SerialName("first_deployed_to_production_at")
     val firstDeployedToProductionAt: Instant? = null,
     @SerialName("force_remove_source_branch")
-    val forceRemoveSourceBranch: Boolean?,
+    val forceRemoveSourceBranch: Boolean? = null,
     val id: Int,
     val iid: Int,
     @SerialName("latest_build_finished_at")

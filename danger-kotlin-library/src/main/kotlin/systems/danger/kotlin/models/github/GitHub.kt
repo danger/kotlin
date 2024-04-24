@@ -65,9 +65,9 @@ enum class GitHubPullRequestState {
 data class GitHubPR(
     val number: Int,
     val title: String,
-    val body: String?,
+    val body: String? = null,
     val user: GitHubUser,
-    val assignee: GitHubUser?,
+    val assignee: GitHubUser? = null,
     val assignees: List<GitHubUser>,
     @SerialName("created_at") val createdAt: Instant,
     @SerialName("updated_at") val updatedAt: Instant,
@@ -78,14 +78,14 @@ data class GitHubPR(
     val state: GitHubPullRequestState,
     @SerialName("draft") val isDraft: Boolean,
     @SerialName("locked") val isLocked: Boolean,
-    @SerialName("merged") val isMerged: Boolean?,
-    @SerialName("commits") val commitCount: Int?,
-    @SerialName("comments") val commentCount: Int?,
-    @SerialName("review_comments") val reviewCommentCount: Int?,
-    val additions: Int?,
-    val deletions: Int?,
-    @SerialName("changed_files") val changedFiles: Int?,
-    val milestone: GitHubMilestone?,
+    @SerialName("merged") val isMerged: Boolean? = null,
+    @SerialName("commits") val commitCount: Int? = null,
+    @SerialName("comments") val commentCount: Int? = null,
+    @SerialName("review_comments") val reviewCommentCount: Int? = null,
+    val additions: Int? = null,
+    val deletions: Int? = null,
+    @SerialName("changed_files") val changedFiles: Int? = null,
+    val milestone: GitHubMilestone? = null,
     @SerialName("html_url") val htmlURL: String
 )
 
@@ -150,7 +150,7 @@ data class GitHubRepo(
     val fullName: String,
     @SerialName("private")
     val isPrivate: Boolean,
-    val description: String?,
+    val description: String? = null,
     @SerialName("fork")
     val isFork: Boolean,
     @SerialName("html_url")
@@ -178,10 +178,11 @@ enum class GitHubReviewState {
 @Serializable
 data class GitHubReview(
     val user: GitHubUser,
-    val id: Long?,
-    val body: String?,
-    @SerialName("commit_id") val commitId: String?,
-    val state: GitHubReviewState?
+    val id: Long? = null,
+    val body: String? = null,
+    @SerialName("commit_id")
+    val commitId: String? = null,
+    val state: GitHubReviewState? = null
 )
 
 /**
@@ -197,9 +198,9 @@ data class GitHubReview(
 data class GitHubCommit(
     val sha: String,
     val url: String,
-    val author: GitHubUser?,
+    val author: GitHubUser? = null,
     val commit: GitCommit,
-    val committer: GitHubUser?
+    val committer: GitHubUser? = null
 )
 
 @Serializable
@@ -248,11 +249,11 @@ data class GitHubIssue(
     val user: GitHubUser,
     val state: GitHubIssueState,
     @SerialName("locked") val isLocked: Boolean,
-    val body: String?,
+    val body: String? = null,
     @SerialName("comments") val commentCount: Int,
-    val assignee: GitHubUser?,
+    val assignee: GitHubUser? = null,
     val assignees: List<GitHubUser>,
-    val milestone: GitHubMilestone?,
+    val milestone: GitHubMilestone? = null,
     @SerialName("created_at") val createdAt: Instant,
     @SerialName("updated_at") val updatedAt: Instant,
     @SerialName("closed_at") val closedAt: Instant? = null,
@@ -294,9 +295,9 @@ enum class GitHubUserType {
  */
 @Serializable
 data class GitHubUser(
-    val id: Long?,
-    val login: String?,
-    val type: GitHubUserType?,
+    val id: Long? = null,
+    val login: String? = null,
+    val type: GitHubUserType? = null,
     @SerialName("avatar_url")
     val avatarUrl: String?
 )
