@@ -294,11 +294,11 @@ enum class GitHubUserType {
  */
 @Serializable
 data class GitHubUser(
-    val id: Long,
-    val login: String,
-    val type: GitHubUserType,
+    val id: Long?,
+    val login: String?,
+    val type: GitHubUserType?,
     @SerialName("avatar_url")
-    val avatarUrl: String
+    val avatarUrl: String?
 )
 
 @Serializable
