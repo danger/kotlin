@@ -1,0 +1,44 @@
+name: Release distribution
+
+on:
+  workflow_dispatch :
+    inputs:
+      docker-version:
+        description: "Docker Version"
+      danger-js-version:
+        description: "Danger JS release version"
+        default: "11.3.1"
+      danger-kotlin-version:
+        description: "Danger Kotlin release version"
+      kotlin-version:
+        description: "Kotlin Version"
+        default: "1.7.22"
+
+jobs:
+  docker-build-push:
+    name: Build and Push Docker image
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Docker Login
+        run: echo $PACKAGES_WRITE_TOKEN | docker login ghcr.io -u $USERNAME --password-stdin
+        env:
+          PACKAGES_WRITE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.actor }}
+
+      - name: Docker Build
+        run: docker build -t ghcr.io/danger/danger-kotlin:$VERSION --build-arg="KOTLINC_VERSION=$KOTLINC_VERSION" --build-arg="DANGER_KOTLIN_VERSION=$DANGER_KOTLIN_VERSION" --build-arg="DANGER_JS_VERSION=$DANGER_JS_VERSION" .
+        env:
+          VERSION: ${{ github.event.inputs.docker-version }}
+          KOTLINC_VERSION: ${{ github.event.inputs.kotlin-version }}
+          DANGER_KOTLIN_VERSION: ${{ github.event.inputs.danger-kotlin-version }}
+          DANGER_JS_VERSION: ${{ github.event.inputs.danger-js-version }}
+
+      - name: Deploy
+        run: docker push ghcr.io/danger/danger-kotlin:$VERSION
+        env:
+          VERSION: ${{ github.event.inputs.docker-version }}
