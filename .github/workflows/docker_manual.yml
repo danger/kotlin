@@ -1,4 +1,4 @@
-name: Release distribution
+name: Build Docker (Manual)
 
 on:
   workflow_dispatch :
