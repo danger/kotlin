@@ -299,7 +299,7 @@ data class GitHubUser(
     val login: String? = null,
     val type: GitHubUserType? = null,
     @SerialName("avatar_url")
-    val avatarUrl: String?
+    val avatarUrl: String? = null
 )
 
 @Serializable
