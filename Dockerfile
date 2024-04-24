@@ -22,7 +22,7 @@ RUN wget -q "https://github.com/JetBrains/kotlin/releases/download/v$KOTLINC_VER
 ENV PATH $PATH:/usr/lib/kotlinc/bin
 
 # Install Danger-JS
-RUN npm install -g "danger@$DANGER_JS_VERSION
+RUN npm install -g "danger@$DANGER_JS_VERSION"
 
 # Install Danger-Kotlin
 RUN wget -q "https://github.com/danger/kotlin/releases/download/$DANGER_KOTLIN_VERSION/danger-kotlin-linuxX64.tar" && \
