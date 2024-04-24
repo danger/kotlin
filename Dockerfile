@@ -8,7 +8,7 @@ LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
 ARG KOTLINC_VERSION="1.7.22"
-ARG DANGER_KOTLIN_VERSION="1.3.0"
+ARG DANGER_KOTLIN_VERSION="1.3.1"
 
 # Install dependencies
 RUN apt-get update
