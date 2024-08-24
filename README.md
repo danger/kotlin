@@ -109,10 +109,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: "Run Danger"
+    container:
+      image: docker://ghcr.io/danger/danger-kotlin:1.3.1
     steps:
-      - uses: actions/checkout@v1
-      - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.3.1
+      - uses: actions/checkout@v4
+      - name: Run Danger
         run: danger-kotlin ci --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
