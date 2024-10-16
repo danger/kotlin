@@ -15,6 +15,7 @@ object DangerFile : DangerFileBridge {
         "/usr", // Fallback
     )
 
+    @kotlinx.cinterop.ExperimentalForeignApi
     override fun execute(inputJson: String, outputJson: String) {
         val dangerKotlinJarPath = platformExpectedLibLocations
             .map { "$it/lib/danger/danger-kotlin.jar" }
@@ -48,6 +49,7 @@ object DangerFile : DangerFileBridge {
     }
 }
 
+@kotlinx.cinterop.ExperimentalForeignApi
 private fun dangerfileParameter(inputJson: String): String? {
     var result: String? = null
 
@@ -69,6 +71,7 @@ private fun dangerfileParameter(inputJson: String): String? {
     return result
 }
 
+@kotlinx.cinterop.ExperimentalForeignApi
 private fun readLine(file: CPointer<FILE>): String? {
     var ch = getc(file)
     var lineBuffer: Array<Char> = arrayOf()

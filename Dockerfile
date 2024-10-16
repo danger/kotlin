@@ -7,7 +7,7 @@ LABEL "com.github.actions.description"="Runs Kotlin Dangerfiles"
 LABEL "com.github.actions.icon"="zap"
 LABEL "com.github.actions.color"="blue"
 
-ARG KOTLINC_VERSION="1.7.22"
+ARG KOTLINC_VERSION="2.0.10"
 ARG DANGER_KOTLIN_VERSION="1.3.1"
 ARG DANGER_JS_VERSION="11.3.1"
 

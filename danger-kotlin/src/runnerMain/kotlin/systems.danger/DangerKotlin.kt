@@ -5,6 +5,7 @@ import systems.danger.cmd.dangerfile.DangerFile
 object DangerKotlin {
     private const val FILE_TMP_OUTPUT_JSON = "danger_out.json"
 
+    @kotlinx.cinterop.ExperimentalForeignApi
     fun run() {
         val dangerDSLPath = readLine()
 
