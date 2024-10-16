@@ -12,7 +12,7 @@ on:
         description: "Danger Kotlin release version"
       kotlin-version:
         description: "Kotlin Version"
-        default: "1.7.22"
+        default: "2.0.10"
 
 jobs:
   docker-build-push:
