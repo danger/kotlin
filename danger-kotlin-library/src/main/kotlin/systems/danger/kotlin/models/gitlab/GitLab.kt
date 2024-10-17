@@ -181,7 +181,7 @@ data class GitLabPipeline(
 
 @Serializable
 enum class GitLabPipelineStatus {
-    @SerialName("cancelled")
+    @SerialName("canceled")
     CANCELLED,
 
     @SerialName("failed")
