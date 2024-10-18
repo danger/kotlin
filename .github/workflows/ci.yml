@@ -5,6 +5,7 @@ on: pull_request
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
     
@@ -16,11 +17,11 @@ jobs:
       - uses: sdkman/sdkman-action@master
         with:
           candidate: gradle
-          version: 7.4.2
+          version: 8.10.2
 
       - name: Install Kotlin
         run: |
-          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.7.22/kotlin-compiler-1.7.22.zip
+          curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v2.0.21/kotlin-compiler-2.0.21.zip
           
           if [[ "$OSTYPE" != "darwin"* ]]
           then
@@ -33,7 +34,7 @@ jobs:
         
       - uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '22.10.0'
 
       - name: Install libncurses5
         run: |
@@ -48,21 +49,20 @@ jobs:
         run: npm install -g danger
        
       - name: Install Danger Kotlin
-        run: make install
-         
+        run: sudo make install
+
       - name: Run tests
-        run: ./gradlew danger-kotlin-library:test
+        run: sudo ./gradlew danger-kotlin-library:test
 
       - name: Install Plugin Installer
-        run: ./gradlew danger-plugin-installer:publishToMavenLocal
+        run: sudo ./gradlew danger-plugin-installer:publishToMavenLocal
 
       - name: Build and Install Sample Plugin
+        working-directory: ./danger-kotlin-sample-plugin
         run: |
-          cd danger-kotlin-sample-plugin
-          gradle wrapper
-          ./gradlew build
-          ./gradlew installDangerPlugin
-          cd ..
+          sudo gradle wrapper
+          sudo ./gradlew build
+          sudo ./gradlew installDangerPlugin
       
       - name: Run Danger-Kotlin
         run: DEBUG='*' danger-kotlin ci --dangerfile Dangerfile_ci.df.kts

@@ -31,19 +31,19 @@ if [[ -n "$sudo" && "$OSTYPE" != "darwin"* ]]; then
 fi
 
 if ! [[ -x "$(command -v kotlinc)" ]]; then
-    echo "Installing kotlin compiler 1.7.22"
-    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.7.22/kotlin-compiler-1.7.22.zip
+    echo "Installing kotlin compiler 2.0.21"
+    curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v2.0.21/kotlin-compiler-2.0.21.zip
     unzip -d /usr/local/ kotlin-compiler.zip
     echo 'export PATH=/usr/local/kotlinc/bin:$PATH' >> ~/.bash_profile
     rm -rf kotlin-compiler.zip
 fi
 
 if ! [[ -x "$(command -v gradle)" ]]; then
-    echo "Installing gradle 7.4.2"
-    curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-7.4.2-bin.zip
+    echo "Installing gradle 8.10.2"
+    curl -o gradle.zip -L https://downloads.gradle-dn.com/distributions/gradle-8.10.2-bin.zip
     mkdir /opt/gradle
     unzip -d /opt/gradle gradle.zip
-    echo 'export PATH=/opt/gradle/gradle-7.4.2/bin:$PATH' >> ~/.bash_profile
+    echo 'export PATH=/opt/gradle/gradle-8.10.2/bin:$PATH' >> ~/.bash_profile
     rm -rf gradle.zip
 fi
 
