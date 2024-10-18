@@ -14,7 +14,7 @@ kotlin {
             "linuxX64" -> linuxX64("runner")
             "macosArm64" -> macosArm64("runner")
             "mingwX64" -> mingwX64("runner")
-            else -> throw GradleException("OS '$osName' is not supported.") as Throwable
+            else -> throw GradleException("OS '$osName' is not supported.")
         }
     } else {
         when (val osName = System.getProperty("os.name")) {
@@ -22,7 +22,7 @@ kotlin {
             "Linux" -> linuxX64("runner")
             "Mac OS X Apple silicon" -> macosArm64("runner")
             "Windows 11" -> mingwX64("runner")
-            else -> throw GradleException("OS '$osName' is not supported.") as Throwable
+            else -> throw GradleException("OS '$osName' is not supported.")
         }
     }
 
@@ -43,6 +43,9 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
+        }
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
         }
     }
 }
