@@ -44,5 +44,8 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
+        all {
+            languageSettings.optIn("kotlinx.cinterop.ExperimentalForeignApi")
+        }
     }
 }
