@@ -47,7 +47,7 @@ data class GitLabMergeRequest(
     val closedAt: Instant? = null,
     @SerialName("closed_by")
     val closedBy: GitLabUser? = null,
-    val description: String,
+    val description: String? = null,
     @SerialName("diff_refs")
     val diffRefs: GitLabDiffRefs,
     val downvotes: Int,
