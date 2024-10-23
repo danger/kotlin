@@ -113,14 +113,14 @@
         "latest_build_started_at": "2021-04-30T14:35:00.103+02:00",
         "latest_build_finished_at": "2019-04-11T00:33:22.492Z",
         "first_deployed_to_production_at": "2019-04-11T00:30:22.492Z",
-        "pipeline": {
+        "pipeline": null,
+        "head_pipeline": {
           "id": 50,
           "sha": "621bc3348549e51c5bd6ea9f094913e9e4667c7b",
           "ref": "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f",
           "status": "canceled",
           "web_url": "https://gitlab.com/danger-systems/danger.systems/pipeline/621bc3348549e51c5bd6ea9f094913e9e4667c7b"
         },
-        "head_pipeline": null,
         "diff_refs": {
           "base_sha": "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f",
           "head_sha": "621bc3348549e51c5bd6ea9f094913e9e4667c7b",
