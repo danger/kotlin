@@ -4,6 +4,13 @@ on: pull_request
 
 jobs:
   build:
+    permissions:
+      statuses: write
+      pull-requests: read
+      discussions: write
+      issues: write
+      contents: read
+
     strategy:
       fail-fast: false
       matrix:
