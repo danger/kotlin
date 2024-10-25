@@ -4,6 +4,8 @@ on: pull_request
 
 jobs:
   build:
+    permissions: write-all
+
     strategy:
       fail-fast: false
       matrix:
