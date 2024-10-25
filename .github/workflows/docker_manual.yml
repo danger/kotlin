@@ -7,12 +7,12 @@ on:
         description: "Docker Version"
       danger-js-version:
         description: "Danger JS release version"
-        default: "11.3.1"
+        default: "12.3.3"
       danger-kotlin-version:
         description: "Danger Kotlin release version"
       kotlin-version:
         description: "Kotlin Version"
-        default: "1.7.22"
+        default: "2.0.21"
 
 jobs:
   docker-build-push:
