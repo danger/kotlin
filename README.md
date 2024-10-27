@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "Run Danger"
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: Danger
         uses: danger/kotlin@1.3.1
         env:
