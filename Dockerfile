@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8
+FROM eclipse-temurin:23-jdk
 
 MAINTAINER Konstantin Aksenov
 
