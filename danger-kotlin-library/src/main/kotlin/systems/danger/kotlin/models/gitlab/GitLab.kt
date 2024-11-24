@@ -73,6 +73,7 @@ data class GitLabMergeRequest(
     @SerialName("merge_when_pipeline_succeeds")
     val mergeOnPipelineSuccess: Boolean,
     val milestone: GitLabMilestone? = null,
+    @SerialName("head_pipeline")
     val pipeline: GitLabPipeline,
     @SerialName("project_id")
     val projectId: String,
