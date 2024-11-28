@@ -19,8 +19,8 @@ val Git.changedLines: PullRequestChangedLines
                 val parts = line.split("\\s+".toRegex())
                 (parts[0].toIntOrNull() ?: 0) to (parts[1].toIntOrNull() ?: 0)
             }
-        val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
-        val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
+        val additions = additionDeletionPairs.fold(0) { acc, (addition, _) -> acc + addition }
+        val deletions = additionDeletionPairs.fold(0) { acc, (_, deletion) -> acc + deletion }
         val commandRawDiffOutput = shellExecutor.execute("git diff $headSha $baseSha")
         return PullRequestChangedLines(additions, deletions, commandRawDiffOutput)
     }
