@@ -2,7 +2,7 @@ package systems.danger.kotlin
 
 import io.mockk.every
 import io.mockk.mockk
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import systems.danger.kotlin.models.git.Git
@@ -41,7 +41,7 @@ internal class GitKtxTest {
         )
     )
 
-    private val expectedResult = PullRequestChangedLines(22, 8, diffCommandOutput)
+    private val expectedResult = PullRequestChangedLines(8, 22, diffCommandOutput)
 
     @Before
     fun setup() {
