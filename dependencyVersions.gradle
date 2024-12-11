@@ -27,9 +27,9 @@ project.ext.artifactIdKotlinMain = 'kotlin-main-kts'
 project.ext.artifactIdKotlinSerializationJson = 'kotlinx-serialization-json'
 project.ext.artifactIdKotlinDatetime = "kotlinx-datetime"
 project.ext.artifactIdKotlinCoroutines = "kotlinx-coroutines-core"
-project.ext.versionKotlinSerializationJson = '1.3.2'
-project.ext.versionKotlinDatetime = '0.2.0'
-project.ext.versionKotlinCoroutines = '1.6.2'
+project.ext.versionKotlinSerializationJson = '1.7.3'
+project.ext.versionKotlinDatetime = '0.6.1'
+project.ext.versionKotlinCoroutines = '1.9.0'
 
 ext.kotlin = [
         mainKts: "$groupIdKotlin:$artifactIdKotlinMain:$versionKotlin",

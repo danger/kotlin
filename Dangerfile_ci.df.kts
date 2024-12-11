@@ -7,6 +7,7 @@
 
 //Testing plugin
 @file:DependsOn("danger-kotlin-sample-plugin-sample.jar")
+@file:OptIn(kotlin.time.ExperimentalTime::class)
 
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -64,9 +65,7 @@ danger(args) {
         async { expensiveCheck("4", 5000) }
     }
     val after = Clock.System.now()
-    @OptIn(kotlin.time.ExperimentalTime::class)
     val runningTime = after.minus(before)
-    @OptIn(kotlin.time.ExperimentalTime::class)
     message("Coroutines checks terminated - runningFor $runningTime")
 
     if ((fails + warnings).isEmpty()) {
