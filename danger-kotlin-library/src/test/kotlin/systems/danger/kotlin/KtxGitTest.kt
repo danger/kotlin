@@ -2,7 +2,7 @@ package systems.danger.kotlin
 
 import io.mockk.every
 import io.mockk.mockk
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import systems.danger.kotlin.models.git.Git
@@ -32,8 +32,16 @@ internal class GitKtxTest {
         commits = listOf(
             GitCommit(
                 sha = "commit1",
-                author = GitCommitAuthor("John Doe", "john@doe.com", "now"),
-                committer = GitCommitAuthor("John Doe", "john@doe.com", "now"),
+                author = GitCommitAuthor("John Doe", "john@doe.com", "2024-11-28T13:41:53Z"),
+                committer = GitCommitAuthor("John Doe", "john@doe.com", "2024-12-04T09:15:23Z"),
+                message = "Random message",
+                parents = listOf(),
+                url = ""
+            ),
+            GitCommit(
+                sha = "commit2",
+                author = GitCommitAuthor("John Doe", "john@doe.com", "2024-11-28T13:54:45Z"),
+                committer = GitCommitAuthor("John Doe", "john@doe.com", "2024-12-04T09:15:23Z"),
                 message = "Random message",
                 parents = listOf(),
                 url = ""
@@ -41,7 +49,7 @@ internal class GitKtxTest {
         )
     )
 
-    private val expectedResult = PullRequestChangedLines(22, 8, diffCommandOutput)
+    private val expectedResult = PullRequestChangedLines(8, 22, diffCommandOutput)
 
     @Before
     fun setup() {
@@ -74,5 +82,15 @@ internal class GitKtxTest {
     fun testNoChangedLinesForNoCommits() {
         val gitWOCommits = basicGit.copy(commits = emptyList())
         assertEquals(PullRequestChangedLines(0, 0), gitWOCommits.changedLines)
+    }
+
+    @Test
+    fun testBaseShaIsCorrect() {
+        assertEquals("commit1^1", basicGit.baseSha)
+    }
+
+    @Test
+    fun testHeadShaIsCorrect() {
+        assertEquals("commit2", basicGit.headSha)
     }
 }

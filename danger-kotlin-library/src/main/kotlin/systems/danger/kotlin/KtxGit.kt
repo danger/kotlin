@@ -1,6 +1,7 @@
 package systems.danger.kotlin
 
 import systems.danger.kotlin.models.git.Git
+import systems.danger.kotlin.models.git.GitCommit
 import systems.danger.kotlin.tools.shell.ShellExecutorFactory
 
 // extensions over [Git] object
@@ -12,16 +13,16 @@ val Git.changedLines: PullRequestChangedLines
     get() {
         if (headSha == null || baseSha == null) return PullRequestChangedLines(0, 0)
         val shellExecutor = ShellExecutorFactory.get()
-        val commandRawOutput = shellExecutor.execute("git diff --numstat $headSha $baseSha")
+        val commandRawOutput = shellExecutor.execute("git diff --numstat $baseSha $headSha")
         val additionDeletionPairs = commandRawOutput.lines()
             .filter { it.isNotEmpty() }
             .map { line ->
                 val parts = line.split("\\s+".toRegex())
                 (parts[0].toIntOrNull() ?: 0) to (parts[1].toIntOrNull() ?: 0)
             }
-        val additions = additionDeletionPairs.fold(0) { acc, (_, addition) -> acc + addition }
-        val deletions = additionDeletionPairs.fold(0) { acc, (deletion, _) -> acc + deletion }
-        val commandRawDiffOutput = shellExecutor.execute("git diff $headSha $baseSha")
+        val additions = additionDeletionPairs.fold(0) { acc, (addition, _) -> acc + addition }
+        val deletions = additionDeletionPairs.fold(0) { acc, (_, deletion) -> acc + deletion }
+        val commandRawDiffOutput = shellExecutor.execute("git diff $baseSha $headSha")
         return PullRequestChangedLines(additions, deletions, commandRawDiffOutput)
     }
 
@@ -47,13 +48,13 @@ val Git.deletions: Int
  * Reference to a SHA of head commit of this PR
  */
 val Git.headSha: String?
-    get() = commits.firstOrNull()?.sha
+    get() = commits.sortChronologically().lastOrNull()?.sha
 
 /**
  * Reference to a SHA of base commit of this PR
  */
 val Git.baseSha: String?
-    get() = commits.lastOrNull()?.sha?.let { "$it^1" }
+    get() = commits.sortChronologically().firstOrNull()?.sha?.let { "$it^1" }
 
 /**
  * Unified diff of this PR 
@@ -74,3 +75,7 @@ data class PullRequestChangedLines(
     val deletions: Int,
     val diff: String? = null
 )
+
+private fun List<GitCommit>.sortChronologically(): List<GitCommit> {
+    return sortedBy { it.author.date }
+}
