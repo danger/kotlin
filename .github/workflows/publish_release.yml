@@ -1,6 +1,14 @@
 name: Release distribution
 
 on:
+  workflow_dispatch:
+    inputs:
+      danger-js-version:
+        description: "Danger JS release version"
+        default: "12.3.3"
+      kotlin-version:
+        description: "Kotlin Version"
+        default: "2.0.21"
   release:
     types: [ created ]
 
@@ -99,9 +107,11 @@ jobs:
           USERNAME: ${{ github.actor }}
 
       - name: Docker Build
-        run: docker build -t ghcr.io/danger/danger-kotlin:$VERSION .
+        run: docker build -t ghcr.io/danger/danger-kotlin:$VERSION --build-arg="DANGER_KOTLIN_VERSION=$VERSION" --build-arg="KOTLINC_VERSION=$KOTLINC_VERSION" --build-arg="DANGER_JS_VERSION=$DANGER_JS_VERSION" .
         env:
           VERSION: ${{ steps.get_release.outputs.tag_name }}
+          KOTLINC_VERSION: ${{ github.event.inputs.kotlin-version }}
+          DANGER_JS_VERSION: ${{ github.event.inputs.danger-js-version }}
 
       - name: Deploy
         run: docker push ghcr.io/danger/danger-kotlin:$VERSION

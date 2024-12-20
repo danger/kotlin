@@ -9,7 +9,7 @@ LABEL "com.github.actions.color"="blue"
 
 ARG KOTLINC_VERSION="2.0.21"
 ARG DANGER_KOTLIN_VERSION="1.3.2"
-ARG DANGER_JS_VERSION="11.3.1"
+ARG DANGER_JS_VERSION="12.3.3"
 
 # Install dependencies
 RUN apt-get update
