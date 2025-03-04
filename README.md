@@ -47,6 +47,11 @@ danger(args) {
 
 ### Setup
 
+### Docker
+```sh
+docker run --rm -v "${PWD}:/code" -w /code ghcr.io/danger/danger-kotlin:1.3.3 danger-kotlin local
+```
+
 #### macOS (ARM)
 ```sh
 brew install danger/tap/danger-kotlin
@@ -130,6 +135,9 @@ You can activate the autocomplete following this additional steps:
 - Make sure the script template `DangerFileScript` is active and above the default `Kotlin Script`
 - Apply changes
 - If opening the `Dangerfile.df.kts` the autocomplete and syntax highlighting doesn't work, try to reboot your IDE or open the Dangerfile from your IDE as a single file.
+- If it still doesn't work, go to `Help -> Edit Custom VM Options...` and add `-Dkotlin.script.classpath=<path>/danger-kotlin.jar` (replace the `<path>` with the absolute path to the JAR). Then restart the IDE.
+- You may also need to disable the "K2 mode" (search the settings for it) if you enabled it previously.
+
 
 ### Using external maven dependencies into your Dangerfile
 You can use any external dependency by adding the following lines at the top of your `Dangerfile.df.kts`
