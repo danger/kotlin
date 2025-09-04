@@ -32,7 +32,7 @@ jobs:
             rm -rf kotlin-compiler.zip
           fi
         
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '22.10.0'
 
