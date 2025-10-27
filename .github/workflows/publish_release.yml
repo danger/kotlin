@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download Artifact lib
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: lib
 
