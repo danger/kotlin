@@ -172,7 +172,7 @@ enum class GitLabMilestoneState {
 
 @Serializable
 data class GitLabPipeline(
-    val id: Int,
+    val id: Long,
     val ref: String,
     val sha: String,
     val status: GitLabPipelineStatus,
