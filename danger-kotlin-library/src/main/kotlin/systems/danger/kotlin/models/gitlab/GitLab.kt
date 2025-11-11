@@ -55,8 +55,8 @@ data class GitLabMergeRequest(
     val firstDeployedToProductionAt: Instant? = null,
     @SerialName("force_remove_source_branch")
     val forceRemoveSourceBranch: Boolean? = null,
-    val id: Int,
-    val iid: Int,
+    val id: Long,
+    val iid: Long,
     @SerialName("latest_build_finished_at")
 
     val latestBuildFinishedAt: Instant? = null,
@@ -147,10 +147,10 @@ data class GitLabMilestone(
     val description: String,
     @SerialName("due_date")
     val dueDate: Instant,
-    val id: Int,
-    val iid: Int,
+    val id: Long,
+    val iid: Long,
     @SerialName("project_id")
-    val projectID: Int,
+    val projectID: Long,
     @SerialName("start_date")
     val startDate: Instant,
     val state: GitLabMilestoneState,
@@ -172,7 +172,7 @@ enum class GitLabMilestoneState {
 
 @Serializable
 data class GitLabPipeline(
-    val id: Int,
+    val id: Long,
     val ref: String,
     val sha: String,
     val status: GitLabPipelineStatus,
@@ -205,7 +205,7 @@ enum class GitLabPipelineStatus {
 data class GitLabUser(
     @SerialName("avatar_url")
     val avatarUrl: String? = null,
-    val id: Int,
+    val id: Long,
     val name: String,
     val state: GitLabUserState,
     val username: String,

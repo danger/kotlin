@@ -21,13 +21,13 @@ class GitLabParsingTests {
             assertEquals(false, allowMaintainerToPush)
             assertEquals(1, approvalsBeforeMerge)
             val orta = GitLabUser(
-                "https://secure.gravatar.com/avatar/f116cb3be23153ec08b94e8bd4dbcfeb?s=80&d=identicon", 377669, "Orta",
+                "https://secure.gravatar.com/avatar/f116cb3be23153ec08b94e8bd4dbcfeb?s=80&d=identicon", 377669L, "Orta",
                 GitLabUserState.ACTIVE, "orta", "https://gitlab.com/orta"
             )
             assertEquals(orta, assignee)
             val fmeloni = GitLabUser(
                 "https://secure.gravatar.com/avatar/3d90e967de2beab6d44cfadbb4976b87?s=80&d=identicon",
-                3331525,
+                3331525L,
                 "Franco Meloni",
                 GitLabUserState.ACTIVE,
                 "f-meloni",
@@ -48,8 +48,8 @@ class GitLabParsingTests {
             assertEquals(0, downvotes)
             assertEquals(Instant.fromEpochMilliseconds(1554942622492), firstDeployedToProductionAt)
             assertEquals(true, forceRemoveSourceBranch)
-            assertEquals(27469633, id)
-            assertEquals(182, iid)
+            assertEquals(27469633L, id)
+            assertEquals(182L, iid)
             assertEquals(Instant.fromEpochMilliseconds(1554942802492), latestBuildFinishedAt)
             assertEquals(Instant.fromEpochMilliseconds(1619786100103), latestBuildStartedAt)
             assertEquals(listOf<String>(), labels)
@@ -61,9 +61,9 @@ class GitLabParsingTests {
                 Instant.fromEpochMilliseconds(1554933465346),
                 "Test Description",
                 Instant.fromEpochMilliseconds(1560124800000),
-                1,
-                2,
-                1000,
+                1L,
+                2L,
+                1000L,
                 Instant.fromEpochMilliseconds(1554933465346),
                 GitLabMilestoneState.CLOSED,
                 "Test Milestone",
@@ -72,7 +72,7 @@ class GitLabParsingTests {
             )
             assertEquals(expectedMilestone, milestone)
             val expectedPipeline = GitLabPipeline(
-                50,
+                50L,
                 "ef28580bb2a00d985bffe4a4ce3fe09fdb12283f",
                 "621bc3348549e51c5bd6ea9f094913e9e4667c7b",
                 GitLabPipelineStatus.SUCCESS,
