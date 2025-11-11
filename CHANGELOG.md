@@ -11,9 +11,53 @@
 
 -->
 ## Master
+
+# 1.3.4
+
+- Fix GitLab pipeline ID overflow by changing Int to Long for all GitLab ID
+  fields [@gianluz] - [#317](https://github.com/danger/kotlin/pull/317)
+- Add Docker instructions and syntax highlighting
+  tips [@hubertgrzeskowiak] - [#305](https://github.com/danger/kotlin/pull/305)
+- Update actions/download-artifact from 4 to 5 [@dependabot] - [#307](https://github.com/danger/kotlin/pull/307)
+
+# 1.3.3
+
+- Fix working with raw git diff [@grine4ka] - [#297](https://github.com/danger/kotlin/pull/297)
+- Update Kotlin libraries [@grine4ka] - [#298](https://github.com/danger/kotlin/pull/298)
+
+# 1.3.2
+
+- Upgrade JDK to 23 [@vilmosnagy] - [#294](https://github.com/danger/kotlin/pull/294)
+- Update to JDK 23 [@Vacxe] - [#296](https://github.com/danger/kotlin/pull/296)
+- Update actions/checkout to v4 in README.md [@tinyboxvk] - [#293](https://github.com/danger/kotlin/pull/293)
+- Fix using `head_pipeline` instead of `pipeline` in
+  GitLab [@grine4ka] - [#289](https://github.com/danger/kotlin/pull/289)
+- Fix typo in GitLab Pipeline status name [@grine4ka] - [#287](https://github.com/danger/kotlin/pull/287)
+- Make GitLab MR descriptions optional [@mrbass21] - [#285](https://github.com/danger/kotlin/pull/285)
+- Update CI checks node version to 22.10.0 [@Vacxe] - [#288](https://github.com/danger/kotlin/pull/288)
+- Update Kotlin to 2.0.21 [@Vacxe]
+- Update Gradle to 8.10.2 [@Vacxe]
+
+# 1.3.1
+
+- Fix GitHub user optional fields [@Vacxe] - [#278](https://github.com/danger/kotlin/pull/278)
+- Fix missed default serialization values [@Vacxe] - [#281](https://github.com/danger/kotlin/pull/281)
+- Bump Kotlin version to 1.7.22 [@Vacxe] - [#275](https://github.com/danger/kotlin/pull/275)
+- Update README.md [@r0adkll] - [#284](https://github.com/danger/kotlin/pull/284)
+
+# 1.3.0
+
+- Add draft field to Pull Request [@msarelo] - [#254](https://github.com/danger/kotlin/pull/254)
+- Add new GitHub action [@Vacxe] - [#269](https://github.com/danger/kotlin/pull/269)
+- Add release flow and distribution
+  pipeline [@Vacxe] - [#263](https://github.com/danger/kotlin/pull/263), [#268](https://github.com/danger/kotlin/pull/268)
+- Update actions/checkout from 3 to 4 [@dependabot] - [#272](https://github.com/danger/kotlin/pull/272)
+- Update actions/setup-java from 3 to 4 [@dependabot] - [#271](https://github.com/danger/kotlin/pull/271)
+- Fixed MissingFieldException's during parsing Bitbucket Server
+  responses [@msarelo] - [#254](https://github.com/danger/kotlin/pull/254)
+- Add accessors for Danger reports [@417-72KI] - [#245](https://github.com/danger/kotlin/pull/245)
 - Update README.md with guidance to enable auto-complete in Android Studio [@gianluz] - [#242](https://github.com/danger/kotlin/pull/242)
 - Update install script with Kotlin compiler 1.7.0 [@gianluz] - [#241](https://github.com/danger/kotlin/pull/241)
-- Add accessors for Danger reports [@417-72KI] - [#245](https://github.com/danger/kotlin/pull/245)
 
 # 1.2.0
 - Update `Kotlin` to `1.7.0` and added support for Apple Silicon Chipset [@gianluz] - [#231](https://github.com/danger/kotlin/pull/231)
@@ -99,3 +143,14 @@
 [@rojanthomas]: https://github.com/rojanthomas
 [@eygraber]: https://github.com/eygraber
 [@417-72KI]: https://github.com/417-72KI
+[@vchernyshov]: https://github.com/vchernyshov
+[@msarelo]: https://github.com/msarelo
+[@vilmosnagy]: https://github.com/vilmosnagy
+[@Vacxe]: https://github.com/Vacxe
+[@hubertgrzeskowiak]: https://github.com/hubertgrzeskowiak
+[@grine4ka]: https://github.com/grine4ka
+[@tinyboxvk]: https://github.com/tinyboxvk
+[@mrbass21]: https://github.com/mrbass21
+[@r0adkll]: https://github.com/r0adkll
+[@sonulen]: https://github.com/sonulen
+[@doodeec]: https://github.com/doodeec
