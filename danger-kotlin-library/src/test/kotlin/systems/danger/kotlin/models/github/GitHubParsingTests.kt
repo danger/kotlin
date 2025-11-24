@@ -243,4 +243,15 @@ class GitHubParsingTests {
     fun testOnGitLabIsFalse() {
         assertEquals(false, dsl.danger.onGitLab)
     }
+
+    @Test
+    fun testItParsesMannequinUserType() {
+        val mannequinUser = GitHubUser(
+            12345,
+            "ghost",
+            GitHubUserType.MANNEQUIN,
+            "https://avatars.githubusercontent.com/u/12345?v=4"
+        )
+        assertEquals(GitHubUserType.MANNEQUIN, mannequinUser.type)
+    }
 }

@@ -283,7 +283,10 @@ enum class GitHubUserType {
     ORGANIZATION,
 
     @SerialName("Bot")
-    BOT
+    BOT,
+
+    @SerialName("Mannequin")
+    MANNEQUIN
 }
 
 /**
