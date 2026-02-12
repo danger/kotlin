@@ -40,6 +40,10 @@ object TestUtils {
             loadJSON("gitlabWithCancelledPipelineDangerJSON.json")
         }
 
+        val gitlabWithNullMilestoneDatesJSON by lazy {
+            loadJSON("gitlabWithNullMilestoneDatesJSON.json")
+        }
+
         private fun loadJSON(named: String): String {
             return this.javaClass.classLoader.getResource(named).readText()
         }

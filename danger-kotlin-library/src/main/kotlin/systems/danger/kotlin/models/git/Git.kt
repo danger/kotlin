@@ -49,6 +49,6 @@ data class GitCommit(
 @Serializable
 data class GitCommitAuthor(
         val name: String,
-        val email: String,
+        val email: String?,
         val date: String
 )

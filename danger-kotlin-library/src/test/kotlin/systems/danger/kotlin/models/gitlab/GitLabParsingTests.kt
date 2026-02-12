@@ -1,6 +1,7 @@
 package systems.danger.kotlin.models.gitlab
 
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.decodeFromString
 import org.junit.Assert.*
 import org.junit.Test
@@ -60,11 +61,11 @@ class GitLabParsingTests {
             val expectedMilestone = GitLabMilestone(
                 Instant.fromEpochMilliseconds(1554933465346),
                 "Test Description",
-                Instant.fromEpochMilliseconds(1560124800000),
+                LocalDate.parse("2019-06-10"),
                 1L,
                 2L,
                 1000L,
-                Instant.fromEpochMilliseconds(1554933465346),
+                LocalDate.parse("2019-04-10"),
                 GitLabMilestoneState.CLOSED,
                 "Test Milestone",
                 Instant.fromEpochMilliseconds(1554933465346),
