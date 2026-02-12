@@ -20,7 +20,7 @@ jobs:
       - name: danger-kotlin-library:shadowJar
         run: ./gradlew danger-kotlin-library:shadowJar
       - name: Upload Artifact lib
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: lib
           path: danger-kotlin-library/build/libs/danger-kotlin.jar
